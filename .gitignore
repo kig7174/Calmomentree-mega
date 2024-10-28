@@ -4,6 +4,9 @@
 # Spring 환경 설정 파일 --> 각자 구성해야 함
 application.properties
 
+# gitcommit file
+.gitmessage.txt
+
 ### Eclipse ###
 .metadata
 bin/
