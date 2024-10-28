@@ -4,76 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calmomentree</title>
-    <link rel="stylesheet" href="/assets/css/reset.css">
-    <link rel="stylesheet" href="/assets/css/.css">
-    <link rel="stylesheet" href="/assets/css/.css">
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/assets/css/.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/search.css" />
+
 </head>
 <body>
     <div class="header">
 
     </div>
-    <div class="search-body">
-        <div class="title-box">
-            <h2 class="title">SEARCH</h2>
-        </div>
-        <div class="search-input">
-            <form class="search-text">
-                <input type="text" name="keyword" />
-                <input type="image" src="https://via.placeholder.com/25?text=search-icon"/>
-            </form>
-        </div>
-        <div class="search-result-box">
-            <p class="search-result">상품 검색 결과 <strong class="result">10</strong></p>
-        </div>
-        <div class="sort-box">
-            <select name="sort-option">
-                <option value selected>== 기준선택 ==</option>
-                <option value="recent">신상품</option>
-                <option value="name">상품명</option>
-                <option value="priceasc">낮은가격</option>
-                <option value="pricedesc">높은가격</option>
-                <option value="manu_name">제조사</option>
-                <option value="review">후기</option>
-            </select>
-        </div>
-        <div class="category-box">
-            <span>홈 ></span>
-            <span>상품검색</span>
-        </div>
-        <div class="search-item-box">
-            <div class="search-item-exist">
-                <ul>
-                    <li>
-                        <div class="list-item" id="list">
-                            <div class="list-item-img">
-                                <img src="https://via.placeholder.com/300?text=search-item-image"/>
-                            </div>
-                            <div class="list-item-content">
-                                <div class="item-content-name">
-                                    <p>ROSEMARY RECOVERY</p>
-                                    <a href="#">로즈마리 리커버리 샴푸 500ML</a>
-                                    <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
-                                </div>
-                                <div class="item-price">
-                                    <span class="normal-price">일반 회원가</span><span class="price">27,000원</span>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+
+    <div class="container">
+        <div class="search-body">
+            <div class="title-box">
+                <h2>SEARCH</h2>
             </div>
-            <div class="search-item-none">
-                <img src="https://via.placeholder.com/100?text=search-item-none"/>
-                <h3>검색결과가 없습니다.</h3>
-                <p>정확한 검색어 인지 확인하시고 다시 검색해 주세요.</p>
-                <p>
-                    검색어/제외검색어의 입력이 정확한지 확인해 보세요.
-                    <br />
-                    두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요.
-                </p>
+
+            <div class="search-field">
+                <form class="search-text">
+                    <input class="text" type="text" name="keyword" value="검색" />
+                    <input class="img" type="image" src="https://via.placeholder.com/25?text=search-icon"/>
+                </form>
+            </div>
+
+            <div class="search-result">
+                <p class="search-result">상품 검색 결과 <strong class="result">10</strong></p>
+                <div class="sort-box">
+                    <select name="sort-option">
+                        <option value selected>== 기준선택 ==</option>
+                        <option value="recent">신상품</option>
+                        <option value="name">상품명</option>
+                        <option value="priceasc">낮은가격</option>
+                        <option value="pricedesc">높은가격</option>
+                        <option value="manu_name">제조사</option>
+                        <option value="review">후기</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="category-box">
+                <span>홈 ></span>
+                <span>상품검색</span>
+            </div>
+
+            <div class="search-item-box">
+                <div class="search-item-exist">
+                    <ul>
+                        <li>
+                            <div class="list-item">
+                                <div class="list-item-img">
+                                    <img src="https://via.placeholder.com/200?text=search-item-image"/>
+                                </div>
+                                <div class="list-item-content">
+                                    <div class="item-content-name">
+                                        <p>ROSEMARY RECOVERY</p>
+                                        <a href="#">로즈마리 리커버리 샴푸 500ML</a>
+                                        <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
+                                    </div>
+                                    <div class="item-price">
+                                        <span class="normal-price">일반 회원가</span><span class="price">27,000원</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="search-item-none">
+                    <img src="https://via.placeholder.com/100?text=search-item-none"/>
+                    <h3>검색결과가 없습니다.</h3>
+                    <p>정확한 검색어 인지 확인하시고 다시 검색해 주세요.</p>
+                    <p>
+                        검색어/제외검색어의 입력이 정확한지 확인해 보세요.
+                        <br />
+                        두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
+
     <div class="footer">
         
     </div>
