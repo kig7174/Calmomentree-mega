@@ -1,0 +1,155 @@
+:root {
+  --background-color: #faf8ef;
+  --font-color: #1a1a1a;
+  --font-color-gray: #5e5e5e;
+  --font-size-title: 26px;
+  --font-size-content: 12px;
+  --font-size-item: 16px;
+  --font: "sans-serif", "dotum";
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  color: var(--font-color);
+  font-family: var(--font);
+}
+body {
+  background-color: var(--background-color);
+  /* font-weight: 500; */
+  text-transform: uppercase;
+}
+#header {
+  border: 3px solid saddlebrown; /** 삭제예정 */
+  height: 25vh;
+}
+
+#container {
+  display: flex;
+  position: relative;
+  width: 90%;
+  margin: auto;
+}
+
+.board-box {
+  width: 15%;
+  text-align: center;
+  margin-top: 40px;
+
+  .board-inner {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    margin-left: 90px;
+
+    li {
+      padding-bottom: 24px;
+      a {
+        font-size: 14px;
+        &:hover {
+          color: #000;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+
+.inner-box {
+  max-width: 840px;
+  width: 80%;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.title-wr {
+  font-size: var(--font-size-title);
+  padding-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  position: relative;
+  font-size: var(--font-size-content);
+
+  tr {
+    border-top: 1px solid #000;
+    height: 57.5px;
+
+    &:last-child {
+      border-bottom: 1px solid #000;
+    }
+  }
+  td {
+    align-content: center;
+  }
+}
+.paging-box {
+  margin-top: 100px;
+  text-align: center;
+
+  .pagination {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+
+    a {
+      display: block;
+      font-size: 14px;
+      padding: 0 7px;
+      color: var(--font-color);
+      text-decoration: none;
+      font-size: var(--font-size-item);
+
+      &.active {
+        /* background-color: #168; */
+        color: white;
+      }
+
+      /* &[href]:hover {
+              background-color: #f0f6f9;
+            } */
+    }
+  }
+}
+
+.search-box {
+  margin-top: 34px;
+  float: right;
+
+  .form {
+    display: flex;
+    border-bottom: 1px solid #000;
+    ::placeholder {
+      color: #979494;
+      font-family: "Noto Sans KR", "Pretendard", "malgun gothic", "돋움";
+    }
+    input {
+      border: none;
+      width: 261px;
+      height: 35px;
+      margin-right: 15px;
+      background: none;
+      font-size: 16px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+    a {
+      display: block;
+      color: #fff;
+      background-color: #000;
+      width: 110px;
+      height: 35px;
+      line-height: 35px;
+      text-align: center;
+      margin-top: 2px;
+    }
+  }
+}
