@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calmomentree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
     <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
     <link rel="stylesheet" href="/assets/css/.css" />
     <link rel="stylesheet" href="/src/main/resources/static/assets/css/search.css" />
@@ -22,7 +23,7 @@
 
             <div class="search-field">
                 <form class="search-text" th:action="">
-                    <input class="text" type="text" name="keyword" value="검색" />
+                    <input class="text" type="text" name="keyword" placeholder="" />
                     <input class="img" type="image" src="https://via.placeholder.com/25?text=search-icon"/>
                 </form>
             </div>
@@ -136,17 +137,19 @@
                     </p>
                 </div>
             </div>
+            
+            <div class="page-number">
+                <ul class="pagination">
+                    <li><a class="left">&laquo;</a></li>
+                    <li><a class="active">1</a></li>
+                    <li><a>2</a></li>
+                    <li><a class="right">&raquo;</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     
-    <div class="page-number">
-        <ul class="pagination">
-            <li><a>&laquo;</a></li>
-            <li><a class="active">1</a></li>
-            <li><a>2</a></li>
-            <li><a>&raquo;</a></li>
-        </ul>
-    </div>
+    
 
     <div class="footer">
         
