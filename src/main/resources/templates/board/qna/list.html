@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qna 목록</title>
+    <link
+      rel="stylesheet"
+      href="/src/main/resources/static/assets/css/reset.css"
+    />
+    <link
+    rel="stylesheet"
+    href="/src/main/resources/static/assets/css/board.css"
+  />
+  </head>
+  <body>
+    <header id="header">
+      <div class="head">헤더영역</div>
+    </header>
+    <div id="container">
+      <div class="board-box left">
+        <ul class="board-inner">
+          <li><a href="">공지사항</a></li>
+          <li><a href="">공병수거신청</a></li>
+          <li><a href="">달력쿠폰</a></li>
+          <li><a href="">문의하기</a></li>
+          <li><a href="">FAQ</a></li>
+          <li><a href="">제품리뷰</a></li>
+        </ul>
+      </div>
+      <div class="inner-box">
+        <div class="title-wr">QNA</div>
+        <div class="board-list">
+          <table border="1">
+            <caption>
+              상품 게시판 목록
+            </caption>
+            <colgroup>
+              <col width="80px" />
+              <col width="auto" />
+              <col width="15%" />
+              <col width="80px" />
+            </colgroup>
+            <!-- <thead>
+              <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>작성일</th>
+              </tr>
+            </thead> -->
+            <tbody>
+              <tr>
+                <td>3681</td>
+                <td>문의드립니다</td>
+                <td>정****</td>
+                <td>2024-10-29</td>
+              </tr>
+              <tr>
+                <td>3681</td>
+                <td>문의드립니다</td>
+                <td>정****</td>
+                <td>2024-10-29</td>
+              </tr>
+              <tr>
+                <td>3681</td>
+                <td>문의드립니다</td>
+                <td>정****</td>
+                <td>2024-10-29</td>
+              </tr>
+              <tr>
+                <td>3681</td>
+                <td>문의드립니다</td>
+                <td>정****</td>
+                <td>2024-10-29</td>
+              </tr>
+              <tr>
+                <td>3681</td>
+                <td>문의드립니다</td>
+                <td>정****</td>
+                <td>2024-10-29</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="paging-box">
+          <!-- 페이지 번호 -->
+          <ul class="pagination">
+            <!-- 이전 페이지 그룹 이동 버튼 -->
+            <li th:if="${pagination.prevPage > 0}">
+              <a
+                th:href="@{/student(keyword=${keyword}, page=${pagination.prevPage})}"
+                >&laquo;</a
+              >
+            </li>
+            <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
+
+            <!-- 페이지 번호 링크 -->
+            <li
+              th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}"
+            >
+              <a
+                th:if="${i == pagination.nowPage}"
+                class="active"
+                th:text="${i}"
+              ></a>
+              <a
+                th:unless="${i == pagination.nowPage}"
+                th:text="${i}"
+                th:href="@{/student(keyword=${keyword}, page=${i})}"
+              ></a>
+            </li>
+
+            <!-- 다음 페이지 그룹 이동 버튼 -->
+            <li th:if="${pagination.nextPage > 0}">
+              <a
+                th:href="@{/student(keyword=${keyword}, page=${pagination.nextPage})}"
+                >&raquo;</a
+              >
+            </li>
+            <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
+          </ul>
+        </div>
+        <div class="search-container">
+          <div class="search-box">
+            <div class="form">
+              <input type="text" placeholder="내용을 입력하세요" />
+              <a href="">검색</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="board-box right"></div>
+    </div>
+  </body>
+</html>
