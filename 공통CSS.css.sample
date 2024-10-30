@@ -1,0 +1,26 @@
+// 추가할 내용 커밋에 넣기
+
+:root {
+    --background-color: #FAF8EF;
+    --font-color: #1c1c1c;
+    --font-color-gray: #5e5e5e;
+    --font-size-title: 24px;
+    --font-size-content: 12px;
+    --font-size-item: 14px;
+    --font: 'Noto Sans KR', 'Pretendard', 'sans-serif', 'dotum';
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    color: var(--font-color);
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: var(--font);
+    width: 100%;
+}
