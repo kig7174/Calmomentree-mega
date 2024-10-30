@@ -109,7 +109,8 @@ body {
 
                 li {
                     width: calc(25% - 16px);
-                    margin-right: 16px;
+                    margin: 10px 16px 10px 0;
+                    min-width: 200px;
 
                     .list-item {
                         
@@ -128,6 +129,14 @@ body {
                             width: 100%;
                             justify-content: space-between;
                             font-size: var(--font-size-content);
+
+                            p, a, span {
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                display: -webkit-box;
+                                -webkit-line-clamp: 1;
+                                -webkit-box-orient: vertical;
+                            }
 
                             .item-content-name {
                                 line-height: 150%;
@@ -148,7 +157,7 @@ body {
                                 flex-direction: column;
                                 text-align: right;
                                 line-height: 110%;
-                            }
+                            }   
                         }
                     }
                 }
