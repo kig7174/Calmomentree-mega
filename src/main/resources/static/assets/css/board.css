@@ -79,12 +79,30 @@ table {
     border-top: 1px solid #000;
     height: 57.5px;
 
+  
     &:last-child {
       border-bottom: 1px solid #000;
+    }
+
+    &.detail-box-title {
+      padding: 10px;
+      width: 100%;
+      
+      
+      td:first-child {
+        width: 60%;
+      }
+      
     }
   }
   td {
     align-content: center;
+    width: 25%;
+    
+  }
+
+  .detail-box {
+    padding: 40px 20px;
   }
 }
 .paging-box {
