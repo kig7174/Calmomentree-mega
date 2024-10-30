@@ -17,19 +17,24 @@
     <div class="container">
         <div class="join-body">
             <div class="title">
-                <p>JOIN US<span>캄모멘트리 회원 가입</span></p>
+                <p>JOIN US<span>캄모멘트리 회원가입</span></p>
             </div>
             <div class="join-form">
                 <form method="" action="">
-                    <input type="text" name="userid" placeholder="아이디" minlength="4" maxlength="16"/>
-                    <span class="input-info">(영문소문자/숫자, 4~16자)</span>
-                    <p class="id-msg" >아이디를 입력하세요.</p>
+                    <div class="id-box input-box">
+                        <input type="text" name="userid" placeholder="아이디" minlength="4" maxlength="16"/>
+                        <p class="input-info">(영문소문자/숫자, 4~16자)</p>
+                        <p class="id-msg" >아이디를 입력하세요.</p>
+                    </div>
 
-                    <input id="password" type="password" name="password" placeholder="비밀번호" minlength="10" maxlength="16"/>
-                    <span class="input-info">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</span>
-                    <div class="password-focus">
+                    <div class="password-box input-box">
+                        <input id="password" type="password" name="password" placeholder="비밀번호" minlength="10" maxlength="16"/>
+                        <p class="input-info">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</p>
+                    </div>
+                    <div id="password-focus" class="password-off">
                         <div class="password-content">
                             <strong>※ 비밀번호 입력 조건</strong>
+                            <button type="button" id="password-content-close">X</button>
                             <ul class="password-info">
                                 - 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자
                                 <br>
@@ -48,37 +53,49 @@
                         </div>
                     </div>
 
-                    <input type="password" name="password-confirm" placeholder="비밀번호 확인" minlength="10" maxlength="16" />
-                    <p class="password-confirm-msg">비밀번호가 일치하지 않습니다.</p>
+                    <div class="password-confirm-box input-box">
+                        <input type="password" name="password-confirm" placeholder="비밀번호 확인" minlength="10" maxlength="16" />
+                        <p class="password-confirm-msg">비밀번호가 일치하지 않습니다.</p>
+                    </div>
 
-                    <select name="tel1" selected="010">
-                        <option value="010">010</option>
-                        <option value="011">011</option>
-                        <option value="016">016</option>
-                        <option value="017">017</option>
-                        <option value="018">018</option>
-                        <option value="019">019</option>
-                    </select>
-                    <input type="text" name="tel2" maxlength="4" class="tel" />
-                    <input type="text" name="tel3" maxlength="4" class="tel" />
+                    <div class="tel-box input-box">
+                        <select name="tel1" selected="010">
+                            <option value="010">010</option>
+                            <option value="011">011</option>
+                            <option value="016">016</option>
+                            <option value="017">017</option>
+                            <option value="018">018</option>
+                            <option value="019">019</option>
+                        </select>
+                        -
+                        <input type="text" name="tel2" maxlength="4" class="tel" />
+                        -
+                        <input type="text" name="tel3" maxlength="4" class="tel" />
+                    </div>
                     
-                    <input type="email" name="email" placeholder="이메일"/>
-                    <p class="email-msg">유효한 이메일을 입력해 주세요.</p>
+                    <div class="email-box input-box">
+                        <input type="email" name="email" placeholder="이메일"/>
+                        <p class="email-msg">유효한 이메일을 입력해 주세요.</p>
+                    </div>
 
-                    <input type="text" name="postcode1" placeholder="우편번호" />
-                    <button type="button" id="postBtn">주소검색</button>
-                    
-                    <input type="text" name="addr1" placeholder="기본주소"/>
-
-                    <input type="text" name="addr2" placeholder="상세주소"/>
+                    <div class="addr-box input-box">
+                        <input type="text" name="postcode1" placeholder="우편번호" />
+                        <button type="button" id="post-btn">주소검색</button>
+                    </div>
+                    <div class="addr-box input-box">
+                        <input type="text" name="addr1" placeholder="기본주소"/>
+                    </div>
+                    <div class="addr-box input-box">
+                        <input type="text" name="addr2" placeholder="상세주소"/>
+                    </div>
 
                     <br />
-                    <label>
-                        추가정보
+                    <div class="add-info-box input-box">
+                        <label for="birthday">추가정보 (생년월일)</label>
                         <input type="date" name="birthday" />
-                    </label>
+                    </div>
 
-                    <div class="agree-box">
+                    <div class="agree-box input-box">
                         <div class="agree-all">
                             <input type="checkbox" id="agreeAllChecked"/>
                             <label for="agreeAllChecked">전체약관 항목에 동의합니다.</label>
@@ -114,13 +131,14 @@
                                 </div>
                                 <input type="checkbox" name="agreeSmsReceive" value="Y" />
                                 <label for="agreeSmsReceive">SMS 수신 동의 (선택)</label>
+
                                 <input type="checkbox" name="agreeEmailReceive" value="Y" />
                                 <label for="agreeEmailReceive">이메일 수신 동의 (선택)</label>
-
-                                <button type="submit">회원가입하기</button>
                             </div>
                         </div>
                     </div>
+
+                    <button type="submit" class="join-btn">회원가입하기</button>
                 </form>
             </div>
         </div>
@@ -131,17 +149,6 @@
     </div>
 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<script>
-    document.querySelector("#postBtn").addEventListener("click", e => {
-        e.preventDefault();
-
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-            }
-        }).open();
-    });
-</script>
+    <script src="/src/main/resources/static/assets/js/join.js"></script>
 </body>
 </html>
