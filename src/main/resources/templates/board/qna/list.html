@@ -4,14 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calmomentree</title>
-    <link
-      rel="stylesheet"
-      href="/src/main/resources/static/assets/css/reset.css"
-    />
-    <link
-    rel="stylesheet"
-    href="/src/main/resources/static/assets/css/board.css"
-  />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/board.css" />
   </head>
   <body>
     <header id="header">
@@ -88,35 +83,18 @@
           <ul class="pagination">
             <!-- 이전 페이지 그룹 이동 버튼 -->
             <li th:if="${pagination.prevPage > 0}">
-              <a
-                th:href="@{/student(keyword=${keyword}, page=${pagination.prevPage})}"
-                >&laquo;</a
-              >
+              <a th:href="@{/student(keyword=${keyword}, page=${pagination.prevPage})}" >&laquo;</a>
             </li>
             <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
-
             <!-- 페이지 번호 링크 -->
-            <li
-              th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}"
-            >
-              <a
-                th:if="${i == pagination.nowPage}"
-                class="active"
-                th:text="${i}"
-              ></a>
-              <a
-                th:unless="${i == pagination.nowPage}"
-                th:text="${i}"
-                th:href="@{/student(keyword=${keyword}, page=${i})}"
-              ></a>
+            <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+              <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}"></a>
+              <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/student(keyword=${keyword}, page=${i})}"></a>
             </li>
 
             <!-- 다음 페이지 그룹 이동 버튼 -->
             <li th:if="${pagination.nextPage > 0}">
-              <a
-                th:href="@{/student(keyword=${keyword}, page=${pagination.nextPage})}"
-                >&raquo;</a
-              >
+              <a th:href="@{/student(keyword=${keyword}, page=${pagination.nextPage})}" >&raquo;</a>
             </li>
             <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
           </ul>
