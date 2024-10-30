@@ -1,0 +1,73 @@
+:root {
+    --background-color: #FAF8EF;
+    --font-color: #1c1c1c;
+    --font-color-gray: #5e5e5e;
+    --font-size-title: 24px;
+    --font-size-content: 12px;
+    --font-size-item: 14px;
+    --font: 'Noto Sans KR', 'Pretendard', 'sans-serif', 'dotum';
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    color: var(--font-color);
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: var(--font);
+    width: 100%;
+}
+
+input[type="checkbox"] {
+    width: 0.7rem;
+    height: 0.7rem;
+    border-radius: 50%;
+    border: 1px solid #999;
+    appearance: none;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    background: var(--font-color);
+    border: none;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    max-width: 500px;
+    font: var(--font);
+}
+
+.container {
+    width: 100%;
+
+    .join-body {
+        width: 70%;
+        margin: 0 auto;
+
+        .title {
+            position: relative;
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #000;
+        }
+
+        .join-form {
+            position: relative;
+            float: right;
+            width: 50%;
+
+            .input-info {
+                font-size: 10px;
+            }
+        }
+    }
+}

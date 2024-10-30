@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calmomentree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/join.css" />
+</head>
+<body>
+    <div class="header">
+
+    </div>
+
+    <div class="container">
+        <div class="join-body">
+            <div class="title">
+                <p>JOIN US<span>캄모멘트리 회원 가입</span></p>
+            </div>
+            <div class="join-form">
+                <form method="" action="">
+                    <input type="text" name="userid" placeholder="아이디" minlength="4" maxlength="16"/>
+                    <span class="input-info">(영문소문자/숫자, 4~16자)</span>
+                    <p class="id-msg" >아이디를 입력하세요.</p>
+
+                    <input id="password" type="password" name="password" placeholder="비밀번호" minlength="10" maxlength="16"/>
+                    <span class="input-info">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</span>
+                    <div class="password-focus">
+                        <div class="password-content">
+                            <strong>※ 비밀번호 입력 조건</strong>
+                            <ul class="input-info">
+                                - 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자
+                                <br>
+                                    - 입력 가능 특수문자 
+                                <br>
+                                    &nbsp;&nbsp;&nbsp;  ~ ` ! @ # $ % ^ ( ) * _ - = { } [ ] | ; : < > , . ? /
+                                <br>
+                                    - 공백 입력 불가능
+                                <br>
+                                    - 연속된 문자, 숫자 사용 불가능
+                                <br>
+                                    - 동일한 문자, 숫자를 반복해서 사용 불가능
+                                <br>
+                                    - 아이디 포함 불가능
+                            </ul>
+                        </div>
+                    </div>
+
+                    <input type="password" name="password-confirm" placeholder="비밀번호 확인" minlength="10" maxlength="16" />
+                    <p class="password-confirm-msg">비밀번호가 일치하지 않습니다.</p>
+
+                    <select name="tel1" selected="010">
+                        <option value="010">010</option>
+                        <option value="011">011</option>
+                        <option value="016">016</option>
+                        <option value="017">017</option>
+                        <option value="018">018</option>
+                        <option value="019">019</option>
+                    </select>
+                    <input type="text" name="tel2" maxlength="4" class="tel" />
+                    <input type="text" name="tel3" maxlength="4" class="tel" />
+                    
+                    <input type="email" name="email" placeholder="이메일"/>
+                    <p class="email-msg">유효한 이메일을 입력해 주세요.</p>
+
+                    <input type="text" name="postcode1" placeholder="우편번호" />
+                    <button type="button" id="postBtn">주소검색</button>
+                    
+                    <input type="text" name="addr1" placeholder="기본주소"/>
+
+                    <input type="text" name="addr2" placeholder="상세주소"/>
+
+                    <br />
+                    <label>
+                        추가정보
+                        <input type="date" name="birthday" />
+                    </label>
+
+                    <div class="agree-box">
+                        <div class="agree-all">
+                            <input type="checkbox" id="agreeAllChecked"/>
+                            <label for="agreeAllChecked">전체약관 항목에 동의합니다.</label>
+                            <label for="agreeAllChecked">전체약관 항목에 동의합니다.</label>
+                        </div>
+                        <div class="agree-inner">
+                            <div class="item">
+                                <div class="title">
+                                    <input type="checkbox" name="agreeServiceCheck" value="Y" required />
+                                    <label for="agree_service_check">이용약광 동의 (필수)</label>
+                                </div>
+                                <div class="content on">
+                                    <p>제1조(목적)
+                                        이 약관은 (주)캄모멘트리 회사(전자상거래 사업자)...</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="title">
+                                    <input type="checkbox" name="agreePrivacyCheck" value="Y" required />
+                                    <label for="agree_privacy_check">개인정보처리방침 동의 (필수)</label>
+                                </div>
+                                <div class="content on">
+                                    <p>1. 개인정보 수집목적 및 이용목적</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="title">
+                                    <input type="checkbox" id="agreeAllMarketingChecked" value="Y" />
+                                    <label for="agree_privacy_check">마케팅 정보 전체 동의 (선택)</label>
+                                </div>
+                                <div class="content">
+                                    <p>캄모멘트리의 특가, 할인, 쿠폰, 혜택, 이벤트</p>
+                                </div>
+                                <input type="checkbox" name="agreeSmsReceive" value="Y" />
+                                <label for="agreeSmsReceive">SMS 수신 동의 (선택)</label>
+                                <input type="checkbox" name="agreeEmailReceive" value="Y" />
+                                <label for="agreeEmailReceive">이메일 수신 동의 (선택)</label>
+
+                                <button type="submit">회원가입하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+
+    </div>
+
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    document.querySelector("#postBtn").addEventListener("click", e => {
+        e.preventDefault();
+
+        new daum.Postcode({
+            oncomplete: function(data) {
+                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
+                // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+            }
+        }).open();
+    });
+</script>
+</body>
+</html>
