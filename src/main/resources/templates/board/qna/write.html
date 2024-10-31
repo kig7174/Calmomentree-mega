@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calmomentree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/board.css" />
+  </head>
+  <body>
+    <header id="header">
+      <div class="head">헤더영역</div>
+    </header>
+    <div id="container">
+      <!-- 내용 영역 -->
+      <div class="inner-box">
+        <div class="title-wr">QNA</div>
+        <div class="board-list">
+          <table border="1">
+            <caption>
+              게시판 글쓰기
+            </caption>
+            <tbody>
+              <tr class="detail-box-title write">
+                <td>
+                  <select name="subject" id="subject">
+                    <option value="문의드립니다.">문의드립니다.</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="textarea-box">
+            <textarea name="content" id="content"></textarea>
+          </div>
+        </div>
+        <!-- 하단 버튼 구역 -->
+        <div class="bottom-box">
+          <div class="file-box">
+            <input name="attach-file" class="line" type="file" />
+            <div class="pw-box line">
+              <input
+                id="password"
+                name="password"
+                fw-filter=""
+                fw-label="비밀번호"
+                fw-msg=""
+                autocomplete="new-password"
+                value=""
+                type="password"
+                placeholder="비밀번호"
+              />
+            </div>
+            <div class="radio-box">
+              <input id="secure0" name="secure" value="F" type="radio" checked="checked" />
+              <label for="secure0">공개글</label>
+              <input id="secure1" name="secure" value="T" type="radio" />
+              <label for="secure1">비밀글</label>
+            </div>
+          </div>
+          <div class="btn-area">
+            <button class="btn-1">등록</button>
+            <button class="btn-2">취소</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+    <script>
+      ClassicEditor.create(document.querySelector("#content"));
+    </script>
+  </body>
+</html>
