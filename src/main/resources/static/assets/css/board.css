@@ -5,7 +5,7 @@
   --font-size-title: 26px;
   --font-size-content: 12px;
   --font-size-item: 16px;
-  --font: 'Noto Sans KR', 'Pretendard', 'sans-serif', 'dotum';
+  --font: "Noto Sans KR", "Pretendard", "sans-serif", "dotum";
 }
 
 * {
@@ -35,6 +35,16 @@ body {
   position: relative;
   width: 90%;
   margin: auto;
+}
+
+.textarea-box {
+  border: 1px solid rebeccapurple;
+  min-height: 50vh;
+  
+
+  #content {
+
+  }
 }
 
 .board-box {
@@ -67,6 +77,7 @@ body {
   width: 80%;
   margin: 0 auto;
   height: 100%;
+  position: relative;
 }
 
 .title-wr {
@@ -83,16 +94,13 @@ table {
     border-bottom: 1px solid #000;
     height: 57.5px;
 
-  
     &:first-child {
       border-top: 1px solid #000;
     }
-  
   }
   td {
     align-content: center;
     /* width: 25%; */
-    
   }
 
   .detail-box {
@@ -107,11 +115,27 @@ table {
   height: 40px;
 
   td:first-child {
-    width: 70%
+    width: 70%;
   }
-  td:nth-child(2){
+  td:nth-child(2) {
     width: 20%;
-  } 
+  }
+  &.write {
+    margin: 0;
+    padding: 0;
+    border-bottom: none;
+    
+    td:first-child {
+      width: 100%;
+    }
+    
+    #subject {
+      width: 100%;
+      height: 100%;
+      border: 1px solid #e0e0e0;
+      background-color: #f3f0eb;
+    }
+  }
 }
 .detail-box-content {
   border-bottom: none;
@@ -184,12 +208,20 @@ table {
 }
 .btn-area {
   margin: 40px 0 50px 6px;
+  display: flex;
+  
+  
+  .btn-1 {
+    color: var(--background-color);
+    background-color: #000;
+  }
 
   button {
     border: 1px solid #000;
     color: #233328;
     height: 35px;
     line-height: 35px;
+    margin-right: 5px;
     padding: 0;
     width: 93px;
     font-size: 14px;
@@ -198,4 +230,38 @@ table {
     cursor: pointer;
     background-color: var(--background-color);
   }
+}
+.bottom-box {
+  position: absolute;
+  right: 10px;
+  width: 50%;
+  .pw-box{
+    width: 50%;
+    
+    input {
+      width: 100%;
+      background: none;
+      border: none;
+      padding-bottom: 5px;
+      &:focus {
+        outline: none;
+      }
+    }
+
+  }
+  .radio-box {
+    margin-top: 20px;
+  }
+  
+  .line {
+    margin-top: 20px;
+    border-bottom: 1px solid #abaaaa;
+    padding-bottom: 5px;
+    
+  }
+}
+.file-box {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
 }
