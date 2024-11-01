@@ -16,7 +16,7 @@
 
     <div class="container">
         <div class="join-body">
-            <div class="title">
+            <div class="head-title">
                 <p>JOIN US<span>캄모멘트리 회원가입</span></p>
             </div>
             <div class="join-form">
@@ -34,7 +34,7 @@
                     <div id="password-focus" class="password-off">
                         <div class="password-content">
                             <strong>※ 비밀번호 입력 조건</strong>
-                            <button type="button" id="password-content-close">X</button>
+                            <button type="button" id="password-content-close"></button>
                             <ul class="password-info">
                                 - 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자
                                 <br>
@@ -79,14 +79,14 @@
                     </div>
 
                     <div class="addr-box input-box">
-                        <input type="text" name="postcode1" placeholder="우편번호" />
+                        <input type="text" name="postcode" id="postcode" placeholder="우편번호" />
                         <button type="button" id="post-btn">주소검색</button>
                     </div>
                     <div class="addr-box input-box">
-                        <input type="text" name="addr1" placeholder="기본주소"/>
+                        <input type="text" name="addr1" id="addr1" placeholder="기본주소"/>
                     </div>
                     <div class="addr-box input-box">
-                        <input type="text" name="addr2" placeholder="상세주소"/>
+                        <input type="text" name="addr2" id="addr2" placeholder="상세주소"/>
                     </div>
 
                     <br />
@@ -105,8 +105,8 @@
                             <div class="item">
                                 <div class="title">
                                     <input type="checkbox" name="agreeServiceCheck" value="Y" required class="check-all" />
-                                    <label for="agree_service_check">이용약관 동의 (필수)</label>
-                                    <button type="button" id="privacy-btn">X</button>
+                                    <label for="agreeServiceCheck">이용약관 동의 (필수)</label>
+                                    <button type="button" id="agree-content-btn"></button>
                                 </div>
                                 <div class="content service-on">
                                     <p>제1조(목적)
@@ -116,8 +116,8 @@
                             <div class="item">
                                 <div class="title">
                                     <input type="checkbox" name="agreePrivacyCheck" value="Y" required class="check-all" />
-                                    <label for="agree_privacy_check">개인정보처리방침 동의 (필수)</label>
-                                    <button type="button" id="privacy-btn">X</button>
+                                    <label for="agreePrivacyCheck">개인정보처리방침 동의 (필수)</label>
+                                    <button type="button" id="agree-content-btn"></button>
                                 </div>
                                 <div class="content privacy-on">
                                     <p>1. 개인정보 수집목적 및 이용목적</p>
@@ -126,8 +126,8 @@
                             <div class="item">
                                 <div class="title">
                                     <input type="checkbox" id="agreeAllMarketingChecked" value="Y" class="check-all" />
-                                    <label for="agree_privacy_check">마케팅 정보 전체 동의 (선택)</label>
-                                    <button type="button" id="marketing-btn">X</button>
+                                    <label for="agreeAllMarketingChecked">마케팅 정보 전체 동의 (선택)</label>
+                                    <button type="button" id="agree-content-btn"></button>
                                 </div>
                                 <div class="content marketing-on">
                                     <p>캄모멘트리의 특가, 할인, 쿠폰, 혜택, 이벤트</p>
