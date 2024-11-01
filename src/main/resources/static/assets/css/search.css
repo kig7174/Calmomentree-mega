@@ -68,6 +68,7 @@ body {
 
             .img {
                 position: absolute;
+                width: 25px;
                 top: 50%;
                 right: 0;
                 transform: translate(-20%, -50%);
