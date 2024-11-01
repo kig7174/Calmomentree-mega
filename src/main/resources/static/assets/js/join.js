@@ -4,8 +4,8 @@ document.querySelector("#post-btn").addEventListener("click", e => {
 
     new daum.Postcode({
         oncomplete: function(data) {
-            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
-            // 예제를 참고하여 다양한 활용법을 확인해 보세요.
+            document.querySelector("#postcode").value = data.zonecode;
+            document.querySelector("#addr1").value = data.roadAddress;
         }
     }).open();
 });
@@ -48,3 +48,20 @@ checkAll.forEach((v, i) => {
 });
 
 /** 약관 항목 버튼 클릭 시 상세 내용 열기 */
+document.querySelectorAll("#agree-content-btn").forEach((v, i) => {
+    v.addEventListener("click", e => {
+        const current = e.currentTarget;
+
+        current.classList.toggle('active');
+
+        const parent = current.closest(".item");
+
+        const content = parent.querySelector(".content");
+
+        if (content.style.maxHeight) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + "px";
+        }
+    });
+});
