@@ -8,6 +8,9 @@
     --font-size-medium: 14px;
     --font-size-large: 16px;
     --font: 'Noto Sans KR', 'Pretendard', 'sans-serif', 'dotum';
+    --btn-color-black: #1c1c1c;
+    --btn-font-color-white: #fff;
+    
 }
 
 * {
@@ -70,7 +73,7 @@ input[type="date"] {
         width: 50%;
         margin: 0 auto;
 
-        .title {
+        .head-title {
             position: relative;
             width: 100%;
             padding: 5px;
@@ -96,8 +99,16 @@ input[type="date"] {
             width: 50%;
             min-width: 300px;
 
+            .join-btn {
+                width: 100%;
+                background-color: var(--btn-color-black);
+                color: var(--btn-font-color-white);
+                padding: 8px;
+            }
+
             .input-box {
                 margin: 20px 0;
+
 
                 &.tel-box {
                     select{
@@ -151,12 +162,90 @@ input[type="date"] {
 
                 &.agree-box {
                     font-size: var(--font-size-small);
+
+                    .item {
+                        cursor: pointer;
+                        padding: 5px;
+                        width: 100%;
+                        font-weight: normal;
+                        margin: 0;
+                        text-align: left;
+                        outline: none;
+
+                    }
+
+                    .title {
+                        border-bottom: 1px solid #000;
+                        margin-bottom: 10px;
+                        line-height: 120%;
+
+                        #agree-content-btn {
+                            border: solid black;
+                            border-width: 0 1px 1px 0;
+                            display: inline-block;
+                            cursor: pointer;
+                            padding: 4px;
+                            margin: 2px;
+                            transform: rotate(45deg);
+                            -webkit-transform: rotate(45deg);
+                            position: absolute;
+                            right: 8px;
+                            transition: all 0.3s ease-in-out;
+
+                            &.active {
+                                transition: all 0.3s ease-in-out;
+                                transform: rotate(-135deg);
+                                -webkit-transform: rotate(-135deg);
+                            }
+                        }
+                    }
+            
+                    .content {
+                        padding: 0 18px;
+                        max-height: 0;
+                        overflow: hidden;
+                        transition: max-height 0.2s ease-out;
+                    }
                 }
             }
 
             #password-focus {
-                position: fixed;
+                position: absolute;
+                top: -80px;
+                left: 14px;
                 background-color: #fff;
+                z-index: 9999;
+                box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.15);
+                width: 250px;
+
+                .password-content {
+                    padding: 10px 14px;
+                    font-size: var(--font-size-small);
+                    line-height: var(--font-size-large);
+
+                    strong {
+                        line-height: 30px;
+                    }
+
+                    button:before, button:after {
+                        position: absolute;
+                        top: 12px;
+                        right: 18px;
+                        content: ' ';
+                        height: 18px;
+                        width: 2px;
+                        background-color: #000;
+                    }
+
+                    button:before {
+                        transform: rotate(45deg);
+                    }
+
+                    button:after {
+                        transform: rotate(-45deg);
+                    }
+                    
+                }
 
                 &.password-on {
                     display: block;
