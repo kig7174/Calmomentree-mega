@@ -38,13 +38,14 @@ body {
 }
 
 .textarea-box {
-  border: 1px solid rebeccapurple;
   min-height: 50vh;
-  
+}
+.ck.ck-editor {
+  width: 100%;
+}
 
-  #content {
-
-  }
+.ck.ck-content {
+  min-height: 50vh;
 }
 
 .board-box {
@@ -124,11 +125,11 @@ table {
     margin: 0;
     padding: 0;
     border-bottom: none;
-    
+
     td:first-child {
       width: 100%;
     }
-    
+
     #subject {
       width: 100%;
       height: 100%;
@@ -139,6 +140,9 @@ table {
 }
 .detail-box-content {
   border-bottom: none;
+  &.content-faq {
+    border-bottom: 1px solid #000;
+  }
 }
 .paging-box {
   margin-top: 100px;
@@ -199,8 +203,8 @@ table {
       color: #fff;
       background-color: #000;
       width: 110px;
-      height: 35px;
-      line-height: 35px;
+      height: 38px;
+      line-height: 38px;
       text-align: center;
       margin-top: 2px;
     }
@@ -209,8 +213,24 @@ table {
 .btn-area {
   margin: 40px 0 50px 6px;
   display: flex;
+
+  &.right {
+    position: relative;
+    .write-btn {
+      position: absolute;
+      right: 0;
+      float: right;
+      color: #fff;
+      background-color: #000;
+      width: 110px;
+      height: 38px;
+      line-height: 38px;
+      text-align: center;
+      margin-top: 10px;
+  }
+  }
   
-  
+
   .btn-1 {
     color: var(--background-color);
     background-color: #000;
@@ -235,9 +255,9 @@ table {
   position: absolute;
   right: 10px;
   width: 50%;
-  .pw-box{
+  .pw-box {
     width: 50%;
-    
+
     input {
       width: 100%;
       background: none;
@@ -247,21 +267,20 @@ table {
         outline: none;
       }
     }
-
   }
   .radio-box {
     margin-top: 20px;
   }
-  
+
   .line {
     margin-top: 20px;
     border-bottom: 1px solid #abaaaa;
     padding-bottom: 5px;
-    
   }
 }
 .file-box {
   display: flex;
   width: 100%;
   flex-direction: column;
+
 }
