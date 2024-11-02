@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calmomentree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/myshop.css" />
+  </head>
+  <body>
+    <!-- 헤더 영역 -->
+    <header id="header">
+      <div class="head">헤더영역</div>
+    </header>
+
+    <div class="container-box">
+      <!-- 사이드바 구역 -->
+      <div class="side-bar">
+        <div class="board-box">
+          <ul class="board-inner">
+            <li><a href="">마이페이지</a></li>
+            <li><a href="">주문/배송조회</a></li>
+            <li><a href="">쿠폰/적립금</a></li>
+            <li><a href="">게시글관리</a></li>
+            <li><a href="">회원정보수정</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- 메인 영역 -->
+      <div class="container">
+        <div class="myshop-area">
+          <div class="myshop-title">
+            <p class="title">Order List</p>
+          </div>
+          <div class="myshop-tab">
+            <ul class="menu">
+              <li class="menu-list"><a href="">주문내역조회</a></li>
+              <li class="menu-list cancel"><a href="">취소/반품/교환 내역</a></li>
+            </ul>
+          </div>
+          <div class="order-history-box">
+            <div class="state-select">
+              <select name="order-status" id="order-status" class="select-status">
+                <option value="all">전체 주문처리상태</option>
+                <option value="before">입금전</option>
+                <option value="standby">배송준비중</option>
+                <option value="begin">배송중</option>
+                <option value="complate">배송완료</option>
+                <option value="cancel">취소</option>
+                <option value="exchange">교환</option>
+                <option value="return">반품</option>
+              </select>
+              <span class="period">
+                <a href="" days="00">오늘</a>
+                <a href="" days="30">1개월</a>
+                <a href="" days="90">3개월</a>
+                <a href="" days="180">6개월</a>
+              </span>
+              <div class="date">
+                <span class="date-picker">
+                  <input type="text" id="start-date" name="start-date" class="start-date" />
+                  <button type="button" class="start-date-pick"><img src="" alt="" /></button>
+                  -
+                  <input type="text" id="end-date" name="end-date" class="end-date" />
+                  <button type="button" class="end-date-pick"><img src="" alt="" /></button>
+                  <button type="submit" class="btn-submit">찾기</button>
+                </span>
+              </div>
+            </div>
+            <div class="order-list">
+              <div class="order">
+                <div class="order-num">
+                  <span>15</span>
+                </div>
+                <div class="thumnail">
+                  <a href=""><img src="https://via.placeholder.com/83" alt="" width="83" height="83" /></a>
+                </div>
+                <div class="description">
+                  <strong class="prd-name">떼르말 세라마이드 헤드 스파 샴푸 500ML</strong>
+                  <span class="price">28,000원</span>
+                  <span class="qyt">1(개)</span>
+                </div>
+                <div class="prd-status" title="주문처리상태">
+                  <span>배송중</span>
+                </div>
+              </div>
+              <div class="order">
+                <div class="order-num">
+                  <span>15</span>
+                </div>
+                <div class="thumnail">
+                  <a href=""><img src="https://via.placeholder.com/83" alt="" width="83" height="83" /></a>
+                </div>
+                <div class="description">
+                  <strong class="prd-name">떼르말 세라마이드 헤드 스파 샴푸 500ML</strong>
+                  <span class="price">28,000원</span>
+                  <span class="qyt">1(개)</span>
+                </div>
+                <div class="prd-status" title="주문처리상태">
+                  <span>배송중</span>
+                </div>
+              </div>
+              <div class="order">
+                <div class="order-num">
+                  <span>15</span>
+                </div>
+                <div class="thumnail">
+                  <a href=""><img src="https://via.placeholder.com/83" alt="" width="83" height="83" /></a>
+                </div>
+                <div class="description">
+                  <strong class="prd-name">떼르말 세라마이드 헤드 스파 샴푸 500ML</strong>
+                  <span class="price">28,000원</span>
+                  <span class="qyt">1(개)</span>
+                </div>
+                <div class="prd-status" title="주문처리상태">
+                  <span>배송중</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 하단 페이징 영역 -->
+          <div class="paging-box">
+            <!-- 페이지 번호 -->
+            <ul class="pagination">
+              <!-- 이전 페이지 그룹 이동 버튼 -->
+              <li th:if="${pagination.prevPage > 0}">
+                <a th:href="@{/student(keyword=${keyword}, page=${pagination.prevPage})}">&laquo;</a>
+              </li>
+              <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
+              <!-- 페이지 번호 링크 -->
+              <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+                <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}"></a>
+                <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/student(keyword=${keyword}, page=${i})}"></a>
+              </li>
+
+              <!-- 다음 페이지 그룹 이동 버튼 -->
+              <li th:if="${pagination.nextPage > 0}">
+                <a th:href="@{/student(keyword=${keyword}, page=${pagination.nextPage})}">&raquo;</a>
+              </li>
+              <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <script src="/src/main/resources/static/assets/js/orderList.js"></script> -->
+    <script>
+      // 취소/반품/교환 내역 클릭시 드롭다운 없어짐
+      document.querySelector(".cancel").addEventListener("click", (e) => {
+        e.preventDefault();
+
+        document.querySelector(".select-status").classList.add("blind");
+      });
+    </script>
+  </body>
+</html>
