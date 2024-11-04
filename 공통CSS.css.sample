@@ -12,6 +12,9 @@
     --font: 'Noto Sans KR', 'Pretendard', 'sans-serif', 'dotum';
     --btn-color-black: #1c1c1c;
     --btn-font-color-white: #fff;
+    --table-color-gray: #e9e5dd;
+    --input-border: #e0e0e0;
+    --input-color: #f3f0eb;
 }
 
 * {
