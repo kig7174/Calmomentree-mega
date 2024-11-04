@@ -116,7 +116,7 @@ input[type="date"] {
                         height: 40px;
                         border: 0;
                         border-bottom: 1px solid #000;
-                        background-color:transparent
+                        background-color: transparent;
                     }
 
                     input {
