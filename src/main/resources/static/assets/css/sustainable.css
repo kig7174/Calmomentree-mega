@@ -1,0 +1,31 @@
+:root {
+    --background-color: #FAF8EF;
+    --font-color: #1c1c1c;
+    --font-color-gray: #5e5e5e;
+    --font-color-whitegray: #f3f0eb;
+    --font-size-title: 24px;
+    --font-size-small: 12px;
+    --font-size-medium: 14px;
+    --font-size-large: 16px;
+    --font: 'Noto Sans KR', 'Pretendard', 'sans-serif', 'dotum';
+    --btn-color-black: #1c1c1c;
+    --btn-font-color-white: #fff;
+    --table-color-gray: #e9e5dd;
+    --input-border: #e0e0e0;
+    --input-color: #f3f0eb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    color: var(--font-color);
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: var(--font);
+    width: 100%;
+}
