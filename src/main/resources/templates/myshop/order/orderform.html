@@ -4,34 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calmomentree</title>
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/order_form.css" />
   </head>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      width: 60%;
-      margin: auto;
-    }
-    .info-title {
-      background-color: antiquewhite;
-    }
-
-    .info-box {
-      display: flex;
-      flex-direction: column;
-
-      .input-box {
-        display: flex;
-        width: 100%;
-
-        label {
-          width: 15%;
-        }
-      }
-    }
-  </style>
   <body>
     <div class="container">
       <!---------- 주문 정보 ------------>
@@ -43,67 +17,86 @@
         <div class="info-box">
           <div class="name-box input-box">
             <label for="member-name">주문자*</label>
-            <input type="text" name="member-name" id="member-name" required />
+            <div class="input-box2">
+              <input type="text" name="member-name" id="member-name" class="input-box-l" required />
+            </div>
           </div>
 
           <div class="email-box input-box">
             <label for="member-email">이메일*</label>
-            <input type="text" name="member-email" id="member-email" required />
-            @
-            <select name="email-sort" id="email-sort">
-              <option value="naver">naver.com</option>
-              <option value="daum">daum.net</option>
-              <option value="nate">nate.com</option>
-              <option value="hotmail">hotmail.com</option>
-              <option value="yahoo">yahoo.com</option>
-              <option value="empas">empas.com</option>
-              <option value="korea">korea.com</option>
-              <option value="dreamwiz">dreamwiz.com</option>
-              <option value="gmail">gmail.com</option>
-              <option value="직접입력">직접입력</option>
-            </select>
+            <div class="input-box2">
+              <input type="text" name="member-email" id="member-email" class="input-box-m" required />
+              &nbsp; @ &nbsp;
+              <select name="email-sort" id="email-sort" class="input-box-m">
+                <option value="naver">naver.com</option>
+                <option value="daum">daum.net</option>
+                <option value="nate">nate.com</option>
+                <option value="hotmail">hotmail.com</option>
+                <option value="yahoo">yahoo.com</option>
+                <option value="empas">empas.com</option>
+                <option value="korea">korea.com</option>
+                <option value="dreamwiz">dreamwiz.com</option>
+                <option value="gmail">gmail.com</option>
+                <option value="직접입력">수정필요</option>
+              </select>
+            </div>
           </div>
 
           <div class="tel-box input-box">
             <label for="tel1"> 일반전화*</label>
-            <select name="tel1" selected="02">
-              <option value="02">02</option>
-              <option value="031">031</option>
-              <option value="041">041</option>
-              <option value="051">051</option>
-            </select>
-            -
-            <input type="text" name="tel2" maxlength="4" />
-            -
-            <input type="text" name="tel2" maxlength="4" />
+            <div class="input-box2">
+              <select name="tel1" selected="02" class="input-box-s">
+                <option value="02">02</option>
+                <option value="031">031</option>
+                <option value="041">041</option>
+                <option value="051">051</option>
+              </select>
+              &nbsp; - &nbsp;
+              <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+              &nbsp; - &nbsp;
+              <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+            </div>
           </div>
 
           <div class="phone-box input-box">
             <label for="phone1"> 휴대전화*</label>
-            <select name="phone1" id="phone1" selected="010">
-              <option value="010">010</option>
-              <option value="011">011</option>
-              <option value="016">016</option>
-              <option value="017">017</option>
-              <option value="018">018</option>
-              <option value="019">019</option>
-            </select>
-            -
-            <input type="text" name="phone2" maxlength="4" />
-            -
-            <input type="text" name="phone3" maxlength="4" />
+            <div class="input-box2">
+              <select name="phone1" id="phone1" selected="010" class="input-box-s">
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="016">016</option>
+                <option value="017">017</option>
+                <option value="018">018</option>
+                <option value="019">019</option>
+              </select>
+              &nbsp; - &nbsp;
+              <input type="text" name="phone2" maxlength="4" class="input-box-s" />
+              &nbsp; - &nbsp;
+              <input type="text" name="phone3" maxlength="4" class="input-box-s" />
+            </div>
           </div>
 
           <div class="addr-box input-box">
             <label for="postcode"> 주소*</label>
-            <input type="text" name="postcode" id="postcode" placeholder="우편번호" />
+            <div class="input-box2">
+              <input type="text" name="postcode" id="postcode" class="postcode" placeholder="우편번호" />
+            </div>
+          </div>
+          <div class="input-box">
+            <label for=""></label>
             <button type="button" id="post-btn">주소검색</button>
           </div>
           <div class="addr-box input-box">
-            <input type="text" name="addr1" id="addr1" placeholder="기본주소" />
+            <label for=""></label>
+            <div class="input-box2">
+              <input type="text" name="addr1" id="addr1" class="addr1" placeholder="기본주소" />
+            </div>
           </div>
           <div class="addr-box input-box">
-            <input type="text" name="addr2" id="addr2" placeholder="상세주소" />
+            <label for=""></label>
+            <div class="input-box2">
+              <input type="text" name="addr2" id="addr2" class="addr2" placeholder="상세주소" />
+            </div>
           </div>
         </div>
       </div>
@@ -126,37 +119,47 @@
           </div>
           <div class="name-box input-box">
             <label for="shop-name">받는사람*</label>
+            <div class="input-box2">
             <input type="text" name="shop-name" id="shop-name" />
           </div>
-          <div class="addr-box input-box">
-            <label for="postcode"> 주소*</label>
-            <input type="text" name="postcode" id="postcode" placeholder="우편번호" />
-            <button type="button" id="post-btn">주소검색</button>
           </div>
           <div class="addr-box input-box">
-            <input type="text" name="addr1" id="addr1" placeholder="기본주소" />
+            <label for="postcode2"> 주소*</label>
+            <input type="text" name="postcode2" id="postcode2" class="postcode2" placeholder="우편번호" />
+            <button type="button" id="post-btn2">주소검색</button>
           </div>
           <div class="addr-box input-box">
-            <input type="text" name="addr2" id="addr2" placeholder="상세주소" />
+            <label for=""></label>
+            <div class="input-box2">
+            <input type="text" name="addr3" id="addr3" class="addr3" placeholder="기본주소" />
           </div>
+          </div>
+          <div class="addr-box input-box">
+            <label for=""></label>
+            <div class="input-box2">
+            <input type="text" name="addr4" id="addr4" class="addr4" placeholder="상세주소" />
+          </div>
+        </div>
 
           <div class="tel-box input-box">
             <label for="tel1"> 일반전화*</label>
-            <select name="tel1" selected="02">
+            <div class="input-box2">
+            <select name="tel1" selected="02" class="input-box-s">
               <option value="02">02</option>
               <option value="031">031</option>
               <option value="041">041</option>
               <option value="051">051</option>
             </select>
-            -
-            <input type="text" name="tel2" maxlength="4" />
-            -
-            <input type="text" name="tel2" maxlength="4" />
+            &nbsp; - &nbsp;
+            <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+            &nbsp; - &nbsp;
+            <input type="text" name="tel2" maxlength="4" class="input-box-s" />
           </div>
-
+        </div>
           <div class="phone-box input-box">
             <label for="phone1"> 휴대전화*</label>
-            <select name="phone1" id="phone1" selected="010">
+            <div class="input-box2">
+            <select name="phone1" id="phone1" selected="010" class="input-box-s">
               <option value="010">010</option>
               <option value="011">011</option>
               <option value="016">016</option>
@@ -164,12 +167,12 @@
               <option value="018">018</option>
               <option value="019">019</option>
             </select>
-            -
-            <input type="text" name="phone2" maxlength="4" />
-            -
-            <input type="text" name="phone3" maxlength="4" />
+            &nbsp; - &nbsp;
+            <input type="text" name="phone2" maxlength="4" class="input-box-s" />
+            &nbsp; - &nbsp;
+            <input type="text" name="phone3" maxlength="4" class="input-box-s" />
           </div>
-
+        </div>
           <div class="message-box input-box">
             <select name="" id="">
               <option value="">--메시지 선택(선택사항)--</option>
@@ -203,8 +206,8 @@
               </div>
             </div>
             <div class="input-box2">
-                <p>배송비</p>
-                <span>3,000</span>
+              <p>배송비</p>
+              <span>3,000</span>
             </div>
           </div>
         </div>
@@ -239,5 +242,7 @@
         </div>
       </div>
     </div>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script src="/src/main/resources/static/assets/js/orderform.js"></script>
   </body>
 </html>
