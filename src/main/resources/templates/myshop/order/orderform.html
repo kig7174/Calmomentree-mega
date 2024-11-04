@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calmomentree</title>
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 60%;
+      margin: auto;
+    }
+    .info-title {
+      background-color: antiquewhite;
+    }
+
+    .info-box {
+      display: flex;
+      flex-direction: column;
+
+      .input-box {
+        display: flex;
+        width: 100%;
+
+        label {
+          width: 15%;
+        }
+      }
+    }
+  </style>
+  <body>
+    <div class="container">
+      <!---------- 주문 정보 ------------>
+      <div class="member-info">
+        <div class="info-title">
+          <span>주문정보</span>
+        </div>
+
+        <div class="info-box">
+          <div class="name-box input-box">
+            <label for="member-name">주문자*</label>
+            <input type="text" name="member-name" id="member-name" required />
+          </div>
+
+          <div class="email-box input-box">
+            <label for="member-email">이메일*</label>
+            <input type="text" name="member-email" id="member-email" required />
+            @
+            <select name="email-sort" id="email-sort">
+              <option value="naver">naver.com</option>
+              <option value="daum">daum.net</option>
+              <option value="nate">nate.com</option>
+              <option value="hotmail">hotmail.com</option>
+              <option value="yahoo">yahoo.com</option>
+              <option value="empas">empas.com</option>
+              <option value="korea">korea.com</option>
+              <option value="dreamwiz">dreamwiz.com</option>
+              <option value="gmail">gmail.com</option>
+              <option value="직접입력">직접입력</option>
+            </select>
+          </div>
+
+          <div class="tel-box input-box">
+            <label for="tel1"> 일반전화*</label>
+            <select name="tel1" selected="02">
+              <option value="02">02</option>
+              <option value="031">031</option>
+              <option value="041">041</option>
+              <option value="051">051</option>
+            </select>
+            -
+            <input type="text" name="tel2" maxlength="4" />
+            -
+            <input type="text" name="tel2" maxlength="4" />
+          </div>
+
+          <div class="phone-box input-box">
+            <label for="phone1"> 휴대전화*</label>
+            <select name="phone1" id="phone1" selected="010">
+              <option value="010">010</option>
+              <option value="011">011</option>
+              <option value="016">016</option>
+              <option value="017">017</option>
+              <option value="018">018</option>
+              <option value="019">019</option>
+            </select>
+            -
+            <input type="text" name="phone2" maxlength="4" />
+            -
+            <input type="text" name="phone3" maxlength="4" />
+          </div>
+
+          <div class="addr-box input-box">
+            <label for="postcode"> 주소*</label>
+            <input type="text" name="postcode" id="postcode" placeholder="우편번호" />
+            <button type="button" id="post-btn">주소검색</button>
+          </div>
+          <div class="addr-box input-box">
+            <input type="text" name="addr1" id="addr1" placeholder="기본주소" />
+          </div>
+          <div class="addr-box input-box">
+            <input type="text" name="addr2" id="addr2" placeholder="상세주소" />
+          </div>
+        </div>
+      </div>
+      <!---------- 배송지 ------------>
+      <div class="shop-info">
+        <div class="info-title">
+          <span>배송지</span>
+        </div>
+
+        <div class="info-box">
+          <div class="radio-box">
+            <label>
+              <input type="radio" name="place" id="place1" value="E" checked />
+              주문자 정보와 동일
+            </label>
+            <label>
+              <input type="radio" name="place" id="place2" value="N" />
+              새로운 배송지
+            </label>
+          </div>
+          <div class="name-box input-box">
+            <label for="shop-name">받는사람*</label>
+            <input type="text" name="shop-name" id="shop-name" />
+          </div>
+          <div class="addr-box input-box">
+            <label for="postcode"> 주소*</label>
+            <input type="text" name="postcode" id="postcode" placeholder="우편번호" />
+            <button type="button" id="post-btn">주소검색</button>
+          </div>
+          <div class="addr-box input-box">
+            <input type="text" name="addr1" id="addr1" placeholder="기본주소" />
+          </div>
+          <div class="addr-box input-box">
+            <input type="text" name="addr2" id="addr2" placeholder="상세주소" />
+          </div>
+
+          <div class="tel-box input-box">
+            <label for="tel1"> 일반전화*</label>
+            <select name="tel1" selected="02">
+              <option value="02">02</option>
+              <option value="031">031</option>
+              <option value="041">041</option>
+              <option value="051">051</option>
+            </select>
+            -
+            <input type="text" name="tel2" maxlength="4" />
+            -
+            <input type="text" name="tel2" maxlength="4" />
+          </div>
+
+          <div class="phone-box input-box">
+            <label for="phone1"> 휴대전화*</label>
+            <select name="phone1" id="phone1" selected="010">
+              <option value="010">010</option>
+              <option value="011">011</option>
+              <option value="016">016</option>
+              <option value="017">017</option>
+              <option value="018">018</option>
+              <option value="019">019</option>
+            </select>
+            -
+            <input type="text" name="phone2" maxlength="4" />
+            -
+            <input type="text" name="phone3" maxlength="4" />
+          </div>
+
+          <div class="message-box input-box">
+            <select name="" id="">
+              <option value="">--메시지 선택(선택사항)--</option>
+              <option value="">배송 전에 미리 연락바랍니다.</option>
+              <option value="">부재 시 경비실에 맡겨주세요.</option>
+              <option value="">부재 시 문앞에 놓아주세요.</option>
+              <option value="">빠른 배송 부탁드립니다.</option>
+              <option value="">택배함에 보관해 주세요</option>
+              <option value="">직접입력</option>
+            </select>
+          </div>
+
+          <div class="message-check-box"><input type="checkbox" />기본 배송지로 저장</div>
+        </div>
+
+        <!---------- 주문 상품 ------------>
+        <div class="order-product">
+          <div class="info-title">
+            <span>주문상품</span>
+          </div>
+
+          <div class="info-box">
+            <div class="prod-box">
+              <div class="thumnail-img">
+                <img src="" alt="" />
+              </div>
+              <div class="description">
+                <p><span class="prod-name">떼르말 세라마이드 헤드 스파 샴퓨 500ML</span></p>
+                <p>수량:<span>1</span>개</p>
+                <p><span>28,000</span></p>
+              </div>
+            </div>
+            <div class="input-box2">
+                <p>배송비</p>
+                <span>3,000</span>
+            </div>
+          </div>
+        </div>
+        <!---------- 결제 정보 ------------>
+        <div class="payment">
+          <div class="info-title">
+            <span>결제정보</span>
+          </div>
+
+          <div class="info-box">
+            <div class="pay">주문상품<span>28,000</span></div>
+            <div class="pay">배송비<span>3,000</span></div>
+            <div class="pay discount">할인/부가결제<span>-0</span></div>
+            <div class="pay price">최종 결제 금액<span>00000</span></div>
+          </div>
+        </div>
+        <!---------- 결제 수단 ------------>
+        <div class="paymethod">
+          <div class="info-title">
+            <span>결제수단</span>
+          </div>
+
+          <div class="info-box"></div>
+        </div>
+        <!---------- 적립혜택 ------------>
+        <div class="benefit">
+          <div class="info-title">
+            <span>적립혜택</span>
+          </div>
+
+          <div class="info-box"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
