@@ -3,6 +3,7 @@
     --font-color: #1c1c1c;
     --font-color-gray: #5e5e5e;
     --font-color-whitegray: #f3f0eb;
+    --font-color-white: #FBF9EF;
     --font-size-title: 24px;
     --font-size-small: 12px;
     --font-size-medium: 14px;
@@ -28,4 +29,96 @@ body {
     background-color: var(--background-color);
     font-family: var(--font);
     width: 100%;
+}
+
+.container {
+    margin-top: 100px;
+
+    .title-box {
+        height: 700px;
+        position: relative;
+        text-align: center;
+
+        .title-img {
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .first-title {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            h3 {
+                font-size: 36px;
+                font-weight: 400;
+                margin-bottom: 30px;
+                color: var(--font-color-white);
+            }
+
+            p {
+                font-size: var(--font-size-medium);
+                font-weight: 300;
+                color: var(--font-color-white);
+            }
+        }
+
+        .second-title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            h4 {
+                font-size: var(--font-size-large);
+                color: var(--font-color-white);
+                font-weight: 400;
+                line-height: 150%;
+            }
+        }
+    }
+
+    .content-box {
+
+        .content {
+
+        }
+
+        .content-img {
+            width: 60%;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .first-content {
+            display: flex;
+        }
+
+        .second-content {
+            display: flex;
+
+            .report-icon {
+                margin-top: 40px;
+
+                ul {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 15px;
+                }
+            }
+        }
+    }
+
+    .development-box {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
