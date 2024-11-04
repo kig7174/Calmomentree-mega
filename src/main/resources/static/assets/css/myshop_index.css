@@ -1,0 +1,131 @@
+:root {
+    --background-color: #FAF8EF;
+    --font-color: #1c1c1c;
+    --font-color-gray: #5e5e5e;
+    --font-color-whitegray: #f3f0eb;
+    --font-size-title: 24px;
+    --font-size-small: 12px;
+    --font-size-medium: 14px;
+    --font-size-large: 16px;
+    --font: 'Noto Sans KR', 'Pretendard', 'sans-serif', 'dotum';
+    --btn-color-black: #1c1c1c;
+    --btn-font-color-white: #fff;
+    --table-color-gray: #e9e5dd;
+    --input-border: #e0e0e0;
+    --input-color: #f3f0eb;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    color: var(--font-color);
+}
+
+body {
+    background-color: var(--background-color);
+    font-family: var(--font);
+    width: 100%;
+}
+
+.container {
+    width: 75%;
+    margin: 150px auto;
+    display: flex;
+
+    .nav {
+        width: 10%;
+    }
+
+    .inner-body {
+        margin: 0 auto;
+        max-width: 900px;
+        width: 80%;
+
+        .title {
+            text-align: left;
+            font-size: var(--font-size-title);
+            width: 80%;
+            padding-left: 3px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--btn-color-black);
+
+            h2 {
+                font-weight: 500;
+            }
+        }
+
+        .main {
+            display: flex;
+            justify-content: space-between;
+            max-width: 80%;
+            margin: 25px 0;
+
+            .main-left {
+                width: 40%;
+
+                .name {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 20px;
+                    padding-bottom: 5px;
+                    border-bottom: 1px solid var(--btn-color-black);
+
+                    .txtname {
+                        font-size: var(--font-size-medium);
+                    }
+
+                    span {
+                        font-size: var(--font-size-small);
+                        line-height: 150%;
+                    }
+
+                    button {
+                        font-size: var(--font-size-small);
+                        padding: 2px 5px;
+                        background-color: var(--btn-color-black);
+                        color: var(--btn-font-color-white);
+                    }
+                }
+
+                .membership {
+                    
+                    h3 {
+                        font-size: var(--font-size-title);
+                        font-weight: 400;
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+
+            .main-right {
+                width: 40%;
+
+                h4 {
+                    margin: 10px 0;
+                    font-size: var(--font-size-large);
+                    font-weight: 400;
+                    padding-bottom: 5px;
+                    border-bottom: 1px solid var(--btn-color-black);
+                }
+
+                span {
+                    font-size: var(--font-size-small);
+                }
+
+                .order {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 30px;
+                }
+
+                .order-cancel {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+}
