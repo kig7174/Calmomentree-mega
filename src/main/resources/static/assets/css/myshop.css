@@ -79,7 +79,30 @@
     padding: 0 0 10px;
     border-bottom: var(--border);
     font-size: var(--font-size-title);
+
+    &.board-select {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+
+      option {
+        background-color: #fff;
+      }
+    }
+
+    #board-sort {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      height: 38px;
+      width: 120px;
+      padding-left: 10px;
+      background: #f3f0eb;
+      border: none;
+    }
   }
+
+
   .myshop-tab {
     margin-bottom: 58px;
 
@@ -129,12 +152,38 @@
         }
       }
     }
+
+    .board {
+      min-height: 80px;
+      width: 100%;
+      text-align: left;
+
+      .board-num {
+        width: 10%;
+      }
+
+      .board-name {
+        width: 70%;
+        
+        span {
+          padding-left: 10px;
+        }
+      }
+
+      .board-place {
+        width: 10%;
+      }
+    }
   }
 }
 .order-list {
   margin-top: 40px;
   border-top: var(--border);
   min-height: 25vh;
+
+  &.board-list {
+    margin: 0;
+  }
 
   .order {
     border-bottom: 1px dotted #1a1a1a;
