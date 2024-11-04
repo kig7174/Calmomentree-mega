@@ -15,11 +15,177 @@
     </div>
 
     <div class="container">
-
+        <div class="title">
+            <h2>회원 정보 수정</h2>
+            <h3>기본정보 <span><span class="required-option">*</span> 필수입력사항</span></h3>
+        </div>
+        <form method="" action="" class="edit-form">
+            <table border="1">
+                <colgroup>
+                    <col style="width:190px" />
+                    <col style="width:80%"/>
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th>아이디 <span class="required-option">*</span></th>
+                        <td>
+                            <input type="text" name="userid" value="1" readonly />
+                            <span class="input-info">(영문소문자/숫자, 4~16자)</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>비밀번호 <span class="required-option">*</span></th>
+                        <td>
+                            <input type="password" name="password" id="password" />
+                            <span class="input-info">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</span>
+                            <div id="password-focus" class="password-off">
+                                <div class="password-content">
+                                    <strong>※ 비밀번호 입력 조건</strong>
+                                    <button type="button" id="password-content-close"></button>
+                                    <ul class="password-info">
+                                        - 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자
+                                        <br>
+                                            - 입력 가능 특수문자 
+                                        <br>
+                                            &nbsp;&nbsp;&nbsp;  ~ ` ! @ # $ % ^ ( ) * _ - = { } [ ] | ; : < > , . ? /
+                                        <br>
+                                            - 공백 입력 불가능
+                                        <br>
+                                            - 연속된 문자, 숫자 사용 불가능
+                                        <br>
+                                            - 동일한 문자, 숫자를 반복해서 사용 불가능
+                                        <br>
+                                            - 아이디 포함 불가능
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>비밀번호 확인 <span class="required-option">*</span></th>
+                        <td>
+                            <input type="password" name="password-confirm" />
+                            <p class="password-confirm-msg">비밀번호가 일치하지 않습니다.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>이름 <span class="required-option">*</span></th>
+                        <td>
+                            <input type="text" name="username" readonly />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>주소 <span class="required-option">*</span></th>
+                        <td>
+                            <ul>
+                                <li>
+                                    <input type="text" name="postcode" id="postcode" value="1" />
+                                    <button type="button" id="post-btn">주소검색</button>
+                                </li>
+                                <li><input type="text" name="addr1" id="addr1" value="1" /></li>
+                                <li><input type="text" name="addr2" id="addr2" value="1" /></li>
+                            </ul>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>일반전화</th>
+                        <td>
+                            <select name="tel1" selected="010">
+                                <option value="02">02</option>
+                                <option value="031">031</option>
+                                <option value="032">032</option>
+                                <option value="033">033</option>
+                                <option value="041">041</option>
+                                <option value="042">042</option>
+                                <option value="043">043</option>
+                                <option value="044">044</option>
+                                <option value="051">051</option>
+                                <option value="052">052</option>
+                                <option value="053">053</option>
+                                <option value="054">054</option>
+                                <option value="055">055</option>
+                                <option value="061">061</option>
+                                <option value="062">062</option>
+                                <option value="063">063</option>
+                                <option value="064">064</option>
+                                <option value="0502">0502</option>
+                                <option value="0503">0503</option>
+                                <option value="0504">0504</option>
+                                <option value="0505">0505</option>
+                                <option value="0506">0506</option>
+                                <option value="0507">0507</option>
+                                <option value="070">070</option>
+                                <option value="010">010</option>
+                                <option value="011">011</option>
+                                <option value="016">016</option>
+                                <option value="017">017</option>
+                                <option value="018">018</option>
+                                <option value="019">019</option>
+                                <option value="0508">0508</option>
+                            </select>
+                            -
+                            <input type="text" name="tel2" maxlength="4" class="tel" />
+                            -
+                            <input type="text" name="tel3" maxlength="4" class="tel" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>휴대전화 <span class="required-option">*</span></th>
+                        <td>
+                            <select name="tel1" selected="010">
+                                <option value="010">010</option>
+                                <option value="011">011</option>
+                                <option value="016">016</option>
+                                <option value="017">017</option>
+                                <option value="018">018</option>
+                                <option value="019">019</option>
+                            </select>
+                            -
+                            <input type="text" name="tel2" maxlength="4" class="tel" value="1" />
+                            -
+                            <input type="text" name="tel3" maxlength="4" class="tel" value="1" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>SMS 수신여부 <span class="required-option">*</span></th>
+                        <td>
+                            <label><input type="radio" name="agreeSmsReceive" value="Y" />수신함</label>
+                            <label><input type="radio" name="agreeSmsReceive" value="N" checked/>수신안함</label>
+                            <p class="input-info">쇼핑몰에서 제공하는 유익한 이벤트 소식을 SMS로 받으실 수 있습니다.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>이메일 <span class="required-option">*</span></th>
+                        <td>
+                            <input type="email" name="email" value="1" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>이메일 수신여부 <span class="required-option">*</span></th>
+                        <td>
+                            <label><input type="radio" name="agreeEmailReceive" value="Y" />수신함</label>
+                            <label><input type="radio" name="agreeEmailReceive" value="N" checked/>수신안함</label>
+                            <p class="input-info">쇼핑몰에서 제공하는 유익한 이벤트 소식을 이메일로 받으실 수 있습니다.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>추가정보</th>
+                        <td>
+                            <input type="date" name="birthday" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="delete-btn">회원탈퇴</button>
+            <div class="submit-btn">
+                <button type="button">취소</button>
+                <button type="submit">회원정보수정</button>
+            </div>
+        </form>
     </div>
 
     <div class="footer">
-        
+
     </div>
     
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
