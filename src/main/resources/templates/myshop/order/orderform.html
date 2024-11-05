@@ -16,14 +16,14 @@
 
         <div class="info-box">
           <div class="name-box input-box">
-            <label for="member-name">주문자*</label>
+            <label for="member-name">주문자<span class="bg-required"></span></label>
             <div class="input-box2">
               <input type="text" name="member-name" id="member-name" class="input-box-l" required />
             </div>
           </div>
 
           <div class="email-box input-box">
-            <label for="member-email">이메일*</label>
+            <label for="member-email">이메일<span class="bg-required"></span></label>
             <div class="input-box2">
               <input type="text" name="member-email" id="member-email" class="input-box-m" required />
               &nbsp; @ &nbsp;
@@ -43,7 +43,7 @@
           </div>
 
           <div class="tel-box input-box">
-            <label for="tel1"> 일반전화*</label>
+            <label for="tel1"> 일반전화</label>
             <div class="input-box2">
               <select name="tel1" selected="02" class="input-box-s">
                 <option value="02">02</option>
@@ -59,9 +59,9 @@
           </div>
 
           <div class="phone-box input-box">
-            <label for="phone1"> 휴대전화*</label>
+            <label for="phone1"> 휴대전화<span class="bg-required"></span></label>
             <div class="input-box2">
-              <select name="phone1" id="phone1" selected="010" class="input-box-s">
+              <select name="phone1" id="phone1" selected="010" class="input-box-s" required>
                 <option value="010">010</option>
                 <option value="011">011</option>
                 <option value="016">016</option>
@@ -70,16 +70,16 @@
                 <option value="019">019</option>
               </select>
               &nbsp; - &nbsp;
-              <input type="text" name="phone2" maxlength="4" class="input-box-s" />
+              <input type="text" name="phone2" maxlength="4" class="input-box-s" required />
               &nbsp; - &nbsp;
-              <input type="text" name="phone3" maxlength="4" class="input-box-s" />
+              <input type="text" name="phone3" maxlength="4" class="input-box-s" required />
             </div>
           </div>
 
           <div class="addr-box input-box">
-            <label for="postcode"> 주소*</label>
+            <label for="postcode"> 주소<span class="bg-required"></span></label>
             <div class="input-box2">
-              <input type="text" name="postcode" id="postcode" class="postcode" placeholder="우편번호" />
+              <input type="text" name="postcode" id="postcode" class="postcode" placeholder="우편번호" required readonly />
             </div>
           </div>
           <div class="input-box">
@@ -118,61 +118,61 @@
             </label>
           </div>
           <div class="name-box input-box">
-            <label for="shop-name">받는사람*</label>
+            <label for="shop-name">받는사람<span class="bg-required"></span></label>
             <div class="input-box2">
-            <input type="text" name="shop-name" id="shop-name" />
-          </div>
+              <input type="text" name="shop-name" id="shop-name" required />
+            </div>
           </div>
           <div class="addr-box input-box">
-            <label for="postcode2"> 주소*</label>
-            <input type="text" name="postcode2" id="postcode2" class="postcode2" placeholder="우편번호" />
+            <label for="postcode2"> 주소<span class="bg-required"></span></label>
+            <input type="text" name="postcode2" id="postcode2" class="postcode2" placeholder="우편번호" required />
             <button type="button" id="post-btn2">주소검색</button>
           </div>
           <div class="addr-box input-box">
             <label for=""></label>
             <div class="input-box2">
-            <input type="text" name="addr3" id="addr3" class="addr3" placeholder="기본주소" />
-          </div>
+              <input type="text" name="addr3" id="addr3" class="addr3" placeholder="기본주소" />
+            </div>
           </div>
           <div class="addr-box input-box">
             <label for=""></label>
             <div class="input-box2">
-            <input type="text" name="addr4" id="addr4" class="addr4" placeholder="상세주소" />
+              <input type="text" name="addr4" id="addr4" class="addr4" placeholder="상세주소" />
+            </div>
           </div>
-        </div>
 
           <div class="tel-box input-box">
-            <label for="tel1"> 일반전화*</label>
+            <label for="tel1"> 일반전화</label>
             <div class="input-box2">
-            <select name="tel1" selected="02" class="input-box-s">
-              <option value="02">02</option>
-              <option value="031">031</option>
-              <option value="041">041</option>
-              <option value="051">051</option>
-            </select>
-            &nbsp; - &nbsp;
-            <input type="text" name="tel2" maxlength="4" class="input-box-s" />
-            &nbsp; - &nbsp;
-            <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+              <select name="tel1" selected="02" class="input-box-s">
+                <option value="02">02</option>
+                <option value="031">031</option>
+                <option value="041">041</option>
+                <option value="051">051</option>
+              </select>
+              &nbsp; - &nbsp;
+              <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+              &nbsp; - &nbsp;
+              <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+            </div>
           </div>
-        </div>
           <div class="phone-box input-box">
-            <label for="phone1"> 휴대전화*</label>
+            <label for="phone1"> 휴대전화<span class="bg-required"></span></label>
             <div class="input-box2">
-            <select name="phone1" id="phone1" selected="010" class="input-box-s">
-              <option value="010">010</option>
-              <option value="011">011</option>
-              <option value="016">016</option>
-              <option value="017">017</option>
-              <option value="018">018</option>
-              <option value="019">019</option>
-            </select>
-            &nbsp; - &nbsp;
-            <input type="text" name="phone2" maxlength="4" class="input-box-s" />
-            &nbsp; - &nbsp;
-            <input type="text" name="phone3" maxlength="4" class="input-box-s" />
+              <select name="phone1" id="phone1" selected="010" class="input-box-s" required>
+                <option value="010">010</option>
+                <option value="011">011</option>
+                <option value="016">016</option>
+                <option value="017">017</option>
+                <option value="018">018</option>
+                <option value="019">019</option>
+              </select>
+              &nbsp; - &nbsp;
+              <input type="text" name="phone2" maxlength="4" class="input-box-s" required />
+              &nbsp; - &nbsp;
+              <input type="text" name="phone3" maxlength="4" class="input-box-s" required />
+            </div>
           </div>
-        </div>
           <div class="message-box input-box">
             <select name="" id="">
               <option value="">--메시지 선택(선택사항)--</option>
@@ -185,7 +185,7 @@
             </select>
           </div>
 
-          <div class="message-check-box"><input type="checkbox" />기본 배송지로 저장</div>
+          <div class="message-check-box"><input type="checkbox" /><span>기본 배송지로 저장</span></div>
         </div>
 
         <!---------- 주문 상품 ------------>
@@ -196,18 +196,27 @@
 
           <div class="info-box">
             <div class="prod-box">
-              <div class="thumnail-img">
-                <img src="" alt="" />
+              <div class="thumbnail-box">
+                <div class="thumbnail-img">
+                  <img src="../../../static/assets/img/noimage.jpg" alt="" width="83" />
+                </div>
               </div>
+              
               <div class="description">
-                <p><span class="prod-name">떼르말 세라마이드 헤드 스파 샴퓨 500ML</span></p>
-                <p>수량:<span>1</span>개</p>
-                <p><span>28,000</span></p>
+                <span class="prod-name">떼르말 세라마이드 헤드 스파 샴퓨 500ML</span>
+                <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
+                <span>수량:<span class="qty">1</span>개</span>
+                <span class="price">28,000</span>
+                
               </div>
+              <div class="cancel-btn-box">
+                <button class="cancel-btn"><img src="" alt=""></button>
+              </div>
+              
             </div>
-            <div class="input-box2">
-              <p>배송비</p>
-              <span>3,000</span>
+            <div class="price-box">
+              <span>배송비</span>
+              <span class="price">3,000</span>
             </div>
           </div>
         </div>
