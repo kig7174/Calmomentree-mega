@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calmomentree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css" />
+</head>
+<body>
+
+    
+        <div class="sticky-nav">
+            <!-- sticky new member -->
+            <div class="sticky-nav-member">
+                <a href="#">신규회원 2,000원 적립금 | 홈 어메니티 멤버십 40%~50% 할인혜택</a>
+            </div>
+
+            <!-- sticky thanksgiving -->
+            <div class="sticky-thanks">
+                <a href="#">추석선물세트 30%</a>
+            </div>
+        </div>
+
+        <div class="header-nav">
+
+            <!-- main nav -->
+            <div class="header-nav-main">
+
+                <!-- nav menu -->
+                <div class="nav-menu">
+                    <ul class="nav-menu-list">
+                        <li class="nav-menu-item nav-menu-on">
+                            <a href="product-list.html" class="nav-menu-items shop">SHOP</a>
+                            <div class="sub-menu menu-off shop" id="sub-menu">
+                                <ul class="sub-list">
+                                    <li class="sub-item"><a href="product-list.html">ALL</a></li>
+                                    <li class="sub-item"><a href="product-list.html?_sort=accQuan&_order=DESC&_limit=8">BEST</a></li>
+                                    <li class="sub-item"><a href="product-list.html?category.hair=true">HAIR</a>
+                                        <ul class="sub-items">
+                                            <li><a href="product-list.html?subCategory=샴푸">샴푸</a></li>
+                                            <li><a href="product-list.html?subCategory=트리트먼트">트리트먼트</a></li>
+                                            <li><a href="product-list.html?subCategory=스타일링">스타일링</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="sub-item"><a href="product-list.html?category.body=true">BODY</a>
+                                        <ul class="sub-items">
+                                            <li><a href="product-list.html?subCategory=워시">워시</a></li>
+                                            <li><a href="product-list.html?subCategory=바디크림">바디크림</a></li>
+                                            <li><a href="product-list.html?subCategory=핸드">핸드</a></li>
+                                            <li><a href="product-list.html?subCategory=베이비">베이비</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="sub-item"><a href="product-list.html?category.facial=true">FACIAL</a>
+                                        <ul class="sub-items">
+                                            <li><a href="product-list.html?subCategory=토너/에센스">토너/에센스</a></li>
+                                            <li><a href="product-list.html?subCategory=크림">크림</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="sub-item"><a href="product-list.html?category.life=true">LIFE</a>
+                                        <ul class="sub-items">
+                                            <li><a href="product-list.html?subCategory=덴탈">덴탈</a></li>
+                                            <li><a href="product-list.html?subCategory=리빙">리빙</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                </ul>
+                                <div class="nav-menu-img"><img src="https://placehold.co/100x100"/></div>
+                                <!-- <div class="nav-menu-background"></div> -->
+                            </div>
+                        </li>
+                        <li class="nav-menu-item">
+                            <a href="#" class="nav-menu-items">MEMBERSHIP</a>
+                        </li>
+                        <li class="nav-menu-item">
+                            <a href="#" class="nav-menu-items">PROMOTION</a>
+                        </li>
+                        <li class="nav-menu-item nav-menu-on">
+                            <a href="#" class="nav-menu-items about">ABOUT</a>
+                            <div class="sub-menu menu-off about" id="sub-menu">
+                                <ul class="sub-list about">
+                                    <li class="sub-item"><a href="#">브랜드스토리</a></li>
+                                    <li class="sub-item"><a href="#">ESG캠페인</a></li>
+                                    <li class="sub-item"><a href="#">지속 가능한 캠페인</a></li>
+                                    <li class="sub-item"><a href="#">공병수거신청</a></li>
+                                    <li class="sub-item"><a href="#">CO-프로모션</a></li>
+                                    <li class="sub-item"><a href="#">PARTNERS</a></li>
+                                </ul>
+                                <div class="nav-menu-img">
+                                    <img src="https://placehold.co/50x50" />
+                                </div>
+                                <!-- <div class="nav-menu-background"></div> -->
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- nav title -->
+                <div class="nav-title">
+                    <a href="index.html">
+                        <img src="https://placehold.co/50x50" />
+                    </a>
+                </div>
+
+                <!-- nav other menu -->
+                <div class="nav-other-menu">
+                    <ul class="nav-other-menu-item">
+                        <li class="nav-other-list"><a href="#"><img class="search" src="https://placehold.co/50x50" /></a></li>
+                        <li class="nav-other-list"><a href="#">LOGIN</a></li>
+                        <li class="nav-other-list"><a href="#">CART</a></li>
+                        <li class="nav-other-list"><a href="#">COMMUNITY</a></li>
+                        <img class="logo" src="https://placehold.co/50x50"/>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    <script src="/src/main/resources/static/assets/js/common.js"></script>
+</body>
+</html>
