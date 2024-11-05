@@ -1,88 +1,196 @@
 :root {
-    --background-color: #faf8ef;
-    --background-button: #1c1c1c;
-    --font-color: #1a1a1a;
-    --font-color-gray: #5e5e5e;
-    --font-size-title: 26px;
-    --font-size-content: 12px;
-    --font-size-item: 16px;
-    --font: "Noto Sans KR", "Pretendard", "sans-serif", "dotum";
-    --border: 1px solid #1a1a1a;
+  --background-color: #faf8ef;
+  --background-button: #1c1c1c;
+  --font-color: #1a1a1a;
+  --font-color-gray: #5e5e5e;
+  --font-size-title: 26px;
+  --font-size-content: 12px;
+  --font-size-item: 16px;
+  --font: "Noto Sans KR", "Pretendard", "sans-serif", "dotum";
+  --border: 1px solid #1a1a1a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  color: var(--font-color);
+  font-family: var(--font);
+  background-color: #f3f0eb;
+  font-size: var(--font-size-content);
+}
+
+button {
+  width: 80px;
+  height: 40px;
+  cursor: pointer;
+  background: var(--background-button);
+  color: var(--background-color);
+}
+
+body {
+  background-color: var(--background-color);
+}
+
+input {
+  border: 1px solid #cccbc8;
+  padding: 10px;
+  font-size: 15px;
+
+  &:focus {
+    outline: none;
   }
-  * {
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
-    color: var(--font-color);
-    font-family: var(--font);
-    background-color: #f3f0eb;
-  }
-  button {
-    width: 80px;
-    height: 40px;
-    cursor: pointer;
-    background: var(--background-button);
-    color:var(--background-color);
-  }
-  body {
-    background-color: var(--background-color);
+}
+.prod-name,
+.price {
+  font-weight: 600;
+}
+input[type="checkbox"],
+input[type="radio"] {
+  background: url(../../assets/img/bg_radio_checked.svg) no-repeat;
+  width: 20px;
+  height: 20px;
+  background-size: cover;
+  margin-top: 15px;
+
+}
+
+.radio-box,
+.message-check-box {
+  height: 50px;
+  line-height: 50px;
+  padding: 0 15px;
+
+  #place2 {
+    margin-left: 10px;
   }
   
-  .container {
-    width: 60%;
-    margin: auto;
+  span {
+    margin-left: 5px;
   }
-  .info-title {
+}
+
+.container {
+  width: 70%;
+  margin: auto;
+}
+
+.info-title {
+  background-color: #e9e5dd;
+  height: 55px;
+  line-height: 55px;
+  padding-left: 15px;
+
+  span {
     background-color: #e9e5dd;
-    height: 55px;
-    line-height: 55px;
-    padding-left: 15px;
-    span {
-      background-color: #e9e5dd;
+  }
+}
+
+.info-box {
+  display: flex;
+  flex-direction: column;
+  background-color: #f3f0eb;
+
+
+  .input-box {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    padding: 5px 15px;
+
+    label {
+      width: 15%;
     }
   }
 
-  .info-box {
+  .input-box2 {
+    width: 85%;
+    display: flex;
+    flex-wrap: nowrap;
+
+    input {
+      width: 100%;
+      height: 100%;
+    }
+
+    .input-box-m {
+      width: 50%;
+    }
+
+    .input-box-s {
+      width: 15%;
+    }
+  }
+}
+
+.message-box {
+  width: 100%;
+
+  select {
+    width: 100%;
+  }
+}
+
+.bg-required {
+  background: url(../../assets/img/bg_required.png) no-repeat;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: -2px 0 0;
+  vertical-align: middle;
+  text-indent: 150%;
+  font-size: 0;
+  line-height: 0;
+  margin-left: 3px;
+  white-space: nowrap;
+  background-size: auto 8px;
+}
+
+.prod-box {
+  display: flex;
+  margin: 0 15px 15px;
+
+  position: relative;
+  font-size: var(--font-size-content);
+
+  .description {
     display: flex;
     flex-direction: column;
+    height: 85px;
+    width: 70%;
+    margin-left: 15px;
+    justify-content: space-around;
+
+  }
+
+  .cancel-btn-box {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .cancel-btn {
     background-color: #f3f0eb;
-    
-
-    .input-box {
-      display: flex;
-      width: 100%;
-      height: 50px;
-      line-height: 50px;
-      padding: 5px 15px;
-
-      label {
-        width: 15%;
-      }
-    }
-
-    .input-box2 {
-      width: 85%;
-      display: flex;
-      flex-wrap: nowrap;
-
-      input {
-        width: 100%;
-        height: 100%;
-        border: 1px solid #cccbc8;
-      }
-      .input-box-m {
-        width: 50%;
-      }
-      .input-box-s {
-        width: 15%;
-      }
-    }
+    width: 24px;
+    height: 24px;
+    border: 1px solid #b5b5b5;
+    border-radius: 2px;
   }
-  .message-box {
-    width: 100%;
-    select {
-      width: 100%;
-    }
+}
+
+.price-box {
+  height: 35px;
+  line-height: 35px;
+  padding: 0 15px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #e9e5dd;
+  margin-bottom: 20px;
+
+  span {
+    background-color: #e9e5dd;
   }
+}
