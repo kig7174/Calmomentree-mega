@@ -38,6 +38,7 @@ body {
         height: 700px;
         position: relative;
         text-align: center;
+        min-width: 1200px;
 
         .title-img {
 
@@ -83,9 +84,12 @@ body {
     }
 
     .content-box {
+        margin-top: 10%;
 
         .content {
-
+            width: 35%;
+            padding: 10px 20px;
+            align-self: center;
         }
 
         .content-img {
@@ -93,15 +97,56 @@ body {
 
             img {
                 width: 100%;
+                min-width: 700px;
             }
         }
 
         .first-content {
             display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+
+            .content {
+                h3 {
+                    font-size: var(--font-size-title);
+                    font-weight: 400;
+                    line-height: 150%;
+                    letter-spacing: 1px;
+                }
+
+                p {
+                    margin-top: 10px;
+                    font-size: var(--font-size-medium);
+                    line-height: 150%;
+                }
+            }
         }
 
         .second-content {
             display: flex;
+            justify-content: end;
+
+            .content {
+                margin: 0 auto;
+                width: 25%;
+                min-width: 500px;
+
+                h3 {
+                    font-size: var(--font-size-title);
+                    font-weight: 400;
+                    line-height: 150%;
+                    letter-spacing: 1px;
+                }
+
+                p {
+                    font-size: var(--font-size-medium);
+                    line-height: 120%;
+                }
+
+                .content-txt {
+                    margin-top: 10px;
+                }
+            }
 
             .report-icon {
                 margin-top: 40px;
@@ -109,7 +154,7 @@ body {
                 ul {
                     display: flex;
                     flex-wrap: wrap;
-                    gap: 15px;
+                    gap: 30px;
                 }
             }
         }
@@ -118,7 +163,31 @@ body {
     .development-box {
         width: 100%;
         display: flex;
+        margin-top: 200px;
         flex-direction: column;
         align-items: center;
+        text-align: center;
+
+        .develop-title {
+            h3 {
+                font-size: var(--font-size-title);
+                font-weight: 400;
+                margin-bottom: 30px;
+            }
+        }
+
+        .develop-img {
+
+        }
+
+        .develop-txt {
+            margin: 50px 0;
+            line-height: 150%;
+
+            h4 {
+                margin-bottom: 10px;
+                font-weight: 400;
+            }          
+        }
     }
 }
