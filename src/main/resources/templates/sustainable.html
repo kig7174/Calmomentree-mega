@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
 <body>
-    <div class="header">
+    <header th:replace="~{/fragments/header :: calm-header}">
 
-    </div>
+    </header>
     
     <div class="container">
         <section class="title-box"
@@ -181,7 +181,7 @@
         </section>
     </div>
 
-    <div class="footer">
+    <div th:replace="~{/fragments/footer :: calm-footer}">
 
     </div>
     
