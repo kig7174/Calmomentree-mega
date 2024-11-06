@@ -21,3 +21,21 @@ document.querySelector("#post-btn2").addEventListener("click", (e) => {
     },
   }).open();
 });
+
+// 아코디언 ...?? 
+document.querySelectorAll(".info-title").forEach((v, i) => {
+  v.addEventListener("click", (e) => {
+    const current = e.currentTarget;
+    const parent = current.closest(".collapse");
+    const infoBox = parent.querySelector(".info-box");
+    
+    infoBox.classList.toggle("selected");
+
+    if (!infoBox.classList.contains("selected")) {
+      infoBox.style.maxHeight = null;
+    } else {
+      infoBox.style.maxHeight = infoBox.scrollHeight + "px";
+    }
+  });
+});
+
