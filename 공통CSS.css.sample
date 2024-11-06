@@ -5,6 +5,7 @@
     --font-color: #1c1c1c;
     --font-color-gray: #5e5e5e;
     --font-color-whitegray: #f3f0eb;
+    --font-color-white: #FBF9EF;
     --font-size-title: 24px;
     --font-size-small: 12px;
     --font-size-medium: 14px;
