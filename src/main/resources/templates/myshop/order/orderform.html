@@ -9,12 +9,12 @@
   <body>
     <div class="container">
       <!---------- 주문 정보 ------------>
-      <div class="member-info">
+      <div class="member-info collapse">
         <div class="info-title">
-          <span>주문정보</span>
+          <span class="title">주문정보</span>
         </div>
 
-        <div class="info-box">
+        <div class="info-box selected">
           <div class="name-box input-box">
             <label for="member-name">주문자<span class="bg-required"></span></label>
             <div class="input-box2">
@@ -101,12 +101,12 @@
         </div>
       </div>
       <!---------- 배송지 ------------>
-      <div class="shop-info">
+      <div class="shop-info place collapse">
         <div class="info-title">
           <span>배송지</span>
         </div>
 
-        <div class="info-box">
+        <div class="info-box selected">
           <div class="radio-box">
             <label>
               <input type="radio" name="place" id="place1" value="E" checked />
@@ -125,7 +125,7 @@
           </div>
           <div class="addr-box input-box">
             <label for="postcode2"> 주소<span class="bg-required"></span></label>
-            <input type="text" name="postcode2" id="postcode2" class="postcode2" placeholder="우편번호" required />
+            <input type="text" name="postcode2" id="postcode2" class="postcode2" placeholder="우편번호" required readonly />
             <button type="button" id="post-btn2">주소검색</button>
           </div>
           <div class="addr-box input-box">
@@ -187,70 +187,91 @@
 
           <div class="message-check-box"><input type="checkbox" /><span>기본 배송지로 저장</span></div>
         </div>
+      </div>
+      <!---------- 주문 상품 ------------>
+      <div class="order-product place collapse">
+        <div class="info-title">
+          <span>주문상품</span>
+        </div>
 
-        <!---------- 주문 상품 ------------>
-        <div class="order-product">
-          <div class="info-title">
-            <span>주문상품</span>
-          </div>
-
-          <div class="info-box">
-            <div class="prod-box">
-              <div class="thumbnail-box">
-                <div class="thumbnail-img">
-                  <img src="../../../static/assets/img/noimage.jpg" alt="" width="83" />
-                </div>
+        <div class="info-box selected">
+          <div class="prod-box">
+            <div class="thumbnail-box">
+              <div class="thumbnail-img">
+                <img src="../../../static/assets/img/noimage.jpg" alt="" width="83" />
               </div>
-              
-              <div class="description">
-                <span class="prod-name">떼르말 세라마이드 헤드 스파 샴퓨 500ML</span>
-                <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
-                <span>수량:<span class="qty">1</span>개</span>
-                <span class="price">28,000</span>
-                
-              </div>
-              <div class="cancel-btn-box">
-                <button class="cancel-btn"><img src="" alt=""></button>
-              </div>
-              
             </div>
-            <div class="price-box">
-              <span>배송비</span>
-              <span class="price">3,000</span>
+
+            <div class="description">
+              <span class="prod-name">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
+              <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
+              <span>수량:<span class="qty">1</span>개</span>
+              <span><span class="price">28,000</span>원</span>
+            </div>
+            <div class="cancel-btn-box">
+              <button class="cancel-btn"><img src="" alt="" /></button>
             </div>
           </div>
-        </div>
-        <!---------- 결제 정보 ------------>
-        <div class="payment">
-          <div class="info-title">
-            <span>결제정보</span>
+          <div class="price-box">
+            <span>배송비</span>
+            <span><span class="price">3,000</span>원</span>
           </div>
-
-          <div class="info-box">
-            <div class="pay">주문상품<span>28,000</span></div>
-            <div class="pay">배송비<span>3,000</span></div>
-            <div class="pay discount">할인/부가결제<span>-0</span></div>
-            <div class="pay price">최종 결제 금액<span>00000</span></div>
-          </div>
-        </div>
-        <!---------- 결제 수단 ------------>
-        <div class="paymethod">
-          <div class="info-title">
-            <span>결제수단</span>
-          </div>
-
-          <div class="info-box"></div>
-        </div>
-        <!---------- 적립혜택 ------------>
-        <div class="benefit">
-          <div class="info-title">
-            <span>적립혜택</span>
-          </div>
-
-          <div class="info-box"></div>
         </div>
       </div>
+      <!---------- 결제 정보 ------------>
+      <div class="payment place collapse">
+        <div class="info-title">
+          <span>결제정보</span>
+        </div>
+
+        <div class="info-box selected">
+          <div class="pay">
+            주문상품<span><span class="bold">28,000</span>원</span>
+          </div>
+          <div class="pay">
+            배송비<span>+<span class="bold">3,000</span>원</span>
+          </div>
+          <div class="pay discount">
+            할인/부가결제<span><span class="red">-&nbsp;</span><span class="bold red">0</span>원</span>
+          </div>
+          <div class="info-box2">
+            <div class="pay price">
+              최종 결제 금액<span><span class="bold">31000</span>원</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---------- 결제 수단 ------------>
+      <div class="paymethod place collapse">
+        <div class="info-title">
+          <span>결제수단</span>
+        </div>
+
+        <div class="info-box selected"></div>
+      </div>
+      <!---------- 적립혜택 ------------>
+      <div class="benefit place collapse">
+        <div class="info-title">
+          <span>적립혜택</span>
+        </div>
+        <div class="info-box selected">
+          <div class="pay">
+            상품별 적립금<span><span class="bold">0</span>원</span>
+          </div>
+          <div class="pay">
+            회원 적립금<span><span class="bold">200</span>원</span>
+          </div>
+          <div class="pay discount">
+            쿠폰적립금<span><span class="bold">0</span>원</span>
+          </div>
+          <div class="acc-money bold">
+            적립 예정금액<span><span class="bold">200</span>원</span>
+          </div>
+        </div>
+      </div>
+      <button class="fin place"><span class="">31000</span>원 결제하기</button>
     </div>
+    <!-- 우편번호 검색 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/src/main/resources/static/assets/js/orderform.js"></script>
   </body>
