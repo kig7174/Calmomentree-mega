@@ -1,0 +1,249 @@
+:root {
+  --background-color: #faf8ef;
+  --font-size-title: 40px;
+  --font-size-content: 14px;
+  --font-size-item: 24px;
+  --font-color-title: #fbf9ef;
+  --font-color: #1c1c1c;
+  --font: "Noto Sans KR", "Pretendard", "sans-serif", "dotum";
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font: var(--font);
+  list-style: none;
+  text-decoration: none;
+}
+a {
+  color: var(--font-color);
+}
+body {
+  background-color: var(--background-color);
+}
+.title-container {
+  position: relative;
+  color: var(--font-color-title);
+  font-weight: 600;
+  line-height: 1.5;
+
+  .title-img-box {
+    height: 70vh;
+    width: 100%;
+
+    .img-box {
+      background-color: antiquewhite;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .title-text {
+    position: absolute;
+    translate: -50%;
+    text-align: center;
+
+    .title {
+      font-size: var(--font-size-title);
+      margin-bottom: 40px;
+    }
+
+    .text {
+      font-size: var(--font-size-content);
+    }
+    .text2 {
+      font-size: 19px;
+    }
+  }
+  .box {
+    top: 30px;
+    left: 50%;
+  }
+  .box2 {
+    top: 50%;
+    left: 50%;
+  }
+}
+.main-container {
+  width: 50%;
+  margin: auto;
+  margin-top: 100px;
+  margin-bottom: 180px;
+  text-align: center;
+  line-height: 1.5;
+  color: var(--font-color);
+  font-weight: 500;
+
+  .campaign-box {
+    margin-bottom: 80px;
+    p:nth-child(3) {
+      margin-bottom: 30px;
+    }
+
+    .title {
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+    .title2 {
+      font-size: var(--font-size-title);
+      margin-bottom: 60px;
+    }
+    .text {
+      font-size: var(--font-size-item);
+    }
+  }
+  .campaign-box-img {
+    margin: 40px 0 50px;
+  }
+  .policy-box {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    text-wrap: nowrap;
+    font-size: var(--font-size-content);
+
+    .title {
+      width: 30%;
+      font-weight: 700;
+    }
+    .box {
+      display: flex;
+      margin: 20px 0;
+    }
+  }
+}
+.table-container {
+  width: 100%;
+
+  table {
+    width: 100%;
+    margin-bottom: 50px;
+
+    .no {
+      background-color: #d1d1d1;
+    }
+    .title {
+      background-color: #6c6c6c;
+    }
+    .name {
+      background-color: #343434;
+    }
+    .date {
+      background-color: #1c1c1c;
+    }
+
+    th {
+      padding: 12px 0;
+      color: var(--font-color-title);
+    }
+    tr {
+      border-bottom: 1px solid #1c1c1c;
+      td {
+        padding: 20px 0;
+
+        &:nth-child(2) {
+          text-align: left;
+          padding-left: 40px;
+        }
+      }
+    }
+  }
+}
+
+.paging-box {
+  margin-top: 50px;
+  text-align: center;
+
+  .pagination {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+    display: flex;
+    justify-content: center;
+
+    a {
+      display: block;
+      font-size: 14px;
+      padding: 0 7px;
+      color: var(--font-color);
+      text-decoration: none;
+      font-size: var(--font-size-item);
+
+      &.active {
+        color: white;
+      }
+    }
+  }
+}
+.btn-area {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+
+  .btn1 {
+    width: 110px;
+    height: 35px;
+    border: none;
+    background-color: #1c1c1c;
+    
+    a {
+      color: var(--font-color-title);
+      font-size: 14px;
+    }
+  }
+}
+.search-box {
+  margin-top: 34px;
+  display: flex;
+  flex-direction: row-reverse;
+
+  .form {
+    display: flex;
+    border-bottom: 1px solid #000;
+    ::placeholder {
+      color: #979494;
+      font-family: "Noto Sans KR", "Pretendard", "malgun gothic", "돋움";
+    }
+    input {
+      border: none;
+      width: 261px;
+      height: 35px;
+      margin-right: 15px;
+      background: none;
+      font-size: 16px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+    a {
+      display: block;
+      color: #fff;
+      background-color: #000;
+      font-size: 14px;
+      width: 110px;
+      height: 38px;
+      line-height: 38px;
+      text-align: center;
+      margin-top: 2px;
+    }
+  }
+}
+.btn-area2 {
+  width: 100%;
+  margin: 60px 0;
+  background-color: #1c1c1c;
+  a{
+    color: var(--font-color-title);
+    padding: 10px 0;
+    display: block;
+    .btn-title {
+      font-size: 21px;
+      margin: 7px 0 12px 0;
+    }
+    .btn-text {
+      font-size: 14px;
+    }
+  }
+  
+}

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calmomentree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/recycling.css" />
+  </head>
+
+  <body>
+    <!-- 타이틀 사진구역 -->
+    <div class="title-container">
+      <div class="title-img-box">
+        <div class="img-box"><img src="http://placehold.co/1960x800" alt="" style="width: 100%; height: 70vh" /></div>
+      </div>
+      <div class="title-text box">
+        <p class="title">Recycling Campaign</p>
+        <p class="text">공병수거</p>
+      </div>
+      <div class="title-text box2">
+        <p class="text2">
+          "We are expanding & developing and servicing sustainable <br />
+          vegan amenities in 2022.”
+        </p>
+      </div>
+    </div>
+    <div class="main-container">
+      <!-- 공병수거 캠페인 안내 -->
+      <div class="campaign-box">
+        <p class="title">RECYCLING CAMPAIGN</p>
+        <p class="title2">캄모멘트리 공병수거 정책 안내</p>
+        <p class="text">캄모멘트리 공식몰 회원에 한합니다. (비회원은 가입 후 참여 가능)</p>
+        <p class="text">캄모멘트리 제품 공병만 수거합니다</p>
+        <p class="text">• 5개부터 수거 가능합니다</p>
+        <p class="text">• 1년에 무제한 수거 가능합니다</p>
+        <p class="text">• 공병 1개당 현금처럼 사용할 수 있는 500P 제공</p>
+        <div class="campaign-box-img">
+          <img src="http://placehold.co/305x135" alt="" />
+        </div>
+        <p class="text2">• 캄모멘트리에서 택배비 부담</p>
+        <p class="text2">* 캄모멘트리가 지정한 CJ대한통운 택배사 사용 신청 시만 해당</p>
+      </div>
+      <!-- 공병수거 정책 안내 -->
+      <div class="policy-box">
+        <div class="policy-title title">캄모멘트리 공병수거 정책 안내</div>
+        <div class="policy-app box">
+          <div class="app-title title">공병수거 신청</div>
+          <ul class="app-list">
+            <li>· 캄모멘트리 공식몰 회원에 한합니다 (비회원은 가입 후 참여 가능)</li>
+            <li>· 캄모멘트리 제품 공병만 수거합니다</li>
+            <li>· 5개부터 수거 가능합니다</li>
+            <li>· 1년에 무제한 수거 가능합니다</li>
+          </ul>
+        </div>
+        <div class="policy-profit box">
+          <div class="profit-title title">공병수거혜택</div>
+          <ul>
+            <li>· 공병 1개당 현금처럼 사용할 수 있는 500P 제공</li>
+            <li>· 캄모멘트리에서 택배비 부담 (캄모멘트리가 지정한 CJ대한통운 택배사 사용 신청 시만 해당)</li>
+          </ul>
+        </div>
+      </div>
+      <!-- 공병 문의 게시판 -->
+      <div class="table-container">
+        <table border="1">
+          <caption style="display: none">
+            상품 게시판 목록
+          </caption>
+          <colgroup>
+            <col width="12%" />
+            <col width="auto" />
+            <col width="12%" />
+            <col width="12%" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th class="no">NO</th>
+              <th class="title">TITLE</th>
+              <th class="name">NAME</th>
+              <th class="date">DATE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>158</td>
+              <td><a href="">공병수거문의</a></td>
+              <td>정****</td>
+              <td>2024-10-29</td>
+            </tr>
+            <tr>
+              <td>157</td>
+              <td><a href="">공병수거문의</a></td>
+              <td>정****</td>
+              <td>2024-10-29</td>
+            </tr>
+            <tr>
+              <td>156</td>
+              <td><a href="">공병수거문의</a></td>
+              <td>정****</td>
+              <td>2024-10-29</td>
+            </tr>
+            <tr>
+              <td>155</td>
+              <td><a href="">공병수거문의</a></td>
+              <td>정****</td>
+              <td>2024-10-29</td>
+            </tr>
+            <tr>
+              <td>154</td>
+              <td><a href="">공병수거문의</a></td>
+              <td>정****</td>
+              <td>2024-10-29</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="btn-area">
+        <button class="btn1"><a href="">수거 신청하기</a></button>
+      </div>
+      <!-- 페이징 구역 -->
+      <div class="paging-box">
+        <!-- 페이지 번호 -->
+        <ul class="pagination">
+          <!-- 이전 페이지 그룹 이동 버튼 -->
+          <li th:if="${pagination.prevPage > 0}">
+            <a th:href="@{/student(keyword=${keyword}, page=${pagination.prevPage})}">&laquo;</a>
+          </li>
+          <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
+          <!-- 페이지 번호 링크 -->
+          <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+            <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}"></a>
+            <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/student(keyword=${keyword}, page=${i})}"></a>
+          </li>
+
+          <!-- 다음 페이지 그룹 이동 버튼 -->
+          <li th:if="${pagination.nextPage > 0}">
+            <a th:href="@{/student(keyword=${keyword}, page=${pagination.nextPage})}">&raquo;</a>
+          </li>
+          <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
+        </ul>
+      </div>
+      <div class="search-container">
+        <div class="search-box">
+          <div class="form">
+            <input type="text" placeholder="내용을 입력하세요" />
+            <a href="">검색</a>
+          </div>
+        </div>
+      </div>
+      <div class="btn-area2">
+        <a href="">
+          <div class="btn-img"><img src="http://placehold.co/60" alt="" /></div>
+          <p class="btn-title">공병수거신청</p>
+          <p class="btn-text">
+            지속가능한 삶과 쉼을 위한 제로 웨이스트,
+            <br />
+            캄모멘트리와 함께 동참하세요
+          </p>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
