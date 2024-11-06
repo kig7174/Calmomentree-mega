@@ -6,7 +6,6 @@
 > Issue : MileStone안에서 진행중인 작업 | commit message에 표시 (#1) 이슈 작업 완료 시 (close #1)
 
 
-
 기획 > UI 구현 > Database 설계 > DB 프로그래밍
 마일스톤 ==> 이슈
 UI구현 공지사항페이지 UI - HTML 50%
@@ -19,9 +18,6 @@ DB 설계
 게시글을끝낸다 x -> 게시글의 HTML 퍼센티지
 게시글 > 달력쿠폰 > 목록
 
-
-
-
 // 이 프로젝트에서 사용안함
 branch : 작업별로 가지치기
 pull request : main 으로 가지친 작업들 병합하기
@@ -33,6 +29,10 @@ PUSH 전에 PULL 받기 (절대 중요!)
 ###########################################
 
 
+### Controller ### (권장)
+post, delete, put=> json
+get => thymeleaf (controller -> view)
+
 
 ##### Model View Controller (MVC) #####
 Model (mappers, services, impl)작업 후 Test 과정 (이 과정에서 의도된 에러 처리 확인)
@@ -42,14 +42,14 @@ Table 회원정보, 상품정보, 게시글, 주문정보, 배송정보
 
 View 메인페이지, 상품페이지, 게시글페이지, 결제페이지, 마이페이지, 로그인페이지, 기타페이지
 
-Controller (기능?)
+Controller (기능?) // 버튼이나 링크 각각에 부여하는 기능
 결제, 배송, 글쓰기, 댓글쓰기, 장바구니넣기, 회원가입, 로그인, 아이디/비밀번호찾기
 
 
 
 - build.gradle 세팅
 	- JAVA 버전 17
-	- Spring 버전 3.3.4
+	- Spring 버전 3.3.5
 
 	- lombok
 	- gson
@@ -72,6 +72,8 @@ Controller (기능?)
 	+a
 	- ua-parser
 	- log4jdbc
+    - thumbnailator
+    - test library
 
 - 패키지
 	- main
@@ -86,11 +88,14 @@ Controller (기능?)
 	- helpers ( @Component )
 		! DatePrinter.java ( 날짜 출력 )
 		! DBHelper.java ( DB접속,  DB접속해제 [ host,  port,  database,  charset,  username,  password ] )
-		! FileHelper.java ( 파일 데이터,  경로 읽기 )
+		! FileHelper.java ( 파일 데이터,  경로 읽기, 파일 첨부 [ form 태그 ], 사진 첨부 썸네일 )
 		! RegexHelper.java ( 문자열 형식 검사 )
 		! RetorfitHelper.java ( 통신 객체 )
 		! UtilHelper.java 
 		! WebHelper.java ( 쿠키, 클라이언트 IP주소, 에러 발생 시 이전페이지로 강제이동시키기 )
+        ! MailHelper.java ( Java Mail Sender )
+        ! RestHelper.java ( Json 형식 응답 출력, 성공 여부 리턴, 에러 메시지 리턴 )
+        ! PaginationHelper.java ( DB에서 받아온 데이터 Page 구현 )
 		
 	- models
 		! model class => 단수형
@@ -99,29 +104,42 @@ Controller (기능?)
 		! ( @Insert | @Options , @Update, @Delete, @Select | @Results | @Result | @ResultMap )
 
 	- controllers ( 컨트롤러 :  컨트롤러 메서드 정의 => 객체 리턴 | @Controller | @Autowired 서비스 주입 [객체 할당 자동화])
+        - apis ( ajax 컨트롤러 : @RestController )
 	
 	- services ( 인터페이스 클래스 정의 : 비즈니스 로직 )
 		- impl ( 구현체 클래스 | services 상속 후 메서드 Override | @Service )
 	
-	! MyWebConfig.java ( implements WebMyConfigurer => log )
+	! MyWebConfig.java ( implements WebMyConfigurer | log 제외 항목 / file upload 경로 치환 )
 
 - resources
 	- static
 		! *.ico ( 아이콘 )
 		! robot.txt
+        - assets
+            - js
+                ! AxiosHelper.js
+                ! UtilHelper.js
+            - css
 	
 	- templates ( html 소스 파일 )
+        ! fragments
+        ! board / member / myshop / product
 	
 	! logback-spring.xml ( log 설정 파일 )
 	
 	! application.properties ( Spring 설정 파일, 수정 시 재가동 필요 )
 		- DB 접속 정보
 		- Java mail sender
-		- 
+        - File Upload 기본 설정 및 경로 설정
+		- thumbnail
+        - 
 	
 	! log4jdbc.log4j2.properties ( DB Log 설정 파일 )
 
 - test
 	
 - Javascript library
-	- 위지윅 에디터 ( 글쓰기 )
+	- Classic Editor ( 글쓰기 )
+    - aos
+    - daum 주소 api
+    - 
