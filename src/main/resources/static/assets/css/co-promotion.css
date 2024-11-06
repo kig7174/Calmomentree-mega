@@ -3,6 +3,7 @@
     --font-color: #1c1c1c;
     --font-color-gray: #5e5e5e;
     --font-color-whitegray: #f3f0eb;
+    --font-color-white: #FBF9EF;
     --font-size-title: 24px;
     --font-size-small: 12px;
     --font-size-medium: 14px;
@@ -28,4 +29,116 @@ body {
     background-color: var(--background-color);
     font-family: var(--font);
     width: 100%;
+}
+
+.container {
+
+    .title-box {
+        height: 900px;
+        position: relative;
+        text-align: center;
+        min-width: 1200px;
+
+        .title-img {
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .title-txt-top {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            h2 {
+                font-size: 36px;
+                font-weight: 400;
+                margin-bottom: 30px;
+                color: var(--font-color-white);
+            }
+
+            p {
+                font-size: var(--font-size-medium);
+                font-weight: 300;
+                color: var(--font-color-white);
+            }
+        }
+        
+        .title-txt-bottom {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            p {
+                font-size: var(--font-size-large);
+                color: var(--font-color-white);
+                font-weight: 400;
+                line-height: 150%;
+            }
+        }
+    }
+
+    .content-box {
+        margin-top: 100px;
+        min-width: 1000px;
+
+        .content-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 70%;
+            margin: 0 auto;
+            gap: 70px 70px;
+
+            li {
+                width: 40%;
+
+                .content-img {
+
+                    img {
+                        width: 100%;
+                        height: 450px;
+                    }
+                }
+
+                .content-txt {
+                    
+                    .content-txt-top {
+                        display: flex;
+
+                        .top-title {
+                            width: 50%;
+                            margin-bottom: 40px;
+
+                            h3 {
+                                font-size: var(--font-size-title);
+                                margin-bottom: 30px;
+                            }
+                        }
+
+                        .top-img {
+                            width: 50%;
+                            display: flex;
+                            justify-content: flex-end;
+                            align-items:flex-start;
+
+                            img {
+                                width: 50%;
+                                height: 100px;
+                            }
+                        }
+                    }
+
+                    .content-txt-bottom {
+                        font-size: var(--font-size-large);
+                        line-height: 120%;
+                    }
+                }
+            }
+        }
+    }
 }
