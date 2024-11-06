@@ -1,17 +1,11 @@
-// hidden menu
-document.querySelectorAll(".nav-menu-on").forEach((v, i) => {
-    v.addEventListener("mouseover", (e) => {
-        e.preventDefault();
-        const current = e.currentTarget;
-        const sub = current.querySelector('#sub-menu');
-        sub.classList.add('menu-on');
-        sub.classList.remove('menu-off');
-    });
-    v.addEventListener("mouseout", (e) => {
-        e.preventDefault();
-        const current = e.currentTarget;
-        const sub = current.querySelector('#sub-menu');
-        sub.classList.remove('menu-on');
-        sub.classList.add('menu-off');
-    });
+window.addEventListener("scroll", (e) => {
+    const scrollTop = window.scrollY;
+
+    if(scrollTop > 0){
+        document.querySelector(".banner").classList.add("on");
+        document.querySelector(".menu").classList.add("on");
+    } else {
+        document.querySelector(".banner").classList.remove("on");
+        document.querySelector(".menu").classList.remove("on");
+    }
 });
