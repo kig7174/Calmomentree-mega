@@ -284,3 +284,11 @@ table {
   flex-direction: column;
 
 }
+
+.detail-list-content {
+  margin: 25px 50px;
+  
+  li {
+    list-style: disc;
+  }
+}
