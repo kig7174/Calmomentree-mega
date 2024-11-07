@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
     <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
     <link rel="stylesheet" href="/src/main/resources/static/assets/css/recycling.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
   </head>
 
   <body>
@@ -15,11 +16,12 @@
       <div class="title-img-box">
         <div class="img-box"><img src="http://placehold.co/1960x800" alt="" style="width: 100%; height: 70vh" /></div>
       </div>
-      <div class="title-text box">
+      <div class="title-text box" data-aos="fade-up" data-aos-offset="0">
         <p class="title">Recycling Campaign</p>
         <p class="text">공병수거</p>
       </div>
-      <div class="title-text box2">
+      <div class="title-text box2" data-aos="fade-up" data-aos-offset="0"
+      data-aos-duration="900">
         <p class="text2">
           "We are expanding & developing and servicing sustainable <br />
           vegan amenities in 2022.”
@@ -28,7 +30,7 @@
     </div>
     <div class="main-container">
       <!-- 공병수거 캠페인 안내 -->
-      <div class="campaign-box">
+      <div class="campaign-box" data-aos="fade-up" data-aos-offset="0" data-aos-duration="900">
         <p class="title">RECYCLING CAMPAIGN</p>
         <p class="title2">캄모멘트리 공병수거 정책 안내</p>
         <p class="text">캄모멘트리 공식몰 회원에 한합니다. (비회원은 가입 후 참여 가능)</p>
@@ -43,7 +45,8 @@
         <p class="text2">* 캄모멘트리가 지정한 CJ대한통운 택배사 사용 신청 시만 해당</p>
       </div>
       <!-- 공병수거 정책 안내 -->
-      <div class="policy-box">
+      <div class="policy-box" data-aos="fade-up" data-aos-offset="0"
+      data-aos-duration="900" data-aos-anchor-placement="top-bottom">
         <div class="policy-title title">캄모멘트리 공병수거 정책 안내</div>
         <div class="policy-app box">
           <div class="app-title title">공병수거 신청</div>
@@ -63,7 +66,8 @@
         </div>
       </div>
       <!-- 공병 문의 게시판 -->
-      <div class="table-container">
+      <div class="table-container" data-aos="fade-up" data-aos-offset="0"
+      data-aos-duration="900" data-aos-anchor-placement="top-bottom">
         <table border="1">
           <caption style="display: none">
             상품 게시판 목록
@@ -161,5 +165,9 @@
         </a>
       </div>
     </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
   </body>
 </html>
