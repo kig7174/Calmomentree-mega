@@ -13,22 +13,25 @@
 </head>
 
 <body>
+    <div th:replace="~{/fragments/header :: calm-header}"></div>
+
     <div class="container">
             
         <!-- body -->
         <div class="list-body">
             <div class="category-box">
-                <span>홈 ></span>
-                <span>상품검색</span>
+                <span>홈</span>
+                <span class="category-txt">HAIR</span>
+                <span class="category-txt">샴푸</span>
             </div>
 
-            <div class="search-item-box">
-                <div class="search-item-exist">
+            <div class="list-item-box">
+                <div class="list-item-exist">
                     <ul>
                         <li>
                             <div class="list-item">
                                 <div class="list-item-img">
-                                    <img src="https://via.placeholder.com/200?text=search-item-image"/>
+                                    <img src="https://placehold.co/200x200"/>
                                 </div>
                                 <div class="list-item-content">
                                     <div class="item-content-name">
@@ -46,7 +49,7 @@
                         <li>
                             <div class="list-item">
                                 <div class="list-item-img">
-                                    <img src="https://via.placeholder.com/200?text=search-item-image"/>
+                                    <img src="https://placehold.co/200x200"/>
                                 </div>
                                 <div class="list-item-content">
                                     <div class="item-content-name">
@@ -64,7 +67,7 @@
                         <li>
                             <div class="list-item">
                                 <div class="list-item-img">
-                                    <img src="https://via.placeholder.com/200?text=search-item-image"/>
+                                    <img src="https://placehold.co/200x200"/>
                                 </div>
                                 <div class="list-item-content">
                                     <div class="item-content-name">
@@ -82,7 +85,7 @@
                         <li>
                             <div class="list-item">
                                 <div class="list-item-img">
-                                    <img src="https://via.placeholder.com/200?text=search-item-image"/>
+                                    <img src="https://placehold.co/200x200"/>
                                 </div>
                                 <div class="list-item-content">
                                     <div class="item-content-name">
@@ -102,7 +105,9 @@
             </div>
         </div>
     </div>
-    
+
+    <div th:replace="~{/fragments/header :: calm-footer}"></div>
+
     <script src="/src/main/resources/static/assets/js/list.js"></script>
 </body>
 </html>

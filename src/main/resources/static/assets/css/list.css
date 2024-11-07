@@ -41,11 +41,18 @@ body {
     padding: 0 5%;
 
     .category-box {
-        font-size: var(--font-size-content);
+        font-size: var(--font-size-small);
         margin-bottom: 20px;
+
+        .category-txt {
+
+            &:before {
+                content: " > ";
+            }
+        }
     }
 
-    .search-item-exist {
+    .list-item-exist {
 
         ul {
             display: flex;
@@ -72,7 +79,7 @@ body {
                         margin-top: 5px;
                         width: 100%;
                         justify-content: space-between;
-                        font-size: var(--font-size-content);
+                        font-size: var(--font-size-small);
 
                         p, a, span {
                             overflow: hidden;
@@ -92,7 +99,7 @@ body {
                             }
 
                             a {
-                                font-size: var(--font-size-item);
+                                font-size: var(--font-size-medium);
                             }
                         }
 
