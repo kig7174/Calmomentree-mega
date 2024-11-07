@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calmomentree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/board.css" />
+  </head>
+  <body>
+    <header id="header">
+      <div class="head">헤더영역</div>
+    </header>
+    <div class="main-container">
+      <!-- 내용 영역 -->
+      <div class="inner-box">
+        <div class="title-wr recycling">Recycling Campaign<span>공병수거신청</span></div>
+        
+        <div class="board-list">
+          <table border="1">
+            <caption>
+              공병신청 게시판 글쓰기
+            </caption>
+            <tbody>
+              <tr class="detail-box-title write">
+                <td class="subject">
+                  <input type="text" placeholder="제목" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="textarea-box-recycling">
+            <div id="content">
+              <div class="text"><p>안녕하세요 캄모멘트리 입니다.<br />
+                <br />
+                공병수거 캠페인에 참여해주셔서 감사합니다.<br />
+                택배사 수거접수를 위해 아래 정보를 빠짐없이 기재 부탁드립니다.<br />
+                <br />
+                [신청양식]<br />
+                1. 성   함 :<br />
+                2. 연락처 :<br />
+                3. 주   소 :<br />
+                4. 공식몰 아이디 :<br />
+                5. 공병수량 (사진첨부 필수) :<br />
+                <br />
+                ※ 모든 제품은 라벨분리 후 세척하시어 미리 포장 부탁드리며, 파손되지 않은 제품만 수거됩니다.<br />
+                ※ 튜브형, 미니 사이즈, 비닐 파우치 등은 재활용 불가제품으로 공병수거 제품에서 제외됩니다.<br />
+                <br />
+                [공병수거 신청]<br />
+                - 캄모멘트리 공식몰 회원에 한합니다. (비회원은 가입 후 참여 가능)<br />
+                - 캄모멘트리 제품 공병만 수거합니다.<br />
+                - 5개부터 수거 가능합니다.<br />
+                <br />
+                [공병수거 혜택]<br />
+                - 공병 1개당 현금처럼 사용할 수 있는 500P 제공<br />
+                - 캄모멘트리에서 택배비 부담 (캄모멘트리에서 지정한 CJ대한통운 택배사로 회수)<br />
+                <br />
+                감사합니다.<br /></p></div>
+            </div>
+          </div>
+          <!-- 하단 버튼 구역 -->
+          <div class="bottom-box">
+            <div class="file-box">
+              <input name="attach-file" class="line file-btn" type="file" />
+              <div class="pw-box line">
+                <input
+                  id="password"
+                  name="password"
+                  fw-filter=""
+                  fw-label="비밀번호"
+                  fw-msg=""
+                  autocomplete="new-password"
+                  value=""
+                  type="password"
+                  placeholder="비밀번호"
+                />
+              </div>
+              <div class="radio-box">
+                <input id="secure0" name="secure" value="F" type="radio" checked="checked" />
+                <label for="secure0">공개글</label>
+                <input id="secure1" name="secure" value="T" type="radio" />
+                <label for="secure1">비밀글</label>
+              </div>
+            </div>
+            <div class="btn-area">
+              <button class="btn-1">등록</button>
+              <button class="btn-2">취소</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+    <script>
+      ClassicEditor.create(document.querySelector("#content"));
+    </script>
+  </body>
+</html>
