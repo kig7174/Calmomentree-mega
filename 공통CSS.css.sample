@@ -1,5 +1,7 @@
 // 추가할 내용 커밋에 넣기
 
+// class 속성에 "displaynone" 추가 시 display: none; 속성 부여
+
 :root {
     --background-color: #FAF8EF;
     --font-color: #1c1c1c;
@@ -31,4 +33,8 @@ body {
     background-color: var(--background-color);
     font-family: var(--font);
     width: 100%;
+}
+
+.display {
+    display: none;
 }
