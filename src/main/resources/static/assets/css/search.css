@@ -2,10 +2,18 @@
     --background-color: #FAF8EF;
     --font-color: #1c1c1c;
     --font-color-gray: #5e5e5e;
+    --font-color-whitegray: #f3f0eb;
+    --font-color-white: #FBF9EF;
     --font-size-title: 24px;
-    --font-size-content: 12px;
-    --font-size-item: 14px;
+    --font-size-small: 12px;
+    --font-size-medium: 14px;
+    --font-size-large: 16px;
     --font: 'Noto Sans KR', 'Pretendard', 'sans-serif', 'dotum';
+    --btn-color-black: #1c1c1c;
+    --btn-font-color-white: #fff;
+    --table-color-gray: #e9e5dd;
+    --input-border: #e0e0e0;
+    --input-color: #f3f0eb;
 }
 
 * {
@@ -21,6 +29,10 @@ body {
     background-color: var(--background-color);
     font-family: var(--font);
     width: 100%;
+}
+
+.display {
+    display: none;
 }
 
 .container {
@@ -59,7 +71,7 @@ body {
                 border: none;
                 background: transparent;
                 color: var(--font-color);
-                font-size: var(--font-size-item);
+                font-size: var(--font-size-small);
 
                 &:focus {
                     outline: none;
@@ -81,7 +93,7 @@ body {
             margin-bottom: 20px;
 
             .search-result {
-                font-size: var(--font-size-content);
+                font-size: var(--font-size-small);
                 align-content: center;
             }
 
@@ -92,13 +104,13 @@ body {
                     padding: 10px 7px;
                     background-color: var(--background-color);
                     filter: brightness(95%);
-                    font-size: var(--font-size-item);
+                    font-size: var(--font-size-medium);
                 }
             }
         }
 
         .category-box {
-            font-size: var(--font-size-content);
+            font-size: var(--font-size-small);
             margin-bottom: 20px;
         }
 
@@ -129,7 +141,7 @@ body {
                             margin-top: 5px;
                             width: 100%;
                             justify-content: space-between;
-                            font-size: var(--font-size-content);
+                            font-size: var(--font-size-small);
 
                             p, a, span {
                                 overflow: hidden;
@@ -149,7 +161,7 @@ body {
                                 }
 
                                 a {
-                                    font-size: var(--font-size-item);
+                                    font-size: var(--font-size-medium);
                                 }
                             }
 
