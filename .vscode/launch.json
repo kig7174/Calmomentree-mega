@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ProjectApplication<projectree>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.calmomentree.projectree.ProjectApplication",
+            "projectName": "projectree",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

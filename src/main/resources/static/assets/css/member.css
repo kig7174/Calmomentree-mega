@@ -28,6 +28,10 @@ body {
     width: 100%;
 }
 
+.displaynone {
+    display: none;
+}
+
 input[type="checkbox"] {
     width: 0.7rem;
     height: 0.7rem;
@@ -40,6 +44,10 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked {
     background: var(--font-color);
     border: none;
+}
+
+input[type="radio"]:checked {
+    color: var(--font-color);
 }
 
 input[type="text"],
@@ -99,12 +107,14 @@ input[type="date"] {
             width: 50%;
             min-width: 300px;
 
-            .join-btn {
+            .join-btn, .find-btn {
                 width: 100%;
                 background-color: var(--btn-color-black);
                 color: var(--btn-font-color-white);
                 padding: 8px;
             }
+
+            
 
             .input-box {
                 margin: 20px 0;

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calmomentree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/detail.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+</head>
+
+<body>
+    <div class="container">
+            
+        <!-- body -->
+        <section class="detail-body">
+            <div class="detail-body-inner">
+                <div class="detail-body-top">
+                    <div class="current-category">
+                        <div class="category">
+                            <span><a class="home" href="index.html">홈</a></span>
+                        </div>
+                    </div>
+                    <div class="item-detail">
+                        <div class="item-img">
+                            <div class="side-img">
+                                <ul class="side-img-list">
+                                    <li><a class="link" href="http://localhost:3001/rosemary_recovery_shampoo/th1.jpg"><img src="http://localhost:3001/rosemary_recovery_shampoo/th1.jpg" /></a></li>
+                                    <li><a class="link" href="http://localhost:3001/rosemary_recovery_shampoo/th2.jpg"><img src="http://localhost:3001/rosemary_recovery_shampoo/th2.jpg" /></a></li>
+                                    <li><a class="link" href="http://localhost:3001/rosemary_recovery_shampoo/th3.jpg"><img src="http://localhost:3001/rosemary_recovery_shampoo/th3.jpg" /></a></li>
+                                    <li><a class="link" href="http://localhost:3001/rosemary_recovery_shampoo/th4.jpg"><img src="http://localhost:3001/rosemary_recovery_shampoo/th4.jpg" /></a></li>
+                                    <li><a class="link" href="http://localhost:3001/rosemary_recovery_shampoo/th5.jpg"><img src="http://localhost:3001/rosemary_recovery_shampoo/th5.jpg" /></a></li>
+                                </ul>
+                            </div>
+                            <div class="main-img" id="main-imgs">
+                                <img id="main-img-target" src="http://localhost:3001/rosemary_recovery_shampoo/th1.jpg" />
+                            </div>
+                        </div>
+                        <div class="item-content">
+                            <div class="text-content">
+                                <p class="eng">thermal ceramide</p>
+                                <p class="kor">[35%할인] 떼르말 세라마이드 헤드 스파 샴푸 500ml</p>
+                                <p class="text1">민감성, 청소년비듬, 시트러스향, 헤드스파</p>
+                                <p class="text2">정수리 떡짐, 냄새, 비듬의 원인인 두피를 집중 케어하는 헤드 스파용 샴푸입니다. 도고 온천수와 세라마이드와 성분이 민감한 두피를 순하게 세정하고, 보송한 두피와 힘 있는 모발로 가꿔줍니다.</p>
+                            </div>
+                            <div class="price-content">
+                                <div>
+                                    <span class="normal-price">26,000원</span><span>멤버쉽가입</span>
+                                </div>
+                                <div>
+                                    <span class="green-price">그린 멤버쉽</span><span>15,600원</span>
+                                </div>
+                                <div>
+                                    <span class="blue-price">블루 멤버쉽</span><span>13,000원</span>
+                                </div>
+                            </div>
+                            <div class="buy-content">
+                                <form id="option">
+                                    <label for="option">옵션</label>
+                                    <select>
+                                        <option>------</option>
+                                        <option>필수</option>
+                                        <option>1개</option>
+                                    </select>
+                                    <button class="cart-btn" type="button">장바구니</button>
+                                    <button class="wish-btn" type="button">위시리스트</button>
+                                    <button class="buy-btn" type="button">바로구매</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-body-bottom">
+                    <div id="tab-container">
+                        <div class="tab-button-group">
+                            <a class="tab-button active" href="#iteminfo">제품정보</a>
+                            <a class="tab-button" href="#itemreview">제품리뷰</a>
+                            <a class="tab-button" href="#buyinfo">구매정보</a>
+                            <a class="tab-button" href="#iteminquiry">제품문의</a>
+                        </div>
+                
+                        <div id="iteminfo" class="tab-page active">
+                            <img src="http://localhost:3001/rosemary_recovery_shampoo/common.jpg"/>
+                            <img src="http://localhost:3001/rosemary_recovery_shampoo/info1.jpg"/>
+                            <img src="http://localhost:3001/rosemary_recovery_shampoo/info2.jpg"/>
+                        </div>
+                        
+                        <div id="itemreview" class="tab-page">
+                            <div class="review-content">
+                                <div class="review-list">
+                                    <div class="collapse">
+                                        <div class="reviews collapsible-title">
+                                            <span class="review-num">5</span>
+                                            <span class="review-title">쓰기 좋아요</span>
+                                            <span class="review-name">김**</span>
+                                            <span class="review-date">2024-09-21</span>
+                                        </div>
+                                        <div class="review-collapse-content">
+                                            <img src="assets/img/main_section01_img01.jpg" width="700px"/>
+                                            <p>쓰기 좋아요</p>
+                                            <p>2024-09-21</p>
+                                        </div>
+                                    </div>
+                                    <div class="collapse">2
+                                        <div class="reviews collapsible-title">
+                                            <span class="review-num">4</span>
+                                            <span class="review-title">배송이 빨라요</span>
+                                            <span class="review-name">신**</span>
+                                            <span class="review-date">2024-09-21</span>
+                                        </div>
+                                        <div class="review-collapse-content">
+                                            <img src="assets/img/13ec4e546708b59db1c3a90aa24e5823.jpg" width="700px"/>
+                                            <p>배송이 빨라요</p>
+                                            <p>2024-09-21</p>
+                                        </div>
+                                    </div>
+                                    <div class="collapse">
+                                        <div class="reviews collapsible-title">
+                                            <span class="review-num">3</span>
+                                            <span class="review-title">좋아요</span>
+                                            <span class="review-name">박**</span>
+                                            <span class="review-date">2024-09-20</span>
+                                        </div>
+                                    </div>
+                                    <div class="collapse">
+                                        <div class="reviews collapsible-title">
+                                            <span class="review-num">2</span>
+                                            <span class="review-title">마음에 들어요</span>
+                                            <span class="review-name">이**</span>
+                                            <span class="review-date">2024-09-20</span>
+                                        </div>
+                                    </div>
+                                    <div class="collapse">
+                                        <div class="reviews collapsible-title">
+                                            <span class="review-num">1</span>
+                                            <span class="review-title">별로에요</span>
+                                            <span class="review-name">김**</span>
+                                            <span class="review-date">2024-09-19</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="review-btn">
+                                <button type="button" class="all-btn">전체보기</button>
+                                <button type="button" class="review-write-btn">리뷰작성</button>
+                            </div>
+                            <div class="review-page">
+                                <a>1</a>
+                                <a>2</a>
+                                <a>3</a>
+                                <a>4</a>
+                                <a class="active">5</a>
+                            </div>
+                        </div>
+                
+                        <div id="buyinfo" class="tab-page">
+                            <ul class="buy-info-list">
+                                <li>
+                                    <p class="info-title">내용물의 용량 및 중량</p>
+                                    <p class="info-content">500ML</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">제품 주요사양</p>
+                                    <p class="info-content">지성 두피로 인한 탈모 증상 완화에 도움을 주고, 약해진 모발을 케어하는 기능성 샴푸입니다. 두피의 유수분 밸런스를 조절해 피지 관리에 도움을 주고, 푸석한 모발을 윤기 있게 가꿔줍니다.</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">사용기한 또는 개봉 후 사용기간</p>
+                                    <p class="info-content">개봉 후 사용 기간: 12개월 / 개봉 전 사용 기간: 36개월</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">사용방법</p>
+                                    <p class="info-content">
+                                        미지근한 물로 두피와 모발을 충분히 적셔주세요. 적당량을 손에 덜어 젖은 머리에 거품을 내며 문지른 후, 미지근한 물로 깨끗이 헹궈주세요.</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">화장품제조업자</p>
+                                    <p class="info-content">유씨엘(주)</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">제조국</p>
+                                    <p class="info-content">대한민국</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">화장품책임판매업자</p>
+                                    <p class="info-content">(주)그린슈타인</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">맞춤형 화장품판매업자</p>
+                                    <p class="info-content">해당사항 없음</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">｢화장품법｣에 따라 기재 표시하여야 하는 모든성분</p>
+                                    <p class="info-content">정제수, 소듐C14-16올레핀설포네이트, 코카미도프로필베타인, 라우레스-23, 라우라마이드디이에이, 소듐클로라이드, 부틸렌글라이콜, 녹차추출물, 코카마이드메틸엠이에이, 폴리쿼터늄-10, 멘톨, 살리실릭애씨드, 덱스판테놀, 포타슘솔베이트, 프로필렌글라이콜라우레이트, 테트라데센, 헥사데센, 시트릭애씨드, 소듐설페이트, 오렌지껍질오일, 로즈마리잎오일(1,108,900ppb), 페퍼민트오일, 나이아신아마이드, 폴리쿼터늄-7, 탄제린껍질오일, 글리세린, 소듐파이테이트, 티트리잎오일, 베르가모트오일, 자몽껍질오일, 리씨열매오일, 빙하수, 소듐벤조에이트, 1,2-헥산다이올, 유칼립투스잎오일, 밤부사불가리스잎/줄기추출물, 동백나무씨오일, 아데노신, 알지닌, 리모넨, 시트랄</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">｢화장품법｣에 따른 기능성 화장품(미백, 주름개선, 자외선 차단제품 등)의 경우</p>
+                                    <p class="info-content">탈모완화기능성 샴푸</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">사용할 때의 주의사항</p>
+                                    <p class="info-content">1) 화장품 사용 시 또는 사용 후 직사광선에 의하여 사용부위가 붉은 반점, 부어오름 또는 가려움증 등의 이상 증상이나 부작용이 있는 경우에는 전문의 등과 상담할 것 2) 상처가 있는 부위 등에는 사용을 자제할 것 3) 보관 및 취급 시 주의사항 가) 어린이의 손이 닿지 않는 곳에 보관할 것 나) 직사광선을 피해서 보관할 것 4) 모발용 샴푸 가) 눈에 들어갔을 때에는 즉시 씻어낼 것 나) 사용 후 물로 씻어내지 않으면 탈모 또는 탈색의 원인이 될 수 있으므로 주의할 것 ※고온, 저온 및 직사광선의 환경에 보관 시 변색/변취/분리/어는 등의 제품 품질에 영향을 줄 수 있으므로 보관상의 주의를 요함</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">품질보증기준</p>
+                                    <p class="info-content">본 제품에 이상이 있을 경우 공정거래위원회고시 소비자분쟁해결기준에 따라 교환 또는 보상받을 수 있습니다.</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">소비자 상담 관련 전화번호</p>
+                                    <p class="info-content">고객센터 1544-8971 월-금 / 09:00-17:00<br />
+                                        (점심시간 12:30-13:30 / 주말, 공휴일 휴무)</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">상품결제정보</p>
+                                    <p class="info-content">
+                                        ·  고액결제는 안전을 위해 카드사에서 확인전화를 드릴 수도 있습니다.<br />
+                                        ·  확인과정에서 도난 카드의 사용이나 타인 명의의 주문등 정상적인 주문이 아니라고 판단될 경우 임의로 주문을 보류 또는 취소할 수 있습니다.<br />
+                                        ·  무통장 입금의 경우, 상품 구매 대금은 PC뱅킹, 인터넷뱅킹, 텔레뱅킹 혹은 가까운 은행에서 직접 입금하시면 됩니다.  <br />
+                                        ·  주문시 입력한 입금자명과 실제입금자의 성명이 반드시 일치해야 하며, 7일 이내로 입금되지 않은 주문은 자동취소 됩니다.</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">배송정보</p>
+                                    <p class="info-content">
+                                        배송 방법 : 택배<br />
+                                        배송 지역 : 전국지역<br />
+                                        배송 비용 : 3,000원<br />
+                                        배송 기간 : 2일 ~ 4일<br />
+                                        배송 안내 : 제주 추가 3,000원 / 제주 외 도서지역 추가 6,000원<br />
+                                        
+                                        · 산간벽지나 도서지방은 별도의 추가금액을 지불하셔야 할 수 있습니다.<br />
+                                        · 고객님께서 주문하신 상품은 입금 확인후 배송해 드립니다. <br />
+                                        · 제품 종류에 따라서 상품의 배송이 다소 지연될 수 있습니다.<br />
+                                        · 제품 불량 및 오배송 등으로 인한 교환/반품 시 배송비는 무료입니다.<br />
+                                        · 고객님의 단순 변심으로 인한 교환/반품 신청은 고객님 부담의 왕복택배비 6,000원을 입금주셔야 처리가 가능합니다. 제주/도서상간의 경우 별도의 추가 비용이 발생할 수 있습니다. 
+                                          택배비 입금 계좌 :  100-031-436946 (주)캄모멘트리<br />
+                                        · 더 많은 고객님들께 혜택을 드리기 위하여, 동일 주소지로 대량 주문 시 해당 아이디에 대한 주문이 제한될 수 있습니다.</p>
+                                </li>
+                                <li>
+                                    <p class="info-title">교환및반품정보</p>
+                                    <p class="info-content">
+                                        · 사은품 품절 시 공지 없이 대체 상품이 발송됩니다.<br />
+                                        · 주문자,수취인,전화번호,주소가 모두 동일한 경우 자동 묶음 배송되며, 사은품도 합계 구매 금액에 대한 사은품으로 배송됩니다.<br />
+                                        · 이벤트 적용 및 사은품 증정은 장바구니에 담으신 시점과 관계없이 결제 당시의 사은품으로 증정됩니다. <br />
+                                        <br />
+                                        1. 교환/반품이 가능한 경우  <br />
+                                         1) 단순변심, 착오구매에 따른 교환/반품 신청은 상품을 받으신 날부터 7일 이내 가능합니다. (배송비 고객 부담)<br />
+                                         2) 공급받은 상품이 표시/광고의 내용과 다르거나 계약 내용과 다르게 이행된 경우에는 제품을 공급받은 날부터 3개월 이내, 그 사실을 안 날 또는 알 수 있었던 날부터 30일 이내 교환/반품 신청을 하실 수 있습니다. (배송비 캄모멘트리 부담)<br />
+                                         3) 교환/반품을 원하시는 고객님은 캄모멘트리 고객센터(1544-8971)에 전화하시거나 홈페이지 우측 상단의 [COMMUNITY>문의하기] 를 통해 신청하실 수 있습니다. 신청 후 2~3일 이내에 캄모멘트리 지정 택배사가 직접 방문하여 상품을 수거합니다. <br />
+                                         <br />
+                                            반송지 주소 : 전화번호 1544-8971 / 경기도 고양시 통일로 140 삼송테크노밸리 A동 252호  캄모멘트리 담당자 : 이수빈<br />
+                                         4) 해당 상품 구매 시 사은품/증정품 등이 제공된 경우, 상품 교환/반품 시 함께 보내주셔야 하며 미 전달 시 교환/반품이 불가합니다.<br />
+                                         5) 반품 시 상품대금 환불은 상품 회수 및 청약 철회가 확정된 날부터 7영업일 이내 진행되며, 기한을 초과한 경우 지연기간에 대하여 연 100분의 15를 곱하여 산정한 지연이자를 지급합니다.<br />
+                                         <br />
+                                        2. 교환/반품이 불가능한 경우<br />
+                                        · 고객님의 책임 사유로 상품이 멸실되거나 훼손된 경우 (상품내용을 확인하기 위하여 포장 등을 훼손한 경우는 제외)<br />
+                                        · 고객님의 상품 사용 또는 일부 소비로 상품 가치가 감소한 경우<br />
+                                        · 구매 시점으로부터 시간이 오래 지나  다시 판매하기 곤란할 정도로 상품 가치가 현저히 감소한 경우<br />
+                                        · 복제가 가능한 상품의 포장을 훼손한 경우<br />
+                                        · 고객님의 주문에 따라 개별적으로 생산되는 상품 또는 이와 유사한 상품에 대하여 청약 철회 등을 인정하는 경우 통신판매업자에게 회복할 수 없는 중대한 피해가 예상되는 경우로서, 사전에 해당 거래에 대하여 별도로 그 사실을 배송 전 고지하고 고객의 서면(전자문서 포함)에 의한 동의를 받은 경우<br />
+                                        <br />
+                                        3. 불만처리 및 분쟁해결<br />
+                                        · 교환/반품/대금 환불 등에 대한 문의사항 및 불만처리 요청은 캄모멘트리 고객센터 1544-8971 를 이용하세요.   <br />
+                                          캄모멘트리 고객센터 운영시간: 월-금 09:00~18:00 (12:30-13:30 점심시간, 토/일/공휴일 휴무)<br />
+                                        · 본 상품의 품질보증 및 피해보상에 관한 사항은 관련 법률 및 공정거래위원회 고시「소비자분쟁해결기준」에 따릅니다.<br />
+                                        · 트러블에 의한 반품 시 의사의 소견서를 첨부해야 하며, 기타 제반 비용은 고객님이 부담하셔야 합니다.<br />
+                                          다만, 의사 소견에 따라 구매 상품의 사용으로 인한 사유가 명백한 경우 소비자분쟁해결기준에 따릅니다.</p>
+                                </li>
+                            </ul>
+                        </div>
+                
+                        <div id="iteminquiry" class="tab-page">
+                            <p>개발중</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <script src="/src/main/resources/static/assets/js/detail.js"></script>
+    <script>
+        
+    </script>
+</body>
+</html>
