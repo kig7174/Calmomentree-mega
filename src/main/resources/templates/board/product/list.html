@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calmomentree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/product.css" />
+  </head>
+  <body>
+    <header id="header">
+      <div class="head">헤더영역</div>
+    </header>
+    <div id="container">
+      <div class="board-box left">
+        <ul class="board-inner">
+          <li><a href="">공지사항</a></li>
+          <li><a href="">공병수거신청</a></li>
+          <li><a href="">달력쿠폰</a></li>
+          <li><a href="">문의하기</a></li>
+          <li><a href="">FAQ</a></li>
+          <li><a href="">제품리뷰</a></li>
+        </ul>
+      </div>
+      <div class="table-container">
+        <div class="title-wr">Review</div>
+        <div class="board-list">
+          <table border="1">
+            <caption style="display: none">
+              상품 게시판 목록
+            </caption>
+            <colgroup>
+              <col width="10%" />
+              <col width="10%" />
+              <col width="auto" />
+              <col width="20%" />
+              <col width="12%" />
+              <col width="12%" />
+            </colgroup>
+            <thead>
+              <!-- <tr>
+                <th class="no">NO</th>
+                <th class="title">TITLE</th>
+                <th class="name">NAME</th>
+                <th class="date">DATE</th>
+              </tr> -->
+            </thead>
+            <tbody>
+              <tr>
+                <td class="chk-no">158</td>
+                <td class="thumb"><a href=""><img src="http://placehold.co/46" alt=""></a></td>
+                <td class="subject"><a href="">좋아용</a></td>
+                <td class="writer">정****</td>
+                <td class="date">2024-10-29</td>
+                <td class="star"><img src="http://placehold.co/74x17" alt=""></td>
+              </tr>
+              <tr>
+                <td class="chk-no">158</td>
+                <td class="thumb"><a href=""><img src="http://placehold.co/46" alt=""></a></td>
+                <td class="subject"><a href="">좋아용</a></td>
+                <td class="writer">정****</td>
+                <td class="date">2024-10-29</td>
+                <td class="star"><img src="http://placehold.co/74x17" alt=""></td>
+              </tr>
+              <tr>
+                <td class="chk-no">158</td>
+                <td class="thumb"><a href=""><img src="http://placehold.co/46" alt=""></a></td>
+                <td class="subject"><a href="">좋아용</a></td>
+                <td class="writer">정****</td>
+                <td class="date">2024-10-29</td>
+                <td class="star"><img src="http://placehold.co/74x17" alt=""></td>
+              </tr>
+              <tr>
+                <td class="chk-no">158</td>
+                <td class="thumb"><a href=""><img src="http://placehold.co/46" alt=""></a></td>
+                <td class="subject"><a href="">좋아용</a></td>
+                <td class="writer">정****</td>
+                <td class="date">2024-10-29</td>
+                <td class="star"><img src="http://placehold.co/74x17" alt=""></td>
+              </tr>
+              <tr>
+                <td class="chk-no">158</td>
+                <td class="thumb"><a href=""><img src="http://placehold.co/46" alt=""></a></td>
+                <td class="subject"><a href="">좋아용</a></td>
+                <td class="writer">정****</td>
+                <td class="date">2024-10-29</td>
+                <td class="star"><img src="http://placehold.co/74x17" alt=""></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="btn-area">
+          <button class="btn1"><a href="">글쓰기</a></button>
+        </div>
+        <div class="paging-box">
+          <!-- 페이지 번호 -->
+          <ul class="pagination">
+            <!-- 이전 페이지 그룹 이동 버튼 -->
+            <li th:if="${pagination.prevPage > 0}">
+              <a th:href="@{/student(keyword=${keyword}, page=${pagination.prevPage})}">&laquo;</a>
+            </li>
+            <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
+            <!-- 페이지 번호 링크 -->
+            <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+              <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}"></a>
+              <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/student(keyword=${keyword}, page=${i})}"></a>
+            </li>
+
+            <!-- 다음 페이지 그룹 이동 버튼 -->
+            <li th:if="${pagination.nextPage > 0}">
+              <a th:href="@{/student(keyword=${keyword}, page=${pagination.nextPage})}">&raquo;</a>
+            </li>
+            <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
+          </ul>
+        </div>
+        <div class="search-container">
+          <div class="search-box">
+            <div class="form">
+              <input type="text" placeholder="내용을 입력하세요" />
+              <a href="">찾기</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="board-box right"></div>
+    </div>
+  </body>
+</html>
