@@ -2,8 +2,18 @@
  * product detail js
  */
 
-// tab menu img
+document.querySelector("#qty-up").addEventListener("click", e => {
+    e.preventDefault();
+    document.querySelector("#qty").value++;
+});
 
+document.querySelector("#qty-down").addEventListener("click", e => {
+    e.preventDefault();
+    const qty = document.querySelector("#qty");
+    if (qty.value > 0) {
+        qty.value--;
+    }
+});
 
 // image mouse over
 document.querySelectorAll('.link').forEach((v, i) => {
@@ -44,7 +54,7 @@ document.querySelectorAll('.tab-button').forEach((v, i) => {
 
 
 // 리뷰 열기
-document.querySelectorAll('.collapsible-title').forEach((v, i) => {
+document.querySelectorAll('.reviews').forEach((v, i) => {
     v.addEventListener('click', (e) => {
         document.querySelectorAll('.review-collapse-content').forEach((w, j) => {
             w.style.maxHeight = null;
@@ -54,7 +64,7 @@ document.querySelectorAll('.collapsible-title').forEach((v, i) => {
 
         current.classList.toggle('active');
 
-        document.querySelectorAll('.collapsible-title').forEach((w, j) => {
+        document.querySelectorAll('.reviews').forEach((w, j) => {
             if (w !== current) {
                 w.classList.remove('active');
             }
@@ -63,6 +73,34 @@ document.querySelectorAll('.collapsible-title').forEach((v, i) => {
         const parent = current.closest('.collapse');
 
         const content = parent.querySelector('.review-collapse-content');
+
+        if (!current.classList.contains('active')) {
+            content.style.maxHeight = null;
+        } else {
+            content.style.maxHeight = content.scrollHeight + 'px';
+        }
+    });
+});
+
+document.querySelectorAll('.inquirys').forEach((v, i) => {
+    v.addEventListener('click', (e) => {
+        document.querySelectorAll('.inquiry-collapse-content').forEach((w, j) => {
+            w.style.maxHeight = null;
+        });
+
+        const current = e.currentTarget;
+
+        current.classList.toggle('active');
+
+        document.querySelectorAll('.inquirys').forEach((w, j) => {
+            if (w !== current) {
+                w.classList.remove('active');
+            }
+        });
+
+        const parent = current.closest('.collapse');
+
+        const content = parent.querySelector('.inquiry-collapse-content');
 
         if (!current.classList.contains('active')) {
             content.style.maxHeight = null;

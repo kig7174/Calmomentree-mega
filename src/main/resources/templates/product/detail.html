@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calmomentree</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css' />
     <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
     <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css" />
     <link rel="stylesheet" href="/src/main/resources/static/assets/css/detail.css" />
@@ -21,7 +22,7 @@
                 <div class="detail-body-top">
                     <div class="current-category">
                         <div class="category">
-                            <span><a class="home" href="index.html">홈</a></span>
+                            <span><a class="home" href="#">홈</a></span>
                         </div>
                     </div>
                     <div class="item-detail">
@@ -42,33 +43,47 @@
                         <div class="item-content">
                             <div class="text-content">
                                 <p class="eng">thermal ceramide</p>
-                                <p class="kor">[35%할인] 떼르말 세라마이드 헤드 스파 샴푸 500ml</p>
+                                <p class="kor">떼르말 세라마이드 헤드 스파 샴푸 500ml</p>
                                 <p class="text1">민감성, 청소년비듬, 시트러스향, 헤드스파</p>
                                 <p class="text2">정수리 떡짐, 냄새, 비듬의 원인인 두피를 집중 케어하는 헤드 스파용 샴푸입니다. 도고 온천수와 세라마이드와 성분이 민감한 두피를 순하게 세정하고, 보송한 두피와 힘 있는 모발로 가꿔줍니다.</p>
                             </div>
                             <div class="price-content">
                                 <div>
-                                    <span class="normal-price">26,000원</span><span>멤버쉽가입</span>
+                                    <span class="discount">30%</span><span class="normal-price price">26,000원</span>
                                 </div>
                                 <div>
-                                    <span class="green-price">그린 멤버쉽</span><span>15,600원</span>
-                                </div>
-                                <div>
-                                    <span class="blue-price">블루 멤버쉽</span><span>13,000원</span>
+                                    <span>일반 회원가</span><span class="discount-price price">15,600원</span>
                                 </div>
                             </div>
-                            <div class="buy-content">
-                                <form id="option">
-                                    <label for="option">옵션</label>
-                                    <select>
-                                        <option>------</option>
-                                        <option>필수</option>
-                                        <option>1개</option>
-                                    </select>
-                                    <button class="cart-btn" type="button">장바구니</button>
-                                    <button class="wish-btn" type="button">위시리스트</button>
-                                    <button class="buy-btn" type="button">바로구매</button>
-                                </form>
+                            <div class="option-select">
+                                <label for="option">옵션</label>
+                                <select>
+                                    <option>------</option>
+                                    <option>필수</option>
+                                    <option value="1">1개</option>
+                                </select>
+                            </div>
+                            <div class="option-item-price">
+                                <div class="buy-product">
+                                    <p>떼르말 세라마이드 헤드 스파 샴푸 500ml</p>
+                                </div>
+                                <div class="qty-box">
+                                    <input type="number" name="qty" value="1" id="qty" min="0" readonly />
+                                    <a class="qty-up" id="qty-up"><i class="fa-solid fa-plus"></i></a>
+                                    <a class="qty-down" id="qty-down"><i class="fa-solid fa-minus"></i></a>
+                                    <a class="buy-delete"></a>
+                                    <div class="qty-price">
+                                        <span>15,600원</span>
+                                    </div>
+                                </div>                       
+                                <div class="total-price">
+                                    <span>TOTAL<span class="qty-txt">(QUANTITY)</span></span>
+                                    <span class="total-price-txt">15,600원<span class="total-qty">(1개)</span></span>
+                                </div>
+                            </div>
+                            <div class="buy-box">
+                                <button class="cart-btn" type="button">장바구니</button>
+                                <button class="buy-btn" type="button">바로구매</button>
                             </div>
                         </div>
                     </div>
@@ -104,7 +119,7 @@
                                             <p>2024-09-21</p>
                                         </div>
                                     </div>
-                                    <div class="collapse">2
+                                    <div class="collapse">
                                         <div class="reviews collapsible-title">
                                             <span class="review-num">4</span>
                                             <span class="review-title">배송이 빨라요</span>
@@ -271,7 +286,73 @@
                         </div>
                 
                         <div id="iteminquiry" class="tab-page">
-                            <p>개발중</p>
+                            <div class="inquiry-content">
+                                <div class="inquiry-list">
+                                    <div class="collapse">
+                                        <div class="inquirys collapsible-title">
+                                            <span class="inquiry-num">5</span>
+                                            <span class="inquiry-title">쓰기 좋아요</span>
+                                            <span class="inquiry-name">김**</span>
+                                            <span class="inquiry-date">2024-09-21</span>
+                                        </div>
+                                        <div class="inquiry-collapse-content">
+                                            <img src="assets/img/main_section01_img01.jpg" width="700px"/>
+                                            <p>쓰기 좋아요</p>
+                                            <p>2024-09-21</p>
+                                        </div>
+                                    </div>
+                                    <div class="collapse">
+                                        <div class="inquirys collapsible-title">
+                                            <span class="inquiry-num">5</span>
+                                            <span class="inquiry-title">쓰기 좋아요</span>
+                                            <span class="inquiry-name">김**</span>
+                                            <span class="inquiry-date">2024-09-21</span>
+                                        </div>
+                                        <div class="inquiry-collapse-content">
+                                            <img src="assets/img/main_section01_img01.jpg" width="700px"/>
+                                            <p>쓰기 좋아요</p>
+                                            <p>2024-09-21</p>
+                                        </div>
+                                    </div>
+                                    <div class="collapse">
+                                        <div class="inquirys collapsible-title">
+                                            <span class="inquiry-num">5</span>
+                                            <span class="inquiry-title">쓰기 좋아요</span>
+                                            <span class="inquiry-name">김**</span>
+                                            <span class="inquiry-date">2024-09-21</span>
+                                        </div>
+                                        <div class="inquiry-collapse-content">
+                                            <img src="assets/img/main_section01_img01.jpg" width="700px"/>
+                                            <p>쓰기 좋아요</p>
+                                            <p>2024-09-21</p>
+                                        </div>
+                                    </div>
+                                    <div class="collapse">
+                                        <div class="inquirys collapsible-title">
+                                            <span class="inquiry-num">5</span>
+                                            <span class="inquiry-title">쓰기 좋아요</span>
+                                            <span class="inquiry-name">김**</span>
+                                            <span class="inquiry-date">2024-09-21</span>
+                                        </div>
+                                        <div class="inquiry-collapse-content">
+                                            <img src="assets/img/main_section01_img01.jpg" width="700px"/>
+                                            <p>쓰기 좋아요</p>
+                                            <p>2024-09-21</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="inquiry-btn">
+                                <button type="button" class="all-btn">전체보기</button>
+                                <button type="button" class="inquiry-write-btn">제품문의하기</button>
+                            </div>
+                            <div class="inquiry-page">
+                                <a>1</a>
+                                <a>2</a>
+                                <a>3</a>
+                                <a>4</a>
+                                <a class="active">5</a>
+                            </div>
                         </div>
                     </div>
                 </div>
