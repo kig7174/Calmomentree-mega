@@ -1,5 +1,7 @@
 # Project
 
+### 누락된 HTML => join_result / find_id_result / find_password_result / login_after / login_before
+
 ### Git Hub (버전관리시스템,  형상관리시스템) ==> 변경 과정 정리 ###
 
   MileStone : 대략적인 큰 틀의 작업 계획 | ex (기획 > UI 구현 > DB > 구현)
