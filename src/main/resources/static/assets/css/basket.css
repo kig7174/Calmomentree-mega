@@ -1,0 +1,78 @@
+:root {
+    --background-color: #faf8ef;
+    --font-color: #1a1a1a;
+    --font-color-gray: #5e5e5e;
+    --font-size-title: 26px;
+    --font-size-content: 12px;
+    --font-size-item: 16px;
+    --font: "Noto Sans KR", "Pretendard", "sans-serif", "dotum";
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    color: var(--font-color);
+    font-family: var(--font);
+}
+body {
+    background-color: var(--background-color);
+}
+.container {
+    width: 70%;    /* 수정해야함 */
+    margin: 100px auto;
+    line-height: 1.5;
+
+    .title {
+        width: 100%;
+        font-size: var(--font-size-title);
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--font-color);
+    }
+    .cartBox {
+        display: flex;
+        
+        .prodBox {
+            width: 100%;
+            padding-right: 30px;
+            .prodBox-title {
+                height: 50px;
+                line-height: 50px;
+            }
+            .normal {
+                height: 50px;
+                line-height: 50px;
+                border-bottom: 1px solid var(--font-color);
+            }
+            .listTable {
+                display: flex;
+                padding: 25px 0;
+                .prodCheck {
+                    align-self: start;
+                    margin-right: 5px;
+                }
+            }
+        }
+    }
+    .orderInfo {
+        min-width: 300px;
+        padding: 10px 0 10px 10px;
+        .orderInfo-box {
+            border: 1px solid var(--font-color);
+            
+        }
+        .orderInfo-btnArea {
+            display: flex;
+            flex-direction: column;
+
+            button {
+                margin-bottom: 5px;
+                height: 50px;
+            }
+        }
+    }
+}
+
+

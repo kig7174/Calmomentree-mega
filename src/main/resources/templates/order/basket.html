@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calmomentree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/basket.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="title">Cart</div>
+      <div class="cartBox">
+        <div class="prodBox">
+          <div class="prodBox-title">장바구니 상품</div>
+          <div class="prodBox-info">
+            <div class="normal">
+              <p>일반상품(<span></span>)</p>
+            </div>
+            <ul>
+              <li class="listTable">
+                <input type="checkbox" class="prodCheck"/>
+                <div class="thumbBox">
+                  <a href=""><img src="http://placehold.co/81x83" alt="" /></a>
+                </div>
+                <div class="prodInfo">
+                  <span><a href="">떼르말 세라마이드 스칼프&헤어 팩</a></span>
+                  <span>500ML</span>
+                  <p><span>42,000</span>원</p>
+                  <p>-<span>0</span>원</p>
+                  <p>배송:[<span>무료</span>]/<span>기본배송</span></p>
+                  <p>[옵션:<span>선택안함</span>/<span>선택안함</span>]</p>
+                  <div class="qtyBox">
+                    <a href="" id="minus">-</a>
+                    <input type="text" id="qty" value="1" />
+                    <a href="" id="plus">+</a>
+                    <button class="btnChange btn1">변경</button>
+                  </div>
+                </div>
+                <div class="prodInfo2">
+                  <p><span>84000</span>원<button>x</button></p>
+                  <div>
+                    <button class="btnGood btn1">관심상품</button>
+                    <button class="btnBuy btn2">주문하기</button>
+                  </div>
+                </div>
+              </li>
+            </ul>
+            <div class="shipmentInfo">
+              <p>상품구매금액: <span>OOO</span> + 배송비 <span>OOO</span></p>
+              <p>합계: <span>OOO</span>원</p>
+            </div>
+            <div>
+              <button>전체선택</button>
+              <button>선택삭제</button>
+            </div>
+          </div>
+        </div>
+        <div class="orderInfo">
+          <div class="orderInfo-box">
+            <div>
+              <p>주문상품</p>
+            </div>
+            <div>
+              <p>총상품금액<span></span>원</p>
+              <p>총배송비<span></span>원</p>
+            </div>
+            <div>
+              <p>결제예정금액<span></span>원</p>
+            </div>
+          </div>
+          <div class="orderInfo-btnArea">
+            <button>전체상품주문</button>
+            <button>선택상품주문</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
