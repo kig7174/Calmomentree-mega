@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta translate="no"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calmomentree</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/index.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <div class="container">
+            
+        <!-- body -->
+        <section class="index-body">
+            <!-- 첫 번째 사진 박스 -->
+            <div class="full-body">
+                <div class="full-body-img">
+                    <a href="product-detail.html?id=1">
+                        <div class="img-box">
+                            <img src="http://localhost:3001/index/main_visual_img001.jpg" />
+                        </div>
+                        <div class="content">
+                            <h3>출산맘들이 인정한 탈모 완화 샴푸</h3>
+                            <h4>로즈마리 리커버리 샴푸</h4>
+                            <h4>ROSEMARY RECOVERY SHAMPOO</h4>
+                            <p>탈모를 가속화하는 협착 피지와 노폐물을 말끔히 이중 세정하고,
+                                <br />
+                                깨끗한 8종 허브 오일 성분들이 윤기 모발로 가꿔줍니다.
+                            </p>
+                            <a class="buy-btn" href="product-detail.html?id=1">
+                                BUY
+                                <img src="http://localhost:3001/index/arrow_icon.svg" />
+                            </a>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- 두 번째 사진 박스 (half & half) -->
+            <div class="half-body-img">
+                <div class="half-img-box left">
+                    <a href="#">
+                        <div class="half-img">
+                            <img src="http://localhost:3001/index/main_section01_img01.jpg" />
+                        </div>
+                        <div class="half-content">
+                            <h3>ESG CAMPAIGN</h3>
+                            <a class="buy-btn" href="#">MORE
+                                <img src="http://localhost:3001/index/arrow_icon.svg" />
+                            </a>
+                        </div>
+                    </a>
+                </div>
+                <div class="half-img-box right">
+                    <a href="#">
+                        <div class="half-img">
+                            <img src="http://localhost:3001/index/main_section01_img02_240822.jpg" />
+                        </div>
+                        <div class="half-content">
+                            <h3>HOME AMENITY MEMBERSHIP</h3>
+                            <a class="buy-btn" href="#">MORE
+                                <img src="http://localhost:3001/index/arrow_icon.svg" />
+                            </a>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <!-- best seller swiper -->
+            <div class="best-box" id="best-box">
+                <div class="best-title">
+                    <h2>BEST SELLER</h2>
+                    <h3>캄모멘트리에서 가장 인기있는 제품을 만나보세요.</h3>
+                </div>
+                <div class="swiper mySwiper best-seller">
+                    <div class="swiper-wrapper swiper-best-seller">
+                        <div class="swiper-slide best-seller-list" id="best-seller-list">
+                            <div class="best-seller-img">
+                                <a href="#"><img src="http://localhost:3001/index/1537d648def7fce05b1327cc494e6bfd.jpg"/></a>
+                            </div>
+                            <div class="best-seller-item">
+                                <div class="best-content-name">
+                                    <p>ROSEMARY RECOVERY</p>
+                                    <a href="#">로즈마리 리커버리 샴푸 500ML</a>
+                                    <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
+                                </div>
+                                <div class="best-seller-price">
+                                    <ul>
+                                        <li><span class="normal-price">일반 회원가</span><span class="price">27,000원</span></li>
+                                        <li><span class="green-price">그린 멤버쉽</span><span class="price">16,380원</span></li>
+                                        <li><span class="blue-price">블루 멤버쉽</span><span class="price">13,650원</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- partners swiper -->
+            <div class="swiper mySwiper partners">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/kia.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/conrad_hotel.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/shinsegae.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/park_roche.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/paradise.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/dazayo.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/sheraton.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/oak_valley.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/westin_hotel.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/fairmont_hotel.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/kia.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/conrad_hotel.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/shinsegae.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/park_roche.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/paradise.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/dazayo.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/sheraton.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/oak_valley.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/westin_hotel.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/fairmont_hotel.svg" />
+                        </div>
+                    </div><div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/kia.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/conrad_hotel.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/shinsegae.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/park_roche.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/paradise.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/dazayo.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/sheraton.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/oak_valley.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/westin_hotel.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/fairmont_hotel.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/kia.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/conrad_hotel.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/shinsegae.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/park_roche.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/paradise.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/dazayo.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/sheraton.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/oak_valley.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/westin_hotel.svg" />
+                        </div>
+                    </div>
+                    <div class="swiper-slide" id="partners-list">
+                        <div class="partners-img">
+                            <img src="http://localhost:3001/index/fairmont_hotel.svg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="/src/main/resources/static/assets/js/index.js"></script>
+    <script>
+
+    </script>
+</body>
+</html>
