@@ -46,8 +46,17 @@ input[type="checkbox"]:checked {
     border: none;
 }
 
+input[type="radio"] {
+    width: 13px;
+    height: 13px;
+    appearance: none;
+    background: url(/src/main/resources/static/assets/img/icon_radio.svg) no-repeat center;
+}
+
 input[type="radio"]:checked {
-    color: var(--font-color);
+    appearance: none;
+    transition: .2s ease-out;
+    background: url(/src/main/resources/static/assets/img/icon_radio_checked_ren.svg) no-repeat center;
 }
 
 input[type="text"],
@@ -60,7 +69,7 @@ input[type="date"] {
     margin-bottom: 5px;
     border: 0;
     border-bottom: 1px solid #000;
-    font-size: var(--font-size-small);
+    font-size: var(--font-size-medium);
 
     &:focus {
         outline: none;
@@ -114,6 +123,17 @@ input[type="date"] {
                 padding: 8px;
             }
 
+            .find-method {
+                label {
+                    margin-right: 5px;
+                }
+
+                p {
+                    margin: 15px 0;
+                    font-weight: 700;
+                    font-size: var(--font-size-medium);
+                }
+            }
             
 
             .input-box {
