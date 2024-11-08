@@ -3,6 +3,7 @@
     --font-color: #1c1c1c;
     --font-color-gray: #5e5e5e;
     --font-color-whitegray: #f3f0eb;
+    --font-color-white: #FBF9EF;
     --font-size-title: 24px;
     --font-size-small: 12px;
     --font-size-medium: 14px;
@@ -10,7 +11,9 @@
     --font: 'Noto Sans KR', 'Pretendard', 'sans-serif', 'dotum';
     --btn-color-black: #1c1c1c;
     --btn-font-color-white: #fff;
-    
+    --table-color-gray: #e9e5dd;
+    --input-border: #e0e0e0;
+    --input-color: #f3f0eb;
 }
 
 * {
@@ -28,7 +31,7 @@ body {
     width: 100%;
 }
 
-.displaynone {
+.display {
     display: none;
 }
 
@@ -84,14 +87,13 @@ input[type="date"] {
 
 .container {
     width: 100%;
-    margin: 50px 0;
+    height: 100%;
 
     .join-body {
         width: 50%;
-        margin: 0 auto;
+        margin: 100px auto;
 
         .head-title {
-            position: relative;
             width: 100%;
             padding: 5px;
             margin-bottom: 20px;
@@ -111,10 +113,11 @@ input[type="date"] {
         }
 
         .join-form {
-            position: relative;
-            float: right;
             width: 50%;
             min-width: 300px;
+            float: none;
+            margin-left: auto;
+            margin-right: 0;
 
             .join-btn, .find-btn {
                 width: 100%;
@@ -133,8 +136,7 @@ input[type="date"] {
                     font-weight: 700;
                     font-size: var(--font-size-medium);
                 }
-            }
-            
+            }              
 
             .input-box {
                 margin: 20px 0;
@@ -155,6 +157,8 @@ input[type="date"] {
                 }
 
                 &.addr-box {     
+                    position: relative;
+                    
                     input {
                         background-color: var(--font-color-whitegray);
 

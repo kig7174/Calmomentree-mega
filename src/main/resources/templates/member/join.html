@@ -1,18 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calmomentree</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/member.css" />
+<head> 
+    <th:block th:replace="~{fragments/head :: calm-head('회원가입')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/member.css}" />
 </head>
 <body>
+    <header th:replace="~{/fragments/header :: calm-header}"></header>
 
-
-    <div class="container">
+    <div class="container">    
         <div class="join-body">
             <div class="head-title">
                 <p>JOIN US<span>캄모멘트리 회원가입</span></p>
@@ -144,9 +139,10 @@
             </div>
         </div>
     </div>
+    
+    <footer th:replace="~{/fragments/footer :: calm-footer}"></footer>
 
-
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="/src/main/resources/static/assets/js/join.js"></script>
+    <th:block th:replace="~{/fragments/script}"></th:block>
+    <script th:src="@{/assets/js/join.js}"></script>
 </body>
 </html>
