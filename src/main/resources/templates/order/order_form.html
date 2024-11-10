@@ -5,13 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calmomentree</title>
     <link rel="stylesheet" href="/src/main/resources/static/assets/css/order_form.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
   </head>
   <body>
     <div class="container">
       <!---------- 주문 정보 ------------>
       <div class="member-info collapse">
         <div class="info-title">
-          <span class="title">주문정보</span>
+          <span class="title">주문정보
+            <button type="button" class="agree-content-btn"></button>
+            <span class="info active" >봉지욱(<span>jiuk0209</span> @ <span>naver.com</span>)</span>
+          </span>
         </div>
 
         <div class="info-box selected">
@@ -25,7 +29,7 @@
           <div class="email-box input-box">
             <label for="member-email">이메일<span class="bg-required"></span></label>
             <div class="input-box2">
-              <input type="text" name="member-email" id="member-email" class="input-box-m" required />
+              <input type="text" name="member-email" id="member-email" class="input-box-m"  required />
               &nbsp; @ &nbsp;
               <select name="email-sort" id="email-sort" class="input-box-m">
                 <option value="naver">naver.com</option>
@@ -103,7 +107,7 @@
       <!---------- 배송지 ------------>
       <div class="shop-info place collapse">
         <div class="info-title">
-          <span>배송지</span>
+          <span>배송지<button type="button" class="agree-content-btn"></button></span>
         </div>
 
         <div class="info-box selected">
@@ -191,14 +195,17 @@
       <!---------- 주문 상품 ------------>
       <div class="order-product place collapse">
         <div class="info-title">
-          <span>주문상품</span>
+          <span>주문상품
+            <button type="button" class="agree-content-btn"></button>
+            <span class="info active"><span class="count"></span>개</span>
+          </span>
         </div>
 
         <div class="info-box selected">
           <div class="prod-box">
             <div class="thumbnail-box">
               <div class="thumbnail-img">
-                <img src="../../../static/assets/img/noimage.jpg" alt="" width="83" />
+                <img src="http://placehold.co/83" alt="" />
               </div>
             </div>
 
@@ -209,7 +216,24 @@
               <span><span class="price">28,000</span>원</span>
             </div>
             <div class="cancel-btn-box">
-              <button class="cancel-btn"><img src="" alt="" /></button>
+              <button class="cancel-btn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+          </div>
+          <div class="prod-box">
+            <div class="thumbnail-box">
+              <div class="thumbnail-img">
+                <img src="http://placehold.co/83" alt="" />
+              </div>
+            </div>
+
+            <div class="description">
+              <span class="prod-name">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
+              <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
+              <span>수량:<span class="qty">1</span>개</span>
+              <span><span class="price">28,000</span>원</span>
+            </div>
+            <div class="cancel-btn-box">
+              <button class="cancel-btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
           </div>
           <div class="price-box">
@@ -217,11 +241,12 @@
             <span><span class="price">3,000</span>원</span>
           </div>
         </div>
+
       </div>
       <!---------- 결제 정보 ------------>
       <div class="payment place collapse">
         <div class="info-title">
-          <span>결제정보</span>
+          <span>결제정보<button type="button" class="agree-content-btn"></button></span>
         </div>
 
         <div class="info-box selected">
@@ -244,7 +269,7 @@
       <!---------- 결제 수단 ------------>
       <div class="paymethod place collapse">
         <div class="info-title">
-          <span>결제수단</span>
+          <span>결제수단<button type="button" class="agree-content-btn"></button></span>
         </div>
 
         <div class="info-box selected"></div>
@@ -252,7 +277,7 @@
       <!---------- 적립혜택 ------------>
       <div class="benefit place collapse">
         <div class="info-title">
-          <span>적립혜택</span>
+          <span>적립혜택<span type="button" class="agree-content-btn"></span></span>
         </div>
         <div class="info-box selected">
           <div class="pay">
@@ -274,5 +299,8 @@
     <!-- 우편번호 검색 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script src="/src/main/resources/static/assets/js/orderform.js"></script>
+    <script>
+
+    </script>
   </body>
 </html>

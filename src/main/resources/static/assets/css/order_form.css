@@ -38,7 +38,15 @@ button {
 body {
   background-color: var(--background-color);
 }
-
+.info {
+  position: absolute;
+  right: 70px;
+  font-weight: 500;
+  &.active {
+    display: none;
+   
+  }
+}
 input {
   border: 1px solid #cccbc8;
   padding: 10px;
@@ -83,7 +91,7 @@ input[type="radio"] {
 }
 
 .container {
-  width: 70%;
+  width: 40%;
   margin: auto;
 }
 
@@ -93,6 +101,7 @@ input[type="radio"] {
   line-height: 55px;
   padding-left: 15px;
   cursor: pointer;
+  position: relative;
   span {
     background-color: #e9e5dd;
   }
@@ -154,7 +163,6 @@ input[type="radio"] {
 }
 
 .bg-required {
-  background: url(../../assets/img/bg_required.png) no-repeat;
   display: inline-block;
   width: 8px;
   height: 8px;
@@ -171,10 +179,11 @@ input[type="radio"] {
 .prod-box {
   display: flex;
   margin: 0 15px 15px;
-
+  border-bottom: 1px dotted #b5b5b5;
   position: relative;
+  padding-bottom: 20px;
   font-size: var(--font-size-content);
-
+  
   .description {
     display: flex;
     flex-direction: column;
@@ -251,4 +260,27 @@ input[type="radio"] {
 }
 .place {
   margin-top: 10px;
+}
+.agree-content-btn {
+  border: 3px solid #BCBCBC;
+  border-width: 2px 2px 0 0;
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  cursor: pointer;
+  padding: 5px;
+  margin: 2px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  transition: all 0.3s ease-in-out;
+  background-color: var(--background-title);
+
+  &.select {
+    transition: all 0.3s ease-in-out;
+    transform: rotate(-225deg);
+    -webkit-transform: rotate(-225deg);
+  }
 }
