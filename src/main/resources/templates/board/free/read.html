@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calmomentree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" /><link rel="stylesheet" href="/src/main/resources/static/assets/css/free.css" />
+  </head>
+  <body>
+    <header id="header">
+      <div class="head">헤더영역</div>
+    </header>
+    <div id="container">
+      <!-- 왼쪽 리스트 -->
+      <div class="board-box left">
+        <ul class="board-inner">
+          <li><a href="">공지사항</a></li>
+          <li><a href="">공병수거신청</a></li>
+          <li><a href="">달력쿠폰</a></li>
+          <li><a href="">문의하기</a></li>
+          <li><a href="">FAQ</a></li>
+          <li><a href="">제품리뷰</a></li>
+        </ul>
+      </div>
+      <div class="table-container">
+        <div class="title-wr">EVENT</div>
+        <div class="subjectName">작성한 게시글 제목</div>
+        <div class="subjectText">작성한 게시글 내용</div>
+        <div class="btnArea">
+          <button class="goList btn">목록</button>
+          <div class="btnList">
+            <button class="edit btn">수정</button>
+            <button class="delete btn">삭제</button>
+          </div>
+        </div>
+        <div>
+          <p class="commentTitle">댓글달기</p>
+          <div class="commentBox">
+            <textarea name="comment" id="comment" required></textarea>
+            <div class="input">
+              <div class="inside">
+                <div>
+                  <label for="commentName">이름</label>
+                  <input type="text" id="commentName" name="commentName" placeholder="" value="" size="8"/>
+                </div>
+                <div>
+                  <label for="commentPassword">비밀번호</label>
+                  <input type="password" id="commentPassword" name="commentPassword" placeholder="" value="" size="8" />
+                </div>
+              </div>
+              <div class="outside">
+                <button class="uploadBtn">등록</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 이전/다음 버튼 -->
+        <div class="page-mov-box">
+            <div class="page-mov-prev page-box">
+              이전<i class="fa-solid fa-chevron-up"></i>
+              <span class="prev-subject"><a href="">너무 좋아요</a></span>
+            </div>
+            <div class="page-mov-next page-box">
+              다음<i class="fa-solid fa-chevron-down"></i>
+              <span class="next-subject"><a href="">향도 좋고 민감성 두피가 사용하기 참 좋네요</a></span>
+            </div>
+          </div>
+      </div>
+      
+      <div class="board-box right"></div>
+    </div>
+  </body>
+</html>
