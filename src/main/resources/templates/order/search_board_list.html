@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calmomentree</title>
+    <style>
+        .header {
+            border-bottom: 1px solid #e5e5e5;
+        }
+       body {
+        padding: 0 10px;
+       }
+        select {
+            background-color: #faf8ef;
+            padding: 10px ;
+            margin: 20px 0;
+            border: 1px solid #e5e5e5;
+           
+        }
+    
+    </style>
+</head>
+<body>
+    <div class="header">
+        <p>주문정보 선택</p>
+    </div>
+    <div class="content">
+        <form action="">
+            <div class="selectBox">
+                <select name="limit" id="">
+                    <option value="5" selected >5개씩 보기</option>
+                    <option value="10">10개씩 보기</option>
+                    <option value="20">20개씩 보기</option>
+                    <option value="30">30개씩 보기</option>
+                </select>
+            </div>
+            <div class="limitContent"></div>
+        </form>
+    </div>
+</body>
+</html>
