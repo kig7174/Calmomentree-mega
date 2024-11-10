@@ -1,78 +1,275 @@
 :root {
-    --background-color: #faf8ef;
-    --font-color: #1a1a1a;
-    --font-color-gray: #5e5e5e;
-    --font-size-title: 26px;
-    --font-size-content: 12px;
-    --font-size-item: 16px;
-    --font: "Noto Sans KR", "Pretendard", "sans-serif", "dotum";
+  --background-color: #faf8ef;
+  --font-color: #1a1a1a;
+  --font-color-gray: #5e5e5e;
+  --font-size-title: 26px;
+  --font-size-content: 12px;
+  --font-size-item: 16px;
+  --font: "Noto Sans KR", "Pretendard", "sans-serif", "dotum";
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
-    color: var(--font-color);
-    font-family: var(--font);
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  list-style: none;
+  box-sizing: border-box;
+  color: var(--font-color);
+  font-family: var(--font);
 }
 body {
-    background-color: var(--background-color);
+  background-color: var(--background-color);
+}
+.btn1 {
+  background-color: var(--background-color);
+  &:hover {
+    border: 1px solid #1a1a1a;
+  }
+}
+.btn2 {
+  background-color: #1a1a1a;
+  color: var(--background-color);
+}
+button {
+  border: 1px solid #bcbcbc;
 }
 .container {
-    width: 70%;    /* 수정해야함 */
-    margin: 100px auto;
-    line-height: 1.5;
+  width: 50%;
+  margin: 100px auto;
+  line-height: 1.5;
 
-    .title {
-        width: 100%;
-        font-size: var(--font-size-title);
-        padding-bottom: 16px;
+  .title {
+    width: 100%;
+    font-size: var(--font-size-title);
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--font-color);
+  }
+  .cartBox {
+    display: flex;
+
+    .prodBox {
+      width: 100%;
+      padding-right: 30px;
+
+      .prodBox-title {
+        height: 50px;
+        line-height: 50px;
+        position: relative;
+      }
+      #agree-content-btn {
+        border: solid black;
+        border-width: 1px 1px 0 0;
+        display: inline-block;
+        cursor: pointer;
+        padding: 5px;
+        margin: 2px;
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        position: absolute;
+        right: 8px;
+        top: 20px;
+        transition: all 0.3s ease-in-out;
+        background-color: var(--background-color);
+
+        &.select {
+          transition: all 0.3s ease-in-out;
+          transform: rotate(-225deg);
+          -webkit-transform: rotate(-225deg);
+        }
+      }
+      .prodBox-info {
+        overflow: hidden;
+        max-height: 0;
+        &.active {
+          max-height: max-content;
+        }
+      }
+      .normal {
+        height: 50px;
+        line-height: 50px;
         border-bottom: 1px solid var(--font-color);
-    }
-    .cartBox {
+      }
+
+      .listTable {
         display: flex;
-        
-        .prodBox {
-            width: 100%;
-            padding-right: 30px;
-            .prodBox-title {
-                height: 50px;
-                line-height: 50px;
-            }
-            .normal {
-                height: 50px;
-                line-height: 50px;
-                border-bottom: 1px solid var(--font-color);
-            }
-            .listTable {
-                display: flex;
-                padding: 25px 0;
-                .prodCheck {
-                    align-self: start;
-                    margin-right: 5px;
-                }
-            }
+        flex: 1 1 0;
+        padding: 25px 0;
+        font-size: 13px;
+        border-bottom: 1px solid #bcbcbc;
+
+        .prodCheck {
+          align-self: start;
+          margin-right: 10px;
         }
-    }
-    .orderInfo {
-        min-width: 300px;
-        padding: 10px 0 10px 10px;
-        .orderInfo-box {
-            border: 1px solid var(--font-color);
-            
+
+        .thumbBox {
+          margin-right: 15px;
         }
-        .orderInfo-btnArea {
+
+        .prodInfo {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          .info {
+            font-weight: 600;
+          }
+          .red {
+            color: red;
+          }
+          .small {
+            font-size: 12px;
+            color: #706f6f;
+            padding: 5px 0 30px;
+            span {
+              color: #706f6f;
+            }
+          }
+          .qtyBox {
+            padding-top: 20px;
             display: flex;
-            flex-direction: column;
-
-            button {
-                margin-bottom: 5px;
-                height: 50px;
+            .fa-solid {
+              font-weight: 600;
             }
+
+            input {
+              width: 45px;
+              height: 30px;
+              padding: 0;
+              line-height: 28px;
+              margin-left: -1px;
+              border: none;
+              text-align: center;
+              background-color: var(--background-color);
+              border-bottom: 1px solid #1a1a1a;
+              &:focus {
+                outline: none;
+              }
+            }
+            a {
+              display: block;
+              width: 30px;
+              height: 30px;
+              text-align: center;
+              line-height: 30px;
+              font-size: 13px;
+              border-bottom: 1px solid #1a1a1a;
+            }
+            .btnChange {
+              padding: 0 15px;
+              margin-left: 10px;
+            }
+          }
         }
+
+        .prodInfo2 {
+          min-width: 25%;
+          position: relative;
+
+          .priceBox {
+            width: 100%;
+            text-align: end;
+            font-size: 16px;
+            font-weight: 600;
+            .cancel {
+              border: none;
+            }
+            .cancel:after {
+              content: "\00d7";
+              font-size: 15pt;
+              line-height: 30px;
+              padding-left: 10px;
+              color: #bcbcbc;
+              background-color: var(--background-color);
+            }
+          }
+        }
+        .btnBox {
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          display: flex;
+
+          button {
+            width: 50%;
+            height: 30px;
+          }
+          .btn1 {
+            margin-right: 6px;
+          }
+        }
+      }
+      .shipmentInfo {
+        padding: 15px;
+        font-size: var(--font-size-content);
+        line-height: 2;
+        border-bottom: 1px solid #bcbcbc;
+        .price {
+          font-weight: 600;
+        }
+      }
+      .prodBox-btnArea {
+        height: 80px;
+        text-align: end;
+        align-content: end;
+        input {
+          height: 30px;
+          padding: 0 15px;
+          border: 1px solid #bcbcbc;
+          &:hover {
+            border: 1px solid #1a1a1a;
+          }
+        }
+        .r {
+          margin-right: 3px;
+        }
+      }
     }
+  }
+  .orderInfo {
+    min-width: 300px;
+    padding: 20px 0 10px 10px;
+    .orderInfo-box {
+      padding: 15px;
+      border: 1px solid var(--font-color);
+      .box {
+        height: 50px;
+        align-content: center;
+        p {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
+      .box2 {
+        height: 100px;
+      }
+      .priceBox {
+        line-height: 50px;
+        p {
+          display: flex;
+          font-size: 13px;
+          justify-content: space-between;
+        }
+        .a {
+          padding-top: 10px;
+        }        
+      }
+      .prod {
+        border-bottom: 1px solid #bcbcbc;
+      }
+      .totalPrice {
+        border-top: 1px solid #bcbcbc;
+        font-weight: 600;
+      }
+    }
+    .orderInfo-btnArea {
+      display: flex;
+      flex-direction: column;
+      margin-top: 15px;
+
+      button {
+        margin-bottom: 10px;
+        height: 50px;
+      }
+    }
+  }
 }
-
-
