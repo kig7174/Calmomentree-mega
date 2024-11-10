@@ -63,7 +63,7 @@ public class PageOpenController {
 
     @GetMapping("/myshop")
     public String myshop() {
-        return "myshop";
+        return "myshop/index";
     }
 
     @GetMapping("/myshop/board_list")
