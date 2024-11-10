@@ -270,22 +270,104 @@ body {
 }
 
 .only-manager {
-    margin: 50px 0;
+  margin: 50px 0;
 }
 .page-mov-box {
+  margin-bottom: 150px;
+  .page-box {
+    line-height: 60px;
+    height: 60px;
+    i {
+      padding-left: 5px;
+    }
+    span {
+      padding-left: 50px;
+    }
+  }
+  .page-mov-prev {
+    border-bottom: 1px solid #eaeaea;
+  }
+}
+/* board > product > write.html */
+.containerBox {
+  width: 50%;
+  margin: auto;
+  .titleBox {
+    .title {
+      display: block;
+      height: 50px;
+      line-height: 50px;
+      font-size: var(--font-size-item);
+      border-bottom: 1px solid #1c1c1c;
+    }
+    .selectProd {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      .select {
+        border: 1px solid #bcbcbc;
+        padding: 10px;
+        margin-left: 10px;
+      }
+    }
+  }
+  table {
+    width: 100%;
+    border-top: 1px solid var(--btn-color-black);
+    text-align: left;
+
+    th {
+      padding-left: 20px;
+      background-color: var(--table-color-gray);
+    }
+    td {
+      border-bottom: 1px solid var(--input-border);
+      padding: 10px;
+    }
+    input {
+      border: 1px solid var(--input-border);
+      background-color: var(--background-color);
+      padding: 5px 10px;
+      &:focus {
+        outline: none;
+      }
+    }
+    input[type="text"] {
+      width: 98%;
+      margin: 5px 10px 30px 10px;
+    }
+    .star {
+      padding: 15px 10px;
+    }
+    .contentBox {
+      display: block;
+      min-height: 500px;
+      
+      .ck.ck-editor {
+        width: 100%;
+      }
+      
+      .ck.ck-content {
+        min-height: 500px;
+      }
+    }
+  }
+  .btnArea {
+    text-align: right;
+    margin-top: 30px;
     margin-bottom: 150px;
-    .page-box {
-        line-height: 60px;
-        height: 60px;
-        i {
-            padding-left: 5px;
-        }
-        span {
-            padding-left: 50px;
-        }
-        
+    .btn {
+      padding: 10px 50px;
+      border: 1px solid var(--input-border);
     }
-    .page-mov-prev {
-        border-bottom: 1px solid #eaeaea;
+    .cancelBtn {
+      margin-right: 5px;
+      background-color: var(--background-color);
     }
+    .uploadBtn {
+      background-color: var(--btn-color-black);
+      color: var(--background-color);
+    }
+  }
+  
 }
