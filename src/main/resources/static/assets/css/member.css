@@ -206,7 +206,7 @@ input[type="date"] {
                         margin: 0;
                         text-align: left;
                         outline: none;
-
+                        position: relative;
                     }
 
                     .title {
