@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calmomentree</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/co-promotion.css" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    
+<head> 
+    <th:block th:replace="~{fragments/head :: calm-head('co-promotion')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/co-promotion.css}" /> 
 </head>
 <body>
-    <header>
-
-    </header>
+    <header th:replace="~{/fragments/common :: calm-header}"></header>
 
     <div class="container">
         <div class="title-box"
@@ -149,11 +140,9 @@
         </div>
     </div>
 
-    <footer>
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
-    </footer>
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <th:block th:replace="~{/fragments/script}"></th:block>
     <script>
         AOS.init();
     </script>

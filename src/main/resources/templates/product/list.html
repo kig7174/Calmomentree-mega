@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calmomentree</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/list.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
+<head> 
+    <th:block th:replace="~{fragments/head :: calm-head('상품 목록')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/list.css}" />
 </head>
-
 <body>
-    <div th:replace="~{/fragments/header :: calm-header}"></div>
+    <header th:replace="~{/fragments/common :: calm-header}"></header>
 
     <div class="container">
             
@@ -106,8 +98,8 @@
         </div>
     </div>
 
-    <div th:replace="~{/fragments/header :: calm-footer}"></div>
+    <div th:replace="~{/fragments/common :: calm-footer}"></div>
 
-    <script src="/src/main/resources/static/assets/js/list.js"></script>
+    <script th:src="@{/assets/js/list.js}"></script>
 </body>
 </html>

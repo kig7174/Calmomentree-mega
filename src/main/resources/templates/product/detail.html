@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calmomentree</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
-    <link rel='stylesheet' type='text/css' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css' />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/detail.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-
+<head> 
+    <th:block th:replace="~{fragments/head :: calm-head('상품 상세')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/detail.css}" />
 </head>
-
 <body>
-    <div class="container">
-            
+    <header th:replace="~{/fragments/common :: calm-header}"></header>
+
+    <div class="container">         
         <!-- body -->
         <section class="detail-body">
             <div class="detail-body-inner">
@@ -360,9 +352,9 @@
         </section>
     </div>
     
-    <script src="/src/main/resources/static/assets/js/detail.js"></script>
-    <script>
-        
-    </script>
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
+
+    <th:block th:replace="~{/fragments/script}"></th:block>
+    <script th:src="@{/assets/js/detail.js}"></script>
 </body>
 </html>

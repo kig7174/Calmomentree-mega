@@ -211,7 +211,7 @@ body {
         }
 
         .other-menu {
-
+            text-wrap: nowrap;
             .other-menu-list {
                 height: 100%;
                 display: flex;

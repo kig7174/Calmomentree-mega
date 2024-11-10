@@ -29,19 +29,21 @@
                             <strong>※ 비밀번호 입력 조건</strong>
                             <button type="button" id="password-content-close"></button>
                             <ul class="password-info">
-                                - 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자
-                                <br>
-                                    - 입력 가능 특수문자 
-                                <br>
-                                    &nbsp;&nbsp;&nbsp;  ~ ` ! @ # $ % ^ ( ) * _ - = { } [ ] | ; : < > , . ? /
-                                <br>
-                                    - 공백 입력 불가능
-                                <br>
-                                    - 연속된 문자, 숫자 사용 불가능
-                                <br>
-                                    - 동일한 문자, 숫자를 반복해서 사용 불가능
-                                <br>
-                                    - 아이디 포함 불가능
+                                <th:block th:fragment="password-info">
+                                    - 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자
+                                    <br>
+                                        - 입력 가능 특수문자 
+                                    <br>
+                                        &nbsp;&nbsp;&nbsp;  ~ ` ! @ # $ % ^ ( ) * _ - = { } [ ] | ; : < > , . ? /
+                                    <br>
+                                        - 공백 입력 불가능
+                                    <br>
+                                        - 연속된 문자, 숫자 사용 불가능
+                                    <br>
+                                        - 동일한 문자, 숫자를 반복해서 사용 불가능
+                                    <br>
+                                        - 아이디 포함 불가능
+                                </th:block>
                             </ul>
                         </div>
                     </div>
@@ -53,12 +55,14 @@
 
                     <div class="tel-box input-box">
                         <select name="tel1" selected="010">
-                            <option value="010">010</option>
-                            <option value="011">011</option>
-                            <option value="016">016</option>
-                            <option value="017">017</option>
-                            <option value="018">018</option>
-                            <option value="019">019</option>
+                            <th:block th:fragment="tel1-list">
+                                <option value="010">010</option>
+                                <option value="011">011</option>
+                                <option value="016">016</option>
+                                <option value="017">017</option>
+                                <option value="018">018</option>
+                                <option value="019">019</option>
+                            </th:block>
                         </select>
                         -
                         <input type="text" name="tel2" maxlength="4" class="tel" />

@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calmomentree</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/search.css" />
-
+<head> 
+    <th:block th:replace="~{/fragments/head :: calm-head('상품 검색')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/search.css}" />
 </head>
 <body>
-    <div class="header">
-
-    </div>
+    <header th:replace="~{/fragments/common :: calm-header}"></header>
 
     <div class="container">
         <div class="search-body">
@@ -22,7 +14,7 @@
             </div>
 
             <div class="search-field">
-                <form class="search-text" th:action="">
+                <form class="search-text" action="">
                     <input class="text" type="text" name="keyword" placeholder="" />
                     <input class="img" type="image" src="/src/main/resources/static/assets/img/search.svg"/>
                 </form>
@@ -148,14 +140,10 @@
             </div>
         </div>
     </div>
-    
-    
 
-    <div class="footer">
-        
-    </div>
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
-
+    <th:block th:replace="~{/fragments/script}"></th:block>
     <script>
 
     </script>

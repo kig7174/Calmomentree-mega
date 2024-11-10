@@ -246,8 +246,6 @@ input[type="date"] {
 
             #password-focus {
                 position: absolute;
-                top: -80px;
-                left: 14px;
                 background-color: #fff;
                 z-index: 9999;
                 box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.15);
