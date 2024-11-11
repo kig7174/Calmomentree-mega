@@ -359,6 +359,10 @@ body {
     .btn {
       padding: 10px 50px;
       border: 1px solid var(--input-border);
+      cursor: pointer;
+      &:hover {
+        border: 1px solid var(--font-color-gray);
+      }
     }
     .cancelBtn {
       margin-right: 5px;
@@ -370,4 +374,28 @@ body {
     }
   }
   
+}
+.modify {
+  width: 100%;
+  .btnArea {
+    position: relative;
+    
+    .goList {
+      position: absolute;
+      left: 0;
+      padding: 10px 50px;
+      border: 1px solid var(--input-border);
+      background-color: var(--background-color);
+      cursor: pointer;
+      &:hover {
+        border: 1px solid var(--font-color-gray);
+      }
+    }
+  }
+  .qna {
+    padding: 5px 10px;
+    width: 350px;
+    font-size: var(--font-size-small);
+    background-color: var(--font-color-whitegray);
+  }
 }
