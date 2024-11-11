@@ -1,0 +1,49 @@
+:root {
+    --background-color: #faf8ef;
+    --font-color: #1a1a1a;
+    --font-color-gray: #5e5e5e;
+    --font-size-title: 26px;
+    --font-size-content: 12px;
+    --font-size-item: 16px;
+    --font: "Noto Sans KR", "Pretendard", "sans-serif", "dotum";
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+    color: var(--font-color);
+    font-family: var(--font);
+  }
+  body {
+    background-color: var(--background-color);
+  }
+  .container {
+    width: 50%;
+    margin: auto;
+    margin-bottom: 100px;
+
+    .title {
+      font-size: 30px;
+      font-weight: 600;
+      margin-top: 200px;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--font-color);
+      text-align: center;
+    }
+    .agree {
+      background-color: #f3f0eb;
+      p {
+        font-size: 13px;
+        padding-bottom: 30px;
+        line-height: 1.4;
+      }
+      .date {
+        padding: 0;
+        color: var(--font-color-gray);
+      }
+    }
+  }
