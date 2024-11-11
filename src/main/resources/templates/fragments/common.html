@@ -131,7 +131,6 @@
     </header>
 
     <div class="container">
-
         <div class="search-popup" id="search-popup" th:fragment="calm-search">
             <div class="search-box" id="search-box">
                 <div class="search-form">
@@ -144,10 +143,17 @@
         <div class="search-background" style="height: 0" th:fragment="calm-search-bg">
 
         </div>
+
+        <div class="top-btn-box" th:fragment="calm-top-btn">
+            <button type="button" id="top-btn">
+                <img src="/src/main/resources/static/assets/img/top_scroll_arrow.svg" />
+                <p>TOP</p>
+            </button>
+        </div>
     </div>
 
 
-    <footer class="footer displaynone" th:fragment="calm-footer">
+    <footer class="footer" th:fragment="calm-footer">
 
         <div class="footer-container">
             <!-- footer title -->

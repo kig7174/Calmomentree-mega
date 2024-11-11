@@ -212,6 +212,7 @@ body {
 
         .other-menu {
             text-wrap: nowrap;
+
             .other-menu-list {
                 height: 100%;
                 display: flex;
@@ -306,6 +307,30 @@ body {
         visibility: visible;
         opacity: 1;
         transform: translateZ(0);
+    }
+}
+
+.top-btn-box {
+    position: fixed;
+    visibility: hidden;
+    bottom: 10%;
+    right: 7%;
+    z-index: 99999;
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
+
+    button {
+        padding: 18px;
+        background-color: var(--btn-font-color-white);
+        color: var(--font-color);
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    &.scroll {
+        visibility: visible;
+        opacity: 1;
     }
 }
 

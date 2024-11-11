@@ -1,8 +1,14 @@
-// 메뉴 및 배너 스크롤 이벤트
-window.addEventListener("scroll", (e) => {
-    const scrollTop = window.scrollY;
+// index page margin remove
+(function() {
+    document.querySelector(".container").style.margin = "0";
+})();
 
-    if(scrollTop > 0){
+// 브라우저 스크롤 이벤트
+window.addEventListener("scroll", (e) => {
+    const scrollY = window.scrollY;  
+    
+    // 메뉴 및 배너 가리기 / 보이기
+    if(scrollY > 0){
         document.querySelector(".banner").classList.add("on");
         document.querySelector(".menu").classList.add("on");
     } else {
@@ -11,11 +17,34 @@ window.addEventListener("scroll", (e) => {
     }
 });
 
+let lastScroll = 0;
+const topBtn = document.querySelector(".top-btn-box");
+
+// top 버튼 가리기 / 보이기
+window.addEventListener("scroll", (e) => {
+    const scrollY = window.scrollY;
+    const scrollDown = scrollY > lastScroll;
+
+    if (scrollDown) {
+        topBtn.classList.add("scroll");
+    } else {
+        topBtn.classList.remove("scroll");
+    }
+
+    lastScroll = scrollY;
+})
+
+topBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    window.scrollTo({ top: 0, behavior: 'smooth'});
+});
+
 // 브라우저 창 중간에서 새로고침 시 메뉴가 브라우저 상단 끝으로 이동하지 않음
 // 아래 코드 추가
-const scrollTop = window.scrollY;
+const scrollY = window.scrollY;
 
-if(scrollTop > 0){
+if(scrollY > 0){
     document.querySelector(".banner").classList.add("on");
     document.querySelector(".menu").classList.add("on");
 } else {
@@ -48,9 +77,9 @@ const searchBox = document.querySelector("#search-popup");
 const searchBg = document.querySelector(".search-background");
 const searchHeight = document.body.offsetHeight;
 
+// 검색 창 동적 높이 (페이지 각각의 body높이로 설정)
 (function() {
-    searchBg.style.pixelheight = searchHeight;
-    console.log(searchBg.style.pixelheight);
+    searchBg.style.height = searchHeight + "px";
 })();
 
 // 검색 창 열기
@@ -68,4 +97,3 @@ window.addEventListener("click", (e) => {
         searchBg.classList.remove("on");
     }
 });
-
