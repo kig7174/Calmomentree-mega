@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:replace="~{/fragments/head :: calm-head('개인정보처리방침')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/agree.css}" />
+  </head>
+  <body>
+    <header th:replace="~{/fragments/common :: calm-header}"></header>
+
+    <th:block th:replace="~{/fragments/agree :: privacy}"></th:block>
+    
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
+
+    <th:block th:replace="~{/fragments/script}"></th:block>
+  </body>
+</html>
