@@ -46,11 +46,17 @@ document.querySelector(".category-inner").addEventListener("mouseout", (e) => {
 /** 검색 창 이벤트 */
 const searchBox = document.querySelector("#search-popup");
 const searchBg = document.querySelector(".search-background");
+const searchHeight = document.body.offsetHeight;
+
+(function() {
+    searchBg.style.pixelheight = searchHeight;
+    console.log(searchBg.style.pixelheight);
+})();
 
 // 검색 창 열기
 document.querySelector("#search-on").addEventListener("click", (e) => {
     e.preventDefault();
-
+    
     searchBox.classList.add("on");
     searchBg.classList.add("on");
 });

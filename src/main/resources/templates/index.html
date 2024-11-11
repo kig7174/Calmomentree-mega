@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head> 
-    <th:block th:replace="~{fragments/head :: calm-head('회원가입')}"></th:block>
+    <th:block th:replace="~{fragments/head :: calm-head('홈페이지')}"></th:block>
     <link rel="stylesheet" th:href="@{/assets/css/index.css}" />
 </head>
 
@@ -9,7 +9,8 @@
     <header th:replace="~{/fragments/common :: calm-header}"></header>
 
     <div class="container">
-            
+        <div th:replace="~{/fragments/common :: calm-search}"></div>
+        <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
         <!-- body -->
         <section class="index-body">
             <!-- 첫 번째 사진 박스 -->
