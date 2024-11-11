@@ -23,6 +23,7 @@ if(scrollTop > 0){
     document.querySelector(".menu").classList.remove("on");
 }
 
+// 카테고리 마우스 오버 이벤트
 document.querySelector(".category-inner").addEventListener("mouseover", (e) => {
     e.preventDefault();
     const subCategory = document.querySelectorAll(".sub-category");
@@ -40,3 +41,25 @@ document.querySelector(".category-inner").addEventListener("mouseout", (e) => {
     });
     document.querySelector(".sub-category-box").classList.remove("on");
 });
+
+
+/** 검색 창 이벤트 */
+const searchBox = document.querySelector("#search-popup");
+const searchBg = document.querySelector(".search-background");
+
+// 검색 창 열기
+document.querySelector("#search-on").addEventListener("click", (e) => {
+    e.preventDefault();
+
+    searchBox.classList.add("on");
+    searchBg.classList.add("on");
+});
+
+// 검색 창 닫기 (검색 박스 외에 외부 영역 클릭 시 닫힘)
+window.addEventListener("click", (e) => {
+    if (e.target.contains(searchBox)) {
+        searchBox.classList.remove("on");
+        searchBg.classList.remove("on");
+    }
+});
+
