@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:replace="~{/fragments/head :: calm-head('어메니티')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/amenity.css}" />
+  </head>
+  <body>
+    <header th:replace="~{/fragments/common :: calm-header}"></header>
+    
+
+    <div id="container" class="amenityRead">
+      <div class="title">어메니티 문의</div>
+      <div class="subjectName">작성한 게시글 제목</div>
+      <div class="subjectText">작성한 게시글 내용</div>
+      <div class="btnArea">
+        <button class="goList btn">목록</button>
+        <div class="btnList">
+          <button class="edit btn">수정</button>
+          <button class="delete btn">삭제</button>
+        </div>
+      </div>
+      <div>
+        <p class="commentTitle">댓글달기</p>
+        <div class="commentBox">
+          <textarea name="comment" id="comment" required></textarea>
+          <div class="inputBox">
+            <div class="insideBox">
+              <div>
+                <label for="commentName">이름</label>
+                <input type="text" id="commentName" name="commentName" placeholder="" value="" size="8" />
+              </div>
+              <div>
+                <label for="commentPassword">비밀번호</label>
+                <input type="password" id="commentPassword" name="commentPassword" placeholder="" value="" size="8" />
+              </div>
+            </div>
+            <div class="outsideBox">
+              <button class="uploadBtn">등록</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
+
+    <th:block th:replace="~{/fragments/script}"></th:block>
+  </body>
+</html>

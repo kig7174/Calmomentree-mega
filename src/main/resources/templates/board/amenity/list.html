@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:replace="~{/fragments/head :: calm-head('어메니티')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/amenity.css}" />
+  </head>
+  <body>
+    <header th:replace="~{/fragments/common :: calm-header}"></header>
+    <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
+
+    <div class="container">
+      <div class="title">어메니티 문의</div>
+      <div class="comment">
+        <p>ESG 경영에 함께하는 Less Waste 친환경 프리미엄 브랜드 캄모멘트리입니다.</p>
+        <p>호텔, 리조트 숙박 및 골프장, 스파 등 어메니티 관련 문의사항을 남겨주시면</p>
+        <p>메일로 어메니티 소개서와 견적서를 보내드립니다.</p>
+      </div>
+      <div class="info">
+        <p>· TEL : 1544-8971</p>
+        <p>· E-MAIL : sales@grstein.com</p>
+        <p>· 상담시간 : 09:00-17:00 (점심시간 12:30-13:30 / 주말, 공휴일 휴무)</p>
+      </div>
+      <table border="1">
+        <colgroup>
+          <col width="80px" />
+          <col width="auto" />
+          <col width="15%" />
+          <col width="80px" />
+        </colgroup>
+        <tbody>
+          <tr>
+            <td class="num">97</td>
+            <td class="subject">상품판매용 주문문의드립니다.</td>
+            <td class="writer">박****</td>
+            <td class="date">2024-11-03</td>
+          </tr>
+          <tr>
+            <td class="num">96</td>
+            <td class="subject">화장품 ODM, OEM 전문회사</td>
+            <td class="writer">이****</td>
+            <td class="date">2024-10-23</td>
+          </tr>
+          <tr>
+            <td class="num">95</td>
+            <td class="subject">독채 게스트하우스</td>
+            <td class="writer">앨****</td>
+            <td class="date">2024-10-21</td>
+          </tr>
+          <tr>
+            <td class="num">94</td>
+            <td class="subject">문의드립니다.</td>
+            <td class="writer">박****</td>
+            <td class="date">22024-09-12</td>
+          </tr>
+          <tr>
+            <td class="num">93</td>
+            <td class="subject">어메니티 문의</td>
+            <td class="writer">문****</td>
+            <td class="date">2024-09-05</td>
+          </tr>
+          <tr>
+            <td class="num">97</td>
+            <td class="subject">상품판매용 주문문의드립니다.</td>
+            <td class="writer">박****</td>
+            <td class="date">2024-11-03</td>
+          </tr>
+          <tr>
+            <td class="num">96</td>
+            <td class="subject">화장품 ODM, OEM 전문회사</td>
+            <td class="writer">이****</td>
+            <td class="date">2024-10-23</td>
+          </tr>
+          <tr>
+            <td class="num">95</td>
+            <td class="subject">독채 게스트하우스</td>
+            <td class="writer">앨****</td>
+            <td class="date">2024-10-21</td>
+          </tr>
+          <tr>
+            <td class="num">94</td>
+            <td class="subject">문의드립니다.</td>
+            <td class="writer">박****</td>
+            <td class="date">22024-09-12</td>
+          </tr>
+          <tr>
+            <td class="num">93</td>
+            <td class="subject">어메니티 문의</td>
+            <td class="writer">문****</td>
+            <td class="date">2024-09-05</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="btnArea">
+        <button>글쓰기</button>
+      </div>
+
+      <!-- 페이지 번호 -->
+      <div class="paging-box">
+        <ul class="pagination">
+          <li><a class="left">&laquo;</a></li>
+          <li><a class="active">1</a></li>
+          <li><a>2</a></li>
+          <li><a class="right">&raquo;</a></li>
+        </ul>
+      </div>
+
+    </div>
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
+
+    <th:block th:replace="~{/fragments/script}"></th:block>
+  </body>
+</html>
