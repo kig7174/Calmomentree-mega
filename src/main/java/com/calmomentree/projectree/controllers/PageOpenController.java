@@ -164,4 +164,19 @@ public class PageOpenController {
     public String freeRead() {
         return "board/free/read";
     }
+
+    @GetMapping("/board/amenity/list")
+    public String amenityList() {
+        return "board/amenity/list";
+    }
+
+    @GetMapping("/board/amenity/write")
+    public String amenityWrite() {
+        return "board/amenity/write";
+    }
+
+    @GetMapping("/board/amenity/read")
+    public String amenityRead() {
+        return "board/amenity/read";
+    }
 }
