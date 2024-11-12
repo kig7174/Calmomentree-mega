@@ -31,6 +31,12 @@ body {
     width: 100%;
 }
 
+/* 모든 버튼 및 링크 커서 */
+button, a {
+    cursor: pointer;
+}
+
+/* Test용 disaplay: none; */
 .displaynone {
     display: none;
 }

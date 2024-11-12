@@ -24,9 +24,13 @@ body {
 }
 .title-container {
   position: relative;
-  color: var(--font-color-title);
+  
   font-weight: 600;
   line-height: 1.5;
+  margin-top: 100px;
+  p{
+    color: var(--font-color-title);
+  }
 
   .title-img-box {
     height: 70vh;
@@ -36,8 +40,6 @@ body {
       background-color: antiquewhite;
       width: 100%;
       height: 100%;
-      /* transform: scale(0.9); */
-      /* transition: all 0.5s ease-in-out; */
     }
   }
   .title-text {
@@ -187,7 +189,7 @@ body {
     height: 35px;
     border: none;
     background-color: #1c1c1c;
-    
+
     a {
       color: var(--font-color-title);
       font-size: 14px;
@@ -235,8 +237,11 @@ body {
   width: 100%;
   margin: 60px 0;
   background-color: #1c1c1c;
-  a{
+  p {
     color: var(--font-color-title);
+  }
+  a {
+    
     padding: 10px 0;
     display: block;
     .btn-title {
@@ -247,5 +252,4 @@ body {
       font-size: 14px;
     }
   }
-  
 }

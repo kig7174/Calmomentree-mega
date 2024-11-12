@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calmomentree</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/myshop.css" />
+    <th:block th:replace="~{fragments/head :: calm-head('주문배송조회')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/myshop.css}" />
   </head>
   <body>
     <!-- 헤더 영역 -->
     <header id="header">
-      <div class="head">헤더영역</div>
+      <header th:replace="~{/fragments/common :: calm-header}"></header>
     </header>
 
     <div class="container-box">
@@ -34,7 +30,7 @@
             <p class="title">Order List</p>
           </div>
           <div class="myshop-tab">
-            <ul class="menu">
+            <ul class="menuOrder">
               <li class="menu-list"><a href="">주문내역조회</a></li>
               <li class="menu-list cancel"><a href="">취소/반품/교환 내역</a></li>
             </ul>
@@ -60,10 +56,10 @@
               <div class="date">
                 <span class="date-picker">
                   <input type="date" id="start-date" name="start-date" class="start-date" />
-                  
+
                   -
                   <input type="date" id="end-date" name="end-date" class="end-date" />
-                  
+
                   <button type="submit" class="btn-submit">찾기</button>
                 </span>
               </div>
@@ -120,32 +116,23 @@
             </div>
           </div>
 
-          <!-- 하단 페이징 영역 -->
+          <!-- 페이지 번호 -->
           <div class="paging-box">
-            <!-- 페이지 번호 -->
             <ul class="pagination">
-              <!-- 이전 페이지 그룹 이동 버튼 -->
-              <li th:if="${pagination.prevPage > 0}">
-                <a th:href="@{/student(keyword=${keyword}, page=${pagination.prevPage})}">&laquo;</a>
-              </li>
-              <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
-              <!-- 페이지 번호 링크 -->
-              <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
-                <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}"></a>
-                <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/student(keyword=${keyword}, page=${i})}"></a>
-              </li>
-
-              <!-- 다음 페이지 그룹 이동 버튼 -->
-              <li th:if="${pagination.nextPage > 0}">
-                <a th:href="@{/student(keyword=${keyword}, page=${pagination.nextPage})}">&raquo;</a>
-              </li>
-              <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
+              <li><a class="left">&laquo;</a></li>
+              <li><a class="active">1</a></li>
+              <li><a>2</a></li>
+              <li><a class="right">&raquo;</a></li>
             </ul>
           </div>
+          
         </div>
       </div>
     </div>
 
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
+
+    <th:block th:replace="~{/fragments/script}"></th:block>
     <!-- <script src="/src/main/resources/static/assets/js/orderList.js"></script> -->
     <script>
       // 취소/반품/교환 내역 클릭시 드롭다운 없어짐

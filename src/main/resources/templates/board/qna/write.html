@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calmomentree</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/board.css" />
+    <th:block th:replace="~{fragments/head :: calm-head('QNA 글쓰기')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/board.css}" />
     
   </head>
   <body>
     <header id="header">
-      <div class="head">헤더영역</div>
+      <header th:replace="~{/fragments/common :: calm-header}"></header>
     </header>
     <div id="container">
       <!-- 내용 영역 -->
@@ -58,6 +54,9 @@
         </div>
       </div>
     </div>
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
+
+    <th:block th:replace="~{/fragments/script}"></th:block>
     <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
     <script>
       ClassicEditor.create(document.querySelector("#content"));

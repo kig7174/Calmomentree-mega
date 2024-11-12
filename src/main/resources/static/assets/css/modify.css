@@ -84,6 +84,7 @@ input[type="radio"] {
     height: 15px;
     margin: 5px;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .required-option {

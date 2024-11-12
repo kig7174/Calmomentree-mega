@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calmomentree</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css" />
+    <link rel="stylesheet" href="/src/main/resources/static/assets/css/esgcampaign.css" />
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+</head>
+<body>
+    <header th:fragment="calm-header">
+        <div class="banner">
+            <div class="top">
+                <a href="#">신규회원 2,000원 적립금 | 홈 어메니티 멤버십 40%-50% 할인혜택</a>
+            </div>
+            <div class="bottom">
+                <a href="#">안티에이징 허브 영양‧보습 ~30%</a>
+            </div>
+        </div>
+        <div class="menu">
+            <div class="menu-inner">
+                <div class="menu-title">
+                    <a href="#">
+                        <img src="https://placehold.co/100x50" />
+                    </a>
+                </div>
+                <div class="menu-category">
+                    <div class="category-inner">
+                        <ul class="category-list">
+                            <li class="category-item"><a>ALL</a></li>
+                            <li class="category-item"><a>Best</a></li>
+                            <li class="category-item"><a>Promotion</a></li>
+
+                            <li class="category-item"><a>Hair</a>
+                                <ul class="sub-category">
+                                    <li><a>샴푸</a></li>
+                                    <li><a>트리트먼트</a></li>
+                                    <li><a>스타일링</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="category-item"><a>Body</a>
+                                <ul class="sub-category">
+                                    <li><a>워시</a></li>
+                                    <li><a>바디크림</a></li>
+                                    <li><a>핸드</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="category-item"><a>Facial</a>
+                                <ul class="sub-category">
+                                    <li><a>토너/에센스</a></li>
+                                    <li><a>크림</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="category-item"><a>Gift</a>
+                                <ul class="sub-category">
+                                    <li><a>헤어</a></li>
+                                    <li><a>바디</a></li>
+                                    <li><a>워시</a></li>
+                                    <li><a>페이셜</a></li>
+                                    <li><a>베이비</a></li>
+                                    <li><a>쇼핑백</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="category-item"><a>Baby & Life</a>
+                                <ul class="sub-category">
+                                    <li><a>베이비</a></li>
+                                    <li><a>덴탈</a></li>
+                                    <li><a>리빙</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="category-item"><a>Membership</a></li>
+                            <li class="category-item"><a>About</a>
+                                <ul class="sub-category">
+                                    <li><a>브랜드스토리</a></li>
+                                    <li><a>ESG 캠페인</a></li>
+                                    <li><a>지속 가능한 실천</a></li>
+                                    <li><a>공병수거신청</a></li>
+                                    <li><a>CO-프로모션</a></li>
+                                    <li><a>PARTNERS</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="sub-category-box">
+                            <img src="https://placehold.co/300x300" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="other-menu">
+                    <div class="login other-menu-list">
+                        <a>로그인</a>
+                        <a>카트
+                           <span class="cart">
+                            (
+                            <span class="cart-count cart">1</span>
+                            )
+                           </span>
+                        </a>
+                        <a>고객문의</a>
+                        <a class="b2b-btn">B2B 문의</a>
+                        <a>
+                            <button type="button"><img src="https://placehold.co/30x30" /></button>
+                        </a>
+                    </div>
+
+                    <div class="logout other-menu-list" style="display:none">
+                        <a>로그아웃</a>
+                        <a>카트
+                           <span class="cart">
+                            (
+                            <span class="cart-count cart">1</span>
+                            )
+                           </span>
+                        </a>
+                        <a>커뮤니터</a>
+                        <a>마이페이지</a>
+                        <a class="b2b-btn">B2B 문의</a>
+                        <a>
+                            <button type="button"><img src="https://placehold.co/30x30" /></button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- 내용에 따라 section 분리-->
+        <section class="brand_first">
+            <div class="inner">
+                <div class="img_wr">
+                    <img src="https://placehold.co/1960x800" />
+                </div>
+                <div class="sub_title">
+                    <p class="title">ESG CAMPAIGN</p>
+                    <p class="text">지속 가능한 실천</p>
+                    <p class="text01">
+                        "We are expanding & developing and servicing sustainable
+                        <br />
+                        vegan amenities in 2022.”
+                    </p>
+                </div>    
+            </div>
+        </section>
+        <!-- 내용에 따라 section 분리-->
+        <section class="brand_second">
+            <div class="inner">
+                <div class="campaign_text">
+                    <p class="text01">
+                        새로운 캠페인을 알립니다.
+                        <br /><br />
+                        캄모멘트리는 피부 휴식을 위한 비건 처방뿐 아니라,
+                        <br />
+                        ESG 경영을 선도하는 특급 호텔 & 레저 그룹들과 함께
+                        <br />
+                        지속 가능한 레스 웨이스트를 실천합니다.
+                    </p>
+                    <p class="text02">
+                        “Announcing a new campaign.”
+                        <br /><br />
+                        Calmomentry not only provides vegan prescriptions for skin relaxation,
+                        <br />
+                        With luxury hotel & leisure groups leading ESG management
+                        <br />
+                        We practice sustainable waste waste.
+                    </p>
+                </div>
+                <div class="campaign_logo">
+                    <div class="img_wr">
+                        <img src="https://placehold.co/60x60" />
+                    </div>
+                    <div class="img_wr">
+                        <img src="https://placehold.co/60x60" />
+                    </div>
+                    <div class="img_wr">
+                        <img src="https://placehold.co/60x60" />
+                    </div>
+                    <div class="img_wr">
+                        <img src="https://placehold.co/60x60" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- 내용에 따라 section 분리-->
+        <section class="brand_third">
+            <div class="inner02">
+                <div class="text03">
+                    <p>Actions</p>
+                </div>
+                <div class="inner_box">
+                    <ul class="inner_list">
+                        <li>
+                            <div class="inner_img">
+                                <img src="https://placehold.co/700x500" />
+                                <p class="text04">재활용 우수 등급</p>
+                                <p class="text05">
+                                    캄모멘트리는 특급 호텔 & 레저 그릅들과 어메니티의
+                                    <br />
+                                    서비스 문화를 바꿉니다.
+                                    <br />
+                                    친환경 레스 웨이스트 소재를 공동 연구하고,
+                                    <br />
+                                    사용한 자원은 환경부로부터 ‘재활용 우수 등급’을
+                                    <br />
+                                    승인 받아 무한 자원 순환을 목표로 합니다.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="inner_img">
+                                <img src="https://placehold.co/700x500" />
+                                <p class="text04">레스 웨이스트 실천</p>
+                                <p class="text05">
+                                    캄모멘트리는 저탄소의 레스 웨이스트를 실천합니다.
+                                    <br />
+                                    실현 불가능한 제로 웨이스트를 마케팅 언어로 사용하는 대신,
+                                    <br />
+                                    일회용 어메니티를 제한하고 재활용이 우수한 대용량과
+                                    <br />
+                                    리필 어메니티로 호텔의 서비스 생태계를 바꿉니다.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="inner_img">
+                                <img src="https://placehold.co/700x500" />
+                                <p class="text04">100% 비건 인증</p>
+                                <p class="text05">
+                                    캄모멘트리는 지속가능한 삶을 위한 능동자로서
+                                    <br />
+                                    100% 채식의 비건 라이프를 실천합니다.
+                                    <br />
+                                    호텔을 방문하는 국내외 모든 고객들께 원료부터 패키지까지,
+                                    <br />
+                                    까다롭기로 유명한 프랑스 이브 비건 인증을 획득했습니다.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="inner_img">
+                                <img src="https://placehold.co/700x500" />
+                                <p class="text04">이윤에 우선한 환경과 사람</p>
+                                <p class="text05">
+                                    지속가능함을 위해, 캄모멘트리는 이윤 추구보다
+                                    <br />
+                                    환경과 사람을 우선하는 브랜드를 연구 개발합니다.
+                                    <br />
+                                    대기업을 포함한 캄모멘트리의 유수 고객사들은
+                                    <br />
+                                    더 올바른 선순환 사회 구조를 위해
+                                    <br />
+                                    모범적 상생 실천 및 동반 성장합니다.
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!-- 내용에 따라 section 분리-->
+        <section class="brand_forth">
+            <div class="inner03">
+                <p class="text03">Report</p>
+                <div class="img_wr">
+                    <img src="https://placehold.co/1960x800" />
+                </div>
+                <div class="sub_title">
+                    <p class="text01">
+                        "We are expanding & developing and servicing sustainable
+                        <br />
+                        vegan amenities in 2022.”
+                    </p>
+                </div>
+                <div class="report_box">
+                    <ul class="report_img">
+                        <li>
+                            <img src="https://placehold.co/120x65" />
+                        </li>
+                        <li>
+                            <img src="https://placehold.co/120x65" />
+                        </li>
+                        <li>
+                            <img src="https://placehold.co/120x65" />
+                        </li>
+                        <li>
+                            <img src="https://placehold.co/120x65" />
+                        </li>
+                        <li>
+                            <img src="https://placehold.co/120x65" />
+                        </li>
+                    </ul>
+                </div>
+                <div class="text_box">
+                    <ul class="text_list">
+                        <li>
+                            <div class="box1">
+                                <p class="tit">신세계 레저 사업</p>
+                                <p class="text05">
+                                    캄모멘트리는 브랜드 탄생의 배경이기도 한 신세계 레저
+                                    <br />
+                                    사업과 2016년부터동반 성장하며 국내 최초로 시그니처
+                                    <br />
+                                    어메니티를 공동 개발해왔습니다. 2022년 6월부터 신세계
+                                    <br />
+                                    레저 사업의 모든 프리미엄 시설들에 ESG 캠페인의 레스
+                                    <br />
+                                    웨이스트 어메니티를 공식 서비스합니다.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="box1">
+                                <p class="tit">파크로쉬 리조트 앤 웰리스</p>
+                                <p class="text05">
+                                    ESG 경영으로 웰리스 문화를 리드하는 HDC 리조트와
+                                    <br />
+                                    캄모멘트리는 2018년 파크로쉬 리조트앤웰리스에 객실용
+                                    <br />
+                                    시그니처 어메니티를 최초로 공동 개발하여 다양한 벤치 마킹
+                                    <br />
+                                    사례가 되었습니다. 2022년 지속가능한 비건 어메니티를 확장
+                                    <br />
+                                    개발 및 서비스하고 있습니다.
+                                </p>
+                            </div>   
+                        </li>
+                        <li>
+                            <div class="box1">
+                                <p class="tit">파라다이스 호텔 그룹</p>
+                                <p class="text05">
+                                    캄모멘트리는 국내 최고의 럭셔리 파라다이스 호텔 그룹과
+                                    <br />
+                                    2017년 충남 보양 온천 1호인 파라다이스 도고 온천수를
+                                    <br />
+                                    어메니티로 공동 개발해왔습니다. 온천수 어메니티의 높은
+                                    <br />
+                                    만족도에 이어,객실 내 다양한 어메니티를 친환경 & 레스
+                                    <br />
+                                    웨이스트 소재로 확장 서비스합니다.
+                                </p>
+                            </div>    
+                        </li>
+                        <li>
+                            <div class="box1">
+                                <p class="tit">호텔 신라</p>
+                                <p class="text05">
+                                    대한민국 대표 서비스 기업 호텔 신라와 캄모멘트리는 2019년
+                                    <br />
+                                    VVIP 클럽 반트를 시작으로, 호텔 신라 제주와 프리미엄
+                                    <br />
+                                    휘트니스 센터 등에 지속가능한 어메니티 서비스를 확장하고
+                                    <br />
+                                    있습니다. 캄모멘트리는 호텔 신라의 기품에 어울리는 레스
+                                    <br />
+                                    웨이스트 어메니티를 연구합니다.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <p class="tit">기아차</p>
+                            <p class="text05">
+                                세계의 자동차 리더를 육성하는 기아 비전스퀘어 연수원은 인재
+                                <br />
+                                양성 뿐 아니라, 국내 최초로 특급 호텔식 룸 컨디션을 자랑하는
+                                <br />
+                                건축물입니다. 2019년 준공부터 연수원으로서는 처음으로 객실
+                                <br />
+                                시그니처 어메니티를 캄모멘트리와 공동 개발 및 레스 웨이스트를
+                                <br />
+                                실천합니다.
+                            </p>
+                        </li>
+                        <li>
+                            <p class="tit">신세계 레저 사업</p>
+                            <p class="text05">
+                                캄모멘트리는 브랜드 탄생의 배경이기도 한 신세계 레저
+                                <br />
+                                사업과 2016년부터동반 성장하며 국내 최초로 시그니처
+                                <br />
+                                어메니티를 공동 개발해왔습니다. 2022년 6월부터 신세계
+                                <br />
+                                레저 사업의 모든 프리미엄 시설들에 ESG 캠페인의 레스
+                                <br />
+                                웨이스트 어메니티를 공식 서비스합니다.
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+                
+            </div>
+        </section>
+        <!-- 내용에 따라 section 분리-->
+        <section class="brand_fifth">
+            <div class="inner04">
+                <div class="sub_title_wr">
+                    <p class="text03">History</p>
+                </div>
+                <hr />
+                <!-- Add swiper script -->
+                    <div class="swiper mySwiper partners">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="https://placehold.co/180x90" />
+                                <p class="text05">
+                                    2018년
+                                    <br />
+                                    국내 최초 파크로쉬 객실
+                                    <br />
+                                    시그니처 어메니티 R&D 투자
+                                    <br />
+                                    <br />
+                                    2022년
+                                    <br />
+                                    2세대 레스 웨이스트 & 비건
+                                    <br />
+                                    라이프 어메니티 공동 개발
+                                    <br />
+                                    <br />
+                                </p>
+                                <p class="text06">
+                                    PARADISE
+                                </p>
+                              </div>
+                              <div class="swiper-slide">
+                                <img src="https://placehold.co/180x90" />
+                                <p class="text05">
+                                    2018년
+                                    <br />
+                                    국내 최초 파크로쉬 객실
+                                    <br />
+                                    시그니처 어메니티 R&D 투자
+                                    <br />
+                                    <br />
+                                    2022년
+                                    <br />
+                                    2세대 레스 웨이스트 & 비건
+                                    <br />
+                                    라이프 어메니티 공동 개발
+                                    <br />
+                                    <br />
+                                </p>
+                                <p class="text06">
+                                    PARADISE
+                                </p>
+                              </div>
+                              <div class="swiper-slide">
+                                <img src="https://placehold.co/180x90" />
+                                <p class="text05">
+                                    2018년
+                                    <br />
+                                    국내 최초 파크로쉬 객실
+                                    <br />
+                                    시그니처 어메니티 R&D 투자
+                                    <br />
+                                    <br />
+                                    2022년
+                                    <br />
+                                    2세대 레스 웨이스트 & 비건
+                                    <br />
+                                    라이프 어메니티 공동 개발
+                                    <br />
+                                    <br />
+                                </p>
+                                <p class="text06">
+                                    PARADISE
+                                </p>
+                              </div>
+                              <div class="swiper-slide">
+                                <img src="https://placehold.co/180x90" />
+                                <p class="text05">
+                                    2018년
+                                    <br />
+                                    국내 최초 파크로쉬 객실
+                                    <br />
+                                    시그니처 어메니티 R&D 투자
+                                    <br />
+                                    <br />
+                                    2022년
+                                    <br />
+                                    2세대 레스 웨이스트 & 비건
+                                    <br />
+                                    라이프 어메니티 공동 개발
+                                    <br />
+                                    <br />
+                                </p>
+                                <p class="text06">
+                                    PARADISE
+                                </p>
+                              </div>
+                              <div class="swiper-slide">
+                                <img src="https://placehold.co/180x90" />
+                                <p class="text05">
+                                    2018년
+                                    <br />
+                                    국내 최초 파크로쉬 객실
+                                    <br />
+                                    시그니처 어메니티 R&D 투자
+                                    <br />
+                                    <br />
+                                    2022년
+                                    <br />
+                                    2세대 레스 웨이스트 & 비건
+                                    <br />
+                                    라이프 어메니티 공동 개발
+                                    <br />
+                                    <br />
+                                </p>
+                                <p class="text06">
+                                    PARADISE
+                                </p>
+                              </div>
+                              <div class="swiper-slide">
+                                <img src="https://placehold.co/180x90" />
+                                <p class="text05">
+                                    2018년
+                                    <br />
+                                    국내 최초 파크로쉬 객실
+                                    <br />
+                                    시그니처 어메니티 R&D 투자
+                                    <br />
+                                    <br />
+                                    2022년
+                                    <br />
+                                    2세대 레스 웨이스트 & 비건
+                                    <br />
+                                    라이프 어메니티 공동 개발
+                                    <br />
+                                    <br />
+                                </p>
+                                <p class="text06">
+                                    PARADISE
+                                </p>
+                              </div>
+                              <div class="swiper-slide">
+                                <img src="https://placehold.co/180x90" />
+                                <p class="text05">
+                                    2018년
+                                    <br />
+                                    국내 최초 파크로쉬 객실
+                                    <br />
+                                    시그니처 어메니티 R&D 투자
+                                    <br />
+                                    <br />
+                                    2022년
+                                    <br />
+                                    2세대 레스 웨이스트 & 비건
+                                    <br />
+                                    라이프 어메니티 공동 개발
+                                    <br />
+                                    <br />
+                                </p>
+                                <p class="text06">
+                                    PARADISE
+                                </p>
+                              </div>
+                              <div class="swiper-slide">
+                                <img src="https://placehold.co/180x90" />
+                                <p class="text05">
+                                    2018년
+                                    <br />
+                                    국내 최초 파크로쉬 객실
+                                    <br />
+                                    시그니처 어메니티 R&D 투자
+                                    <br />
+                                    <br />
+                                    2022년
+                                    <br />
+                                    2세대 레스 웨이스트 & 비건
+                                    <br />
+                                    라이프 어메니티 공동 개발
+                                    <br />
+                                    <br />
+                                </p>
+                                <p class="text06">
+                                    PARADISE
+                                </p>
+                              </div>
+                              <div class="swiper-slide">
+                                <img src="https://placehold.co/180x90" />
+                                <p class="text05">
+                                    2018년
+                                    <br />
+                                    국내 최초 파크로쉬 객실
+                                    <br />
+                                    시그니처 어메니티 R&D 투자
+                                    <br />
+                                    <br />
+                                    2022년
+                                    <br />
+                                    2세대 레스 웨이스트 & 비건
+                                    <br />
+                                    라이프 어메니티 공동 개발
+                                    <br />
+                                    <br />
+                                </p>
+                                <p class="text06">
+                                    PARADISE
+                                </p>
+                              </div>
+                              <div class="swiper-slide">
+                                <img src="https://placehold.co/180x90" />
+                                <p class="text05">
+                                    2018년
+                                    <br />
+                                    국내 최초 파크로쉬 객실
+                                    <br />
+                                    시그니처 어메니티 R&D 투자
+                                    <br />
+                                    <br />
+                                    2022년
+                                    <br />
+                                    2세대 레스 웨이스트 & 비건
+                                    <br />
+                                    라이프 어메니티 공동 개발
+                                    <br />
+                                    <br />
+                                </p>
+                                <p class="text06">
+                                    PARADISE
+                                </p>
+                              </div>
+                              <div class="swiper-slide">
+                                <img src="https://placehold.co/180x90" />
+                                <p class="text05">
+                                    2018년
+                                    <br />
+                                    국내 최초 파크로쉬 객실
+                                    <br />
+                                    시그니처 어메니티 R&D 투자
+                                    <br />
+                                    <br />
+                                    2022년
+                                    <br />
+                                    2세대 레스 웨이스트 & 비건
+                                    <br />
+                                    라이프 어메니티 공동 개발
+                                    <br />
+                                    <br />
+                                </p>
+                                <p class="text06">
+                                    PARADISE
+                                </p>
+                              </div>
+                              <div class="swiper-slide">
+                                <img src="https://placehold.co/180x90" />
+                                <p class="text05">
+                                    2018년
+                                    <br />
+                                    국내 최초 파크로쉬 객실
+                                    <br />
+                                    시그니처 어메니티 R&D 투자
+                                    <br />
+                                    <br />
+                                    2022년
+                                    <br />
+                                    2세대 레스 웨이스트 & 비건
+                                    <br />
+                                    라이프 어메니티 공동 개발
+                                    <br />
+                                    <br />
+                                </p>
+                                <p class="text06">
+                                    PARADISE
+                                </p>
+                              </div>
+                          <div class="swiper-pagination"></div>
+                        </div>
+                        
+                        <!-- 현재 페이지 위치 -->
+                        <div role="tablist" class="dots"></div>
+                    </div>
+                    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+                    <script>
+                        let partnersList = new Swiper(".partners", {
+                            slidesPerView: "auto",
+                            spaceBetween: 20,
+                            freemode: true,
+                            loop: true,
+                            speed: 1000,
+                            autoplay: {     
+                                delay: 1000,
+                                disableOnInteraction: true, 
+                            },
+                        });
+                        
+                    </script>
+                </div>
+            </div>
+        </section>
+        <!-- 내용에 따라 section 분리-->
+        <section class="brand_sixth">
+            <div class="inner05">
+                <div class="img_wr">
+                    <img src="https://placehold.co/235x200" />
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer" th:fragment="calm-footer">
+
+        <div class="footer-container">
+            <!-- footer title -->
+            <div class="footer-title">
+                <img class="img-title" src="http://localhost:3001/index/ft_cal_logo.svg" />
+                <p>완벽한 쉼, 비건 라이프 캄모멘트리</p>
+                <img class="img-logo" src="http://localhost:3001/index/ft_logo.svg" />
+            </div>
+
+            <!-- company info -->
+            <div class="footer-info">
+                <div class="cs-info">
+                    <span>고객센터</span><span>1544-8971</span>
+                    <span>월-금 / 09:00~17:00</span>
+                    <span>(점심시간 12:30~13:30 / 주말, 공휴일 휴무)</span>
+                </div>
+                <div class="address">
+                    <span>(주)그린슈타인 Greenstein</span>
+                    <br />
+                    <span>10594 경기도 고양시 덕양구 동산동 376 삼송테크노밸리 A동 252호</span>
+                    <br />
+                    <span>사업자 등록번호 안내 : 170-86-00512</span>
+                    <span>대표 Geun Young Leem</span>
+                    <span>통신판매업 신고 제 2016-고양덕양구-0641호</span>
+                    <a href="#">[사업자정보확인]</a>
+                    <br />
+                    <span>개인정보보호책임자 : 김재철</span>
+                    <span>유선전화 : 1544-8971</span>
+                    <span>팩스 : 070-7500-9668</span>
+                    <a href="mailto:kig7174@naver.com">(admin@grstein.com)</a>
+                    <br />
+                    <span>입금계좌 안내 신한은행 100-031-436946</span>
+                    <span>(주)그린슈타인 Greenstein</span>
+                    <br />
+                </div>
+                <div class="copy-box">
+                    <span>
+                        Copyright &copy; 2024 Greensteint. All Rights Reserved.
+                    </span>
+                    <br />
+                    <span>
+                        캄모멘트리의 모든 상품 이미지 및 컨텐츠의 저작권은 (주)그린슈타인에 있으며 무단 사용시 법적 제재를 받을 수 있습니다.
+                    </span>
+                </div>
+            </div>
+
+            <!-- inquiry -->
+            <div class="footer-right">
+                <div class="footer-inquiry">
+                    <p>
+                        친환경과 프리미엄을 동시에,
+                        <br/>
+                        최고급 품질의 어메니티로 특별함을 더하세요.
+                    </p>
+                    <a class="inquiry-btn" href="#">B2B 문의</a>
+                </div>
+
+                <!-- footer menu -->
+                <div class="footer-menu">
+                    <ul class="footer-menu-list">
+                        <li class="footer-list-title"><a href="#">이용약관</a></li>
+                        <li class="footer-list-title"><a href="#">개인정보처리방침</a></li>
+                        <li class="footer-list-title"><a href="#">홈어메니티멤버쉽</a></li>
+                        <li class="footer-list-title"><a href="#">SNS
+                            <div class="sns-list">
+                                <a href="#">인스타그램</a>
+                                <a href="#">카카오톡</a>
+                            </div>
+                        </a></li>
+                        <li class="footer-list-title"><a href="#">비즈니스
+                                <div class="business-list">
+                                    <a href="#">어메니티 문의</a>
+                                    <a href="#">파트너스</a>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- <script src="/src/main/resources/static/assets/js/header.js"></script> -->
+</body>
+</html>

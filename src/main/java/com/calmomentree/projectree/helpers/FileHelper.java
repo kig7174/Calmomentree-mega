@@ -370,4 +370,16 @@ public class FileHelper {
 
         return uploadList;
     }
+
+    public String getUrl(String path) {
+        if (path == null) {
+            return null;
+        }
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(this.uploadUrl); // "/files"
+        builder.append(path.trim());    // "/2024/11/12/photo.png"
+
+        return builder.toString();
+    }
 }

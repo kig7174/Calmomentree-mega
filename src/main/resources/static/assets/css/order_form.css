@@ -19,7 +19,7 @@
   box-sizing: border-box;
   color: var(--font-color);
   font-family: var(--font);
-  background-color: #f3f0eb;
+  
   font-size: var(--font-size-content);
 }
 
@@ -49,6 +49,7 @@ body {
 }
 input {
   border: 1px solid #cccbc8;
+  background-color: #f3f0eb;
   padding: 10px;
   font-size: 15px;
 
@@ -93,6 +94,11 @@ input[type="radio"] {
 .container {
   width: 40%;
   margin: auto;
+  padding-top: 150px;
+  padding-bottom: 100px;
+  select {
+    background-color: #f3f0eb;
+  }
 }
 
 .info-title {

@@ -76,6 +76,7 @@ Controller (기능?) // 버튼이나 링크 각각에 부여하는 기능
 	- log4jdbc
     - thumbnailator
     - test library
+    - spring session
 
 - 패키지
 	- main

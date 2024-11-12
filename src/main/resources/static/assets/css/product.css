@@ -38,6 +38,7 @@ body {
   position: relative;
   width: 90%;
   margin: auto;
+  padding: 200px 0 0 150px;
 }
 
 .container {
@@ -292,6 +293,8 @@ body {
 .containerBox {
   width: 50%;
   margin: auto;
+  padding-top: 200px;
+  
   .titleBox {
     .title {
       display: block;
@@ -377,6 +380,7 @@ body {
 }
 .modify {
   width: 100%;
+  padding-top: 100px;
   .btnArea {
     position: relative;
     

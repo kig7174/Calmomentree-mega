@@ -1,20 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calmomentree</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/product.css" />
+    <th:block th:replace="~{fragments/head :: calm-head('제품리뷰 상세')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/product.css}" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
   </head>
   <body>
-    <header id="header">
-      <div class="head">헤더영역</div>
-    </header>
+    <header th:replace="~{/fragments/common :: calm-header}"></header>
+
     <div id="container">
-        <!-- 왼쪽 리스트 -->
+      <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
+      
+      <!-- 왼쪽 리스트 -->
       <div class="board-box left">
         <ul class="board-inner">
           <li><a href="">공지사항</a></li>
@@ -28,7 +25,7 @@
       <div class="table-container">
         <div class="title-wr">Review</div>
         <div class="board-list">
-            <!-- 첫번째: 상품 정보 -->
+          <!-- 첫번째: 상품 정보 -->
           <div class="board-prod box">
             <div class="thumb-box">
               <a href=""><img src="http://placehold.co/65" alt="" /></a>
@@ -80,5 +77,8 @@
       </div>
       <div class="board-box right"></div>
     </div>
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
+
+    <th:block th:replace="~{/fragments/script}"></th:block>
   </body>
 </html>

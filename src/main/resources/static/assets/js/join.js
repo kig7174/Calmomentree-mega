@@ -1,13 +1,7 @@
 /** 우편번호 주소 검색 - daum 주소 */
 document.querySelector("#post-btn").addEventListener("click", e => {
     e.preventDefault();
-
-    new daum.Postcode({
-        oncomplete: function(data) {
-            document.querySelector("#postcode").value = data.zonecode;
-            document.querySelector("#addr1").value = data.roadAddress;
-        }
-    }).open();
+    utilHelper.findPostcode();
 });
 
 /** 비밀번호 입력 시 입력조건 */
@@ -47,6 +41,17 @@ checkAll.forEach((v, i) => {
     });
 });
 
+/** 마케팅 전체 수신 동의 */
+const marketingCheckAll = document.querySelectorAll(".marketing-check-all");
+
+marketingCheckAll.forEach((v, i) => {
+    v.addEventListener("change", e => {
+        if (!v.checked) {
+            document.querySelector("#agreeAllMarketingChecked").checked = false;
+        }
+    });
+});
+
 /** 약관 항목 버튼 클릭 시 상세 내용 열기 */
 document.querySelectorAll("#agree-content-btn").forEach((v, i) => {
     v.addEventListener("click", e => {
@@ -61,7 +66,7 @@ document.querySelectorAll("#agree-content-btn").forEach((v, i) => {
         if (content.style.maxHeight) {
             content.style.maxHeight = null;
         } else {
-            content.style.maxHeight = content.scrollHeight + "px";
+            content.style.maxHeight = "300px";
         }
     });
 });

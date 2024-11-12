@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calmomentree</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&amp;display=swap" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/reset.css" />
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/recycling.css" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <th:block th:replace="~{fragments/head :: calm-head('공병수거신청')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/recycling.css}" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
   </head>
 
   <body>
+    <header th:replace="~{/fragments/common :: calm-header}"></header>
+    <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
+    
     <!-- 타이틀 사진구역 -->
     <div class="title-container">
       <div class="title-img-box">
@@ -20,8 +19,7 @@
         <p class="title">Recycling Campaign</p>
         <p class="text">공병수거</p>
       </div>
-      <div class="title-text box2" data-aos="fade-up" data-aos-offset="0"
-      data-aos-duration="900">
+      <div class="title-text box2" data-aos="fade-up" data-aos-offset="0" data-aos-duration="900">
         <p class="text2">
           "We are expanding & developing and servicing sustainable <br />
           vegan amenities in 2022.”
@@ -45,8 +43,7 @@
         <p class="text2">* 캄모멘트리가 지정한 CJ대한통운 택배사 사용 신청 시만 해당</p>
       </div>
       <!-- 공병수거 정책 안내 -->
-      <div class="policy-box" data-aos="fade-up" data-aos-offset="0"
-      data-aos-duration="900" data-aos-anchor-placement="top-bottom">
+      <div class="policy-box" data-aos="fade-up" data-aos-offset="0" data-aos-duration="900" data-aos-anchor-placement="top-bottom">
         <div class="policy-title title">캄모멘트리 공병수거 정책 안내</div>
         <div class="policy-app box">
           <div class="app-title title">공병수거 신청</div>
@@ -66,8 +63,7 @@
         </div>
       </div>
       <!-- 공병 문의 게시판 -->
-      <div class="table-container" data-aos="fade-up" data-aos-offset="0"
-      data-aos-duration="900" data-aos-anchor-placement="top-bottom">
+      <div class="table-container" data-aos="fade-up" data-aos-offset="0" data-aos-duration="900" data-aos-anchor-placement="top-bottom">
         <table border="1">
           <caption style="display: none">
             상품 게시판 목록
@@ -123,28 +119,17 @@
       <div class="btn-area">
         <button class="btn1"><a href="">수거 신청하기</a></button>
       </div>
-      <!-- 페이징 구역 -->
-      <div class="paging-box">
-        <!-- 페이지 번호 -->
-        <ul class="pagination">
-          <!-- 이전 페이지 그룹 이동 버튼 -->
-          <li th:if="${pagination.prevPage > 0}">
-            <a th:href="@{/student(keyword=${keyword}, page=${pagination.prevPage})}">&laquo;</a>
-          </li>
-          <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
-          <!-- 페이지 번호 링크 -->
-          <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
-            <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}"></a>
-            <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/student(keyword=${keyword}, page=${i})}"></a>
-          </li>
 
-          <!-- 다음 페이지 그룹 이동 버튼 -->
-          <li th:if="${pagination.nextPage > 0}">
-            <a th:href="@{/student(keyword=${keyword}, page=${pagination.nextPage})}">&raquo;</a>
-          </li>
-          <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
+      <!-- 페이지 번호 -->
+      <div class="paging-box">
+        <ul class="pagination">
+          <li><a class="left">&laquo;</a></li>
+          <li><a class="active">1</a></li>
+          <li><a>2</a></li>
+          <li><a class="right">&raquo;</a></li>
         </ul>
       </div>
+
       <div class="search-container">
         <div class="search-box">
           <div class="form">
@@ -165,6 +150,9 @@
         </a>
       </div>
     </div>
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
+
+    <th:block th:replace="~{/fragments/script}"></th:block>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
       AOS.init();

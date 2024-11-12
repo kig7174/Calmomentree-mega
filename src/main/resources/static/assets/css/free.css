@@ -89,6 +89,7 @@ input[type="password"] {
   position: relative;
   width: 90%;
   margin: auto;
+  padding-top: 200px;
 
   .subjectName {
     padding: 25px 0;

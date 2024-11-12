@@ -12,11 +12,19 @@
         },
         {
             "type": "java",
+<<<<<<< HEAD
             "name": "Spring Boot-ProjectApplication<Calmomentree-mega>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
             "mainClass": "com.calmomentree.projectree.ProjectApplication",
             "projectName": "Calmomentree-mega",
+=======
+            "name": "Spring Boot-ProjectApplication<projectree-Calmomentree-mega>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.calmomentree.projectree.ProjectApplication",
+            "projectName": "projectree-Calmomentree-mega",
+>>>>>>> 4b84e4e149cc7130eb0c512b1397ee1fec0de3fa
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }

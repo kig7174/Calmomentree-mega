@@ -7,7 +7,10 @@
 <body>
     <header th:replace="~{/fragments/common :: calm-header}"></header>
 
-    <div class="container">    
+    <div class="container">
+        <div th:replace="~{/fragments/common :: calm-search}"></div>
+        <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
+        <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
         <div class="join-body">
             <div class="head-title">
                 <p>JOIN US<span>캄모멘트리 회원가입</span></p>
@@ -105,9 +108,8 @@
                                     <label for="agreeServiceCheck">이용약관 동의 (필수)</label>
                                     <button type="button" id="agree-content-btn"></button>
                                 </div>
-                                <div class="content service-on">
-                                    <p>제1조(목적)
-                                        이 약관은 (주)캄모멘트리 회사(전자상거래 사업자)...</p>
+                                <div class="content service-on" th:insert="~{/member/mall_agreement :: agreement}">
+                                    
                                 </div>
                             </div>
                             <div class="item">
@@ -116,23 +118,23 @@
                                     <label for="agreePrivacyCheck">개인정보처리방침 동의 (필수)</label>
                                     <button type="button" id="agree-content-btn"></button>
                                 </div>
-                                <div class="content privacy-on">
-                                    <p>1. 개인정보 수집목적 및 이용목적</p>
+                                <div class="content privacy-on" >
+                                    
                                 </div>
                             </div>
                             <div class="item">
                                 <div class="title">
-                                    <input type="checkbox" id="agreeAllMarketingChecked" value="Y" class="check-all" />
+                                    <input type="checkbox" id="agreeAllMarketingChecked" data-checked=".marketing-check-all" value="Y" class="check-all" />
                                     <label for="agreeAllMarketingChecked">마케팅 정보 전체 동의 (선택)</label>
                                     <button type="button" id="agree-content-btn"></button>
                                 </div>
                                 <div class="content marketing-on">
                                     <p>캄모멘트리의 특가, 할인, 쿠폰, 혜택, 이벤트</p>
                                 </div>
-                                <input type="checkbox" name="agreeSmsReceive" value="Y" class="check-all" />
+                                <input type="checkbox" name="agreeSmsReceive" value="Y" class="check-all marketing-check-all" />
                                 <label for="agreeSmsReceive">SMS 수신 동의 (선택)</label>
 
-                                <input type="checkbox" name="agreeEmailReceive" value="Y" class="check-all" />
+                                <input type="checkbox" name="agreeEmailReceive" value="Y" class="check-all marketing-check-all" />
                                 <label for="agreeEmailReceive">이메일 수신 동의 (선택)</label>
                             </div>
                         </div>

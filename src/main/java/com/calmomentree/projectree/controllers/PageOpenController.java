@@ -31,6 +31,16 @@ public class PageOpenController {
         return "member/login";
     }
 
+    @GetMapping("/member/mall_agreement")
+    public String mailAgreement() {
+        return "member/mall_agreement";
+    }
+
+    @GetMapping("/member/privacy")
+    public String privacy() {
+        return "member/privacy";
+    }
+
     @GetMapping("/member/modify")
     public String modify() {
         return "member/modify";
@@ -116,6 +126,15 @@ public class PageOpenController {
         return "board/product/read";
     }
 
+    @GetMapping("/board/product/modify")
+    public String productModify() {
+        return "board/product/modify";
+    }
+    @GetMapping("/board/product/write")
+    public String productWrite() {
+        return "board/product/write";
+    }
+
     @GetMapping("/board/qna/list")
     public String qnaList() {
         return "board/qna/list";
@@ -139,5 +158,10 @@ public class PageOpenController {
     @GetMapping("/board/recycling/write")
     public String recyWrite() {
         return "board/recycling/write";
+    }
+
+    @GetMapping("/board/free/read")
+    public String freeRead() {
+        return "board/free/read";
     }
 }

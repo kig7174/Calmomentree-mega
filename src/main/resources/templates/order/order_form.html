@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calmomentree</title>
-    <link rel="stylesheet" href="/src/main/resources/static/assets/css/order_form.css" />
+    <th:block th:replace="~{fragments/head :: calm-head('주문결제페이지')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/order_form.css}" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
   </head>
   <body>
+    <header th:replace="~{/fragments/common :: calm-header}"></header>
+    
     <div class="container">
       <!---------- 주문 정보 ------------>
       <div class="member-info collapse">
@@ -296,11 +296,13 @@
       </div>
       <button class="fin place"><span class="">31000</span>원 결제하기</button>
     </div>
+
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
+
+    <th:block th:replace="~{/fragments/script}"></th:block>
     <!-- 우편번호 검색 -->
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-    <script src="/src/main/resources/static/assets/js/orderform.js"></script>
-    <script>
-
-    </script>
+    <script th:src="@{/assets/js/orderform.js}"></script>
+    
   </body>
 </html>

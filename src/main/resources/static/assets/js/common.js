@@ -1,8 +1,3 @@
-// index page margin remove
-(function() {
-    document.querySelector(".container").style.margin = "0";
-})();
-
 // 브라우저 스크롤 이벤트
 window.addEventListener("scroll", (e) => {
     const scrollY = window.scrollY;  
@@ -92,7 +87,7 @@ document.querySelector("#search-on").addEventListener("click", (e) => {
 
 // 검색 창 닫기 (검색 박스 외에 외부 영역 클릭 시 닫힘)
 window.addEventListener("click", (e) => {
-    if (e.target.contains(searchBox)) {
+    if (e.target === searchBg) {
         searchBox.classList.remove("on");
         searchBg.classList.remove("on");
     }
