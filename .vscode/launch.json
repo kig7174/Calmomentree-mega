@@ -9,6 +9,16 @@
             "projectName": "projectree",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-ProjectApplication<Calmomentree-mega>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.calmomentree.projectree.ProjectApplication",
+            "projectName": "Calmomentree-mega",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
