@@ -7,8 +7,11 @@
   <body>
     <header th:replace="~{/fragments/common :: calm-header}"></header>
     
-
     <div id="container" class="amenityRead">
+      <div th:replace="~{/fragments/common :: calm-search}"></div>
+      <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
+      <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
+
       <div class="title">어메니티 문의</div>
       <div class="subjectName">작성한 게시글 제목</div>
       <div class="subjectText">작성한 게시글 내용</div>
