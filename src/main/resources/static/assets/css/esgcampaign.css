@@ -32,7 +32,7 @@ body {
 }
 
 .container {
-  
+  margin-top: 0;
 
   .inner {
     /* height: 800px; */
@@ -50,7 +50,7 @@ body {
 
     .sub_title {
         position: absolute;
-        top: 15%;
+        top: 20%;
         left: 50%;
         transform: translate(-50%, -50%);
     
@@ -67,13 +67,17 @@ body {
             margin-bottom: 30px;
             color: var(--font-color-white);
         }
+    }
     
-        .text01{
-            font-size: 19px;
-            font-weight: 600;
-            color: var(--font-color-white);
-            line-height: 1.5;
-        }
+    .sub_txt{
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 19px;
+        font-weight: 600;
+        color: var(--font-color-white);
+        line-height: 1.5;
     }
 
     .campaign_text {
