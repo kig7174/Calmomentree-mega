@@ -20,10 +20,11 @@
   body {
     background-color: var(--background-color);
   }
+  
   .container {
     width: 50%;
     margin: auto;
-    margin-bottom: 100px;
+    padding-bottom: 100px;
 
     .title {
       font-size: 30px;

@@ -35,8 +35,9 @@ button {
 }
 .container {
   width: 50%;
-  margin: 100px auto;
+  margin: auto;
   line-height: 1.5;
+  padding: 100px 0;
 
   .title {
     width: 100%;

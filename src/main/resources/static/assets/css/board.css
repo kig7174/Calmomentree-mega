@@ -27,7 +27,6 @@ body {
 
 #container {
   display: flex;
-  position: relative;
   width: 90%;
   padding: 200px 0;
   margin: auto;

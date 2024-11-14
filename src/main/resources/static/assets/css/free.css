@@ -86,7 +86,6 @@ input[type="password"] {
 }
 #container {
   display: flex;
-  position: relative;
   width: 90%;
   margin: auto;
   padding-top: 200px;
