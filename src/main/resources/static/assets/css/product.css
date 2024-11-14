@@ -37,8 +37,8 @@ body {
   display: flex;
   position: relative;
   width: 90%;
-  margin: auto;
-  padding: 200px 0 0 150px;
+  margin: auto 0;
+  padding: 200px 0  150px 0;
 }
 
 .container {

@@ -35,6 +35,11 @@ body {
     display: none;
 }
 
+.container {
+    margin: 0;
+    margin-top: 60px;
+}
+
 .index-body {
     width: auto;
     height: auto;

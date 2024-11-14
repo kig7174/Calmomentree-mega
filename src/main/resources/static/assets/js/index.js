@@ -1,8 +1,3 @@
-// index page margin remove
-(function() {
-    document.querySelector(".container").style.margin = "0";
-})();
-
 // best seller swiper
 let bestSeller = new Swiper(".best-seller", {
     slidesPerView: "auto",
