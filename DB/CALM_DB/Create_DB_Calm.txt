@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `calmomentree`.`members` (
   `addr2` VARCHAR(255) NOT NULL COMMENT '상세주소',
   `birthday` DATETIME NULL DEFAULT NULL COMMENT '생년월일',
   `is_marketing_agree` ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '마케팅 수신 여부',
-  `login_date` DATETIME NOT NULL COMMENT '마지막 로그인 날짜',
+  `login_date` DATETIME NULL COMMENT '마지막 로그인 날짜',
   `join_date` DATETIME NOT NULL COMMENT '회원가입 날짜',
   `edit_date` DATETIME NOT NULL COMMENT '마지막 수정 날짜',
   `is_out` ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '탈퇴여부',
