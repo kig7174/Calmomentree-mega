@@ -18,12 +18,23 @@ import com.calmomentree.projectree.models.Member;
 public interface MemberMapper {
     
     /**
-     * 회원 정보 입력 (회원가입 / join)
+     * 회원 정보 입력 (회원가입 & join)
      * 
      * @param input - 가입할 회원 객체
      * @return - 가입된 회원 수
      */
-    @Insert("")
+    @Insert("INSERT INTO members " +
+            "(user_name, user_id, user_pw, tel, " + 
+            "email, postcode, addr1, addr2, " + 
+            "birthday, is_marketing_agree, " +
+            "login_date, join_date, edit_date, " +
+            "is_out, is_admin) " +
+            "VALUE " +
+            "(#{userName}, #{userId}, MD5(#{userPw}), #{tel}, " +
+            "#{email}, #{postcode}, #{addr1}, #{addr2}, " +
+            "#{birthday}, #{isMarketingAgree}, " +
+            "null, NOW(), NOW(), " +
+            "'N', 'N')")
     @Options(useGeneratedKeys = true, keyProperty = "memberId", keyColumn = "member_id")
     public int insert(Member input);
 
