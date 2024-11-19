@@ -20,6 +20,7 @@ public class Board {
     private String uploadImg;       // 첨부파일 사진 업로드 경로
     
     private int memberId;           // 회원 번호
+    private String userName;        // 회원 이름
     
     @Getter
     @Setter

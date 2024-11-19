@@ -49,7 +49,7 @@ public class BoardServiceImpl implements BoardService {
                 throw new Exception("수정된 데이터가 없습니다.");
             }
         } catch (Exception e) {
-            log.error("데이터 수정에 실패했습니다.", e);
+            log.error("게시글 수정에 실패했습니다.", e);
             throw e;
         }
 
@@ -85,7 +85,7 @@ public class BoardServiceImpl implements BoardService {
                 throw new Exception("조회된 데이터가 없습니다.");
             }
         } catch (Exception e) {
-            log.error("교수 조회에 실패했습니다.", e);
+            log.error("게시글 조회에 실패했습니다.", e);
             throw e;
         }
 
@@ -97,7 +97,7 @@ public class BoardServiceImpl implements BoardService {
         List<Board> output = null;
 
         try {
-            output = boardMapper.categoryList(input);
+            output = boardMapper.boardList(input);
         } catch (Exception e) {
             log.error("게시판 목록 조회에 실패했습니다.", e);
             throw e;
