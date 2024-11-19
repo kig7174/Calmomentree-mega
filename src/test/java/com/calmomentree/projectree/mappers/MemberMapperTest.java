@@ -29,7 +29,8 @@ public class MemberMapperTest {
         input.setAddr1("서울특별시 강남구 강남대로94길 13");
         input.setAddr2("삼경빌딩 1층");
         input.setBirthday("2024-11-18");
-        input.setIsMarketingAgree("Y");
+        input.setIsEmailAgree("N");
+        input.setIsSmsAgree("N");
 
         int output = memberMapper.insert(input);
 
@@ -42,19 +43,41 @@ public class MemberMapperTest {
     @DisplayName("회원정보수정 테스트")
     void memberModifyTest() {
         Member input = new Member();
-        input.setMemberId(1);
+        input.setMemberId(2);
         input.setUserPw("asdf1234567");
         input.setTel("01012341234");
         input.setEmail("test1@naver.com");
         input.setPostcode("12345");
         input.setAddr1("서울특별시 강남구 강남대로94길 13");
         input.setAddr2("삼경빌딩 1층");
-        input.setBirthday("2024-11-19");
-        input.setIsMarketingAgree("Y");
+        input.setBirthday("2024-11-10");
+        input.setIsEmailAgree("N");
+        input.setIsSmsAgree("N");
 
         int output = memberMapper.update(input);
 
         log.debug("output : " + output);
         log.debug("Member : " + input.toString());
+    }
+
+    @Test
+    @DisplayName("회원 탈퇴 처리 테스트 (탈퇴여부 관리)")
+    void memberIsOutTEst() {
+        Member input = new Member();
+        input.setMemberId(2);
+        input.setUserPw("asdf1234567");
+
+        int output = memberMapper.out(input);
+
+        log.debug("output : " + output);
+        log.debug("Member_is_out : " + input.getIsOut());
+    }
+
+    @Test
+    @DisplayName("탈퇴 회원 일괄 처리 테스트")
+    void deleteOutMembersTest() {
+        int output = memberMapper.deleteOutMembers();
+
+        log.debug("Out Members : " + output);
     }
 }
