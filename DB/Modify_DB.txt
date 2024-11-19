@@ -1,2 +1,1 @@
-// 회원 정보 > 로그인 날짜 => NULL 허용
-ALTER TABLE `members` CHANGE `login_date` `login_date` datetime NULL;
+// 

@@ -1,5 +1,5 @@
 -- MySQL Workbench Synchronization
--- Generated: 2024-11-18 16:58
+-- Generated: 2024-11-19 16:33
 -- Model: New Model
 -- Version: 1.0
 -- Project: Name of the project
@@ -22,8 +22,9 @@ CREATE TABLE IF NOT EXISTS `calmomentree`.`members` (
   `addr1` VARCHAR(255) NOT NULL COMMENT '기본주소',
   `addr2` VARCHAR(255) NOT NULL COMMENT '상세주소',
   `birthday` DATETIME NULL DEFAULT NULL COMMENT '생년월일',
-  `is_marketing_agree` ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '마케팅 수신 여부',
-  `login_date` DATETIME NULL COMMENT '마지막 로그인 날짜',
+  `is_sms_agree` ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '문자 메세지 수신 여부',
+  `is_email_agree` ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '이메일 수신 여부',
+  `login_date` DATETIME NULL DEFAULT NULL COMMENT '마지막 로그인 날짜',
   `join_date` DATETIME NOT NULL COMMENT '회원가입 날짜',
   `edit_date` DATETIME NOT NULL COMMENT '마지막 수정 날짜',
   `is_out` ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '탈퇴여부',
