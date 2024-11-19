@@ -17,6 +17,9 @@ public class BoardServiceImpl implements BoardService {
     @Autowired
     private BoardMapper boardMapper;
 
+    /**
+     * 게시글 등록
+     */
     @Override
     public Board addItem(Board input) throws Exception {
         int rows = 0;
@@ -28,7 +31,7 @@ public class BoardServiceImpl implements BoardService {
                 throw new Exception("저장된 데이터가 없습니다.");
             }
         } catch (Exception e) {
-            log.error("데이터 저장에 실패했습니다.", e);
+            log.error("게시글 등록에 실패했습니다.", e);
             throw e;
         }
 
@@ -94,9 +97,9 @@ public class BoardServiceImpl implements BoardService {
         List<Board> output = null;
 
         try {
-            output = boardMapper.selectList(input);
+            output = boardMapper.categoryList(input);
         } catch (Exception e) {
-            log.error("교수 목록 조회에 실패했습니다.", e);
+            log.error("게시판 목록 조회에 실패했습니다.", e);
             throw e;
         }
 
