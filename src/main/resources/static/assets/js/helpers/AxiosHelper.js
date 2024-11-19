@@ -63,7 +63,7 @@ const axiosHelper = {
                 console.error(`[${error.code}] ${error.message}`);
             }
 
-            await utilHelper.alertDanger(alertTitle, alertMsg);
+            return error.response?.data;
         }
 
         return response?.data;

@@ -82,7 +82,7 @@ public class MemberServiceImpl implements MemberService {
                 throw new Exception("조회된 데이터가 없습니다.");
             }
         } catch (Exception e) {
-            log.error("교수 조회에 실패했습니다.", e);
+            log.error("회원 조회에 실패했습니다.", e);
             throw e;
         }
 
@@ -96,7 +96,7 @@ public class MemberServiceImpl implements MemberService {
         try {
             output = memberMapper.selectList(input);
         } catch (Exception e) {
-            log.error("교수 목록 조회에 실패했습니다.", e);
+            log.error("회원 목록 조회에 실패했습니다.", e);
             throw e;
         }
 
@@ -133,5 +133,24 @@ public class MemberServiceImpl implements MemberService {
         }
 
         return output;
+    }
+
+    @Override
+    public void isUniqueUserId(String userid) throws Exception {
+        Member input = new Member();
+        input.setUserId(userid);
+
+        int output = 0;
+
+        try {
+            output = memberMapper.selectCount(input);
+
+            if (output > 0) {
+                throw new Exception("는 사용할 수 없는 아이디 입니다.");
+            }
+        } catch (Exception e) {
+            log.error("아이디 중복검사에 실패했습니다.", e);
+            throw e;
+        }
     }
 }

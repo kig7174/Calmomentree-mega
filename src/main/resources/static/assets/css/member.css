@@ -141,6 +141,17 @@ input[type="date"] {
             .input-box {
                 margin: 20px 0;
 
+                &.id-box {
+
+                    .id-msg {
+                        font-size: var(--font-size-small);
+                        color: rgb(230, 75, 75);
+
+                        &.id-unique-check {
+                            color: rgb(59, 59, 233);
+                        }
+                    }
+                }
 
                 &.tel-box {
                     select{

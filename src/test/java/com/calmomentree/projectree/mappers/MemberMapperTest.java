@@ -80,4 +80,15 @@ public class MemberMapperTest {
 
         log.debug("Out Members : " + output);
     }
+
+    @Test
+    @DisplayName("아이디 중복 검사 테스트 (중복된 수 리턴)")
+    void isUniqueUserId() {
+        Member input = new Member();
+        input.setUserId("test1");
+
+        int output = memberMapper.selectCount(input);
+
+        log.debug("duplicated ID count : " + output);
+    }
 }

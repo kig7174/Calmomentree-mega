@@ -71,16 +71,42 @@ document.querySelectorAll("#agree-content-btn").forEach((v, i) => {
     });
 });
 
-/** 아이디 중복 검사 */
+/** 아이디 중복 검사 및 유효성 검사(아이디 입력 칸 아래 메세지) */
 document.querySelector("#user_id").addEventListener("blur", async (e) => {
     e.preventDefault();
 
+    const idMsg = document.querySelector(".id-msg");
+
     try {
         regexHelper.value("#user_id", "아이디를 입력하세요.");
-        regexHelper.minLength("#user_id", 4, "아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.")
+        regexHelper.minLength("#user_id", 4, "아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.");
+        regexHelper.maxLength("#user_id", 16, "아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.");
     } catch (error) {
-        document.querySelector(".id-msg").innerHTML = error.message;
+        idMsg.classList.remove("id-unique-check");
+        idMsg.innerHTML = error.message;
+        setTimeout(() => error.element.focus(), 1);
+        return;
     }
+
+    const userid = document.querySelector("#user_id").value;
+    const data = await axiosHelper.get('/api/member/id_unique_check', {
+        user_id : userid
+    });
+
+    if (data) {
+        idMsg.innerHTML = userid + data.message;
+        document.querySelector("#user_id_check").value = "Y";
+        idMsg.classList.add("id-unique-check");
+
+        if (data.error) {
+            document.querySelector("#user_id_check").value = "N";
+            idMsg.classList.remove("id-unique-check"); 
+        }
+    }
+});
+
+document.querySelector("#user_id").addEventListener("change", e => {
+    document.querySelector("#user_id_check").value = "N";
 });
 
 document.querySelector("#join").addEventListener("submit", async (e) => {

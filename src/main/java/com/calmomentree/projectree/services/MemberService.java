@@ -18,4 +18,6 @@ public interface MemberService {
     public int getCount(Member params) throws Exception;
 
     public int out(Member params) throws Exception;
+
+    public void isUniqueUserId(String userid) throws Exception;
 }
