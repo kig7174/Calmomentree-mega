@@ -16,7 +16,8 @@ public class Member {
     private String addr1;               // 기본주소
     private String addr2;               // 상세주소
     private String birthday;            // 생년월일
-    private String isMarketingAgree;  // 마케팅 수신 여부
+    private String isEmailAgree;      // 이메일 수신 여부
+    private String isSmsAgree;        // 문자 메세지 수신 여부
     private String loginDate;          // 마지막 로그인 날짜
     private String joinDate;           // 회원가입 날짜
     private String editDate;           // 마지막 수정 날짜

@@ -26,18 +26,26 @@ public interface MemberMapper {
     @Insert("INSERT INTO members " +
             "(user_name, user_id, user_pw, tel, " + 
             "email, postcode, addr1, addr2, " + 
-            "birthday, is_marketing_agree, " +
+            "birthday, is_email_agree, is_sms_agree, " +
             "login_date, join_date, edit_date, " +
             "is_out, is_admin) " +
             "VALUE " +
             "(#{userName}, #{userId}, MD5(#{userPw}), #{tel}, " +
             "#{email}, #{postcode}, #{addr1}, #{addr2}, " +
-            "#{birthday}, #{isMarketingAgree}, " +
+            "#{birthday}, #{isEmailAgree}, #{isSmsAgree}, " +
             "null, NOW(), NOW(), " +
             "'N', 'N')")
     @Options(useGeneratedKeys = true, keyProperty = "memberId", keyColumn = "member_id")
     public int insert(Member input);
 
+    /**
+     * 회원 정보 수정 (modify)
+     * 등록된 비밀번호 입력 시 기존 비밀번호 사용 & 회원 정보 수정
+     * 새 비밀번호 입력 시 새 비밀번호 등록 & 회원 정보 수정
+     * 
+     * @param input - 수정할 회원 객체
+     * @return - 수정된 회원 수
+     */
     @Update("<script> " +
             "UPDATE members SET " + 
             // 입력된 비밀번호가 현재 비밀번호와 다를 때 비밀번호 변경
@@ -49,19 +57,21 @@ public interface MemberMapper {
             "WHEN user_pw=MD5(#{userPw}) " +
             "THEN user_pw " +
             "WHEN user_pw!=MD5(#{userPw}) " +
-            "THEN #{userPw} " +
+            "THEN MD5(#{userPw}) " +
             "END " +
             "), " +
             // Dynamic SQL if문에서 파라미터값 받는 방법?
-            // "<if test='userPw != null AND userPw != \"\" AND userPw != #{userPw}'>user_pw=#{userPw},</if> " +
+            // "<if test='userPw != null and userPw != \"\" and userPw != user_pw'>user_pw=#{userPw},</if> " +
             "tel=#{tel}, " +
             "email=#{email}, " +
             "postcode=#{postcode}, " +
             "addr1=#{addr1}, " +
             "addr2=#{addr2}, " +
             "<if test='birthday != null and birthday != \"\"'>birthday=#{birthday},</if> " +
+            "is_email_agree=#{isEmailAgree}, " +
+            "is_sms_agree=#{isSmsAgree}, " +
             "edit_date=NOW() " +
-            "WHERE member_id=#{memberId} AND user_pw=MD5(#{userPw}) " +
+            "WHERE member_id=#{memberId} " +
             "</script>")
     public int update(Member input);
 
@@ -86,7 +96,8 @@ public interface MemberMapper {
         @Result(property="addr1", column="addr1"),
         @Result(property="addr2", column="addr2"),
         @Result(property="birthday", column="birthday"),
-        @Result(property="isMarketingAgree", column="is_marketing_agree"),
+        @Result(property="isEmailAgree", column="is_email_agree"),
+        @Result(property="isSmsAgree", column="is_sms_agree"),
         @Result(property="loginDate", column="login_date"),
         @Result(property="joinDate", column="join_date"),
         @Result(property="editDate", column="edit_date"),
@@ -112,5 +123,27 @@ public interface MemberMapper {
             "</where> " +
             "</script>")
     public int selectCount(Member input);
-}
 
+    /**
+     * 회원 탈퇴
+     * 탈퇴 여부가 'Y'로 변경될 뿐 실제 탈퇴 처리는 이루어지지 않음
+     * 
+     * @param input
+     * @return
+     */
+    @Update("UPDATE members SET " +
+            "is_out='Y', edit_date=NOW() " +
+            "WHERE member_id=#{memberId} AND user_pw=MD5(#{userPw}) AND is_out='N'")
+    public int out(Member input);
+
+    /**
+     * 탈퇴 회원 일괄 처리
+     * Scheduler로 관리
+     * 
+     * @return
+     */
+    @Delete("DELETE FROM members " +
+            "WHERE is_out='Y' AND " +
+            "edit_date < DATE_ADD(NOW(), INTERVAL -3 month)")
+    public int deleteOutMembers();
+}
