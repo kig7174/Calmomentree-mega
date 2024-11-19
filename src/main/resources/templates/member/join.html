@@ -16,15 +16,15 @@
                 <p>JOIN US<span>캄모멘트리 회원가입</span></p>
             </div>
             <div class="join-form">
-                <form method="" action="">
+                <form id="join">
                     <div class="id-box input-box">
-                        <input type="text" name="userid" placeholder="아이디" minlength="4" maxlength="16"/>
+                        <input type="text" name="user_id" id="user_id" placeholder="아이디" minlength="4" maxlength="16"/>
                         <p class="input-info">(영문소문자/숫자, 4~16자)</p>
-                        <p class="id-msg" >아이디를 입력하세요.</p>
+                        <p class="id-msg" ></p>
                     </div>
 
                     <div class="password-box input-box">
-                        <input id="password" type="password" name="password" placeholder="비밀번호" minlength="10" maxlength="16"/>
+                        <input id="password" type="password" name="user_pw" placeholder="비밀번호" minlength="10" maxlength="16"/>
                         <p class="input-info">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</p>
                     </div>
                     <div id="password-focus" class="password-off">
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="password-confirm-box input-box">
-                        <input type="password" name="password-confirm" placeholder="비밀번호 확인" minlength="10" maxlength="16" />
+                        <input type="password" name="password_confirm" placeholder="비밀번호 확인" minlength="10" maxlength="16" />
                         <p class="password-confirm-msg">비밀번호가 일치하지 않습니다.</p>
                     </div>
 
@@ -104,7 +104,7 @@
                         <div class="agree-inner">
                             <div class="item">
                                 <div class="title">
-                                    <input type="checkbox" name="agreeServiceCheck" value="Y" required class="check-all" />
+                                    <input type="checkbox" name="agree_service_check" value="Y" required class="check-all" />
                                     <label for="agreeServiceCheck">이용약관 동의 (필수)</label>
                                     <button type="button" id="agree-content-btn"></button>
                                 </div>
@@ -114,7 +114,7 @@
                             </div>
                             <div class="item">
                                 <div class="title">
-                                    <input type="checkbox" name="agreePrivacyCheck" value="Y" required class="check-all" />
+                                    <input type="checkbox" name="agree_privacy_check" value="Y" required class="check-all" />
                                     <label for="agreePrivacyCheck">개인정보처리방침 동의 (필수)</label>
                                     <button type="button" id="agree-content-btn"></button>
                                 </div>
@@ -131,10 +131,10 @@
                                 <div class="content marketing-on">
                                     <p>캄모멘트리의 특가, 할인, 쿠폰, 혜택, 이벤트</p>
                                 </div>
-                                <input type="checkbox" name="agreeSmsReceive" value="Y" class="check-all marketing-check-all" />
+                                <input type="checkbox" name="is_sms_agree" value="Y" class="check-all marketing-check-all" />
                                 <label for="agreeSmsReceive">SMS 수신 동의 (선택)</label>
 
-                                <input type="checkbox" name="agreeEmailReceive" value="Y" class="check-all marketing-check-all" />
+                                <input type="checkbox" name="is_email_agree" value="Y" class="check-all marketing-check-all" />
                                 <label for="agreeEmailReceive">이메일 수신 동의 (선택)</label>
                             </div>
                         </div>

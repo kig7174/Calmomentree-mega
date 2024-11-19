@@ -70,3 +70,22 @@ document.querySelectorAll("#agree-content-btn").forEach((v, i) => {
         }
     });
 });
+
+/** 아이디 중복 검사 */
+document.querySelector("#user_id").addEventListener("blur", async (e) => {
+    e.preventDefault();
+
+    try {
+        regexHelper.value("#user_id", "아이디를 입력하세요.");
+        regexHelper.minLength("#user_id", 4, "아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.")
+    } catch (error) {
+        document.querySelector(".id-msg").innerHTML = error.message;
+    }
+});
+
+document.querySelector("#join").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    /** 유효성 검사 */
+    
+});
