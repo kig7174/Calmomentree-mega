@@ -16,4 +16,6 @@ public interface MemberService {
     public List<Member> getList(Member params) throws Exception;
 
     public int getCount(Member params) throws Exception;
+
+    public int out(Member params) throws Exception;
 }

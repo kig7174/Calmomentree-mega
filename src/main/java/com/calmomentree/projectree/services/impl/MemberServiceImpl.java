@@ -116,4 +116,22 @@ public class MemberServiceImpl implements MemberService {
 
         return output;
     }
+
+    @Override
+    public int out(Member input) throws Exception {
+        int output = 0;
+
+        try {
+            output = memberMapper.out(input);
+
+            if (output == 0) {
+                throw new Exception("비밀번호 확인이 잘못되었거나 존재하지 않는 회원입니다.");
+            }
+        } catch (Exception e) {
+            log.error("탈퇴 처리에 실패했습니다.", e);
+            throw e;
+        }
+
+        return output;
+    }
 }
