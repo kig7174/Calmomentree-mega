@@ -62,7 +62,7 @@ public class MemberMapperTest {
 
     @Test
     @DisplayName("회원 탈퇴 처리 테스트 (탈퇴여부 관리)")
-    void memberIsOutTEst() {
+    void memberIsOutTest() {
         Member input = new Member();
         input.setMemberId(2);
         input.setUserPw("asdf1234567");

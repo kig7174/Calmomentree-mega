@@ -1,6 +1,42 @@
 ### memberJoinTestResult
-+-----------+-----------+---------+----------------------------------+-------------+-----------------+----------+-----------------------------------+--------------+---------------------+--------------------+------------+---------------------+---------------------+--------+----------+
-| member_id | user_name | user_id | user_pw                          | tel         | email           | postcode | addr1                             | addr2        | birthday            | is_marketing_agree | login_date | join_date| edit_date           | is_out | is_admin |
-+-----------+-----------+---------+----------------------------------+-------------+-----------------+----------+-----------------------------------+--------------+---------------------+--------------------+------------+---------------------+---------------------+--------+----------+
-|         1 | 김인겸    | test1   | 0e167509d1be26a3e5b9785558b224cc | 01012341234 | test1@naver.com | 12345    | 서울특별시 강남구 강남대로94길 13 | 삼경빌딩 1층 | 2024-11-18 00:00:00 | Y                  | NULL       | 2024-11-18 23:41:42 | 2024-11-18 23:41:42 | N      | N        |
-+-----------+-----------+---------+----------------------------------+-------------+-----------------+----------+-----------------------------------+--------------+---------------------+--------------------+------------+---------------------+---------------------+--------+----------+
+[DEBUG] 24-11-19 16:43:25 [insert:135] - ==>  Preparing: INSERT INTO members (user_name, user_id, user_pw, tel, email, postcode, addr1, addr2, birthday, is_email_agree, is_sms_agree, login_date, join_date, edit_date, is_out, is_admin) VALUE (?, ?, MD5(?), ?, ?, ?, ?, ?, ?, ?, ?, null, NOW(), NOW(), 'N', 'N')
+[DEBUG] 24-11-19 16:43:25 [insert:135] - ==> Parameters: 김인겸(String), test1(String), asdf123456(String), 01012341234(String), test1@naver.com(String), 12345(String), 서울특별시 강남구 강남대로94길 13(String), 삼경빌딩 1층(String), 2024-11-18(String), N(String), N(String)
+[INFO ] 24-11-19 16:43:25 [sqlonly:228] - INSERT INTO members (user_name, user_id, user_pw, tel, email, postcode, addr1, addr2, birthday, is_email_agree, is_sms_agree, login_date, join_date, edit_date, is_out, is_admin) VALUE ('김인겸', 'test1', MD5('asdf123456'), '01012341234', 'test1@naver.com', '12345', '서울특별시 강남구 강남대로94길 13', '삼경빌딩 1층', '2024-11-18', 'N', 'N', null, NOW(), NOW(), 'N', 'N')
+
+[DEBUG] 24-11-19 16:43:25 [insert:135] - <==    Updates: 1
+[INFO ] 24-11-19 16:43:25 [resultsettable:610] - 
+|--------------|
+|generated_key |
+|--------------|
+|1             |
+|--------------|
+
+[DEBUG] 24-11-19 16:43:25 [MemberMapperTest:37] - output : 1
+[DEBUG] 24-11-19 16:43:25 [MemberMapperTest:38] - new member : 1
+[DEBUG] 24-11-19 16:43:25 [MemberMapperTest:39] - Member : Member(memberId=1, userName=김인겸, userId=test1, userPw=asdf123456, tel=01012341234, email=test1@naver.com, postcode=12345, addr1=서울특별시 강남구 강남대로94길 13, addr2=삼경빌딩 1층, birthday=2024-11-18, isEmailAgree=N, isSmsAgree=N, loginDate=null, joinDate=null, editDate=null, isOut=null, isAdmin=null)
+
+### memberModifyTestResult
+[DEBUG] 24-11-19 16:44:45 [update:135] - ==>  Preparing: UPDATE members SET user_pw = ( CASE WHEN user_pw=MD5(?) THEN user_pw WHEN user_pw!=MD5(?) THEN MD5(?) END ), tel=?, email=?, postcode=?, addr1=?, addr2=?, birthday=?, is_email_agree=?, is_sms_agree=?, edit_date=NOW() WHERE member_id=?
+[DEBUG] 24-11-19 16:44:45 [update:135] - ==> Parameters: asdf1234567(String), asdf1234567(String), asdf1234567(String), 01012341234(String), test1@naver.com(String), 12345(String), 서울특별시 강남구 강남대로94길 13(String), 삼경빌딩 1층(String), 2024-11-10(String), N(String), N(String), 2(Integer)
+[INFO ] 24-11-19 16:44:45 [sqlonly:228] - UPDATE members SET user_pw = ( CASE WHEN user_pw=MD5('asdf1234567') THEN user_pw WHEN user_pw!=MD5('asdf1234567') THEN MD5('asdf1234567') END ), tel='01012341234', email='test1@naver.com', postcode='12345', addr1='서울특별시 강남구 강남대로94길 13', addr2='삼경빌딩 1층',  birthday='2024-11-10',  is_email_agree='N', is_sms_agree='N', edit_date=NOW() WHERE member_id=2
+
+[DEBUG] 24-11-19 16:44:45 [update:135] - <==    Updates: 1
+[DEBUG] 24-11-19 16:44:45 [MemberMapperTest:59] - output : 1
+[DEBUG] 24-11-19 16:44:45 [MemberMapperTest:60] - Member : Member(memberId=2, userName=null, userId=null, userPw=asdf1234567, tel=01012341234, email=test1@naver.com, postcode=12345, addr1=서울특별시 강남구 강남대로94길 13, addr2=삼경빌딩 1층, birthday=2024-11-10, isEmailAgree=N, isSmsAgree=N, loginDate=null, joinDate=null, editDate=null, isOut=null, isAdmin=null)
+
+### memberIsOutTestResult
+[DEBUG] 24-11-19 16:45:15 [out:135] - ==>  Preparing: UPDATE members SET is_out='Y', edit_date=NOW() WHERE member_id=? AND user_pw=MD5(?) AND is_out='N'
+[DEBUG] 24-11-19 16:45:15 [out:135] - ==> Parameters: 2(Integer), asdf1234567(String)
+[INFO ] 24-11-19 16:45:15 [sqlonly:228] - UPDATE members SET is_out='Y', edit_date=NOW() WHERE member_id=2 AND user_pw=MD5('asdf1234567') AND is_out='N'
+
+[DEBUG] 24-11-19 16:45:15 [out:135] - <==    Updates: 1
+[DEBUG] 24-11-19 16:45:15 [MemberMapperTest:72] - output : 1
+[DEBUG] 24-11-19 16:45:15 [MemberMapperTest:73] - Member_is_out : null
+
+### deleteOutMembersTestResult // 수정 날짜 임의 설정
+[DEBUG] 24-11-19 16:46:23 [deleteOutMembers:135] - ==>  Preparing: DELETE FROM members WHERE is_out='Y' AND edit_date < DATE_ADD(NOW(), INTERVAL -3 month)
+[DEBUG] 24-11-19 16:46:23 [deleteOutMembers:135] - ==> Parameters: 
+[INFO ] 24-11-19 16:46:23 [sqlonly:228] - DELETE FROM members WHERE is_out='Y' AND edit_date < DATE_ADD(NOW(), INTERVAL -3 month)
+
+[DEBUG] 24-11-19 16:46:23 [deleteOutMembers:135] - <==    Updates: 1
+[DEBUG] 24-11-19 16:46:23 [MemberMapperTest:81] - Out Members : 1

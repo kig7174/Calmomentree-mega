@@ -1,0 +1,52 @@
+### memberJoinTestresult
+[DEBUG] 24-11-19 17:30:52 [insert:135] - ==>  Preparing: INSERT INTO members (user_name, user_id, user_pw, tel, email, postcode, addr1, addr2, birthday, is_email_agree, is_sms_agree, login_date, join_date, edit_date, is_out, is_admin) VALUE (?, ?, MD5(?), ?, ?, ?, ?, ?, ?, ?, ?, null, NOW(), NOW(), 'N', 'N')
+[DEBUG] 24-11-19 17:30:52 [insert:135] - ==> Parameters: 가나다(String), test2(String), asdf123456(String), 01012341234(String), test2@naver.com(String), 12345(String), 서울특별시 강남구 강남대로94길 13(String), 삼경빌딩 1층(String), 2024-11-19(String), N(String), N(String)
+[INFO ] 24-11-19 17:30:52 [sqlonly:228] - INSERT INTO members (user_name, user_id, user_pw, tel, email, postcode, addr1, addr2, birthday, is_email_agree, is_sms_agree, login_date, join_date, edit_date, is_out, is_admin) VALUE ('가나다', 'test2', MD5('asdf123456'), '01012341234', 'test2@naver.com', '12345', '서울특별시 강남구 강남대로94길 13', '삼경빌딩 1층', '2024-11-19', 'N', 'N', null, NOW(), NOW(), 'N', 'N')
+
+[DEBUG] 24-11-19 17:30:52 [insert:135] - <==    Updates: 1
+[INFO ] 24-11-19 17:30:52 [resultsettable:610] - 
+|--------------|
+|generated_key |
+|--------------|
+|4             |
+|--------------|
+
+[DEBUG] 24-11-19 17:30:52 [selectItem:135] - ==>  Preparing: SELECT member_id, user_name, user_id, user_pw, tel, email, postcode, addr1, addr2, birthday, is_email_agree, is_sms_agree, login_date, join_date, edit_date, is_out, is_admin FROM members WHERE member_id=?
+[DEBUG] 24-11-19 17:30:52 [selectItem:135] - ==> Parameters: 4(Integer)
+[INFO ] 24-11-19 17:30:52 [sqlonly:228] - SELECT member_id, user_name, user_id, user_pw, tel, email, postcode, addr1, addr2, birthday, is_email_agree, is_sms_agree, login_date, join_date, edit_date, is_out, is_admin FROM members WHERE member_id=4
+
+[INFO ] 24-11-19 17:30:52 [resultsettable:610] - 
+|----------|----------|--------|---------------------------------|------------|----------------|---------|---------------------|--------|--------------------|---------------|-------------|-----------|--------------------|--------------------|-------|---------|
+|member_id |user_name |user_id |user_pw                          |tel         |email           |postcode |addr1                |addr2   |birthday            |is_email_agree |is_sms_agree |login_date |join_date           |edit_date           |is_out |is_admin |
+|----------|----------|--------|---------------------------------|------------|----------------|---------|---------------------|--------|--------------------|---------------|-------------|-----------|--------------------|--------------------|-------|---------|
+|4         |가나다       |test2   |0e167509d1be26a3e5b9785558b224cc |01012341234 |test2@naver.com |12345    |서울특별시 강남구 강남대로94길 13 |삼경빌딩 1층 |2024-11-19 00:00:00 |N              |N            |null       |2024-11-19 17:30:52 |2024-11-19 17:30:52 |N      |N        |
+|----------|----------|--------|---------------------------------|------------|----------------|---------|---------------------|--------|--------------------|---------------|-------------|-----------|--------------------|--------------------|-------|---------|
+
+[DEBUG] 24-11-19 17:30:52 [selectItem:135] - <==      Total: 1
+
+### memberModifyTestResult
+[DEBUG] 24-11-19 17:32:19 [update:135] - ==>  Preparing: UPDATE members SET user_pw = ( CASE WHEN user_pw=MD5(?) THEN user_pw WHEN user_pw!=MD5(?) THEN MD5(?) END ), tel=?, email=?, postcode=?, addr1=?, addr2=?, birthday=?, is_email_agree=?, is_sms_agree=?, edit_date=NOW() WHERE member_id=?
+[DEBUG] 24-11-19 17:32:19 [update:135] - ==> Parameters: asdf123456(String), asdf123456(String), asdf123456(String), 01011223344(String), test1@naver.com(String), 12345(String), 서울특별시 강남구 강남대로94길 13(String), 삼경빌딩 1층(String), 2023-11-10(String), N(String), N(String), 4(Integer)
+[INFO ] 24-11-19 17:32:19 [sqlonly:228] - UPDATE members SET user_pw = ( CASE WHEN user_pw=MD5('asdf123456') THEN user_pw WHEN user_pw!=MD5('asdf123456') THEN MD5('asdf123456') END ), tel='01011223344', email='test1@naver.com', postcode='12345', addr1='서울특별시 강남구 강남대로94길 13', addr2='삼경빌딩 1층',  birthday='2023-11-10',  is_email_agree='N', is_sms_agree='N', edit_date=NOW() WHERE member_id=4
+
+[DEBUG] 24-11-19 17:32:19 [update:135] - <==    Updates: 1
+[DEBUG] 24-11-19 17:32:19 [selectItem:135] - ==>  Preparing: SELECT member_id, user_name, user_id, user_pw, tel, email, postcode, addr1, addr2, birthday, is_email_agree, is_sms_agree, login_date, join_date, edit_date, is_out, is_admin FROM members WHERE member_id=?
+[DEBUG] 24-11-19 17:32:19 [selectItem:135] - ==> Parameters: 4(Integer)
+[INFO ] 24-11-19 17:32:19 [sqlonly:228] - SELECT member_id, user_name, user_id, user_pw, tel, email, postcode, addr1, addr2, birthday, is_email_agree, is_sms_agree, login_date, join_date, edit_date, is_out, is_admin FROM members WHERE member_id=4
+
+[INFO ] 24-11-19 17:32:19 [resultsettable:610] - 
+|----------|----------|--------|---------------------------------|------------|----------------|---------|---------------------|--------|--------------------|---------------|-------------|-----------|--------------------|--------------------|-------|---------|
+|member_id |user_name |user_id |user_pw                          |tel         |email           |postcode |addr1                |addr2   |birthday            |is_email_agree |is_sms_agree |login_date |join_date           |edit_date           |is_out |is_admin |
+|----------|----------|--------|---------------------------------|------------|----------------|---------|---------------------|--------|--------------------|---------------|-------------|-----------|--------------------|--------------------|-------|---------|
+|4         |가나다       |test2   |0e167509d1be26a3e5b9785558b224cc |01011223344 |test1@naver.com |12345    |서울특별시 강남구 강남대로94길 13 |삼경빌딩 1층 |2023-11-10 00:00:00 |N              |N            |null       |2024-11-19 17:30:52 |2024-11-19 17:32:19 |N      |N        |
+|----------|----------|--------|---------------------------------|------------|----------------|---------|---------------------|--------|--------------------|---------------|-------------|-----------|--------------------|--------------------|-------|---------|
+
+[DEBUG] 24-11-19 17:32:19 [selectItem:135] - <==      Total: 1
+
+### memberIsOutTestResult
+[DEBUG] 24-11-19 17:32:54 [out:135] - ==>  Preparing: UPDATE members SET is_out='Y', edit_date=NOW() WHERE member_id=? AND user_pw=MD5(?) AND is_out='N'
+[DEBUG] 24-11-19 17:32:54 [out:135] - ==> Parameters: 4(Integer), asdf123456(String)
+[INFO ] 24-11-19 17:32:54 [sqlonly:228] - UPDATE members SET is_out='Y', edit_date=NOW() WHERE member_id=4 AND user_pw=MD5('asdf123456') AND is_out='N'
+
+[DEBUG] 24-11-19 17:32:54 [out:135] - <==    Updates: 1
+[DEBUG] 24-11-19 17:32:54 [MemberServiceTest:92] - output : 1

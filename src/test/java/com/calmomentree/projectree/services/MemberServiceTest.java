@@ -44,4 +44,53 @@ public class MemberServiceTest {
             log.debug("output : " + output.toString());
         }
     }
+
+    @Test
+    @DisplayName("회원정보수정 테스트")
+    void memberModifyTest() throws Exception {
+        Member input = new Member();
+        input.setMemberId(4);
+        input.setUserPw("asdf123456");
+        input.setTel("01011223344");
+        input.setEmail("test1@naver.com");
+        input.setPostcode("12345");
+        input.setAddr1("서울특별시 강남구 강남대로94길 13");
+        input.setAddr2("삼경빌딩 1층");
+        input.setBirthday("2023-11-10");
+        input.setIsEmailAgree("N");
+        input.setIsSmsAgree("N");
+
+        Member output = null;
+
+        try {
+            output = memberService.editItem(input);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
+        if (output != null) {
+            log.debug("output : " + output);
+        }
+    }
+
+    @Test
+    @DisplayName("회원 탈퇴 처리 테스트 (탈퇴여부 관리)")
+    void memberIsOutTest() {
+        Member input = new Member();
+        input.setMemberId(4);
+        input.setUserPw("asdf123456");
+
+        int output = 0;
+
+        try {
+            output = memberService.out(input);
+        } catch (Exception e) {
+            log.debug(e.getMessage());
+        }
+        
+        if (output != 0) {
+            log.debug("output : " + output);
+            log.debug("Out Member : " + input);
+        }
+    }
 }
