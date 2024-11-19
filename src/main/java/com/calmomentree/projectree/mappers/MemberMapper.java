@@ -80,7 +80,7 @@ public interface MemberMapper {
 
     @Select("SELECT member_id, user_name, user_id, user_pw, " +
             "tel, email, postcode, addr1, addr2, " +
-            "birthday, is_marketing_agree, " +
+            "birthday, is_email_agree, is_sms_agree, " +
             "login_date, join_date, edit_date, " +
             "is_out, is_admin " +
             "FROM members " +
@@ -108,7 +108,7 @@ public interface MemberMapper {
 
     @Select("SELECT member_id, user_name, user_id, user_pw, " +
             "tel, email, postcode, addr1, addr2, " +
-            "birthday, is_marketing_agree, " +
+            "birthday, is_email_agree, is_sms_agree, " +
             "login_date, join_date, edit_date, " +
             "is_out, is_admin " +
             "FROM members")
