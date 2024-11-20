@@ -101,17 +101,16 @@ button, a {
         color: #FBF9EF;
         font-size: 13px;
         font-weight: 500;
-        line-height: 13px;
     }
 
     .top {
         background-color: #1c1c1c;
-        padding: 6px;
+        padding: 10px;
     }
 
     .bottom {
         background-color: #134B28;
-        padding: 6px;
+        padding: 10px;
     }
 
     &.on {
