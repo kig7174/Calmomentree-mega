@@ -222,6 +222,21 @@ class RegexHelper {
         return this.selector(selector, msg, /^[ㄱ-ㅎ가-힣0-9]*$/);
     }
 
+    lowerEngNum(selector, msg) {
+        return this.selector(selector, msg, /^[a-z0-9]*$/);
+    }
+
+    /**
+     * 비밀번호 정규 표현식
+     * 영문 대소문자 숫자 중 최소 두 개씩 포함, 10~16자
+     * @param {*} selector 
+     * @param {*} msg 
+     * @returns 
+     */
+    password(selector, msg) {
+        return this.selector(selector, msg, /^(?!((?:[A-Za-z]+)|(?:[~!@#$%^&*()_+=]+)|(?:[0-9]+))$)[A-Za-z\d~!@#$%^&*()_+=]{10,16}$/);
+    }
+
     /**
      * 이메일주소 형식인지 검사하기 위해 selector()를 간접적으로 호출한다.
      * @param {string} selector     검사할 대상에 대한 <INPUT>요소의 selector

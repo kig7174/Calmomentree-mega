@@ -2,9 +2,11 @@ package com.calmomentree.projectree.helpers;
 
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Component;
+
 import com.calmomentree.projectree.exceptions.StringFormatException;
 
-
+@Component
 public class RegexHelper {
     private static RegexHelper current = null;
 
@@ -85,6 +87,12 @@ public class RegexHelper {
         }
     }
 
+    public void isLowerEngNum(String str, String message) throws StringFormatException {
+        if (!Pattern.matches("^[a-z0-9]$", str)) {
+            throw new StringFormatException(message);
+        }
+    }
+
     /**
      * 한글과 숫자로만 구성되었는지에 대한 형식 검사
      * 
@@ -95,6 +103,12 @@ public class RegexHelper {
     public void isKorNum(String str, String message) throws StringFormatException {
         if (!Pattern.matches( "^[ㄱ-ㅎ가-힣0-9]*$", str)) {
             throw new StringFormatException(message);
+        }
+    }
+
+    public void isPassword(String str, String message) throws StringFormatException {
+        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{10,16}$\n", str)) {
+
         }
     }
 
