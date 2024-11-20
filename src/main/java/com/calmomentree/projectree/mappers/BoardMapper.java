@@ -73,9 +73,10 @@ public interface BoardMapper {
          */
         @Select("SELECT " +
                         "board_id, board_category, board_title, board_content, " +
-                        "write_date, edit_date, is_public, board_pw, " +
-                        "upload_img, member_id " +
-                        "FROM boards " +
+                        "DATE_FORMAT(b.write_date,'%Y-%m-%d') AS write_date, DATE_FORMAT(b.edit_date,'%Y-%m-%d') AS edit_date, is_public, board_pw, " +
+                        "upload_img, m.member_id, replace(user_name,substring(user_name,2),'****') AS user_name " +
+                        "FROM boards b " +
+                        "INNER JOIN members m ON b.member_id = m.member_id " +
                         "WHERE board_id = #{boardId}")
         @Results(id = "resultMap", value = {
                         @Result(property = "boardId", column = "board_id"),
@@ -88,6 +89,7 @@ public interface BoardMapper {
                         @Result(property = "boardPw", column = "board_pw"),
                         @Result(property = "uploadImg", column = "upload_img"),
                         @Result(property = "memberId", column = "member_id"),
+                        @Result(property = "userName", column = "user_name"),
         })
         public Board selectItem(Board input);
 
@@ -100,18 +102,18 @@ public interface BoardMapper {
         @Select("<script> " +
                 "SELECT " +
                         "board_id, board_category, board_title, board_content, " +
-                        "b.write_date, b.edit_date, is_public, board_pw," +
-                        "upload_img, m.member_id, replace(user_name,substring(user_name,2),'****') " +
+                        "DATE_FORMAT(b.write_date,'%Y-%m-%d') AS write_date, DATE_FORMAT(b.edit_date,'%Y-%m-%d') AS edit_date, is_public, board_pw," +
+                        "upload_img, m.member_id, replace(user_name,substring(user_name,2),'****') AS user_name " +
                 "FROM boards b " +
                 "INNER JOIN members m ON b.member_id = m.member_id " +
                 "<where> " +
                         // 제목에 대해서만 검색기능
                         "<if test = 'boardTitle != null'>board_title LIKE concat('%',#{boardTitle},'%')</if> " +
 
-                        "<if test = 'boardCategory != null'>board_category = #{boardCategory}</if> " +
+                        "<if test = 'boardCategory != null'>AND board_category = #{boardCategory}</if> " +
                         "<if test = 'memberId != 0'>AND m.member_id = #{memberId}</if> " +
                 "</where> " +
-                        // "ORDER BY board_id DESC " +
+                        "ORDER BY board_id DESC " +
 
                         "<if test='listCount > 0'>LIMIT #{offset}, #{listCount}</if> " +
                 "</script> ")

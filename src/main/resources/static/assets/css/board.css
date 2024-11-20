@@ -143,6 +143,12 @@ table {
 .paging-box {
   margin-top: 100px;
   text-align: center;
+  justify-content: center;
+  display: flex;
+
+  li {
+    padding: 0 7px;
+  }
 
   .pagination {
     list-style: none;

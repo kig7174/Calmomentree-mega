@@ -46,7 +46,7 @@
             </thead> -->
             <tbody>
               <tr th:each="boardQna : ${boardQnas}">
-                <td></td>
+                <td class="countList"></td>
                 <td th:text="${boardQna.boardTitle}"></td>
                 <td th:text="${boardQna.userName}"></td>
                 <td th:text="${boardQna.writeDate}"></td>
@@ -59,22 +59,22 @@
         </div>
 
         <!-- 페이지 번호 -->
-        <ul class="pagination">
+        <ul class="pagination paging-box">
           <!-- 이전 페이지 그룹 이동 버튼 -->
           <li th:if="${pagination.prevPage > 0}">
-            <a th:href="@{/department(keyword=${keyword}, page=${pagination.prevPage})}">&laquo;</a>
+            <a th:href="@{/board/qna/list(keyword=${keyword}, page=${pagination.prevPage})}">&laquo;</a>
           </li>
           <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
 
           <!-- 페이지 번호 링크 -->
           <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
             <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}"></a>
-            <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/department(keyword=${keyword}, page=${i})}"></a>
+            <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/board/qna/list(keyword=${keyword}, page=${i})}"></a>
           </li>
 
           <!-- 다음 페이지 그룹 이동 버튼 -->
           <li th:if="${pagination.nextPage > 0}">
-            <a th:href="@{/department(keyword=${keyword}, page=${pagination.nextPage})}">&raquo;</a>
+            <a th:href="@{/board/qna/list(keyword=${keyword}, page=${pagination.nextPage})}">&raquo;</a>
           </li>
           <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
         </ul>
@@ -96,5 +96,15 @@
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
+
+    <script>
+      // 게시글 번호 표시
+      const num = document.querySelectorAll(".countList");
+      const c = num.length;
+      
+      num.forEach((v,i) => {
+        v.innerHTML = c - i ;
+      });
+    </script>
   </body>
 </html>

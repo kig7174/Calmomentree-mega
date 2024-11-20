@@ -42,7 +42,7 @@ public class BoardController {
         // 조회 조건에 사용할 객체
         Board input = new Board();
         input.setBoardTitle(keyword);
-                
+        input.setBoardCategory("qna");        
 
         List<Board> output = null;
 
@@ -61,7 +61,7 @@ public class BoardController {
             webHelper.serverError(e);
 
         }
-        log.info("output" + output);
+               
         // view에 데이터 전달
         model.addAttribute("boardQnas", output);
         model.addAttribute("keyword", keyword);
