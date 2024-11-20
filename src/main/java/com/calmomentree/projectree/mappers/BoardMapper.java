@@ -74,7 +74,8 @@ public interface BoardMapper {
         @Select("SELECT " +
                         "board_id, board_category, board_title, board_content, " +
                         "DATE_FORMAT(b.write_date,'%Y-%m-%d') AS write_date, DATE_FORMAT(b.edit_date,'%Y-%m-%d') AS edit_date, is_public, board_pw, " +
-                        "upload_img, m.member_id, replace(user_name,substring(user_name,2),'****') AS user_name " +
+                        "upload_img, m.member_id, replace(user_name,substring(user_name,2),'****') AS user_name, " +
+                        "RAW_NUMBER() OVER(ORDER BY board_id DESC) AS rownum " +
                         "FROM boards b " +
                         "INNER JOIN members m ON b.member_id = m.member_id " +
                         "WHERE board_id = #{boardId}")
@@ -90,6 +91,7 @@ public interface BoardMapper {
                         @Result(property = "uploadImg", column = "upload_img"),
                         @Result(property = "memberId", column = "member_id"),
                         @Result(property = "userName", column = "user_name"),
+                        @Result(property = "rownum", column = "rownum"),
         })
         public Board selectItem(Board input);
 
@@ -103,7 +105,8 @@ public interface BoardMapper {
                 "SELECT " +
                         "board_id, board_category, board_title, board_content, " +
                         "DATE_FORMAT(b.write_date,'%Y-%m-%d') AS write_date, DATE_FORMAT(b.edit_date,'%Y-%m-%d') AS edit_date, is_public, board_pw," +
-                        "upload_img, m.member_id, replace(user_name,substring(user_name,2),'****') AS user_name " +
+                        "upload_img, m.member_id, replace(user_name,substring(user_name,2),'****') AS user_name, " +
+                        "ROW_NUMBER() OVER(ORDER BY board_id) AS rownum " +
                 "FROM boards b " +
                 "INNER JOIN members m ON b.member_id = m.member_id " +
                 "<where> " +
@@ -113,7 +116,7 @@ public interface BoardMapper {
                         "<if test = 'boardCategory != null'>AND board_category = #{boardCategory}</if> " +
                         "<if test = 'memberId != 0'>AND m.member_id = #{memberId}</if> " +
                 "</where> " +
-                        "ORDER BY board_id DESC " +
+                        "ORDER BY rownum DESC " +
 
                         "<if test='listCount > 0'>LIMIT #{offset}, #{listCount}</if> " +
                 "</script> ")
