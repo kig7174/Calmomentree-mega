@@ -8,18 +8,19 @@ import com.calmomentree.projectree.exceptions.StringFormatException;
 
 @Component
 public class RegexHelper {
-    private static RegexHelper current = null;
 
-    public static RegexHelper getInstance() {
-        if (current == null) {
-            current = new RegexHelper();
+    /**
+     * 주어진 문자열이 조건과 일치하는 지를 검사
+     * 
+     * @param str       - 검사할 문자열
+     * @param checkStr  - 검사 조건 문자열
+     * @param message   - 조건을 충족하지 않은 경우 표시할 에러 메시지
+     * @throws StringFormatException
+     */
+    public void isMatch(String str, String checkStr, String message) throws StringFormatException {
+        if (str != null && checkStr != null && str != checkStr) {
+            throw new StringFormatException(message);
         }
-
-        return current;
-    }
-
-    private RegexHelper() {
-        super();
     }
 
     /**
