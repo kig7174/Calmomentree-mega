@@ -135,11 +135,6 @@ public class PageOpenController {
         return "board/product/write";
     }
 
-    @GetMapping("/board/qna/list")
-    public String qnaList() {
-        return "board/qna/list";
-    }
-
     @GetMapping("/board/qna/read")
     public String qnaRead() {
         return "board/qna/read";

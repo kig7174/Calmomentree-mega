@@ -11,9 +11,12 @@ import com.calmomentree.projectree.helpers.Pagination;
 import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Board;
 import com.calmomentree.projectree.services.BoardService;
+
+import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+@Slf4j
 @Controller
 public class BoardController {
 
@@ -22,9 +25,9 @@ public class BoardController {
 
     @Autowired
     private WebHelper webHelper;
-
+    
     @GetMapping("/board/qna/list")
-    public String getList(Model model,
+    public String qnaList(Model model,
             // 검색어 파라미터
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(value = "page", defaultValue = "1") int nowPage) {
@@ -39,6 +42,7 @@ public class BoardController {
         // 조회 조건에 사용할 객체
         Board input = new Board();
         input.setBoardTitle(keyword);
+                
 
         List<Board> output = null;
 
@@ -57,6 +61,7 @@ public class BoardController {
             webHelper.serverError(e);
 
         }
+        log.info("output" + output);
         // view에 데이터 전달
         model.addAttribute("boardQnas", output);
         model.addAttribute("keyword", keyword);

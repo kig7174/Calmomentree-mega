@@ -129,7 +129,7 @@ public interface BoardMapper {
                         "SELECT COUNT(*) AS cnt " +
                         "FROM boards " +
                         "<where> " +
-                        "<if test = 'board_title != null'>board_title LIKE concat('%',#{boardTitle},'%')</if> " +
+                        "<if test = 'boardTitle != null'>board_title LIKE concat('%',#{boardTitle},'%')</if> " +
                         "</where> " +
                 "</script>")
         public int selectCount(Board input);
