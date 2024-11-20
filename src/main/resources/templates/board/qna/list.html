@@ -46,7 +46,7 @@
             </thead> -->
             <tbody>
               <tr th:each="boardQna : ${boardQnas}">
-                <td class="countList"></td>
+                <td th:text="${boardQna.rownum}"></td>
                 <td th:text="${boardQna.boardTitle}"></td>
                 <td th:text="${boardQna.userName}"></td>
                 <td th:text="${boardQna.writeDate}"></td>
@@ -97,14 +97,5 @@
 
     <th:block th:replace="~{/fragments/script}"></th:block>
 
-    <script>
-      // 게시글 번호 표시
-      const num = document.querySelectorAll(".countList");
-      const c = num.length;
-      
-      num.forEach((v,i) => {
-        v.innerHTML = c - i ;
-      });
-    </script>
   </body>
 </html>

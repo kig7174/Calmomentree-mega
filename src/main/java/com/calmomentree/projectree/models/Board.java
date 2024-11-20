@@ -21,6 +21,8 @@ public class Board {
     
     private int memberId;           // 회원 번호
     private String userName;        // 회원 이름
+
+    private String rownum;          // 순번
     
     @Getter
     @Setter
