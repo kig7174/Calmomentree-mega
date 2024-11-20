@@ -105,13 +105,14 @@
                         <div class="agree-all">
                             <input type="checkbox" id="agree-all-checked" data-checked=".check-all"/>
                             <label for="agreeAllChecked">전체약관 항목에 동의합니다.</label>
-                            <label for="agreeAllChecked">전체약관 항목에 동의합니다.</label>
                         </div>
                         <div class="agree-inner">
                             <div class="item">
                                 <div class="title">
-                                    <input type="checkbox" id="agree_service_check" name="agree_service_check" value="Y" class="check-all" />
-                                    <label for="agreeServiceCheck">이용약관 동의 (필수)</label>
+                                    <label for="agreeServiceCheck">
+                                        <input type="checkbox" id="agree_service_check" name="agree_service_check" value="Y" class="check-all" />
+                                        이용약관 동의 (필수)
+                                    </label>
                                     <button type="button" id="agree-content-btn"></button>
                                 </div>
                                 <div class="content service-on" th:insert="~{/member/mall_agreement :: agreement}">
@@ -124,7 +125,7 @@
                                     <label for="agreePrivacyCheck">개인정보처리방침 동의 (필수)</label>
                                     <button type="button" id="agree-content-btn"></button>
                                 </div>
-                                <div class="content privacy-on" >
+                                <div class="content privacy-on" th:insert="~{/member/privacy :: privacy}">
                                     
                                 </div>
                             </div>
@@ -135,8 +136,13 @@
                                     <button type="button" id="agree-content-btn"></button>
                                 </div>
                                 <div class="content marketing-on">
-                                    <p>캄모멘트리의 특가, 할인, 쿠폰, 혜택, 이벤트</p>
+                                    <p>
+                                        캄모멘트리의 특가, 할인, 쿠폰, 혜택, 이벤트, 신제품 소식 등 쇼핑몰에서 제공하는 유익한 정보를 SMS나 이메일로 받아보실 수 있습니다. 단, 주문/교환/환불 등 거래 정보 및 주요 정책과 관련된 내용은 수신동의 여부와 관계없이 발송됩니다.
+
+                                        선택 약관에 동의하지 않으셔도 회원가입은 가능하며, 회원가입 후 언제든지 회원정보수정 페이지에서 수신여부를 변경하실 수 있습니다.
+                                    </p>
                                 </div>
+                                <br />
                                 <input type="checkbox" name="is_sms_agree" value="Y" class="check-all marketing-check-all" />
                                 <label for="agreeSmsReceive">SMS 수신 동의 (선택)</label>
 
@@ -155,6 +161,11 @@
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
-    <script th:src="@{/assets/js/join.js}"></script>
+    <script th:inline="javascript">
+        const memberJoinLink = /*[[@{/api/member/join}]]*/'';
+        const pageLoginLink = /*[[@{/member/login}]]*/'';
+        const idUniqueCheckLink = /*[[@{/api/member/id_unique_check}]]*/'';
+    </script>
+    <script type="text/javascript" th:src="@{/assets/js/join.js}" th:inline="javascript"></script>
 </body>
 </html>

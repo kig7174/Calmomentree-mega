@@ -89,7 +89,7 @@ document.querySelector("#user_id").addEventListener("blur", async (e) => {
     }
 
     const userid = document.querySelector("#user_id").value;
-    const data = await axiosHelper.get(`/api/member/id_unique_check`, {
+    const data = await axiosHelper.get(idUniqueCheckLink, {
         user_id : userid
     });
 
@@ -142,7 +142,7 @@ document.querySelector("#join").addEventListener("submit", async (e) => {
         regexHelper.minLength("#user_pw", 10, "비밀번호는 10자 이상으로 입력해주세요.");
         regexHelper.maxLength("#user_pw", 16, "비밀번호는 16자 이하로 입력해주세요.");
         regexHelper.password("#user_pw", "비밀번호 형식이 잘못되었습니다.");
-        regexHelper.compareTo("#user_pw", "#pw_confirm", "비밀번호 확인이 잘못되었습니다.");
+        regexHelper.compareTo("#user_pw", "#pw_confirm", "비밀번호 확인이 일치하지 않습니다..");
 
         regexHelper.value("#user_name", "이름을 입력해주세요.");
         regexHelper.kor("#user_name", "이름은 한글로만 입력해주세요.");
@@ -179,10 +179,10 @@ document.querySelector("#join").addEventListener("submit", async (e) => {
 
     const formData = new FormData(e.currentTarget);
 
-    const data = await axiosHelper.post('[[@{/api/member/join}]]', formData);
+    const data = await axiosHelper.post(memberJoinLink, formData);
 
     if (data) {
         alert("회원가입에 성공했습니다.");
-        window.location = '[[@{/member/login}]]';
+        window.location = pageLoginLink;
     }
 });
