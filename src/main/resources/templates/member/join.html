@@ -18,14 +18,14 @@
             <div class="join-form">
                 <form id="join">
                     <div class="id-box input-box">
-                        <input type="text" name="user_id" id="user_id" placeholder="아이디" minlength="4" maxlength="16"/>
+                        <input type="text" name="user_id" id="user_id" placeholder="아이디"/>
                         <input type="hidden" id="user_id_check" name="user_id_check" value="N" />
                         <p class="input-info">(영문소문자/숫자, 4~16자)</p>
                         <p class="id-msg"></p>
                     </div>
 
                     <div class="password-box input-box">
-                        <input id="password" type="password" name="user_pw" placeholder="비밀번호" minlength="10" maxlength="16"/>
+                        <input type="password" id="user_pw" name="user_pw" placeholder="비밀번호"/>
                         <p class="input-info">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</p>
                     </div>
                     <div id="password-focus" class="password-off">
@@ -34,11 +34,11 @@
                             <button type="button" id="password-content-close"></button>
                             <ul class="password-info">
                                 <th:block th:fragment="password-info">
-                                    - 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자
+                                    - 대소문자/숫자/특수문자 를 포함, 10자~16자
                                     <br>
                                         - 입력 가능 특수문자 
                                     <br>
-                                        &nbsp;&nbsp;&nbsp;  ~ ` ! @ # $ % ^ ( ) * _ - = { } [ ] | ; : < > , . ? /
+                                        &nbsp;&nbsp;&nbsp;  ~ ! @ # $ % ^ ( ) * _ - = 
                                     <br>
                                         - 공백 입력 불가능
                                     <br>
@@ -53,12 +53,17 @@
                     </div>
 
                     <div class="password-confirm-box input-box">
-                        <input type="password" name="password_confirm" placeholder="비밀번호 확인" minlength="10" maxlength="16" />
-                        <p class="password-confirm-msg">비밀번호가 일치하지 않습니다.</p>
+                        <input type="password" id="pw_confirm" name="pw_confirm" placeholder="비밀번호 확인"/>
+                        <p class="pw-confirm-msg"></p>                        
+                    </div>
+
+                    <div class="user-name-box input-box">
+                        <input type="text" id="user_name" name="user_name" placeholder="이름" />
+                        <p class="input-info">(한글, 2~10자)</p>
                     </div>
 
                     <div class="tel-box input-box">
-                        <select name="tel1" selected="010">
+                        <select id="tel1" name="tel1" selected="010">
                             <th:block th:fragment="tel1-list">
                                 <option value="010">010</option>
                                 <option value="011">011</option>
@@ -69,14 +74,14 @@
                             </th:block>
                         </select>
                         -
-                        <input type="text" name="tel2" maxlength="4" class="tel" />
+                        <input type="text" id="tel2" name="tel2" maxlength="4" class="tel" />
                         -
-                        <input type="text" name="tel3" maxlength="4" class="tel" />
+                        <input type="text" id="tel3" name="tel3" maxlength="4" class="tel" />
+                        <input type="hidden" id="tel" />
                     </div>
                     
                     <div class="email-box input-box">
-                        <input type="email" name="email" placeholder="이메일"/>
-                        <p class="email-msg">유효한 이메일을 입력해 주세요.</p>
+                        <input type="email" id="email" name="email" placeholder="이메일"/>
                     </div>
 
                     <div class="addr-box input-box">
@@ -105,7 +110,7 @@
                         <div class="agree-inner">
                             <div class="item">
                                 <div class="title">
-                                    <input type="checkbox" name="agree_service_check" value="Y" required class="check-all" />
+                                    <input type="checkbox" id="agree_service_check" name="agree_service_check" value="Y" class="check-all" />
                                     <label for="agreeServiceCheck">이용약관 동의 (필수)</label>
                                     <button type="button" id="agree-content-btn"></button>
                                 </div>
@@ -115,7 +120,7 @@
                             </div>
                             <div class="item">
                                 <div class="title">
-                                    <input type="checkbox" name="agree_privacy_check" value="Y" required class="check-all" />
+                                    <input type="checkbox" id="agree_privacy_check" name="agree_privacy_check" value="Y" class="check-all" />
                                     <label for="agreePrivacyCheck">개인정보처리방침 동의 (필수)</label>
                                     <button type="button" id="agree-content-btn"></button>
                                 </div>

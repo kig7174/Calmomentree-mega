@@ -153,6 +153,14 @@ input[type="date"] {
                     }
                 }
 
+                &.password-confirm-box {
+
+                    .pw-confirm-msg {
+                        font-size: var(--font-size-small);
+                        color: rgb(230, 75, 75);
+                    }
+                }
+
                 &.tel-box {
                     select{
                         width: 31%;
