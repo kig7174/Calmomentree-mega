@@ -5,13 +5,13 @@ document.querySelector("#post-btn").addEventListener("click", e => {
 });
 
 /** 비밀번호 입력 시 입력조건 */
-document.querySelector("#password").addEventListener("focus", e => {
+document.querySelector("#user_pw").addEventListener("focus", e => {
     e.preventDefault();
     document.querySelector("#password-focus").classList.remove("password-off");
     document.querySelector("#password-focus").classList.add("password-on");
 });
 
-document.querySelector("#password").addEventListener("blur", e => {
+document.querySelector("#user_pw").addEventListener("blur", e => {
     e.preventDefault();
     document.querySelector("#password-focus").classList.remove("password-on");
     document.querySelector("#password-focus").classList.add("password-off");
@@ -81,15 +81,15 @@ document.querySelector("#user_id").addEventListener("blur", async (e) => {
         regexHelper.value("#user_id", "아이디를 입력하세요.");
         regexHelper.minLength("#user_id", 4, "아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.");
         regexHelper.maxLength("#user_id", 16, "아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요.");
+        regexHelper.engNum("#user_id","아이디는 영문소문자 또는 숫자 4~16자로 입력해 주세요." )
     } catch (error) {
         idMsg.classList.remove("id-unique-check");
         idMsg.innerHTML = error.message;
-        setTimeout(() => error.element.focus(), 1);
         return;
     }
 
     const userid = document.querySelector("#user_id").value;
-    const data = await axiosHelper.get('/api/member/id_unique_check', {
+    const data = await axiosHelper.get(`/api/member/id_unique_check`, {
         user_id : userid
     });
 
@@ -105,13 +105,84 @@ document.querySelector("#user_id").addEventListener("blur", async (e) => {
     }
 });
 
+/** 비밀번호 확인 검사 */
+document.querySelector("#pw_confirm").addEventListener("blur", e => {
+    e.preventDefault();
+    const pwMsg = document.querySelector(".pw-confirm-msg");
+    try {
+        regexHelper.compareTo("#user_pw", "#pw_confirm", "비밀번호가 일치하지 않습니다.");
+    } catch (error) {
+        pwMsg.innerHTML = error.message;
+    }
+
+    document.querySelector("#pw_confirm").addEventListener("change", e => {
+        pwMsg.innerHTML = "";
+    });
+});
+
 document.querySelector("#user_id").addEventListener("change", e => {
     document.querySelector("#user_id_check").value = "N";
 });
 
 document.querySelector("#join").addEventListener("submit", async (e) => {
     e.preventDefault();
+    const tel1 = document.querySelector("#tel1");
+    const tel1Selected = tel1.selectedIndex;
+    const tel = tel1[tel1Selected].value + document.querySelector("#tel2").value + document.querySelector("#tel3").value;
+    document.querySelector("#tel").value = tel;
 
     /** 유효성 검사 */
-    
+    try {
+        regexHelper.value("#user_id", "아이디를 입력해주세요.");
+        regexHelper.minLength("#user_id", 4, "아이디는 4자 이상으로 입력해주세요.");
+        regexHelper.maxLength("#user_id", 16, "아이디는 16자 이하로 입력해주세요.");
+        regexHelper.lowerEngNum("#user_id", "아이디는 영문소문자와 숫자로만 입력해주세요.");
+
+        regexHelper.value("#user_pw", "비밀번호를 입력해주세요.");
+        regexHelper.minLength("#user_pw", 10, "비밀번호는 10자 이상으로 입력해주세요.");
+        regexHelper.maxLength("#user_pw", 16, "비밀번호는 16자 이하로 입력해주세요.");
+        regexHelper.password("#user_pw", "비밀번호 형식이 잘못되었습니다.");
+        regexHelper.compareTo("#user_pw", "#pw_confirm", "비밀번호 확인이 잘못되었습니다.");
+
+        regexHelper.value("#user_name", "이름을 입력해주세요.");
+        regexHelper.kor("#user_name", "이름은 한글로만 입력해주세요.");
+        regexHelper.minLength("#user_name", "이름은 2자 이상으로 입력해주세요.");
+        regexHelper.maxLength("#user_name", "이름은 10자 이하로 입력해주세요.");
+
+        regexHelper.value("#tel", "전화번호를 입력해주세요.");
+        regexHelper.num("#tel", "전화번호는 숫자로만 입력 가능합니다.");
+        regexHelper.phone("#tel", "전화번호 형식이 잘못되었습니다.");
+
+        regexHelper.value("#email", "이메일을 입력해주세요.");
+        regexHelper.email("#email", "이메일 형식이 잘못되었습니다.");
+
+        regexHelper.value("#postcode", "우편번호를 검색해주세요.");
+        regexHelper.minLength("#postcode", 5, "우편번호는 5자로 입력해주세요.");
+        regexHelper.maxLength("#postcode", 5, "우편번호는 5자로 입력해주세요.");
+        regexHelper.num("#postcode", "우편번호는 숫자로만 입력해주세요.");
+        
+        regexHelper.value("#addr1", "주소를 검색해주세요.");
+        regexHelper.value("#addr2", "상세 주소를 입력해주세요.");
+
+        regexHelper.check("#agree_service_check", "이용약관 동의는 필수 항목입니다.");
+        regexHelper.check("#agree_privacy_check", "개인정보처리방침 약관 동의는 필수 항목입니다.");
+    } catch (error) {
+        alert(error.message);
+        return;
+    }
+
+    const idCheck = document.querySelector("#user_id_check");
+
+    if (idCheck === 'N') {
+        alert("중복된 아이디입니다. 중복검사를 진행해주세요.");
+    }
+
+    const formData = new FormData(e.currentTarget);
+
+    const data = await axiosHelper.post('[[@{/api/member/join}]]', formData);
+
+    if (data) {
+        alert("회원가입에 성공했습니다.");
+        window.location = '[[@{/member/login}]]';
+    }
 });
