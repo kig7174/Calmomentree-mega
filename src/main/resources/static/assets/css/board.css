@@ -75,6 +75,13 @@ body {
   height: 100%;
   position: relative;
   padding-bottom: 150px;
+
+  .noneData {
+    background-color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    border-top : 1px solid #000;
+  }
 }
 
 .title-wr {
@@ -200,7 +207,7 @@ table {
         outline: none;
       }
     }
-    a {
+    button {
       display: block;
       color: #fff;
       background-color: #000;
@@ -209,13 +216,27 @@ table {
       line-height: 38px;
       text-align: center;
       margin-top: 2px;
+      border: none;
     }
   }
 }
 .btn-area {
   margin: 40px 0 50px 6px;
   display: flex;
-
+  .button {
+    border: 1px solid #000;
+    color: #233328;
+    height: 35px;
+    line-height: 35px;
+    margin-right: 5px;
+    padding: 0;
+    width: 93px;
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    background-color: var(--background-color);
+  }
   &.right {
     position: relative;
     .write-btn {
@@ -333,4 +354,56 @@ table {
       font-size: 16px;
       padding-top: 5px;
     }
+}
+
+.inner-button-area {
+  position: absolute;
+  right: 0;
+  display: flex;
+
+  a {
+    border: 1px solid var(--font-color);
+    color: #233328;
+    height: 35px;
+    line-height: 35px;
+    margin-right: 5px;
+    padding: 0;
+    width: 93px;
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    cursor: pointer;
+    background-color: var(--background-color);
+    
+  }
+  .edit {
+    background-color: #000;
+    color:var(--background-color);
+  }
+}
+
+.passwordArea {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  border-top: 1px solid var(--font-color);
+  padding-top: 20px;
+
+  input {
+    width: 150px;
+    margin-left: auto;
+    background-color: var(--background-color);
+    border: none;
+    border-bottom: 1px solid var(--font-color);
+    padding: 5px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  p {
+    font-size: 10px;
+    margin-top: 10px;
+  }
 }

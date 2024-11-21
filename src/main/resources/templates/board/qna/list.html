@@ -26,33 +26,42 @@
       <div class="inner-box">
         <div class="title-wr">QNA</div>
         <div class="board-list">
-          <table border="1">
-            <caption>
-              상품 게시판 목록
-            </caption>
-            <colgroup>
-              <col width="80px" />
-              <col width="auto" />
-              <col width="15%" />
-              <col width="80px" />
-            </colgroup>
-            <!-- <thead>
-              <tr>
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>작성일</th>
-              </tr>
-            </thead> -->
-            <tbody>
-              <tr th:each="boardQna : ${boardQnas}">
-                <td th:text="${boardQna.rownum}"></td>
-                <td th:text="${boardQna.boardTitle}"></td>
-                <td th:text="${boardQna.userName}"></td>
-                <td th:text="${boardQna.writeDate}"></td>
-              </tr>
-            </tbody>
-          </table>
+          
+          <div class="noneData" th:unless="${boardQnas.size() > 0}">
+            <p>검색결과가 없습니다.</p>
+          </div>
+          
+          <div th:if="${boardQnas.size() > 0}">
+            <table border="1">
+              <caption>
+                상품 게시판 목록
+              </caption>
+              <colgroup>
+                <col width="80px" />
+                <col width="auto" />
+                <col width="15%" />
+                <col width="80px" />
+              </colgroup>
+              <!-- <thead>
+                <tr>
+                  <th>번호</th>
+                  <th>제목</th>
+                  <th>작성자</th>
+                  <th>작성일</th>
+                </tr>
+              </thead> -->
+              <tbody>
+                <tr th:each="boardQna : ${boardQnas}">
+                  <td th:text="${boardQna.rownum}"></td>
+                  <td><a th:text="${boardQna.boardTitle}" 
+                         th:href="@{/board/qna/{boardId}(boardId=${boardQna.boardId})}"></a></td>
+                  <td th:text="${boardQna.userName}"></td>
+                  <td th:text="${boardQna.writeDate}"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
         </div>
         <div class="btn-area right">
           <button class="write-btn">글쓰기</button>
@@ -81,6 +90,7 @@
 
         <div class="search-container">
           <div class="search-box">
+            <!-- 검색폼 -->
             <form method="get" th:action="@{/board/qna/list}">
               <div class="form">
                 <input type="search" name="keyword" placeholder="내용을 입력하세요" th:value="${keyword}" />

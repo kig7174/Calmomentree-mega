@@ -22,13 +22,13 @@ public class BoardMapperTest {
     @DisplayName("게시글 등록 테스트")
     void boardUploadTest() {
         Board input = new Board();
-        input.setBoardCategory("qna");
-        input.setBoardTitle("리뷰게시글 제목임.");
-        input.setBoardContent("리뷰입니다...");
+        input.setBoardCategory("review");
+        input.setBoardTitle("리뷰 게시글 제목임.");
+        input.setBoardContent("리뷰사항입니다...");
         input.setIsPublic("N");
         input.setBoardPw("1234");
         input.setUploadImg(null);
-        input.setMemberId(2);
+        input.setMemberId(1);
 
         int output = boardMapper.insert(input);
        

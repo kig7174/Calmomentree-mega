@@ -48,36 +48,65 @@
               </thead> -->
             <tbody>
               <tr class="detail-box-title">
-                <td>문의드립니다</td>
-                <td>정****</td>
-                <td>2024-10-13</td>
+                <td th:text="${boardQna.boardTitle}"></td>
+                <td th:text="${boardQna.userName}"></td>
+                <td th:text="${boardQna.writeDate}"></td>
               </tr>
               <tr class="detail-box-content">
                 <td>
-                  <div class="detail-box">
-                    1. 무료배송 쿠폰 넣어주신다고 하셨는데 아직인가요....??
-                    멤버십 가입한지도 꽤 되었고 가입혜택인 것을 제가 직접
-                    문의드리는것도 번거로운데 문의드린지도 꽤 되었는데 응대도
-                    없으시고 적립금도 다 써갑니다만 고객응대가 매우 아쉽네요. 2.
-                    트라이얼키트는 마지막 적립금 소진시 제 주소로
-                    보내주시는건가요? 3. 회원 연간 기프트는 누락안되고
-                    보내주시나요? 무료배송쿠폰도 조차도 누락되었고 회원혜택을
-                    받은게 아직 없기때문에 제가 챙기지 않아도 제대로 오는지
-                    찜찜해서 문의드립니다.
-                  </div>
+                  <div class="detail-box" th:text="${boardQna.boardContent}"></div>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <div class="btn-area">
-          <button>목록</button>
+
+        <!-- 본인이 작성한 글이면 생김 th:if="${}" -->
+        <form id="cancel">
+        <div class="passwordArea" >
+          <input type="password" placeholder="비밀번호" class="password">
+          <p>수정 및 삭제하려면 비밀번호를 입력하세요.</p>
         </div>
+
+
+        <div class="btn-area">
+          <a class="button" th:href="@{/board/qna/list}">목록</a>
+
+          <!-- 본인이 작성한 글이면 생김 th:if="${}" -->
+          <div class="inner-button-area" >
+            <a href="" class="edit">수정</a>
+            <button type="submit" class="cancel">삭제</button>
+          </div>
+        </div>
+      </form>
       </div>
       <div class="board-box right"></div>
     </div>
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
+    <script>
+      document.querySelector("#cancel").addEventListener("submit", async e => {
+        e.preventDefault();
+
+        const current = e.currentTarget;
+        const passwordValue = document.querySelector(".password").value;
+        
+        const result = await confirm("정말로 삭제 하시겠습니까?");
+        console.log(result);
+        // if(result.value) {
+        //   const data = await axiosHelper.delete("[[@/board/qna/delete/{boardId}(boardId=${boardQna.boardId})]]",
+        //        current);
+
+
+
+        //   if(data) {
+        //     await alert("삭제되었습니다.");
+        //     window.loaction = "[[@{/board/qna/list}]]"
+        //   }
+        // }
+
+      });
+    </script>
   </body>
 </html>

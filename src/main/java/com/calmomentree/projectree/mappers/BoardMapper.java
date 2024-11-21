@@ -75,7 +75,7 @@ public interface BoardMapper {
                         "board_id, board_category, board_title, board_content, " +
                         "DATE_FORMAT(b.write_date,'%Y-%m-%d') AS write_date, DATE_FORMAT(b.edit_date,'%Y-%m-%d') AS edit_date, is_public, board_pw, " +
                         "upload_img, m.member_id, replace(user_name,substring(user_name,2),'****') AS user_name, " +
-                        "RAW_NUMBER() OVER(ORDER BY board_id DESC) AS rownum " +
+                        "ROW_NUMBER() OVER(ORDER BY board_id) AS rownum " +
                         "FROM boards b " +
                         "INNER JOIN members m ON b.member_id = m.member_id " +
                         "WHERE board_id = #{boardId}")

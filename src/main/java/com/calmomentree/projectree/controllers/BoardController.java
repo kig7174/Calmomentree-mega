@@ -14,8 +14,11 @@ import com.calmomentree.projectree.services.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 @Slf4j
 @Controller
 public class BoardController {
@@ -26,6 +29,9 @@ public class BoardController {
     @Autowired
     private WebHelper webHelper;
     
+    /**
+     * qna 게시판 목록페이지   
+     */
     @GetMapping("/board/qna/list")
     public String qnaList(Model model,
             // 검색어 파라미터
@@ -70,5 +76,50 @@ public class BoardController {
         return "board/qna/list";
 
     }
+
+    /**
+     * qna 게시판 상세페이지
+     */
+    @GetMapping("/board/qna/{boardId}")
+    public String qnaRead(Model model,
+        @PathVariable("boardId") int boardId) {
+        
+        // 조회 조건에 사용할 변수를 Beans에 저장
+        Board input = new Board();
+        input.setBoardId(boardId);
+
+
+        Board output = null;
+
+        try {
+            output = boardService.getItem(input);
+        } catch (Exception e) {
+            webHelper.serverError(e);
+        }
+
+        // View에 데이터 전달
+        model.addAttribute("boardQna", output);
+        
+        return "board/qna/read";
+    }
+
+
+    @ResponseBody
+    @GetMapping("/board/qna/delete/{boardId}")
+    public void qnaDelete(
+        @PathVariable("boardId") int boardId) {
+        
+        Board input = new Board();
+        input.setBoardId(boardId);
+
+        try {
+            boardService.deleteItem(input);
+        } catch (Exception e) {
+            webHelper.serverError(e);
+        }
+        
+        webHelper.redirect("/board/qna/list","삭제되었습니다.");
+    }
+    
 
 }
