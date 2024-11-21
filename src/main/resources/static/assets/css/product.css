@@ -33,11 +33,11 @@ body {
   width: 100%;
 }
 
-#container {
+.container {
   display: flex;
   position: relative;
   width: 90%;
-  margin: auto 0;
+  margin: auto;
   padding: 200px 0  150px 0;
 }
 
