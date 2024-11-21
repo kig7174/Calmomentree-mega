@@ -12,14 +12,14 @@
       <div th:replace="~{/fragments/common :: calm-search}"></div>
       <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
       <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
-      
+
       <!-- 왼쪽 사이드바 영역 -->
       <div class="board-box left">
         <ul class="board-inner">
           <li><a href="">공지사항</a></li>
           <li><a href="">공병수거신청</a></li>
           <li><a href="">달력쿠폰</a></li>
-          <li><a href="">문의하기</a></li>
+          <li><a href="/board/qna/list">문의하기</a></li>
           <li><a href="">FAQ</a></li>
           <li><a href="">제품리뷰</a></li>
         </ul>
@@ -62,23 +62,22 @@
         </div>
 
         <!-- 본인이 작성한 글이면 생김 th:if="${}" -->
-        <form id="cancel">
-        <div class="passwordArea" >
-          <input type="password" placeholder="비밀번호" class="password">
-          <p>수정 및 삭제하려면 비밀번호를 입력하세요.</p>
-        </div>
-
-
-        <div class="btn-area">
-          <a class="button" th:href="@{/board/qna/list}">목록</a>
-
-          <!-- 본인이 작성한 글이면 생김 th:if="${}" -->
-          <div class="inner-button-area" >
-            <a href="" class="edit">수정</a>
-            <button type="submit" class="cancel">삭제</button>
+        <form method="post" id="cancel" >
+          <div class="passwordArea">
+            <input type="password" placeholder="비밀번호" class="password" />
+            <p>수정 및 삭제하려면 비밀번호를 입력하세요.</p>
           </div>
-        </div>
-      </form>
+
+          <div class="btn-area">
+            <a class="button" th:href="@{/board/qna/list}">목록</a>
+
+            <!-- 본인이 작성한 글이면 생김 th:if="${}" -->
+            <div class="inner-button-area">
+              <a href="" class="edit">수정</a>
+              <button type="sumbit" class="cancel">삭제</button>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="board-box right"></div>
     </div>
@@ -91,21 +90,17 @@
 
         const current = e.currentTarget;
         const passwordValue = document.querySelector(".password").value;
-        
-        const result = await confirm("정말로 삭제 하시겠습니까?");
-        console.log(result);
-        // if(result.value) {
-        //   const data = await axiosHelper.delete("[[@/board/qna/delete/{boardId}(boardId=${boardQna.boardId})]]",
-        //        current);
+        const deleteQna = current.action;
+        console.log(deleteQna);
 
-
-
-        //   if(data) {
-        //     await alert("삭제되었습니다.");
-        //     window.loaction = "[[@{/board/qna/list}]]"
-        //   }
-        // }
-
+         if (confirm('정말로 삭제 하시겠습니까?')) {
+           const data = await axiosHelper.delete("[[@{/api/board/qna/delete/{boardId}(boardId=${boardQna.boardId})}]]");
+           
+           if(data) {
+            alert("삭제되었습니다.");
+            window.location = "[[@{/board/qna/list}]]";
+           }
+        } 
       });
     </script>
   </body>
