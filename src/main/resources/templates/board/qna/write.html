@@ -3,65 +3,80 @@
   <head>
     <th:block th:replace="~{fragments/head :: calm-head('QNA 글쓰기')}"></th:block>
     <link rel="stylesheet" th:href="@{/assets/css/board.css}" />
-    
   </head>
   <body>
     <header id="header">
       <header th:replace="~{/fragments/common :: calm-header}"></header>
     </header>
-    <div id="container">
+    <div id="write">
       <div th:replace="~{/fragments/common :: calm-search}"></div>
       <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
       <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
-      
-      <!-- 내용 영역 -->
-      <div class="inner-box">
-        <div class="title-wr">QNA</div>
-        <div class="board-list">
-          <table border="1">
-            <caption>
-              게시판 글쓰기
-            </caption>
-            <tbody>
-              <tr class="detail-box-title write">
-                <td>
-                  <select name="subject" id="subject">
-                    <option value="문의드립니다.">문의드립니다.</option>
-                  </select>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="textarea-box">
-            
-            <div id="content" ></div>
-          </div>
-        </div>
-        <!-- 하단 버튼 구역 -->
-        <div class="bottom-box">
-          <div class="file-box">
-            <input name="attach-file" class="line file-btn" type="file" />
-            <div class="pw-box line">
-              <input id="password" name="password" fw-filter="" fw-label="비밀번호" fw-msg="" autocomplete="new-password" value="" type="password" placeholder="비밀번호" />
-            </div>
-            <div class="radio-box">
-              <input id="secure0" name="secure" value="F" type="radio" checked="checked" />
-              <label for="secure0">공개글</label>
-              <input id="secure1" name="secure" value="T" type="radio" />
-              <label for="secure1">비밀글</label>
+
+      <form action="" id="boardEdit" method="post">
+        <!-- 내용 영역 -->
+        <div class="inner-box">
+          <div class="title-wr">QNA</div>
+          <div class="board-list">
+            <table border="1">
+              <caption>
+                게시판 글쓰기
+              </caption>
+              <tbody>
+                <tr class="detail-box-title write">
+                  <td>
+                    <select name="boardTitle" id="subject">
+                      <option value="문의드립니다.">문의드립니다.</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="textarea-box" >
+              <textarea name="boardContent" id="textBox" style="display: none;"></textarea>
+              <div id="content"></div>
             </div>
           </div>
-          <div class="btn-area">
-            <button class="btn-1">등록</button>
-            <button class="btn-2">취소</button>
+          <!-- 하단 버튼 구역 -->
+          <div class="bottom-box">
+            <div class="file-box">
+              <input name="attach-file" class="line file-btn" type="file" />
+              <div class="pw-box line">
+                <input
+                  id="password"
+                  name="boardPw"
+                  autocomplete="new-password"
+                  value=""
+                  type="password"
+                  placeholder="비밀번호"
+                />
+              </div>
+              <div class="radio-box">
+                <input id="secure0" name="isPublic" value="Y" type="radio" checked="checked" />
+                <label for="secure0">공개글</label>
+                <input id="secure1" name="isPublic" value="N" type="radio" />
+                <label for="secure1">비밀글</label>
+              </div>
+            </div>
+            <div class="btn-area">
+              <button type="submit" class="btn-1">등록</button>
+              <button class="btn-2">취소</button>
+            </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
-    <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+
+    <script th:inline="javascript">
+      const boardAddLink = /*[[@{/board/Add}]]*/'';
+      const qnaListPageLink = /*[[@{/board/qna/list}]]*/'';
+    </script>
+
+    <script type="text/javascript" th:src="@{/assets/js/boardAdd.js}" ></script>
+
     <script>
       ClassicEditor.create(document.querySelector("#content"));
     </script>

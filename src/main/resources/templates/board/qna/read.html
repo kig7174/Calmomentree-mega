@@ -67,6 +67,7 @@
             <div class="inner-button-area">
               <a href="" class="edit">수정</a>
               <button type="sumbit" class="cancel">삭제</button>
+               <!-- <a id="cancelBtn" th:href="@{/api/board/qna/delete/{boardId(boardId=${boardQna.boardId})}}">삭제</a> -->
             </div>
           </div>
         </form>
@@ -76,24 +77,12 @@
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
-    <script>
-      document.querySelector("#cancel").addEventListener("submit", async e => {
-        e.preventDefault();
 
-        const current = e.currentTarget;
-        const passwordValue = document.querySelector(".password").value;
-        const deleteQna = current.action;
-        console.log(deleteQna);
-
-         if (confirm('정말로 삭제 하시겠습니까?')) {
-           const data = await axiosHelper.delete("[[@{/api/board/qna/delete/{boardId}(boardId=${boardQna.boardId})}]]");
-           
-           if(data) {
-            alert("삭제되었습니다.");
-            window.location = "[[@{/board/qna/list}]]";
-           }
-        } 
-      });
+    <script th:inline="javascript">
+      const boardDeleteLink = /*[[@{/api/board/qna/delete/{boardId}(boardId=${boardQna.boardId})}]]*/'';
+      const qnaListPageLink = /*[[@{/board/qna/list}]]*/'';
     </script>
+    <script type="text/javascript" th:src="@{/assets/js/board.js}" ></script>
+    
   </body>
 </html>
