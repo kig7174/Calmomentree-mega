@@ -38,21 +38,21 @@ public interface ProductMapper {
 
     @Update("<script>" +
             "UPDATE products SET " +
-            "prod_name_kor=#{prodNameKor}, " +
-            "prod_name_eng=#{prodNameEng}, " +
-            "func_txt=#{funcTxt}, " +
-            "desc_txt=#{descTxt}, " +
-            "price=#{price}, " +
-            "is_discount=#{isDiscount}, " +
-            "<if test='is_discount=\'Y\''>discount=#{discount},</if> " +
-            "capacity=#{capacity}, " +
-            "specification=#{specification}, " +
-            "use_period=#{usePeriod}, " +
-            "use_method=#{useMethod}, " +
-            "manufacturer=#{manufacturer}, " +
-            "release_date=#{releaseDate}, " +
-            "edit_date=NOW(), " +
-            "category_id=#{categoryId} " +
+                "prod_name_kor=#{prodNameKor}, " +
+                "prod_name_eng=#{prodNameEng}, " +
+                "func_txt=#{funcTxt}, " +
+                "desc_txt=#{descTxt}, " +
+                "price=#{price}, " +
+                "is_discount=#{isDiscount}, " +
+                "<if test='is_discount=\"Y\"'>discount=#{discount},</if> " +
+                "capacity=#{capacity}, " +
+                "specification=#{specification}, " +
+                "use_period=#{usePeriod}, " +
+                "use_method=#{useMethod}, " +
+                "manufacturer=#{manufacturer}, " +
+                "release_date=#{releaseDate}, " +
+                "edit_date=NOW(), " +
+                "category_id=#{categoryId} " +
             "WHERE prod_id=#{prodId} " +
             "</script>")
     public int update(Product input);
