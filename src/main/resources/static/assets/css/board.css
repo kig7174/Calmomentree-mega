@@ -25,11 +25,18 @@ body {
   
 }
 
+#write {
+  width: 90%;
+  padding: 200px 0;
+  margin: auto;
+}
+
 #container {
   display: flex;
   width: 90%;
   padding: 200px 0;
   margin: auto;
+  
 }
 
 .textarea-box {

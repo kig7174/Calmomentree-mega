@@ -78,7 +78,7 @@ public class BoardController {
     /**
      * qna 게시판 상세페이지
      */
-    @GetMapping("/board/qna/{boardId}")
+    @GetMapping("/board/qna/read/{boardId}")
     public String qnaRead(Model model,
         @PathVariable("boardId") int boardId) {
         
@@ -99,6 +99,18 @@ public class BoardController {
         model.addAttribute("boardQna", output);
         
         return "board/qna/read";
-    }    
+    }
+    
+    // @ResponseBody
+    // @PostMapping("/board/add")
+    // public void boardEdit(
+    //     @RequestParam("boardTitle") String boardTitle,
+    //     @RequestParam("boardContent") String boardContent
+    //     @RequestParam("")) {
+        
+        
+
+    // }
+    
 
 }

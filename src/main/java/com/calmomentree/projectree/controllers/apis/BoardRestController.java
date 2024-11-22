@@ -11,7 +11,8 @@ import com.calmomentree.projectree.services.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Slf4j
 @RestController
@@ -23,7 +24,7 @@ public class BoardRestController {
     @Autowired
     private BoardService boardService;
 
-    @DeleteMapping("/api/board/qna/delete/{boardId}")
+    @PostMapping("/api/board/qna/delete/{boardId}")
     public Map<String, Object> deleteQna(
             @PathVariable("boardId") int boardId) {
 
