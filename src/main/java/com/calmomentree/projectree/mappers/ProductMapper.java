@@ -96,21 +96,59 @@ public interface ProductMapper {
         @Result(property="editDate", column="edit_date"),
         @Result(property="categoryId", column="category_id"),
         @Result(property="categoryName", column="category_name"),
-        @Result(property="parentCategoryName", column="parent_cateogry_name")
+        @Result(property="parentCategoryName", column="parent_cateogry_name"),
+        @Result(property="parentCategoryNo", column="parent_category_no")
     })
     public Product selectItem(Product input);
 
     @Select("SELECT " +
-                "prod_id, " +
-                "prod_name_kor, prod_name_eng, " +
-                "func_txt, desc_txt, " +
-                "price, is_discount, discount, " +
-                "capacity, specification, " +
-                "use_period, use_method, manufacturer, " +
-                "release_date, edit_date, " +
+            "prod_id, " +
+            "prod_name_kor, prod_name_eng, " +
+            "func_txt, desc_txt, " +
+            "price, is_discount, discount, " +
+            "capacity, specification, " +
+            "use_period, use_method, manufacturer, " +
+            "release_date, edit_date, " +
+            "category_name, " +
+            "( " +
+            "SELECT category_name " +
+            "FROM categorys " +
+            "WHERE category_id = category.parent_category_no " +
+            ") AS parent_category_name " +
+            "FROM products AS prod " +
+            "INNER JOIN categorys AS category " +
+            "ON prod.category_id = category.category_id " +
+            "WHERE prod.category_id " +
+            "( " +
+            "CASE " +
+            "WHEN (SELECT parent_category_no FROM categorys WHERE category_id = #{categoryId}) != 0 " +
+            "THEN = #{categoryId} " +
+            "WHEN (SELECT parent_category_no FROM categorys WHERE category_id = #{categoryId}) = '0' " +
+            "THEN IN " +
+            "(WITH RECURSIVE category_list AS ( " +
+                "SELECT " +
+                    "category_id, " +
+                    "category_name, " +
+                    "parent_category_no " +
+                    "FROM categorys " +
+                    "WHERE parent_category_no = #{categoryId} " + 
+                    
+                "UNION ALL " +
+                    
+                "SELECT " + 
+                    "a.category_id, " +
+                    "a.category_name, " + 
+                    "a.parent_category_no " +
+                "FROM categorys AS a " +
+                "INNER JOIN category_list AS b " +
+                "ON a.parent_category_no = b.category_id " +
+            ") " +
+            "SELECT " +
                 "category_id " +
-            "FROM products " +
-            "WHERE category_id=#{categoryId}")
+            "FROM category_list AS c " +
+            "END " +
+            ") " +
+            ");")
     @ResultMap("productMap")
     public List<Product> selectList(Product input);
 

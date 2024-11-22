@@ -25,6 +25,7 @@ public class Product {
 
     private String categoryName;    // 상품 카테고리
     private String parentCategoryName; // 상위 카테고리
+    private int parentCategoryNo;   // 상위 카테고리 번호
 
 
     @Getter
