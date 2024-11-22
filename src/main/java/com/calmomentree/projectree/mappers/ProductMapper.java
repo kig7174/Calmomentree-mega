@@ -68,8 +68,15 @@ public interface ProductMapper {
                 "capacity, specification, " +
                 "use_period, use_method, manufacturer, " +
                 "release_date, edit_date, " +
-                "category_id " +
-            "FROM products " +
+                "category_name, " +
+                "( " +
+                "SELECT category_name " +
+                "FROM categorys " +
+                "WHERE category_id = category.parent_category_no " +
+                ") AS parent_category_name " +
+            "FROM products AS prod " +
+            "INNER JOIN categorys AS category " +
+            "ON prod.category_id = category.category_id " +
             "WHERE prod_id=#{prodId}")
     @Results(id="productMap", value={
         @Result(property="prodId", column="prod_id"),
@@ -81,13 +88,15 @@ public interface ProductMapper {
         @Result(property="isDiscount", column="is_discount"),
         @Result(property="discount", column="discount"),
         @Result(property="capacity", column="capacity"),
-        @Result(property="spectification", column="specification"),
+        @Result(property="specification", column="specification"),
         @Result(property="usePeriod", column="use_period"),
-        @Result(property="useMehtod", column="use_method"),
+        @Result(property="useMethod", column="use_method"),
         @Result(property="manufacturer", column="manufacturer"),
         @Result(property="releaseDate", column="release_date"),
         @Result(property="editDate", column="edit_date"),
-        @Result(property="categoryId", column="category_id")
+        @Result(property="categoryId", column="category_id"),
+        @Result(property="categoryName", column="category_name"),
+        @Result(property="parentCategoryName", column="parent_cateogry_name")
     })
     public Product selectItem(Product input);
 

@@ -23,6 +23,9 @@ public class Product {
     private String editDate;      	// 수정 날짜
     private int categoryId;       	// 카테고리 번호  
 
+    private String categoryName;    // 상품 카테고리
+    private String parentCategoryName; // 상위 카테고리
+
 
     @Getter
     @Setter
