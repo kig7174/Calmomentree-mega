@@ -25,13 +25,11 @@
                         <input type="radio" name="find-method" id="find-method2" />
                         <label for="find-method2">휴대폰번호</label>
 
-                        <input type="radio" name="find-method" id="find-method3" />
-                        <label for="find-method3">휴대폰인증</label>
                     </div>
 
                     <div class="selected-find-method1">
                         <div class="name-box input-box">
-                            <input type="text" name="name" placeholder="이름"/>
+                            <input type="text" name="user_name" placeholder="이름"/>
                         </div>
 
                         <div class="email-box input-box">
@@ -41,7 +39,7 @@
 
                     <div class="selected-find-method2 displaynone">
                         <div class="name-box input-box">
-                            <input type="text" name="name" placeholder="이름"/>
+                            <input type="text" name="user_name" placeholder="이름"/>
                         </div>
 
                         <div class="tel-box input-box">
@@ -55,7 +53,7 @@
 
                     <div class="selected-find-method3 displaynone">
                         <div class="name-box input-box">
-                            <input type="text" name="name" placeholder="이름"/>
+                            <input type="text" name="user_name" placeholder="이름"/>
                         </div>
 
                     </div>
@@ -66,8 +64,43 @@
         </div>
     </div>
 
+    <!-- <th:block th:replace="~{_fragments/_scripts::my-scripts}"></th:block>
+    <script>
+        document.getElementById('find-id-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            /** 입력값 유효성 검사 */
+                try {
+                    regexHelper.value("#user_name", "이름을 입력하세요");
+                    regexHelper.value("#email", "이메일 주소를 입력하세요");
+                } catch (err) {
+                    await utilHelper.alertDanger(err.message);
+
+                    setTimeout(() => err.element.focus(), 1);
+                    return;
+                }
+
+                const data = await axiosHelper.post('[[@{/api/account/find_id}]]', new FormData(e.currentTarget));
+
+                if (data) {
+                    const userName = document.querySelector("#user_name").value;
+                    const userId = data.item;
+
+                    document.querySelector(".user-name").innerHTML = userName;
+                    document.querySelector(".user-id").innerHTML = userId;
+
+                    document.querySelector(".find-result").style.display = 'block';
+                }
+        });
+    </script> -->
+
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
+
+    <script th:inline="javascript">
+        const findIdLink = /*[[@{/api/member/find_id}]]*/'';
+    </script>
+    <script type="text/javascript" th:src="@{/assets/js/find_id.js}" th:inline="javascript"></script>
 </body>
 </html>
