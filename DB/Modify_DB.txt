@@ -1,1 +1,6 @@
-// 
+### DB 수정사항 기록
+### CALM_DB / Create_DB_Calm.txt에서 해당 항목 찾아서 수정하기
+### DB를 삭제하고 다시 생성하기 어려울 때 밑의 수정사항 실행하기
+
+// 부모 카테고리 데이터 타입 변경, NULL 허용, 기본값 설정
+ALTER TABLE categorys MODIFY `parent_category_no` INT DEFAULT 0 NULL COMMENT '부모카테고리 번호';
