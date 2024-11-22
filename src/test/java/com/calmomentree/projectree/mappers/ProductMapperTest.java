@@ -1,5 +1,7 @@
 package com.calmomentree.projectree.mappers;
 
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +44,19 @@ public class ProductMapperTest {
     @DisplayName("상품 상세 테스트")
     void detailProd() {
         Product input = new Product();
-        input.setProdId(1);
+        input.setProdId(5);
 
-        Product output = productMapper.selectItem(input);
+        productMapper.selectItem(input);
+    }
 
-        log.debug("Product : " + output);
+    @Test
+    @DisplayName("상품 목록 테스트")
+    void listProd() {
+        Product input = new Product();
+        input.setCategoryId(3);
+
+        List<Product> output = productMapper.selectList(input);
+
+        log.debug("List : " + output);
     }
 }
