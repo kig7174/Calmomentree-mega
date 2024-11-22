@@ -21,7 +21,7 @@ public class MemberServiceTest {
     void memberJoinTest() throws Exception {
         Member input = new Member();
         input.setUserName("가나다");
-        input.setUserId("test2");
+        input.setUserId("test4");
         input.setUserPw("asdf123456");
         input.setTel("01012341234");
         input.setEmail("test2@naver.com");
