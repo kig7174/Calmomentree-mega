@@ -18,11 +18,12 @@ document.querySelector("#boardEdit").addEventListener("submit", async (e) => {
   }
 
   const current = e.currentTarget;
-
   const formData = new FormData(current);
-  const data = await axiosHelper.postMultipart(boardAddLink, formData);
+  const data = await axiosHelper.post(boardAddLink, formData);
 
-  // if(data) {
-  //   window.location = qnaListPageLink
-  // }
+  if(data) {
+    alert("게시글이 등록되었습니다.");
+    window.location = qnaListPageLink;
+  }
+
 });
