@@ -46,13 +46,23 @@
               </tr>
               <tr class="detail-box-content">
                 <td>
+                  <img th:src="${boardQna.uploadImg}" class="uploadImg"
+                  th:unless="${boardQna.uploadImg == null or boardQna.uploadImg == ''}" alt="">
                   <div class="detail-box" th:text="${boardQna.boardContent}"></div>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-
+        <!-- 첨부파일 이미지 이름 표시 -->
+        <div th:if="${boardQna.uploadImg}" class="imgBox">
+          <span class="input">첨부파일</span>
+          <span class="imgFakeName" th:text="${boardQna.uploadImg}" style="display: none;"></span>
+          <div class="innerImgBox">
+            <span class="imgName"></span>
+          </div>
+          
+        </div>
         <!-- 본인이 작성한 글이면 생김 th:if="${}" -->
         <form method="post" id="cancel" >
           <div class="passwordArea">
@@ -83,6 +93,17 @@
       const qnaListPageLink = /*[[@{/board/qna/list}]]*/'';
     </script>
     <script type="text/javascript" th:src="@{/assets/js/board.js}" ></script>
-    
+    <script>
+    // 첨부파일 이미지 이름 출력하기(추후 보완 필요...) 
+    const imgFakeName = document.querySelector(".imgFakeName").innerText;
+    const imgRealName = imgFakeName.substring(imgFakeName.lastIndexOf("/") + 1);
+
+    const imgName = document.querySelector(".imgName");
+    imgName.innerHTML = imgRealName;
+
+    imgName.addEventListener("click", e => {
+      alert("다운로드 ... ");
+    });
+    </script>
   </body>
 </html>

@@ -13,7 +13,7 @@
       <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
       <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
 
-      <form action="" id="boardEdit" method="post">
+      <form id="boardEdit" method="post" enctype="multipart/form-data">
         <!-- 내용 영역 -->
         <div class="inner-box">
           <div class="title-wr">QNA</div>
@@ -25,14 +25,18 @@
               <tbody>
                 <tr class="detail-box-title write">
                   <td>
+                    <!-- 제목 선택 -->
                     <select name="boardTitle" id="subject">
                       <option value="문의드립니다.">문의드립니다.</option>
                     </select>
+                    <input type="hidden" name="boardCategory" value="qna" />
                   </td>
                 </tr>
               </tbody>
             </table>
+            <!-- 내용 입력 받을 곳 -->
             <div class="textarea-box" >
+              <!-- 입력된 내용 복사 될 곳 -->
               <textarea name="boardContent" id="textBox" style="display: none;"></textarea>
               <div id="content"></div>
             </div>
@@ -40,27 +44,24 @@
           <!-- 하단 버튼 구역 -->
           <div class="bottom-box">
             <div class="file-box">
-              <input name="attach-file" class="line file-btn" type="file" />
+              <!-- 첨부파일 - 사진에 대해서만 허용 -->
+              <input name="photo" class="line file-btn" type="file" accept="image/*" />
+              <!-- 비밀번호 -->
               <div class="pw-box line">
-                <input
-                  id="password"
-                  name="boardPw"
-                  autocomplete="new-password"
-                  value=""
-                  type="password"
-                  placeholder="비밀번호"
-                />
+                <input id="password" name="boardPw" autocomplete="new-password"
+                        value="" type="password" placeholder="비밀번호" />
               </div>
+              <!-- 게시글 공개여부 -->
               <div class="radio-box">
-                <input id="secure0" name="isPublic" value="Y" type="radio" checked="checked" />
+                <input id="secure0" class="isPublic" name="isPublic" value="Y" type="radio" checked="checked" />
                 <label for="secure0">공개글</label>
-                <input id="secure1" name="isPublic" value="N" type="radio" />
+                <input id="secure1" class="isPublic" name="isPublic" value="N" type="radio" />
                 <label for="secure1">비밀글</label>
               </div>
             </div>
             <div class="btn-area">
               <button type="submit" class="btn-1">등록</button>
-              <button class="btn-2">취소</button>
+              <a th:href="@{/board/qna/list}" class="btn-2 button">취소</a>
             </div>
           </div>
         </div>
@@ -71,10 +72,9 @@
     <th:block th:replace="~{/fragments/script}"></th:block>
 
     <script th:inline="javascript">
-      const boardAddLink = /*[[@{/board/Add}]]*/'';
+      const boardAddLink = /*[[@{/board/add}]]*/'';
       const qnaListPageLink = /*[[@{/board/qna/list}]]*/'';
     </script>
-
     <script type="text/javascript" th:src="@{/assets/js/boardAdd.js}" ></script>
 
     <script>

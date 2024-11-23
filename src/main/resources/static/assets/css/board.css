@@ -265,6 +265,9 @@ table {
     color: var(--background-color);
     background-color: #000;
   }
+  .btn-2 {
+    border: 1px solid var(--font-color);
+  }
 
   button {
     border: 1px solid #000;
@@ -412,5 +415,36 @@ table {
   p {
     font-size: 10px;
     margin-top: 10px;
+  }
+}
+/* 업로드 사진에 대한  */
+.uploadImg {
+  max-width: 80%;
+  padding: 25px 0 0 15px;
+}
+
+.imgBox {
+  .input {
+    font-weight: 600;
+    font-size: var(--font-size-item);
+  }
+  .innerImgBox {
+    width: 100%;
+    border-top: 1px solid #d5d5d5;
+  }
+  
+  .imgName {
+    color: #434346;
+    font-weight: 500;
+    
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  span {
+    padding: 15px 0;
+    display: inline-block;
   }
 }
