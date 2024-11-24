@@ -89,7 +89,7 @@ public class RegexHelper {
     }
 
     public void isLowerEngNum(String str, String message) throws StringFormatException {
-        if (!Pattern.matches("^[a-z0-9]$", str)) {
+        if (!Pattern.matches("^[a-z0-9]*$", str)) {
             throw new StringFormatException(message);
         }
     }
@@ -108,7 +108,7 @@ public class RegexHelper {
     }
 
     public void isPassword(String str, String message) throws StringFormatException {
-        if (!Pattern.matches("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\\d~!@#$%^&*()+|=]{10,16}$\n", str)) {
+        if (!Pattern.matches("^(?!((?:[A-Za-z]+)|(?:[~!@#$%^&*()_+=]+)|(?:[0-9]+))$)[A-Za-z\\d~!@#$%^&*()_+=]{8,16}$", str)) {
 
         }
     }
