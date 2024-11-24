@@ -134,10 +134,12 @@
         <div class="search-popup" id="search-popup" th:fragment="calm-search">
             <div class="search-box" id="search-box">
                 <div class="search-form">
-                    <input type="text" id="keyword" placeholder="SEARCH" />
-                    <button type="submit"><img src="https://placehold.co/30x30"/></button>
+                    <form method="get" th:action="@{/product/search_ok}">
+                        <input type="text" name="keyword" id="keyword" placeholder="SEARCH" />
+                        <button type="submit"><img src="https://placehold.co/30x30"/></button>
+                    </form>
                 </div>
-            </div>        
+            </div>    
         </div>
 
         <div class="search-background" style="height: 0" th:fragment="calm-search-bg">
@@ -237,5 +239,19 @@
     </footer>
 
     <script src="/src/main/resources/static/assets/js/common.js"></script>
+    <script>
+        if ("[[${session.memberInfo}]]" !== null) {
+            document.querySelector("#logout").addEventListener("click", async (e) => {
+                e.preventDefault();
+
+                const data = await axiosHelper.get(e.currentTarget.getAttribute('href'));
+
+                if (data) {
+                    window.location.reload();
+                }
+            });
+        }
+
+    </script>
 </body>
 </html>
