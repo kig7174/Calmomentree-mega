@@ -92,3 +92,13 @@ window.addEventListener("click", (e) => {
         searchBg.classList.remove("on");
     }
 });
+
+document.querySelector("#logout").addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    const data = await axiosHelper.get(e.currentTarget.getAttribute('href'));
+
+    if (data) {
+        window.location.reload();
+    }
+});

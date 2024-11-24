@@ -110,7 +110,7 @@
                     </div>
 
                     <div class="logout other-menu-list" th:unless="${session.memberInfo == null}">
-                        <a>로그아웃</a>
+                        <a id="logout" th:href="@{/member/logout}">로그아웃</a>
                         <a>카트
                            <span class="cart">
                             (
