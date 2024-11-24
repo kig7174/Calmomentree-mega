@@ -51,12 +51,34 @@ public class ProductMapperTest {
 
     @Test
     @DisplayName("상품 목록 테스트")
-    void listProd() {
+    void listProdTest() {
         Product input = new Product();
-        input.setCategoryId(3);
+        input.setCategoryId(1);
 
-        List<Product> output = productMapper.selectList(input);
+        List<Product> output = productMapper.selectListByCategory(input);
 
         log.debug("List : " + output);
+    }
+
+    @Test
+    @DisplayName("상품 검색 테스트")
+    void searchProdTest() {
+        Product input = new Product();
+        input.setProdNameKor("샴푸");
+
+        List<Product> output = productMapper.selectListBySearch(input);
+
+        log.debug("List : " + output);
+    }
+
+    @Test
+    @DisplayName("상품 검색 카운트 테스트")
+    void searchProdCountTest() {
+        Product input = new Product();
+        input.setProdNameKor("샴푸");
+
+        int output = productMapper.selectCount(input);
+
+        log.debug("output : " + output);
     }
 }
