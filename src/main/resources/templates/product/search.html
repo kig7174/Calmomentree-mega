@@ -18,16 +18,16 @@
             </div>
 
             <div class="search-field">
-                <form class="search-text" action="">
-                    <input class="text" type="text" name="keyword" placeholder="" />
-                    <input class="img" type="image" src="/src/main/resources/static/assets/img/search.svg"/>
+                <form class="search-text" method="get" th:action="@{/product/search_ok}">
+                    <input class="text" type="text" name="keyword" th:value="${keyword}" />
+                    <button class="img" type="submit"><img src="/src/main/resources/static/assets/img/search.svg" /></button>
                 </form>
             </div>
 
             <div class="search-result-box">
-                <p class="search-result">상품 검색 결과 <strong class="result">10</strong></p>
+                <p class="search-result">상품 검색 결과 <strong class="result" th:unless="${pagination == null}" th:text="${pagination.totalCount}">10</strong></p>
                 <div class="sort-box">
-                    <select name="sort-option">
+                    <select name="order_by">
                         <option value selected>== 기준선택 ==</option>
                         <option value="recent">신상품</option>
                         <option value="name">상품명</option>
@@ -44,7 +44,7 @@
                 <span>상품검색</span>
             </div>
 
-            <div class="search-item-box">
+            <div class="search-item-box" th:unless="${products == null}">
                 <div class="search-item-exist">
                     <ul>
                         <li>
@@ -64,65 +64,30 @@
                                     </div>
                                 </div>
                             </div>
-                        </li>
-                        <li>
-                            <div class="list-item">
-                                <div class="list-item-img">
-                                    <img src="https://via.placeholder.com/200?text=search-item-image"/>
-                                </div>
-                                <div class="list-item-content">
-                                    <div class="item-content-name">
-                                        <p>ROSEMARY RECOVERY</p>
-                                        <a href="#">로즈마리 리커버리 샴푸 500ML</a>
-                                        <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
-                                    </div>
-                                    <div class="item-price">
-                                        <span class="discount">30%</span><span>40,000원</span>
-                                        <span class="normal-price">일반 회원가</span><span class="price">27,000원</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="list-item">
-                                <div class="list-item-img">
-                                    <img src="https://via.placeholder.com/200?text=search-item-image"/>
-                                </div>
-                                <div class="list-item-content">
-                                    <div class="item-content-name">
-                                        <p>ROSEMARY RECOVERY</p>
-                                        <a href="#">로즈마리 리커버리 샴푸 500ML</a>
-                                        <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
-                                    </div>
-                                    <div class="item-price">
-                                        <span class="discount">30%</span><span class="discount-price">40,000원</span>
-                                        <span class="normal-price">일반 회원가</span><span class="price">27,000원</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="list-item">
-                                <div class="list-item-img">
-                                    <img src="https://via.placeholder.com/200?text=search-item-image"/>
-                                </div>
-                                <div class="list-item-content">
-                                    <div class="item-content-name">
-                                        <p>ROSEMARY RECOVERY</p>
-                                        <a href="#">로즈마리 리커버리 샴푸 500ML</a>
-                                        <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
-                                    </div>
-                                    <div class="item-price">
-                                        <span class="discount">30%</span><span>40,000원</span>
-                                        <span class="normal-price">일반 회원가</span><span class="price">27,000원</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
+                        </li>                 
                     </ul>
+                    <div class="page-number">
+                        <ul class="pagination">
+                            <li th:if="${pagination.prevPage > 0}">
+                                <a >&laquo;</a>
+                            </li>
+                            <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
+                            
+                            <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+                                <a class="active" th:text="${i}" />
+                                <a th:text="${i}"
+                                     />
+                            </li>
+                    
+                            <li th:if="${pagination.nextPage > 0}">
+                                <a>&raquo;</a>
+                            </li>
+                            <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
+                        </ul>
+                    </div>
                 </div>
 
-                <div class="search-item-none">
+                <div class="search-item-none" th:if="${products == null}">
                     <img src="https://via.placeholder.com/100?text=search-item-none"/>
                     <h3>검색결과가 없습니다.</h3>
                     <p>정확한 검색어 인지 확인하시고 다시 검색해 주세요.</p>
@@ -132,24 +97,12 @@
                         두 단어 이상의 검색어인 경우, 띄어쓰기를 확인해 보세요.
                     </p>
                 </div>
-            </div>
-            
-            <div class="page-number">
-                <ul class="pagination">
-                    <li><a class="left">&laquo;</a></li>
-                    <li><a class="active">1</a></li>
-                    <li><a>2</a></li>
-                    <li><a class="right">&raquo;</a></li>
-                </ul>
-            </div>
+            </div> 
         </div>
     </div>
 
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
-    <script>
-
-    </script>
 </body>
 </html>
