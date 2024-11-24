@@ -8,6 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -656,5 +659,85 @@ public class FileHelper {
         log.debug(item.toString());
 
         return item;
+    }
+
+    /**
+     * 파일 경로 앞의 URL prefix를 제거하고 리턴한다.
+     * 
+     * @param path - 파일 경로
+     * @return DB에 저장되어 있는 실제 경로 문자열
+     */
+    public String getFilePath(String path) {
+        if (path == null) {
+            return null;
+        }
+        return path.replace(this.uploadUrl, "");
+    }
+
+    /**
+     * 업로드 파일 삭제하기
+     * @param filePath
+     */
+    public void deleteUploadFile(String filePath) {
+        // 업로드 된 파일 경로가 없다면 처리 중단
+        if (filePath == null || filePath.equals("")) {
+            return;
+        }
+
+        /** 1) 원본 파일 삭제하기 */
+        // 사용자가 업로드한 프로필 사진의 실제 경로
+        File f = new File(uploadDir, filePath);
+        log.debug("파일 삭제 >>> : " + f.getAbsolutePath());
+
+        // 파일이 있다면 삭제한다.
+        if (f.exists()) {
+            try {
+                f.delete();
+                log.debug("파일 삭제 성공");
+            } catch (Exception e) {
+                log.debug("파일 삭제 실패", e);
+            }
+        }
+
+        /** 2) 썸네일 이미지 삭제하기 */
+
+        // 원본 이미지의 경로 객체 생성
+        // --> import java.nio.file.Path;
+        // --> import java.nio.file.Paths;
+        Path path = Paths.get(f.getAbsolutePath());
+
+        // 원본 이미지에 대한 컨텐츠 종류값(MimeType) 조회
+        String contentType = null;
+        try {
+            // --> import java.nio.file.Files;
+            contentType = Files.probeContentType(path);
+        } catch (IOException e) {
+
+        }
+
+        // 컨텐츠 종류를 알아내지 못했거나 이미지 형식이 아니라면 처리 종료
+        if (contentType == null || contentType.indexOf("image/") == -1) {
+            return;
+        }
+
+        // 썸네일 이미지의 이름 생성하기
+        String name = f.getName(); // 실제 파일 경로에서 파일명만 가져옴
+        String parent = f.getParent(); // 실제 파일 경로에서 폴더위치만 가져옴
+        int p = name.lastIndexOf("."); // 마지막 "."의 위치
+        String thumbName = name.substring(0, p) + "_" +
+                thumbnailWidth + "x" + thumbnailHeight + name.substring(p);
+
+        // 썸네일 이미지의 실제 경로
+        File thumbFile = new File(parent, thumbName);
+        log.debug("썸네일 삭제 >>> " + thumbFile.getAbsolutePath());
+
+        if (thumbFile.exists()) {
+            try {
+                thumbFile.delete();
+                log.debug("썸네일 삭제 성공");
+            } catch (Exception e) {
+                log.error("썸네일 삭제 실패", e);
+            }
+        }
     }
 }
