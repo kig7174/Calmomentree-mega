@@ -20,4 +20,6 @@ public interface MemberService {
     public int out(Member params) throws Exception;
 
     public void isUniqueUserId(String userid) throws Exception;
+
+    public Member login(Member params) throws Exception;
 }

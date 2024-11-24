@@ -153,4 +153,33 @@ public class MemberServiceImpl implements MemberService {
             throw e;
         }
     }
+
+    @Override
+    public Member login(Member input) throws Exception {
+        Member output = null;
+
+        try {
+            output = memberMapper.login(input);
+
+            if (output == null) {
+                throw new Exception("아이디 혹은 비밀번호를 확인해주세요.");
+            }
+        } catch (Exception e) {
+            log.error("Member 데이터 조회에 실패했습니다.", e);
+            throw e;
+        }
+
+        try {
+            int rows = memberMapper.updateLoginDate(output);
+
+            if (rows == 0 || rows > 1) {
+                throw new Exception("존재하지 않는 회원에 대한 요청입니다.");
+            }
+        } catch (Exception e) {
+            log.error("Member 데이터 갱신에 실패했습니다.", e);
+            throw e;
+        }
+
+        return output;
+    }
 }

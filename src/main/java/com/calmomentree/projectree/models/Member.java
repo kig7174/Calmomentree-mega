@@ -1,11 +1,13 @@
 package com.calmomentree.projectree.models;
 
+import java.io.Serializable;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 @Data
-public class Member {
+public class Member implements Serializable {
     private int memberId;              // 회원번호
     private String userName;           // 회원 이름
     private String userId;             // 회원 아이디
