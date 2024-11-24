@@ -11,6 +11,9 @@ import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.services.MemberService;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -123,6 +126,43 @@ public class MemberRestController {
         } catch (Exception e) {
             return restHelper.serverError(e);
         }
+
+        return restHelper.sendJson();
+    }
+
+    @PostMapping("/api/member/login")
+    public Map<String, Object> login(
+        HttpServletRequest request,
+        @RequestParam("user_id") String userId,
+        @RequestParam("user_pw") String userPw
+    ) {
+        /** 유효성 검사 */
+        try {
+            regexHelper.isValue(userId, "아이디를 입력해주세요.");
+            regexHelper.isLowerEngNum(userId, "아이디는 영문소문자와 숫자로 입력해주세요.");
+
+            regexHelper.isValue(userPw, "비밀번호를 입력해주세요.");
+            regexHelper.isPassword(userPw, "비밀번호 형식이 잘못되었습니다.");
+        } catch (StringFormatException e) {
+            return restHelper.badRequest(e);
+        }
+        /** 객체 구성 */
+        Member input = new Member();
+        input.setUserId(userId);
+        input.setUserPw(userPw);
+        
+        /** 로그인 시도 */
+        Member output = null;
+
+        try {
+            output = memberService.login(input);
+        } catch (Exception e) {
+            return restHelper.serverError(e);
+        }
+
+        /** 세션 저장 */
+        HttpSession session = request.getSession();
+        session.setAttribute("memberInfo", output);
 
         return restHelper.sendJson();
     }

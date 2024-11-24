@@ -17,9 +17,9 @@
                     <h3>Sign in</h3>
                 </div>
                 <div class="login-form">
-                    <form method="" action="">
-                        <input type="text" name="userid" placeholder="아이디" minlength="4" maxlength="16" required />
-                        <input type="password" name="password" placeholder="비밀번호" required />
+                    <form id="login">
+                        <input type="text" name="user_id" id="user_id" placeholder="아이디" />
+                        <input type="password" name="user_pw" id="user_pw" placeholder="비밀번호" />
                         <div class="login-option">
                             <label for="remember_id">
                             <input type="checkbox" value="Y" name="remember_id" />
@@ -69,6 +69,29 @@
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
-    <script></script>
+    <script>
+        document.querySelector("#login").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            try {
+                regexHelper.value("#user_id", "아이디를 입력해주세요.");
+                regexHelper.value("#user_pw", "비밀번호를 입력해주세요.");
+            } catch (error) {
+                alert(error.message);
+                return false;
+            }
+
+            const data = await axiosHelper.post("[[@{/api/member/login}]]", new FormData(e.currentTarget));
+
+            if (data) {
+                if (data.error) {
+                    await utilHelper.alertDanger(data.message);
+                    return;
+                }
+
+                window.location = "[[@{/}]]";
+            }
+        });
+    </script>
 </body>
 </html>

@@ -93,8 +93,8 @@
                 </div>
 
                 <div class="other-menu">
-                    <div class="login other-menu-list">
-                        <a>로그인</a>
+                    <div class="login other-menu-list" th:if="${session.memberInfo == null}">
+                        <a th:href="@{/member/login}">로그인</a>
                         <a>카트
                            <span class="cart">
                             (
@@ -109,7 +109,7 @@
                         </a>
                     </div>
 
-                    <div class="logout other-menu-list" style="display:none">
+                    <div class="logout other-menu-list" th:unless="${session.memberInfo == null}">
                         <a>로그아웃</a>
                         <a>카트
                            <span class="cart">
@@ -118,7 +118,7 @@
                             )
                            </span>
                         </a>
-                        <a>커뮤니터</a>
+                        <a>커뮤니티</a>
                         <a>마이페이지</a>
                         <a class="b2b-btn">B2B 문의</a>
                         <a>
