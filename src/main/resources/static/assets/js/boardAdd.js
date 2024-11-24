@@ -1,5 +1,5 @@
-// 게시글 업로드
-document.querySelector("#boardEdit").addEventListener("submit", async (e) => {
+// ----------------- 게시글 업로드 ------------------------------
+document.querySelector("#boardAdd").addEventListener("submit", async (e) => {
   e.preventDefault();
   
   /** ck-editor의 값 추출 후 textBox에 복사 */

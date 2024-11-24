@@ -15,5 +15,3 @@ document.querySelector("#cancel").addEventListener("submit", async e => {
        }
     }
   });
-
-  
