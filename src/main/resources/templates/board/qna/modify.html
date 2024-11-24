@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <th:block th:replace="~{fragments/head :: calm-head('QNA 글쓰기')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/board.css}" />
+  </head>
+  <body>
+    <header id="header">
+      <header th:replace="~{/fragments/common :: calm-header}"></header>
+    </header>
+    <div id="write">
+      <div th:replace="~{/fragments/common :: calm-search}"></div>
+      <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
+      <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
+
+      <form id="boardEdit" method="post" enctype="multipart/form-data"
+      th:action="@{/board/qna/modify_ok/{boardId}/{memberId}(boardId=${board.boardId}, memberId=${board.memberId})}">
+        <!-- 내용 영역 -->
+        <div class="inner-box">
+          <div class="title-wr">QNA</div>
+          <div class="board-list">
+            <table border="1">
+              <caption>
+                게시판 글쓰기
+              </caption>
+              <tbody>
+                <tr class="detail-box-title write">
+                  <td>
+                    <!-- 제목 선택 -->
+                    <select name="boardTitle" id="subject">
+                      <option value="문의드립니다.">문의드립니다.</option>
+                    </select>
+                    <input type="hidden" name="boardCategory" value="qna" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- 내용 입력 받을 곳 -->
+            <div class="textarea-box">
+              <!-- 입력된 내용 복사 될 곳 -->
+              <textarea name="boardContent" id="textBox" style="display: none"></textarea>
+              <div id="content"></div>
+            </div>
+          </div>
+          <!-- 하단 버튼 구역 -->
+          <div class="bottom-box">
+            <div class="file-box">
+              <!-- 첨부파일 - 사진에 대해서만 허용 -->
+              <!-- 등록된 사진이 없을 경우 : 파일 업로드 가능 -->
+              <th:block th:if="${board.uploadImg == null or board.uploadImg == ''}">
+                <input name="photo" class="line file-btn" type="file" accept="image/*" />
+              </th:block>
+              <!-- 기존에 등록된 사진이 있을 경우 : 삭제 여부를 선택해야만 업로드 가능 -->
+              <th:block th:unless="${board.uploadImg == null or board.uploadImg == ''}">
+                <input name="photo" id="photo" class="line file-btn" type="file" accept="image/*" disabled />
+                <label for="delete_photo">
+                  <span class="imgFakeName" th:text="${board.uploadImg}" style="display: none"></span>
+                  <span class="imgName name"></span>
+                  <input type="checkbox" name="delete_photo" id="delete_photo" value="Y" data-disabled="#photo" />
+                  삭제
+                </label>
+              </th:block>
+
+              <!-- 비밀번호 -->
+              <div class="pw-box line">
+                <input id="password" name="boardPw" autocomplete="new-password" value="" type="password" placeholder="비밀번호" />
+              </div>
+              <!-- 게시글 공개여부 -->
+              <div class="radio-box">
+                <input id="secure0" class="isPublic" name="isPublic" value="Y" type="radio" checked="checked" />
+                <label for="secure0">공개글</label>
+                <input id="secure1" class="isPublic" name="isPublic" value="N" type="radio" />
+                <label for="secure1">비밀글</label>
+              </div>
+            </div>
+            <div class="btn-area">
+              <button type="submit" class="btn-1">수정</button>
+              <a th:href="@{/board/qna/list}" class="btn-2 button">취소</a>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
+
+    <th:block th:replace="~{/fragments/script}"></th:block>
+
+    <script th:inline="javascript">
+      const boardEditOkLink = /*[[@{/board/qna/modify_ok/{boardId}/{memberId}(boardId=${board.boardId}, memberId=${board.memberId})}]]*/'';
+      const qnaListPageLink = /*[[@{/board/qna/list}]]*/'';
+    </script>
+    <script type="text/javascript" th:src="@{/assets/js/boardEdit.js}" ></script>
+    
+    <!-- CKEditor5가 적용된 textarea에 DB에게 전달받은 값 집어넣기.  -->
+    <script>
+      const box = document.querySelector("#textBox");
+
+      ClassicEditor.create(document.querySelector("#content"))
+        .then((editor) => {
+          editor.setData("[[${board.boardContent}]]");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+        
+    </script>
+  </body>
+</html>

@@ -448,3 +448,7 @@ table {
     display: inline-block;
   }
 }
+.name {
+  display: inline-block;
+  padding-top: 10px;
+}
