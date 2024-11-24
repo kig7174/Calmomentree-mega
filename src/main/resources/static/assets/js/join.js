@@ -182,7 +182,12 @@ document.querySelector("#join").addEventListener("submit", async (e) => {
     const data = await axiosHelper.post(memberJoinLink, formData);
 
     if (data) {
-        alert("회원가입에 성공했습니다.");
+        if (data.error) {
+            alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+            return;
+        }
+        
+        await utilHelper.alertSuccess("회원가입에 성공했습니다.");
         window.location = pageLoginLink;
     }
 });
