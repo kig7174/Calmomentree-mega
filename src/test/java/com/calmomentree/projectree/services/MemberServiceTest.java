@@ -85,12 +85,31 @@ public class MemberServiceTest {
         try {
             output = memberService.out(input);
         } catch (Exception e) {
-            log.debug(e.getMessage());
+            log.error(e.getMessage());
         }
         
         if (output != 0) {
             log.debug("output : " + output);
             log.debug("Out Member : " + input);
         }
+    }
+
+    @Test
+    @DisplayName("로그인 테스트")
+    void login() {
+        Member input = new Member();
+        input.setUserId("test1");
+        input.setUserPw("asdf123456");
+        input.setMemberId(1);
+
+        Member output = null;
+
+        try {
+            output = memberService.login(input);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+        }
+
+        log.debug("output : " + output);
     }
 }

@@ -91,4 +91,27 @@ public class MemberMapperTest {
 
         log.debug("duplicated ID count : " + output);
     }
+
+    @Test
+    @DisplayName("로그인 테스트")
+    void loginTest() {
+        Member input = new Member();
+        input.setUserId("test1");
+        input.setUserPw("asdf123456");
+
+        Member output = memberMapper.login(input);
+
+        log.debug("output : " + output);
+    }
+
+    @Test
+    @DisplayName("로그인 날짜 업데이트 테스트")
+    void updateLoginDateTest() {
+        Member input = new Member();
+        input.setMemberId(1);
+
+        int output = memberMapper.updateLoginDate(input);
+
+        log.debug("output : " + output);
+    }
 }
