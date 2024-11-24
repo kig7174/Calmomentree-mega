@@ -42,10 +42,10 @@ public interface BoardMapper {
                         "SET " +
                         "board_content = #{boardContent}, " +
                         "edit_date = NOW(), " +
-                        "is_public = #{isPublic}, " +
-
-                        // 한번 설정한 비번은 변경불가
-
+                        "upload_img = #{uploadImg}, " +
+                        "board_pw = #{boardPw}, " +
+                        "is_public = #{isPublic}, " +                      
+                        
                         "upload_img = #{uploadImg} " +
                         "WHERE board_id = #{boardId} AND member_id = #{memberId}")
         public int update(Board input);

@@ -90,6 +90,7 @@ public class BoardController {
     /**
      * qna 게시판 상세페이지
      */
+    @SuppressWarnings("null")
     @GetMapping("/board/qna/read/{boardId}")
     public String qnaRead(Model model,
             @PathVariable("boardId") int boardId) {
@@ -174,4 +175,105 @@ public class BoardController {
         // 컨트롤러랑 javascript 둘 중 하나라도 없으면 왜 동작 안하지??????
         webHelper.redirect("/board/qua/list", "게시글이 등록되었습니다.");
     }
+
+    @GetMapping("/board/qna/modify/{boardId}")
+    public String boardEdit(Model model,
+        @PathVariable("boardId") int boardId
+        // @PathVariable("memberId") int memberId
+        ) {
+
+        // 검색 조건으로 사용
+        Board input = new Board();
+        input.setBoardId(boardId);
+        // input.setMemberId(memberId);
+
+        // 수정할 데이터의 현재 값을 조회
+        Board board = null;
+        
+        try {
+            board = boardService.getItem(input);
+        } catch (Exception e) {
+            webHelper.serverError(e);
+        }
+
+        // View에 데이터 전달
+        model.addAttribute("board", board);
+
+        return "board/qna/modify";
+    }
+
+    @ResponseBody
+    @PostMapping("/board/qna/modify_ok/{boardId}/{memberId}")
+    public void boardEditOk(
+        @PathVariable("boardId") int boardId,
+        @PathVariable("memberId") int memberId,
+        @RequestParam("boardContent") String boardContent,
+        @RequestParam("boardCategory") String boardCategory,
+        @RequestParam(value = "delete_photo", defaultValue = "N") String deletePhoto,
+        @RequestParam(value = "photo", required = false) MultipartFile photo,
+        @RequestParam(value = "boardPw", required = false) String boardPw,
+        @RequestParam("isPublic") String isPublic
+
+        // memberId 수정해야 됨
+        // @RequestParam(value = "memberId", defaultValue = "1") int memberId
+        ) {
+        
+        // 게시글 공개시 비밀번호 NULL처리
+        if (isPublic.equals("Y")) {
+            boardPw = null;
+        }
+        // 업로드 사진에 대한 처리
+        UploadItem uploadItem = null;
+
+        try {
+            uploadItem = fileHelper.uploadImgFile(photo, boardCategory);
+        } catch (NullPointerException e) {
+            // 업로드 된 항목이 없는 경우는 에러가 아니므로 계속 진행
+        } catch (Exception e) {
+           webHelper.serverError(e);;
+        }
+
+        Board board = new Board();
+        board.setBoardContent(boardContent);
+        board.setBoardPw(boardPw);
+        board.setIsPublic(isPublic);
+
+        String currentPhoto = uploadItem.getFilePath();
+        // 기존에 등록된 사진이 있는 경우
+        if(photo != null && photo.equals("")) {
+            
+            // 기존 사진의 삭제가 요청 되었다면?
+            if(deletePhoto.equals("Y")) {
+                fileHelper.deleteUploadFile(currentPhoto);
+
+                // 업로드 된 사진이 있다면 Beans에 포함
+                // 기존 파일이 있을 경우에는 삭제없이는 정보를 갱신하면 안됨
+                if(uploadItem != null) {
+                    board.setUploadImg(uploadItem.getFilePath());
+                } else {
+                    // 삭제만 하고 새로운 파일은 업로드 안하면?
+                    board.setUploadImg(null);
+                }
+            } else {
+                // 삭제 요청이 없으면 기존 사진 유지.
+                board.setUploadImg(currentPhoto);
+            }
+        } else {
+            // 업로드 된 사진이 있다면 Beans에 포함
+            if(uploadItem != null) {
+                board.setUploadImg(uploadItem.getFilePath());
+            }
+            
+        }
+
+        // DB에 저장하기
+        try {
+           boardService.editItem(board);
+        } catch (Exception e) {
+            webHelper.serverError(e);
+        }
+
+        webHelper.redirect("/board/qua/list", "게시글이 수정되었습니다.");
+    }
+    
 }
