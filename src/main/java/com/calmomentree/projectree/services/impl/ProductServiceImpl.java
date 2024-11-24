@@ -90,13 +90,27 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getList(Product input) throws Exception {
+    public List<Product> getListByCategory(Product input) throws Exception {
         List<Product> output = null;
 
         try {
-            output = productMapper.selectList(input);
+            output = productMapper.selectListByCategory(input);
         } catch (Exception e) {
-            log.error("교수 목록 조회에 실패했습니다.", e);
+            log.error("상품 목록 조회에 실패했습니다.", e);
+            throw e;
+        }
+
+        return output;
+    }
+
+    @Override
+    public List<Product> getListBySearch(Product input) throws Exception {
+        List<Product> output = null;
+
+        try {
+            output = productMapper.selectListBySearch(input);
+        } catch (Exception e) {
+            log.error("상품 목록 조회에 실패했습니다.", e);
             throw e;
         }
 
@@ -115,5 +129,5 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return output;
-    }
+    } 
 }

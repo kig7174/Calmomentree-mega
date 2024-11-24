@@ -13,7 +13,9 @@ public interface ProductService {
 
     public Product getItem(Product params) throws Exception;
 
-    public List<Product> getList(Product params) throws Exception;
+    public List<Product> getListByCategory(Product params) throws Exception;
 
     public int getCount(Product params) throws Exception;
+
+    public List<Product> getListBySearch(Product Params) throws Exception;
 }
