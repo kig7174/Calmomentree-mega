@@ -85,6 +85,20 @@ body {
                 right: 0;
                 transform: translate(-20%, -50%);
             }
+
+            .sort-box {
+                position: absolute;
+                right: -150px;
+                top: 100px;
+
+                
+                select {
+                    padding: 10px 7px;
+                    background-color: var(--background-color);
+                    filter: brightness(95%);
+                    font-size: var(--font-size-medium);
+                }
+            }
         }
         
         .search-result-box{
@@ -95,17 +109,6 @@ body {
             .search-result {
                 font-size: var(--font-size-small);
                 align-content: center;
-            }
-
-            .sort-box {
-                margin-right: 2%;
-                
-                select {
-                    padding: 10px 7px;
-                    background-color: var(--background-color);
-                    filter: brightness(95%);
-                    font-size: var(--font-size-medium);
-                }
             }
         }
 
