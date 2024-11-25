@@ -8,20 +8,14 @@ import org.springframework.ui.Model;
 
 import com.calmomentree.projectree.helpers.FileHelper;
 import com.calmomentree.projectree.helpers.Pagination;
-import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Board;
-import com.calmomentree.projectree.models.UploadItem;
 import com.calmomentree.projectree.services.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 @Slf4j
 @Controller
@@ -36,17 +30,16 @@ public class BoardController {
     @Autowired
     private FileHelper fileHelper;
 
-    @Autowired
-    private RestHelper restHelper;
-
     /**
-     * qna 게시판 목록페이지
+     * 게시판 목록페이지
      */
-    @GetMapping("/board/qna/list")
+    @GetMapping("/board/{boardCategory}/list")
     public String qnaList(Model model,
             // 검색어 파라미터
             @RequestParam(value = "keyword", required = false) String keyword,
-            @RequestParam(value = "page", defaultValue = "1") int nowPage) {
+            @RequestParam(value = "page", defaultValue = "1") int nowPage,
+
+            @PathVariable("boardCategory") String boardCategory) {
 
         int totalCount = 0; // 전체 게시글 수
         int listCount = 10; // 한 페이지당 표시할 목록 수
@@ -58,7 +51,7 @@ public class BoardController {
         // 조회 조건에 사용할 객체
         Board input = new Board();
         input.setBoardTitle(keyword);
-        input.setBoardCategory("qna");
+        input.setBoardCategory(boardCategory);
 
         List<Board> output = null;
 
@@ -79,11 +72,16 @@ public class BoardController {
         }
 
         // view에 데이터 전달
-        model.addAttribute("boardQnas", output);
+        model.addAttribute("boards", output);
         model.addAttribute("keyword", keyword);
         model.addAttribute("pagination", pagination);
 
-        return "board/qna/list";
+        if(boardCategory.equals("qna")) {
+            return "board/qna/list";
+        } else {
+            return "board/review/list";
+        }
+        
 
     }
 
@@ -91,13 +89,15 @@ public class BoardController {
      * qna 게시판 상세페이지
      */
     @SuppressWarnings("null")
-    @GetMapping("/board/qna/read/{boardId}")
+    @GetMapping("/board/{boardCategory}/read/{boardId}")
     public String qnaRead(Model model,
-            @PathVariable("boardId") int boardId) {
+            @PathVariable("boardId") int boardId,
+            @PathVariable("boardCategory") String boardCategory) {
 
         // 조회 조건에 사용할 변수를 Beans에 저장
         Board input = new Board();
         input.setBoardId(boardId);
+        input.setBoardCategory(boardCategory);
         
         Board output = null;
         
@@ -111,71 +111,18 @@ public class BoardController {
         output.setUploadImg(fileHelper.getUrl(output.getUploadImg()));
 
         // View에 데이터 전달
-        model.addAttribute("boardQna", output);
+        model.addAttribute("board", output);
 
-        return "board/qna/read";
+        if(boardCategory.equals("qna")) {
+            return "board/qna/read";
+        } else {
+            return "board/review/read";
+        }
     }
 
     /**
-     * 게시글 작성 (------ member_id 값 처리해야됨. -------)
-     * 
-     * @param boardTitle
+     * 게시글 수정 페이지 
      */
-    @ResponseBody
-    @PostMapping("/board/add")
-    public void boardEdit(
-            @RequestParam("boardTitle") String boardTitle,
-            @RequestParam("boardCategory") String boardCategory,
-            @RequestParam("boardContent") String boardContent,
-            @RequestParam(value = "photo", required = false) MultipartFile photo,
-            @RequestParam(value = "boardPw", required = false) String boardPw,
-            @RequestParam("isPublic") String isPublic,
-
-            // memberId 수정해야 됨
-            @RequestParam(value = "memberId", defaultValue = "1") int memberId) {
-
-        // 게시글 공개시 비밀번호 NULL처리
-        if (isPublic.equals("Y")) {
-            boardPw = null;
-        }
-
-        // 업로드 사진에 대한 처리
-        UploadItem uploadItem = null;
-
-        try {
-            uploadItem = fileHelper.uploadImgFile(photo, boardCategory);
-        } catch (NullPointerException e) {
-            // 업로드 된 항목이 없는 경우는 에러가 아니므로 계속 진행
-        } catch (Exception e) {
-            // 업로드 된 항목이 있으나, 이를 처리하다가 에러가 발생한 경우
-            restHelper.serverError(e);
-            return;
-        }
-
-        Board input = new Board();
-        input.setBoardTitle(boardTitle);
-        input.setBoardContent(boardContent);
-        input.setBoardCategory(boardCategory);
-        input.setBoardPw(boardPw);
-        input.setIsPublic(isPublic);
-        input.setMemberId(memberId);
-
-        // 업로드 사진 있어?
-        if(uploadItem != null) {
-            input.setUploadImg(uploadItem.getFilePath());
-        }
-
-        // DB에 저장
-        try {
-            boardService.addItem(input);
-        } catch (Exception e) {
-            webHelper.serverError(e);
-        }
-
-        // 컨트롤러랑 javascript 둘 중 하나라도 없으면 왜 동작 안하지??????
-        webHelper.redirect("/board/qua/list", "게시글이 등록되었습니다.");
-    }
-
     @GetMapping("/board/qna/modify/{boardId}")
     public String boardEdit(Model model,
         @PathVariable("boardId") int boardId
@@ -200,80 +147,5 @@ public class BoardController {
         model.addAttribute("board", board);
 
         return "board/qna/modify";
-    }
-
-    @ResponseBody
-    @PostMapping("/board/qna/modify_ok/{boardId}/{memberId}")
-    public void boardEditOk(
-        @PathVariable("boardId") int boardId,
-        @PathVariable("memberId") int memberId,
-        @RequestParam("boardContent") String boardContent,
-        @RequestParam("boardCategory") String boardCategory,
-        @RequestParam(value = "delete_photo", defaultValue = "N") String deletePhoto,
-        @RequestParam(value = "photo", required = false) MultipartFile photo,
-        @RequestParam(value = "boardPw", required = false) String boardPw,
-        @RequestParam("isPublic") String isPublic
-
-        // memberId 수정해야 됨
-        // @RequestParam(value = "memberId", defaultValue = "1") int memberId
-        ) {
-        
-        // 게시글 공개시 비밀번호 NULL처리
-        if (isPublic.equals("Y")) {
-            boardPw = null;
-        }
-        // 업로드 사진에 대한 처리
-        UploadItem uploadItem = null;
-
-        try {
-            uploadItem = fileHelper.uploadImgFile(photo, boardCategory);
-        } catch (NullPointerException e) {
-            // 업로드 된 항목이 없는 경우는 에러가 아니므로 계속 진행
-        } catch (Exception e) {
-           webHelper.serverError(e);;
-        }
-
-        Board board = new Board();
-        board.setBoardContent(boardContent);
-        board.setBoardPw(boardPw);
-        board.setIsPublic(isPublic);
-
-        String currentPhoto = uploadItem.getFilePath();
-        // 기존에 등록된 사진이 있는 경우
-        if(photo != null && photo.equals("")) {
-            
-            // 기존 사진의 삭제가 요청 되었다면?
-            if(deletePhoto.equals("Y")) {
-                fileHelper.deleteUploadFile(currentPhoto);
-
-                // 업로드 된 사진이 있다면 Beans에 포함
-                // 기존 파일이 있을 경우에는 삭제없이는 정보를 갱신하면 안됨
-                if(uploadItem != null) {
-                    board.setUploadImg(uploadItem.getFilePath());
-                } else {
-                    // 삭제만 하고 새로운 파일은 업로드 안하면?
-                    board.setUploadImg(null);
-                }
-            } else {
-                // 삭제 요청이 없으면 기존 사진 유지.
-                board.setUploadImg(currentPhoto);
-            }
-        } else {
-            // 업로드 된 사진이 있다면 Beans에 포함
-            if(uploadItem != null) {
-                board.setUploadImg(uploadItem.getFilePath());
-            }
-            
-        }
-
-        // DB에 저장하기
-        try {
-           boardService.editItem(board);
-        } catch (Exception e) {
-            webHelper.serverError(e);
-        }
-
-        webHelper.redirect("/board/qua/list", "게시글이 수정되었습니다.");
-    }
-    
+    }    
 }
