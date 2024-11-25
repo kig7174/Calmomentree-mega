@@ -37,17 +37,17 @@
                         </div>
                         <div class="item-content">
                             <div class="text-content">
-                                <p class="eng">thermal ceramide</p>
-                                <p class="kor">떼르말 세라마이드 헤드 스파 샴푸 500ml</p>
-                                <p class="text1">민감성, 청소년비듬, 시트러스향, 헤드스파</p>
-                                <p class="text2">정수리 떡짐, 냄새, 비듬의 원인인 두피를 집중 케어하는 헤드 스파용 샴푸입니다. 도고 온천수와 세라마이드와 성분이 민감한 두피를 순하게 세정하고, 보송한 두피와 힘 있는 모발로 가꿔줍니다.</p>
+                                <p class="eng" th:text="${product.prodNameEng}"></p>
+                                <p class="kor" th:text="|${product.prodNameKor} ${product.capacity}|"></p>
+                                <p class="text1" th:text="${product.funcTxt}"></p>
+                                <p class="text2" th:text="${product.descTxt}"></p>
                             </div>
                             <div class="price-content">
                                 <div>
-                                    <span class="discount">30%</span><span class="normal-price price">26,000원</span>
+                                    <span class="discount"></span><span class="normal-price price" th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}"></span>
                                 </div>
                                 <div>
-                                    <span>일반 회원가</span><span class="discount-price price">15,600원</span>
+                                    <span>일반 회원가</span><span class="discount-price price"></span>
                                 </div>
                             </div>
                             <div class="option-select">
@@ -60,7 +60,7 @@
                             </div>
                             <div class="option-item-price">
                                 <div class="buy-product">
-                                    <p>떼르말 세라마이드 헤드 스파 샴푸 500ml</p>
+                                    <p th:text="|${product.prodNameKor}, ${product.capacity}|"></p>
                                 </div>
                                 <div class="qty-box">
                                     <input type="number" name="qty" value="1" id="qty" min="0" readonly />
@@ -68,12 +68,12 @@
                                     <a class="qty-down" id="qty-down"><i class="fa-solid fa-minus"></i></a>
                                     <a class="buy-delete"></a>
                                     <div class="qty-price">
-                                        <span>15,600원</span>
+                                        <span></span>
                                     </div>
                                 </div>                       
                                 <div class="total-price">
                                     <span>TOTAL<span class="qty-txt">(QUANTITY)</span></span>
-                                    <span class="total-price-txt">15,600원<span class="total-qty">(1개)</span></span>
+                                    <span class="total-price-txt"><span class="total-qty"></span></span>
                                 </div>
                             </div>
                             <div class="buy-box">
