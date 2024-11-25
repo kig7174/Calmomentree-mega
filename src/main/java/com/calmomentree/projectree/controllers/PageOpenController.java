@@ -66,11 +66,6 @@ public class PageOpenController {
         return "product/list";
     }
 
-    @GetMapping("/product/search")
-    public String search() {
-        return "product/search";
-    }
-
     @GetMapping("/myshop")
     public String myshop() {
         return "myshop/index";
