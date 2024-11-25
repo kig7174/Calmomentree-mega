@@ -19,11 +19,11 @@
         <div class="title-wr">QNA</div>
         <div class="board-list">
           
-          <div class="noneData" th:unless="${boardQnas.size() > -1}">
+          <div class="noneData" th:if="${boards.size() == 0}">
             <p>검색결과가 없습니다.</p>
           </div>
           
-          <div th:if="${boardQnas.size() > -1}">
+          <div th:unless="${boards.size() == 0}">
             <table border="1">
               <caption>
                 상품 게시판 목록
@@ -34,21 +34,14 @@
                 <col width="15%" />
                 <col width="80px" />
               </colgroup>
-              <!-- <thead>
-                <tr>
-                  <th>번호</th>
-                  <th>제목</th>
-                  <th>작성자</th>
-                  <th>작성일</th>
-                </tr>
-              </thead> -->
+            
               <tbody>
-                <tr th:each="boardQna : ${boardQnas}">
-                  <td th:text="${boardQna.rownum}"></td>
-                  <td><a th:text="${boardQna.boardTitle}" 
-                         th:href="@{/board/qna/read/{boardId}(boardId=${boardQna.boardId})}"></a></td>
-                  <td th:text="${boardQna.userName}"></td>
-                  <td th:text="${boardQna.writeDate}"></td>
+                <tr th:each="board : ${boards}">
+                  <td th:text="${board.rownum}"></td>
+                  <td><a th:text="${board.boardTitle}" 
+                         th:href="@{/board/{boardCategory}/read/{boardId}(boardCategory=${board.boardCategory},boardId=${board.boardId})}"></a></td>
+                  <td th:text="${board.userName}"></td>
+                  <td th:text="${board.writeDate}"></td>
                 </tr>
               </tbody>
             </table>

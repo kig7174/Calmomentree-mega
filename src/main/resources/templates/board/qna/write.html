@@ -13,7 +13,7 @@
       <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
       <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
 
-      <form id="boardAdd" method="post" enctype="multipart/form-data">
+      <form id="boardAdd" enctype="multipart/form-data">
         <!-- 내용 영역 -->
         <div class="inner-box">
           <div class="title-wr">QNA</div>
@@ -72,10 +72,10 @@
     <th:block th:replace="~{/fragments/script}"></th:block>
 
     <script th:inline="javascript">
-      const boardAddLink = /*[[@{/board/add}]]*/'';
+      const boardAddLink = /*[[@{/api/board/add}]]*/'';
       const qnaListPageLink = /*[[@{/board/qna/list}]]*/'';
     </script>
-    <script type="text/javascript" th:src="@{/assets/js/boardAdd.js}" ></script>
+    <script type="text/javascript" th:src="@{/assets/js/board.js}" ></script>
 
     <script>
       ClassicEditor.create(document.querySelector("#content"));

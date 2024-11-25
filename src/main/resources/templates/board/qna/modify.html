@@ -13,8 +13,7 @@
       <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
       <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
 
-      <form id="boardEdit" method="post" enctype="multipart/form-data"
-      th:action="@{/board/qna/modify_ok/{boardId}/{memberId}(boardId=${board.boardId}, memberId=${board.memberId})}">
+      <form id="boardEdit" enctype="multipart/form-data" >
         <!-- 내용 영역 -->
         <div class="inner-box">
           <div class="title-wr">QNA</div>
@@ -86,7 +85,7 @@
     <th:block th:replace="~{/fragments/script}"></th:block>
 
     <script th:inline="javascript">
-      const boardEditOkLink = /*[[@{/board/qna/modify_ok/{boardId}/{memberId}(boardId=${board.boardId}, memberId=${board.memberId})}]]*/'';
+      const boardEditOkLink = /*[[@{/api/board/modify_ok/{boardId}(boardId=${board.boardId})}]]*/'';
       const qnaListPageLink = /*[[@{/board/qna/list}]]*/'';
     </script>
     <script type="text/javascript" th:src="@{/assets/js/boardEdit.js}" ></script>
