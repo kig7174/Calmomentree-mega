@@ -101,7 +101,9 @@ public interface ProductMapper {
     })
     public Product selectItem(Product input);
 
-    @Select("WITH RECURSIVE category_list AS ( " +
+    @Select("<script>" +
+            "<if test='parentCategoryNo == null'>" +
+            "WITH RECURSIVE category_list AS ( " +
                 "SELECT " +
                     "category_id, " +
                     "category_name, " +
@@ -118,6 +120,7 @@ public interface ProductMapper {
                 "FROM categorys AS a " +
                 "INNER JOIN category_list AS b " +
                 "ON a.parent_category_no = b.category_id) " +
+                "</if> " +
         
             "SELECT " +
             "prod_id, " +
@@ -137,17 +140,12 @@ public interface ProductMapper {
             "INNER JOIN categorys AS category " +
             "ON prod.category_id = category.category_id " +
             "WHERE prod.category_id IN ( " +
-            // "( " +
-            // "CASE " +
-            // "WHEN (SELECT parent_category_no FROM categorys WHERE category_id = #{categoryId}) != 0 " +
-            // "THEN #{categoryId} " +
-            // "WHEN (SELECT parent_category_no FROM categorys WHERE category_id = #{categoryId}) = 0 " +
-            // "THEN " +        
-            "(SELECT " +
-            "category_id " +
-            "FROM category_list AS c) " +   
-            // "END " +
-            ");")
+            "<if test='categoryId == \"1\"'>(SELECT category_id FROM categorys)</if> " +
+            "<if test='categoryId == \"2\"'>(SELECT category_id FROM categorys LIMIT 0, 10)</if> " +
+            "<if test='categoryId > 2 and parentCategoryNo == null'>(SELECT category_id FROM category_list AS c)</if> " +
+            "<if test='parentCategoryNo != \"0\"'>#{categoryId}</if> " +
+            ") " +
+            "</script>")
     @ResultMap("productMap")
     public List<Product> selectListByCategory(Product input);
 
@@ -169,10 +167,13 @@ public interface ProductMapper {
             "FROM products AS prod " +
             "INNER JOIN categorys AS category " +
             "ON prod.category_id = category.category_id " +
-            "<where> " +
-            "<if test='prodNameKor != null or prodNameKor != \"\"'>prod_name_kor LIKE CONCAT('%', #{prodNameKor}, '%')</if> " +
-            "</where> " +
-            "ORDER BY #{orderBy} " +
+            "WHERE prod_name_kor LIKE CONCAT('%', #{prodNameKor}, '%') " +
+            "<if test='orderBy == \"recent\"'>ORDER BY release_date DESC, prod_id ASC</if> " +
+            "<if test='orderBy == \"name\"'>ORDER BY prod_name_kor ASC, prod_id ASC</if> " +
+            "<if test='orderBy == \"priceasc\"'>ORDER BY price ASC, prod_id ASC</if> " +
+            "<if test='orderBy == \"pricedesc\"'>ORDER BY price DESC, prod_id ASC</if> " +
+            "<if test='orderBy == \"manu_name\"'>ORDER BY manufacturer ASC, prod_id ASC</if> " +
+            "<if test='orderBy == \"review\"'>ORDER BY review ASC, prod_id ASC</if> " +
             "<if test='listCount > 0'>LIMIT #{offset}, #{listCount}</if> " +
             "</script>")
     @ResultMap("productMap")
