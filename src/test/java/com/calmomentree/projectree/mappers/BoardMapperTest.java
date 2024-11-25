@@ -99,7 +99,7 @@ public class BoardMapperTest {
         Board input = new Board();
         input.setBoardContent("게시글내용 수정해볼까?");
         input.setIsPublic("Y");
-
+        input.setUploadImg("/qna/2024.11.25/images0.jpg");
         input.setBoardId(5);
         input.setMemberId(1);
 

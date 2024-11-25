@@ -44,9 +44,8 @@ public interface BoardMapper {
                         "edit_date = NOW(), " +
                         "upload_img = #{uploadImg}, " +
                         "board_pw = #{boardPw}, " +
-                        "is_public = #{isPublic}, " +                      
+                        "is_public = #{isPublic} " +                      
                         
-                        "upload_img = #{uploadImg} " +
                         "WHERE board_id = #{boardId} AND member_id = #{memberId}")
         public int update(Board input);
 
