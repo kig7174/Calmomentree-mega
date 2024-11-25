@@ -13,10 +13,13 @@ document.querySelectorAll("*[data-disabled]").forEach((v, i) => {
   });
   
   // 첨부파일 이미지 이름 출력하기(추후 보완 필요...)
-  const imgFakeName = document.querySelector(".imgFakeName").innerText;
-  const imgRealName = imgFakeName.substring(imgFakeName.lastIndexOf("/") + 1);
-  const imgName = document.querySelector(".imgName");
-  imgName.innerHTML = imgRealName;
+  if(document.querySelector(".imgFakeName") != null) {
+    const imgFakeName = document.querySelector(".imgFakeName").innerText;
+    const imgRealName = imgFakeName.substring(imgFakeName.lastIndexOf("/") + 1);
+    const imgName = document.querySelector(".imgName");
+    imgName.innerHTML = imgRealName;
+  }
+ 
   
   // textarea의 값 DB에 전달하기
   document.querySelector("#boardEdit").addEventListener("submit", async (e) => {
@@ -39,7 +42,7 @@ document.querySelectorAll("*[data-disabled]").forEach((v, i) => {
     
     const current = e.currentTarget;
     const formData = new FormData(current);
-    const data = await axiosHelper.post(boardEditOkLink, formData);
+    const data = await axiosHelper.putMultipart(boardEditOkLink, formData);
   
     if (data) {
       alert("게시글이 수정되었습니다.");
