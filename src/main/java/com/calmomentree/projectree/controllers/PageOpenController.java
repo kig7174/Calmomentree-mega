@@ -111,11 +111,6 @@ public class PageOpenController {
         return "board/notice/read";
     }
 
-    @GetMapping("/board/product/list")
-    public String productList() {
-        return "board/product/list";
-    }
-
     @GetMapping("/board/product/read")
     public String productRead() {
         return "board/product/read";

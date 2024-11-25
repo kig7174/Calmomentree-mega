@@ -147,5 +147,15 @@ public class BoardController {
         model.addAttribute("board", board);
 
         return "board/qna/modify";
-    }    
+    }
+
+    @GetMapping("/board/product/list")
+    public String productList(Model model
+            ) {
+
+
+
+        return "board/product/list";
+    }
+    
 }

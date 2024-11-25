@@ -9,7 +9,7 @@ import lombok.Setter;
  */
 @Data
 public class ReviewBoard {
-    private int reviewBoard_id;      // 리뷰게시글 번호
+    private int reviewBoardId;      // 리뷰게시글 번호
     private String reviewTitle;     // 리뷰게시글 제목
     private String reviewContent;   // 리뷰게시글 내용
     private int rating;             // 평점
@@ -18,6 +18,8 @@ public class ReviewBoard {
 
     private int prodId;             // 상품번호
     private int memberId;           // 회원번호
+
+    private int rownum;             // 게시글 카운트
 
     @Getter
     @Setter
