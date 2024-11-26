@@ -96,7 +96,7 @@ public interface ProductMapper {
         @Result(property="editDate", column="edit_date"),
         @Result(property="categoryId", column="category_id"),
         @Result(property="categoryName", column="category_name"),
-        @Result(property="parentCategoryName", column="parent_cateogry_name"),
+        @Result(property="parentCategoryName", column="parent_category_name"),
         @Result(property="parentCategoryNo", column="parent_category_no")
     })
     public Product selectItem(Product input);
