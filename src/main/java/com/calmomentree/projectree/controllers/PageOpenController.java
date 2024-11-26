@@ -2,6 +2,8 @@ package com.calmomentree.projectree.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class PageOpenController {
@@ -90,6 +92,12 @@ public class PageOpenController {
     public String orderForm() {
         return "order/order_form";
     }
+
+    @GetMapping("/order/search_board_list")
+    public String searchOrder() {
+        return "order/search_board_list";
+    }
+    
 
     @GetMapping("/board/faq/list")
     public String faqList() {
