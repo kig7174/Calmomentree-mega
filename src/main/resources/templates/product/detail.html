@@ -17,7 +17,9 @@
                 <div class="detail-body-top">
                     <div class="current-category">
                         <div class="category">
-                            <span><a class="home" href="#">홈</a></span>
+                            <span><a class="home" th:href="@{/}">홈</a></span>
+                            <span>> <a class="home" th:text="${product.parentCategoryName}"></a></span>
+                            <span>> <a class="home" th:text="${product.categoryName}"></a></span>
                         </div>
                     </div>
                     <div class="item-detail">
@@ -38,7 +40,7 @@
                         <div class="item-content">
                             <div class="text-content">
                                 <p class="eng" th:text="${product.prodNameEng}"></p>
-                                <p class="kor" th:text="|${product.prodNameKor} ${product.capacity}|"></p>
+                                <p class="kor" th:text="|${product.prodNameKor} ${product.capacity} ML|"></p>
                                 <p class="text1" th:text="${product.funcTxt}"></p>
                                 <p class="text2" th:text="${product.descTxt}"></p>
                             </div>
@@ -60,7 +62,7 @@
                             </div>
                             <div class="option-item-price">
                                 <div class="buy-product">
-                                    <p th:text="|${product.prodNameKor}, ${product.capacity}|"></p>
+                                    <p th:text="|${product.prodNameKor} ${product.capacity} ML|"></p>
                                 </div>
                                 <div class="qty-box">
                                     <input type="number" name="qty" value="1" id="qty" min="0" readonly />
