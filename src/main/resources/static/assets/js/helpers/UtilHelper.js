@@ -150,7 +150,7 @@ class UtilHelper {
         return await this.alert(title, text, "info", "확인", this.colorMap.info);
     }
 
-    async confirm(title, text, confirmButtonText, confirmButtonColor, cancelBUttonText, cancelButtonColor) {
+    async confirm(title, text, confirmButtonText, confirmButtonColor, cancelButtonText, cancelButtonColor) {
         if (Swal !== undefined) {
             return await Swal.fire({
                 title: title, // 제목
@@ -160,32 +160,32 @@ class UtilHelper {
                 confirmButtonText: confirmButtonText, // 확인버튼 표시 문구
                 confirmButtonColor: confirmButtonColor, // 확인버튼 색상
                 showCancelButton: true, // 취소버튼 표시 여부
-                cancelBUttonText: confirmButtonText, // 취소버튼 표시 문구
-                cancelButtonColor: confirmButtonColor, // 취소버튼 색상
+                cancelButtonText: cancelButtonText, // 취소버튼 표시 문구
+                cancelButtonColor: cancelButtonColor, // 취소버튼 색상
             });
         } else {
             return confirm(text);
         }
     }
 
-    async confirmPrimary(title, text, confirmButtonText = "확인", cancelBUttonText = "취소") {
-        return await this.alert(title, text, confirmButtonText, this.colorMap.primary, cancelBUttonText, this.colorMap.light);
+    async confirmPrimary(title, text, confirmButtonText = "확인", cancelButtonText = "취소") {
+        return await this.confirm(title, text, confirmButtonText, this.colorMap.primary, cancelButtonText, this.colorMap.light);
     }
 
-    async confirmSuccess(title, text, confirmButtonText = "확인", cancelBUttonText = "취소") {
-        return await this.alert(title, text, confirmButtonText, this.colorMap.success, cancelBUttonText, this.colorMap.light);
+    async confirmSuccess(title, text, confirmButtonText = "확인", cancelButtonText = "취소") {
+        return await this.confirm(title, text, confirmButtonText, this.colorMap.success, cancelButtonText, this.colorMap.light);
     }
 
-    async confirmDanger(title, text, confirmButtonText = "확인", cancelBUttonText = "취소") {
-        return await this.alert(title, text, confirmButtonText, this.colorMap.danger, cancelBUttonText, this.colorMap.light);
+    async confirmDanger(title, text, confirmButtonText = "확인", cancelButtonText = "취소") {
+        return await this.confirm(title, text, confirmButtonText, this.colorMap.danger, cancelButtonText, this.colorMap.light);
     }
 
-    async confirmWarning(title, text, confirmButtonText = "확인", cancelBUttonText = "취소") {
-        return await this.alert(title, text, confirmButtonText, this.colorMap.warning, cancelBUttonText, this.colorMap.light);
+    async confirmWarning(title, text, confirmButtonText = "확인", cancelButtonText = "취소") {
+        return await this.confirm(title, text, confirmButtonText, this.colorMap.warning, cancelButtonText, this.colorMap.light);
     }
     
-    async confirmInfo(title, text, confirmButtonText = "확인", cancelBUttonText = "취소") {
-        return await this.alert(title, text, confirmButtonText, this.colorMap.info, cancelBUttonText, this.colorMap.light);
+    async confirmInfo(title, text, confirmButtonText = "확인", cancelButtonText = "취소") {
+        return await this.confirm(title, text, confirmButtonText, this.colorMap.info, cancelButtonText, this.colorMap.light);
     }
 }
 
