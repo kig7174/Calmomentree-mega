@@ -16,7 +16,7 @@
             <h2>회원 정보 수정</h2>
             <h3>기본정보 <span><span class="required-option">*</span> 필수입력사항</span></h3>
         </div>
-        <form method="" action="" class="edit-form">
+        <form id="edit-form" class="edit-form">
             <table border="1">
                 <colgroup>
                     <col style="width:190px" />
@@ -26,14 +26,14 @@
                     <tr>
                         <th>아이디 <span class="required-option">*</span></th>
                         <td>
-                            <input type="text" name="userid" value="1" readonly />
+                            <input type="text" name="user_id" th:value="${session.memberInfo.userId}" readonly />
                             <span class="input-info">(영문소문자/숫자, 4~16자)</span>
                         </td>
                     </tr>
                     <tr>
                         <th>비밀번호 <span class="required-option">*</span></th>
                         <td>
-                            <input type="password" name="password" id="password" />
+                            <input type="password" name="user_pw" id="user_pw" />
                             <span class="input-info">(영문 대소문자/숫자/특수문자 중 2가지 이상 조합, 10자~16자)</span>
                             <div id="password-focus" class="password-off">
                                 <div class="password-content">
@@ -49,14 +49,14 @@
                     <tr>
                         <th>비밀번호 확인 <span class="required-option">*</span></th>
                         <td>
-                            <input type="password" name="password-confirm" />
-                            <p class="password-confirm-msg">비밀번호가 일치하지 않습니다.</p>
+                            <input type="password" id="pw_confirm" name="pw_confirm" />
+                            <p class="pw-confirm-msg"></p>
                         </td>
                     </tr>
                     <tr>
                         <th>이름 <span class="required-option">*</span></th>
                         <td>
-                            <input type="text" name="username" readonly />
+                            <input type="text" name="user_name" id="user_name" th:value="${session.memberInfo.userName}" readonly />
                         </td>
                     </tr>
                     <tr>
@@ -64,88 +64,60 @@
                         <td>
                             <ul>
                                 <li>
-                                    <input type="text" name="postcode" id="postcode" value="1" />
+                                    <input type="text" name="postcode" id="postcode" th:value="${session.memberInfo.postcode}" />
                                     <button type="button" id="post-btn">주소검색</button>
                                 </li>
-                                <li><input type="text" name="addr1" id="addr1" value="1" /></li>
-                                <li><input type="text" name="addr2" id="addr2" value="1" /></li>
+                                <li><input type="text" name="addr1" id="addr1" th:value="${session.memberInfo.addr1}" /></li>
+                                <li><input type="text" name="addr2" id="addr2" th:value="${session.memberInfo.addr2}" /></li>
                             </ul>
                         </td>
                     </tr>
                     <tr>
                         <th>일반전화</th>
                         <td>
-                            <select name="phone1" selected="02">
-                                <option value="02">02</option>
-                                <option value="031">031</option>
-                                <option value="032">032</option>
-                                <option value="033">033</option>
-                                <option value="041">041</option>
-                                <option value="042">042</option>
-                                <option value="043">043</option>
-                                <option value="044">044</option>
-                                <option value="051">051</option>
-                                <option value="052">052</option>
-                                <option value="053">053</option>
-                                <option value="054">054</option>
-                                <option value="055">055</option>
-                                <option value="061">061</option>
-                                <option value="062">062</option>
-                                <option value="063">063</option>
-                                <option value="064">064</option>
-                            </select>
-                            -
-                            <input type="text" name="phone2" maxlength="4" class="tel" />
-                            -
-                            <input type="text" name="phone3" maxlength="4" class="tel" />
+                            <input type="text" name="phone" />
                         </td>
                     </tr>
                     <tr>
                         <th>휴대전화 <span class="required-option">*</span></th>
                         <td>
-                            <select name="tel1" selected="010">
-                                <th:block th:replace="~{/member/join :: tel1-list}"></th:block>
-                            </select>
-                            -
-                            <input type="text" name="tel2" maxlength="4" class="tel" value="1" />
-                            -
-                            <input type="text" name="tel3" maxlength="4" class="tel" value="1" />
+                            <input type="text" name="tel" id="tel" th:value="${session.memberInfo.tel}" />
                         </td>
                     </tr>
                     <tr>
                         <th>SMS 수신여부 <span class="required-option">*</span></th>
                         <td>
-                            <label><input type="radio" name="agreeSmsReceive" value="Y" />수신함</label>
-                            <label><input type="radio" name="agreeSmsReceive" value="N" checked/>수신안함</label>
+                            <label><input type="radio" name="is_sms_agree" value="Y" th:checked="${session.memberInfo.isSmsAgree eq 'Y'}"/>수신함</label>
+                            <label><input type="radio" name="is_sms_agree" value="N" th:checked="${session.memberInfo.isSmsAgree eq 'N'}"/>수신안함</label>
                             <p class="input-info">쇼핑몰에서 제공하는 유익한 이벤트 소식을 SMS로 받으실 수 있습니다.</p>
                         </td>
                     </tr>
                     <tr>
                         <th>이메일 <span class="required-option">*</span></th>
                         <td>
-                            <input type="email" name="email" value="1" />
+                            <input type="email" name="email" id="email" th:value="${session.memberInfo.email}" />
                         </td>
                     </tr>
                     <tr>
                         <th>이메일 수신여부 <span class="required-option">*</span></th>
                         <td>
-                            <label><input type="radio" name="agreeEmailReceive" value="Y" />수신함</label>
-                            <label><input type="radio" name="agreeEmailReceive" value="N" checked/>수신안함</label>
+                            <label><input type="radio" name="is_email_agree" value="Y" th:checked="${session.memberInfo.isEmailAgree eq 'Y'}"/>수신함</label>
+                            <label><input type="radio" name="is_email_agree" value="N" th:checked="${session.memberInfo.isEmailAgree eq 'N'}"/>수신안함</label>
                             <p class="input-info">쇼핑몰에서 제공하는 유익한 이벤트 소식을 이메일로 받으실 수 있습니다.</p>
                         </td>
                     </tr>
                     <tr>
                         <th>추가정보</th>
                         <td>
-                            <input type="date" name="birthday" />
+                            <input type="date" name="birthday" th:value="${session.memberInfo.birthday}" />
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <button type="submit" class="delete-btn">회원탈퇴</button>
+            <button type="button" id="out_btn" class="delete-btn">회원탈퇴</button>
             <div class="submit-btn">
                 <button type="button">취소</button>
-                <button type="submit">회원정보수정</button>
+                <button type="submit" id="edit_btn">회원정보수정</button>
             </div>
         </form>
     </div>
@@ -154,5 +126,95 @@
 
     <th:block th:replace="~{/fragments/script}"></th:block>
     <script th:src="@{/assets/js/modify.js}"></script>
+
+    <script>
+        // 회원 탈퇴 버튼
+        document.querySelector("#out_btn").addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            try {
+                regexHelper.value("#user_pw", "비밀번호를 입력해주세요.");
+                regexHelper.password("#user_pw", "비밀번호 형식이 잘못되었습니다.");
+                regexHelper.compareTo("#user_pw", "#pw_confirm", "비밀번호 확인이 일치하지 않습니다..");
+            } catch (error) {
+                alert(error.message);
+                return;
+            }
+
+            const outResult = confirm("정말 탈퇴하시겠습니까? 탈퇴 후에는 복구가 불가능합니다.");
+
+            if (outResult === true) {
+                const current = document.querySelector("#edit-form");
+                
+                const data = await axiosHelper.delete("[[@{/api/member/out}]]", new FormData(current));
+
+                if (data) {
+                    alert("Calmomentree를 이용해 주셔서 감사합니다. 탈퇴되셨습니다.");
+                    window.location = "[[@{/}]]"
+                }
+            } else if (outResult === false) {
+                window.location.reload();
+            }
+        });
+
+        /** 비밀번호 확인 검사 */
+        document.querySelector("#pw_confirm").addEventListener("blur", e => {
+            e.preventDefault();
+            const pwMsg = document.querySelector(".pw-confirm-msg");
+            try {
+                regexHelper.compareTo("#user_pw", "#pw_confirm", "비밀번호가 일치하지 않습니다.");
+            } catch (error) {
+                pwMsg.innerHTML = error.message;
+            }
+
+            document.querySelector("#pw_confirm").addEventListener("change", e => {
+                pwMsg.innerHTML = "";
+            });
+        });
+
+        // 회원정보 수정
+        document.querySelector("#edit-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            try {
+                regexHelper.value("#user_pw", "비밀번호를 입력해주세요.");
+                regexHelper.minLength("#user_pw", 10, "비밀번호는 10자 이상으로 입력해주세요.");
+                regexHelper.maxLength("#user_pw", 16, "비밀번호는 16자 이하로 입력해주세요.");
+                regexHelper.password("#user_pw", "비밀번호 형식이 잘못되었습니다.");
+                regexHelper.compareTo("#user_pw", "#pw_confirm", "비밀번호 확인이 일치하지 않습니다..");
+
+                regexHelper.value("#tel", "전화번호를 입력해주세요.");
+                regexHelper.num("#tel", "전화번호는 숫자로만 입력 가능합니다.");
+                regexHelper.phone("#tel", "전화번호 형식이 잘못되었습니다.");
+
+                regexHelper.value("#email", "이메일을 입력해주세요.");
+                regexHelper.email("#email", "이메일 형식이 잘못되었습니다.");
+
+                regexHelper.value("#postcode", "우편번호를 검색해주세요.");
+                regexHelper.minLength("#postcode", 5, "우편번호는 5자로 입력해주세요.");
+                regexHelper.maxLength("#postcode", 5, "우편번호는 5자로 입력해주세요.");
+                regexHelper.num("#postcode", "우편번호는 숫자로만 입력해주세요.");
+                
+                regexHelper.value("#addr1", "주소를 검색해주세요.");
+                regexHelper.value("#addr2", "상세 주소를 입력해주세요.");
+
+            } catch (error) {
+                alert(error.message);
+                return;
+            }
+            
+            const data = await axiosHelper.put("[[@{/api/member/modify}]]", new FormData(e.currentTarget));
+
+            if (data) {
+                if (data.error) {
+                    alert(data.message);
+                    return;
+                }
+
+                alert("회원정보가 수정되었습니다.");
+                window.location = "[[@{/myshop}]]";
+            }
+        });
+    </script>
 </body>
 </html>
