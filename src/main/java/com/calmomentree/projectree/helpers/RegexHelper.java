@@ -18,7 +18,7 @@ public class RegexHelper {
      * @throws StringFormatException
      */
     public void isMatch(String str, String checkStr, String message) throws StringFormatException {
-        if (str != null && checkStr != null && str != checkStr) {
+        if (str != null && checkStr != null && str == checkStr) {
             throw new StringFormatException(message);
         }
     }

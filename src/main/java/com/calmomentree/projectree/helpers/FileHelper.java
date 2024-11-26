@@ -302,8 +302,8 @@ public class FileHelper {
         }
 
         /** 2) 업로드 된 파일이 저장될 폴더 생성 */
-        String targetDir = String.format("%s/%s/%s",
-                uploadDir, prodName, imgType);
+        String targetDir = String.format("%s/%s/%s/%s",
+                uploadDir, "product_img", prodName, imgType);
 
         // 폴더가 존재하지 않는다면 생성한다.
         File f = new File(targetDir);
@@ -314,6 +314,7 @@ public class FileHelper {
         /** 3) 저장될 파일의 이름을 생성한다. */
         // 파일의 원본 이름에서 확장자만 추출
         String ext = originName.substring(originName.lastIndexOf("."));
+        String origin = originName.substring(0, originName.lastIndexOf(".")); // 파일의 이름 추출
         String fileName = null; // 웹 서버에 저장될 파일이름
         File targetFile = null; // 저장된 파일 정보를 담기 위한 File객체
         int count = 0; // 중복된 파일 수
@@ -363,7 +364,7 @@ public class FileHelper {
         }
 
         // 업로드 경로를 웹 상에서 접근 가능한 경로 문자열로 변환
-        String fileUrl = String.format("%s%s", uploadUrl, filePath);
+        String fileUrl = String.format("%d%s%s", origin, uploadUrl, filePath);
 
         /** 6) 업로드 결과를 Beans에 저장 */
         UploadItem item = new UploadItem();
