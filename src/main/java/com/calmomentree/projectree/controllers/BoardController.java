@@ -33,13 +33,11 @@ public class BoardController {
     /**
      * 게시판 목록페이지
      */
-    @GetMapping("/board/{boardCategory}/list")
+    @GetMapping("/board/qna/list")
     public String qnaList(Model model,
             // 검색어 파라미터
             @RequestParam(value = "keyword", required = false) String keyword,
-            @RequestParam(value = "page", defaultValue = "1") int nowPage,
-
-            @PathVariable("boardCategory") String boardCategory) {
+            @RequestParam(value = "page", defaultValue = "1") int nowPage) {
 
         int totalCount = 0; // 전체 게시글 수
         int listCount = 10; // 한 페이지당 표시할 목록 수
@@ -51,7 +49,6 @@ public class BoardController {
         // 조회 조건에 사용할 객체
         Board input = new Board();
         input.setBoardTitle(keyword);
-        input.setBoardCategory(boardCategory);
 
         List<Board> output = null;
 
@@ -76,12 +73,7 @@ public class BoardController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("pagination", pagination);
 
-        if(boardCategory.equals("qna")) {
-            return "board/qna/list";
-        } else {
-            return "board/review/list";
-        }
-        
+        return "board/qna/list";
 
     }
 
@@ -89,23 +81,21 @@ public class BoardController {
      * qna 게시판 상세페이지
      */
     @SuppressWarnings("null")
-    @GetMapping("/board/{boardCategory}/read/{boardId}")
+    @GetMapping("/board/qna/read/{boardId}")
     public String qnaRead(Model model,
-            @PathVariable("boardId") int boardId,
-            @PathVariable("boardCategory") String boardCategory) {
+            @PathVariable("boardId") int boardId) {
 
         // 조회 조건에 사용할 변수를 Beans에 저장
         Board input = new Board();
         input.setBoardId(boardId);
-        input.setBoardCategory(boardCategory);
-        
+
         Board output = null;
-        
+
         try {
             output = boardService.getItem(input);
         } catch (Exception e) {
             webHelper.serverError(e);
-        }     
+        }
 
         // 업로드 사진의 경로를 URL로 변환.
         output.setUploadImg(fileHelper.getUrl(output.getUploadImg()));
@@ -113,21 +103,18 @@ public class BoardController {
         // View에 데이터 전달
         model.addAttribute("board", output);
 
-        if(boardCategory.equals("qna")) {
-            return "board/qna/read";
-        } else {
-            return "board/review/read";
-        }
+        return "board/qna/read";
+
     }
 
     /**
-     * 게시글 수정 페이지 
+     * 게시글 수정 페이지
      */
     @GetMapping("/board/qna/modify/{boardId}")
     public String boardEdit(Model model,
-        @PathVariable("boardId") int boardId
-        // @PathVariable("memberId") int memberId
-        ) {
+            @PathVariable("boardId") int boardId
+    // @PathVariable("memberId") int memberId
+    ) {
 
         // 검색 조건으로 사용
         Board input = new Board();
@@ -136,7 +123,7 @@ public class BoardController {
 
         // 수정할 데이터의 현재 값을 조회
         Board board = null;
-        
+
         try {
             board = boardService.getItem(input);
         } catch (Exception e) {
@@ -148,14 +135,4 @@ public class BoardController {
 
         return "board/qna/modify";
     }
-
-    @GetMapping("/board/product/list")
-    public String productList(Model model
-            ) {
-
-
-
-        return "board/product/list";
-    }
-    
 }

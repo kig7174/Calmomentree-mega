@@ -39,7 +39,7 @@
                 <tr th:each="board : ${boards}">
                   <td th:text="${board.rownum}"></td>
                   <td><a th:text="${board.boardTitle}" 
-                         th:href="@{/board/{boardCategory}/read/{boardId}(boardCategory=${board.boardCategory},boardId=${board.boardId})}"></a></td>
+                         th:href="@{/board/qna/read/{boardId}(boardId=${board.boardId})}"></a></td>
                   <td th:text="${board.userName}"></td>
                   <td th:text="${board.writeDate}"></td>
                 </tr>
