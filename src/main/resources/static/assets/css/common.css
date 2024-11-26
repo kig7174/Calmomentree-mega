@@ -141,10 +141,10 @@ button, a {
         justify-content: space-between;
 
         .menu-title {
+            align-content: center;
 
             img {
                 width: 180px;
-                height: 50px;
             }
         }
 
@@ -172,6 +172,7 @@ button, a {
                         position: absolute;
                         right: 0;
                         margin: 2%;
+                        width: 300px;
                     }
                 }
 
@@ -239,6 +240,15 @@ button, a {
                     padding: 10px;
                 }
 
+                .search-btn {
+                    background-color: var(--background-color);
+                    border: 0;
+                    width: 21px;
+
+                    img {
+                        width: 100%;
+                    }
+                }
             }
             
         }
