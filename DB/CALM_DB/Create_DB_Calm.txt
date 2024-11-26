@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `calmomentree`.`members` (
   `postcode` CHAR(5) NOT NULL COMMENT '우편번호',
   `addr1` VARCHAR(255) NOT NULL COMMENT '기본주소',
   `addr2` VARCHAR(255) NOT NULL COMMENT '상세주소',
-  `birthday` DATETIME NULL DEFAULT NULL COMMENT '생년월일',
+  `birthday` DATE NULL DEFAULT NULL COMMENT '생년월일',
   `is_sms_agree` ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '문자 메세지 수신 여부',
   `is_email_agree` ENUM('Y', 'N') NOT NULL DEFAULT 'N' COMMENT '이메일 수신 여부',
   `login_date` DATETIME NULL DEFAULT NULL COMMENT '마지막 로그인 날짜',

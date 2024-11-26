@@ -4,3 +4,6 @@
 
 // 부모 카테고리 데이터 타입 변경, NULL 허용, 기본값 설정
 ALTER TABLE categorys MODIFY `parent_category_no` INT DEFAULT 0 NULL COMMENT '부모카테고리 번호';
+
+// 회원정보 생년월일 데이터 타입 변경
+ALTER TABLE `members` CHANGE `birthday` `birthday` DATE NULL;
