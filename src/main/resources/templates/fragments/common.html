@@ -21,8 +21,8 @@
         <div class="menu">
             <div class="menu-inner">
                 <div class="menu-title">
-                    <a href="#">
-                        <img src="https://placehold.co/100x50" />
+                    <a th:href="@{/}">
+                        <img th:src="@{/files/common/header_logo.svg}" />
                     </a>
                 </div>
                 <div class="menu-category">
@@ -87,7 +87,7 @@
                             </li>
                         </ul>
                         <div class="sub-category-box">
-                            <img src="https://placehold.co/300x300" />
+                            <img th:src="@{/files/common/sub_menu_img.jpg}" />
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@
                         <a>고객문의</a>
                         <a class="b2b-btn">B2B 문의</a>
                         <a>
-                            <button id="search-on" type="button"><img src="https://placehold.co/30x30" /></button>
+                            <button class="search-btn" id="search-on" type="button"><img th:src="@{/files/common/search.svg}" /></button>
                         </a>
                     </div>
 
@@ -122,7 +122,7 @@
                         <a>마이페이지</a>
                         <a class="b2b-btn">B2B 문의</a>
                         <a>
-                            <button id="search-on" type="button"><img src="https://placehold.co/30x30" /></button>
+                            <button class="search-btn" id="search-on" type="button"><img th:src="@{/files/common/search.svg}" /></button>
                         </a>
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                 <div class="search-form">
                     <form method="get" th:action="@{/product/search}">
                         <input type="text" name="keyword" id="keyword" placeholder="SEARCH" />
-                        <button type="submit"><img src="https://placehold.co/30x30"/></button>
+                        <button type="submit"><img th:src="@{/files/common/search.svg}"/></button>
                     </form>
                 </div>
             </div>    
@@ -148,7 +148,7 @@
 
         <div class="top-btn-box" th:fragment="calm-top-btn">
             <button type="button" id="top-btn">
-                <img src="/src/main/resources/static/assets/img/top_scroll_arrow.svg" />
+                <img th:src="@{/files/common/top_scroll_arrow.svg}" />
                 <p>TOP</p>
             </button>
         </div>
@@ -160,9 +160,9 @@
         <div class="footer-container">
             <!-- footer title -->
             <div class="footer-title">
-                <img class="img-title" src="http://localhost:3001/index/ft_cal_logo.svg" />
+                <img class="img-title" th:src="@{/files/common/ft_cal_logo.svg}" />
                 <p>완벽한 쉼, 비건 라이프 캄모멘트리</p>
-                <img class="img-logo" src="http://localhost:3001/index/ft_logo.svg" />
+                <img class="img-logo" th:src="@{/files/common/ft_logo.svg}" />
             </div>
 
             <!-- company info -->
@@ -240,17 +240,7 @@
 
     <script src="/src/main/resources/static/assets/js/common.js"></script>
     <script>
-        if ("[[${session.memberInfo}]]" !== null) {
-            document.querySelector("#logout").addEventListener("click", async (e) => {
-                e.preventDefault();
-
-                const data = await axiosHelper.get(e.currentTarget.getAttribute('href'));
-
-                if (data) {
-                    window.location.reload();
-                }
-            });
-        }
+        
 
     </script>
 </body>
