@@ -183,7 +183,7 @@ document.querySelector("#join").addEventListener("submit", async (e) => {
 
     if (data) {
         if (data.error) {
-            alert("회원가입에 실패했습니다. 다시 시도해주세요.");
+            alert(data.message);
             return;
         }
         
