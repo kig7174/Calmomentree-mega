@@ -92,3 +92,16 @@ window.addEventListener("click", (e) => {
         searchBg.classList.remove("on");
     }
 });
+
+// 로그아웃
+if (document.querySelector("#logout")) {
+    document.querySelector("#logout").addEventListener("click", async (e) => {
+        e.preventDefault();
+
+        const data = await axiosHelper.get(e.currentTarget.getAttribute('href'));
+
+        if (data) {
+            window.location.reload();
+        }
+    });
+}
