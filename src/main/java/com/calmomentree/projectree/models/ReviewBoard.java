@@ -20,6 +20,8 @@ public class ReviewBoard {
     private int memberId;           // 회원번호
 
     private int rownum;             // 게시글 카운트
+    
+    private String userName;        // 회원이름
 
     @Getter
     @Setter

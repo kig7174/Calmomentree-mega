@@ -12,120 +12,168 @@
       <div th:replace="~{/fragments/common :: calm-search}"></div>
       <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
 
-      <div class="titleBox">
-        <span class="title">Review</span>
-        <div class="selectProd">
-          <img src="http://placehold.co/65" alt="" />
-          <span class="select"><a href="">주문상품선택</a></span>
+      <form id="reviewAdd" enctype="multipart/form-data">
+        <div class="titleBox">
+          <span class="title">Review</span>
+          <div class="selectProd">
+            <img src="http://placehold.co/65" alt="" />
+            <span class="select"><a href="">주문상품선택</a></span>
+          </div>
         </div>
-      </div>
-      <div class="reviewContent">
-        <table border="1">
-          <colgroup>
-            <col style="width: 190px" />
-            <col style="width: auto" />
-          </colgroup>
-          <tbody>
-            <tr>
-              <th>제목</th>
-              <td><input type="text" required /></td>
-            </tr>
-            <tr>
-              <th>평점</th>
-              <td class="star">
-                <input type="radio" id="point5" name="point" value="5" checked />
-                <label for="point5">★★★★★</label>
-                <input type="radio" id="point4" name="point" value="4" />
-                <label for="point4">★★★★</label>
-                <input type="radio" id="point3" name="point" value="3" />
-                <label for="point3">★★★</label>
-                <input type="radio" id="point2" name="point" value="2" />
-                <label for="point2">★★</label>
-                <input type="radio" id="point1" name="point" value="1" />
-                <label for="point1">★</label>
-              </td>
-            </tr>
-            <tr>
-              <th>본문</th>
-              <td class="contentBox">
-                <div id="content"></div>
-              </td>
-            </tr>
-            <tr>
-              <th>첨부파일1</th>
-              <td>
-                <input type="file" />
-              </td>
-            </tr>
-            <tr>
-              <th>첨부파일2</th>
-              <td>
-                <input type="file" />
-              </td>
-            </tr>
-            <tr>
-              <th>첨부파일3</th>
-              <td>
-                <input type="file" />
-              </td>
-            </tr>
-            <tr>
-              <th>첨부파일4</th>
-              <td>
-                <input type="file" />
-              </td>
-            </tr>
-            <tr>
-              <th>첨부파일5</th>
-              <td>
-                <input type="file" />
-              </td>
-            </tr>
-            <tr>
-              <th>비밀번호</th>
-              <td>
-                <input type="password" size="5" />
-              </td>
-            </tr>
-            <tr>
-              <th>비밀글설정</th>
-              <td class="star">
-                <input type="radio" id="public" class="" name="secure" checked />
-                <label for="public">공개글</label>
-                <input type="radio" id="private" class="" name="secure" />
-                <label for="private">비밀글</label>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="btnArea">
-        <button class="cancelBtn btn">취소</button>
-        <button class="uploadBtn btn">등록</button>
-      </div>
+        <div class="reviewContent">
+          <table border="1">
+            <colgroup>
+              <col style="width: 190px" />
+              <col style="width: auto" />
+            </colgroup>
+            <tbody>
+              <tr>
+                <th>제목</th>
+                <td><input id="title" type="text" name="reviewTitle" /></td>
+              </tr>
+              <tr>
+                <th>평점</th>
+                <td class="star">
+                  <input type="radio" id="point5" name="rating" value="5" checked />
+                  <label for="point5">★★★★★</label>
+                  <input type="radio" id="point4" name="rating" value="4" />
+                  <label for="point4">★★★★</label>
+                  <input type="radio" id="point3" name="rating" value="3" />
+                  <label for="point3">★★★</label>
+                  <input type="radio" id="point2" name="rating" value="2" />
+                  <label for="point2">★★</label>
+                  <input type="radio" id="point1" name="rating" value="1" />
+                  <label for="point1">★</label>
+                </td>
+              </tr>
+              <tr>
+                <th>본문</th>
+                <td class="contentBox">
+                  <!-- 입력된 내용 복사 될 곳 -->
+                  <textarea name="reviewContent" id="textBox" style="display: none"></textarea>
+                  <div id="content"></div>
+                </td>
+              </tr>
+              <tr>
+                <th>첨부파일1</th>
+                <td>
+                  <input name="photo" class="line file-btn" type="file" accept="image/*" />
+                </td>
+              </tr>
+              <tr>
+                <th>첨부파일2</th>
+                <td>
+                  <input name="photo" class="line file-btn" type="file" accept="image/*" />
+                </td>
+              </tr>
+              <tr>
+                <th>첨부파일3</th>
+                <td>
+                  <input name="photo" class="line file-btn" type="file" accept="image/*" />
+                </td>
+              </tr>
+              <tr>
+                <th>첨부파일4</th>
+                <td>
+                  <input name="photo" class="line file-btn" type="file" accept="image/*" />
+                </td>
+              </tr>
+              <tr>
+                <th>첨부파일5</th>
+                <td>
+                  <input name="photo" class="line file-btn" type="file" accept="image/*" />
+                </td>
+              </tr>
+              <tr>
+                <th>비밀번호</th>
+                <td>
+                  <input type="password" size="5" />
+                </td>
+              </tr>
+              <tr>
+                <th>비밀글설정</th>
+                <td class="star">
+                  <input type="radio" id="public" class="" name="secure" checked />
+                  <label for="public">공개글</label>
+                  <input type="radio" id="private" class="" name="secure" />
+                  <label for="private">비밀글</label>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="btnArea">
+          <button class="cancelBtn btn">취소</button>
+          <button class="uploadBtn btn">등록</button>
+        </div>
+      </form>
     </div>
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
-    
-    <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>
+
     <script>
       ClassicEditor.create(document.querySelector("#content"));
     </script>
     <script>
-      document.querySelector(".select").addEventListener("click", e=>{
-          e.preventDefault();
-          
-          const popup = window.open('/src/main/resources/templates/order/search_board_list.html', 
-          '', 'width=500, height=500, scrollbars=no, toolbar=no, menubar=no, status=no, location=no');
+      document.querySelector(".select").addEventListener("click", (e) => {
+        e.preventDefault();
 
-          // 팝업창이 차단된 경우
-          if(!popup) {
-              alert('팝업 차단을 해제해 주세요');
-          } else {
-              popup.focus();
-          }
+        const popup = window.open(
+          "[[@{/order/search_board_list}]]",
+          "",
+          "width=500, height=500, scrollbars=no, toolbar=no, menubar=no, status=no, location=no"
+        );
+
+        // 팝업창이 차단된 경우
+        if (!popup) {
+          alert("팝업 차단을 해제해 주세요");
+        } else {
+          popup.focus();
+        }
       });
+      if(document.querySelector("#reviewAdd") != null) {
+        document.querySelector("#reviewAdd").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // 제목 입력여부
+        const title = document.querySelector("#title");
+        if(title.value == null || title.value == "") {
+          alert("제목 항목은 필수 입력값입니다.");
+          setTimeout(() => title.focus(), 300);
+          return false;
+        }
+
+        /** ck-editor의 값 추출 후 textBox에 복사 */
+        const content = document.querySelector(".ck-content");
+        const con = content.getElementsByTagName("p");
+        const text = con[0].innerText;
+        const box = document.querySelector("#textBox");
+        box.innerHTML = text;
+
+        /** textarea 입력 여부 판단 */
+        try {
+          regexHelper.value("#textBox", "내용(을/를) 입력하세요");
+        } catch (e) {
+          alert(e.message);
+          return;
+        }
+        
+        const current = e.currentTarget;
+        const formData = new FormData(current);
+        const data = await axiosHelper.postMultipart("[[@{/api/board/product/add}]]", formData);
+
+        if (data) {
+          if (data.error) {
+            alert("error : " + data.message);
+            return;
+          }
+          alert("게시글이 등록되었습니다.");
+          window.location = "[[@{/board/product/list}]]";
+        }
+      });
+      }
+     
     </script>
   </body>
 </html>
