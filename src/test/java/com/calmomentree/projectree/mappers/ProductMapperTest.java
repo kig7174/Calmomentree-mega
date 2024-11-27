@@ -53,7 +53,7 @@ public class ProductMapperTest {
     @DisplayName("상품 목록 테스트")
     void listProdTest() {
         Product input = new Product();
-        input.setCategoryId(8);
+        input.setCategoryId(9);
 
         List<Product> output = productMapper.selectListByCategory(input);
 

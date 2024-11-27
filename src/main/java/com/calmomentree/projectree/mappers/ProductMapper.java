@@ -102,7 +102,6 @@ public interface ProductMapper {
     public Product selectItem(Product input);
 
     @Select("<script>" +
-            "<if test='parentCategoryNo == null'>" +
             "WITH RECURSIVE category_list AS ( " +
                 "SELECT " +
                     "category_id, " +
@@ -120,7 +119,6 @@ public interface ProductMapper {
                 "FROM categorys AS a " +
                 "INNER JOIN category_list AS b " +
                 "ON a.parent_category_no = b.category_id) " +
-                "</if> " +
         
             "SELECT " +
             "prod_id, " +
@@ -142,8 +140,8 @@ public interface ProductMapper {
             "WHERE prod.category_id IN ( " +
             "<if test='categoryId == \"1\"'>(SELECT category_id FROM categorys)</if> " +
             "<if test='categoryId == \"2\"'>(SELECT category_id FROM categorys LIMIT 0, 10)</if> " +
-            "<if test='categoryId > 2 and parentCategoryNo == null'>(SELECT category_id FROM category_list AS c)</if> " +
-            "<if test='parentCategoryNo != \"0\"'>#{categoryId}</if> " +
+            "<if test='categoryId gt \"2\" and categoryId lt \"8\"'>(SELECT category_id FROM category_list AS c)</if> " +
+            "<if test='categoryId gte \"8\"'>#{categoryId}</if> " +
             ") " +
             "</script>")
     @ResultMap("productMap")
