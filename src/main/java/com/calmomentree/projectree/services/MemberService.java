@@ -22,4 +22,8 @@ public interface MemberService {
     public void isUniqueUserId(String userid) throws Exception;
 
     public Member login(Member params) throws Exception;
+
+    public Member findId(Member params) throws Exception;
+
+    public void resetPw(Member params) throws Exception;
 }

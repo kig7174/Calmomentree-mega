@@ -164,4 +164,24 @@ public interface MemberMapper {
             "WHERE is_out='Y' AND " +
             "edit_date < DATE_ADD(NOW(), INTERVAL -3 month)")
     public int deleteOutMembers();
+
+    /**
+     * 아이디 찾기
+     * @param input
+     * @return
+     */
+    @Select("SELECT user_name, user_id FROM members " +
+            "WHERE user_name = #{userName} AND email = #{email} AND is_out='N'")
+    @ResultMap("memberMap") 
+    public Member findId(Member input);
+
+    /**
+     * 비밀번호 재설정
+     * @param input
+     * @return
+     */
+    @Update("UPDATE members SET " +
+            "user_pw = MD5(#{userPw}) " +
+            "WHERE user_id = #{userId} AND user_name = #{userName} AND email = #{email} AND is_out='N'")
+    public int resetPw(Member input);
 }

@@ -182,4 +182,38 @@ public class MemberServiceImpl implements MemberService {
 
         return output;
     }
+
+    @Override
+    public Member findId(Member input) throws Exception {
+        Member output = null;
+
+        try {
+            output = memberMapper.findId(input);
+
+            if (output == null) {
+                throw new Exception("일치하는 회원 정보를 찾을 수 없습니다. 입력한 정보를 확인해주세요.");
+            }
+        } catch (Exception e) {
+            log.error("아이디 검색에 실패했습니다.", e);
+            throw e;
+        }
+
+        return output;
+    }
+
+    @Override
+    public void resetPw(Member input) throws Exception {
+        int rows = 0;
+
+        try {
+            rows = memberMapper.resetPw(input);
+
+            if (rows == 0) {
+                throw new Exception("일치하는 회원 정보를 찾을 수 없습니다. 입력한 정보를 확인해주세요.");
+            }
+        } catch (Exception e) {
+            log.error("비밀번호 업데이트 실패", e);
+            throw e;
+        }
+    }
 }
