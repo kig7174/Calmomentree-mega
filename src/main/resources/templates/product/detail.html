@@ -26,15 +26,16 @@
                         <div class="item-img">
                             <div class="side-img">
                                 <ul class="side-img-list">
-                                    <li><a class="link" href="http://localhost:3001/rosemary_recovery_shampoo/th1.jpg"><img src="http://localhost:3001/rosemary_recovery_shampoo/th1.jpg" /></a></li>
-                                    <li><a class="link" href="http://localhost:3001/rosemary_recovery_shampoo/th2.jpg"><img src="http://localhost:3001/rosemary_recovery_shampoo/th2.jpg" /></a></li>
-                                    <li><a class="link" href="http://localhost:3001/rosemary_recovery_shampoo/th3.jpg"><img src="http://localhost:3001/rosemary_recovery_shampoo/th3.jpg" /></a></li>
-                                    <li><a class="link" href="http://localhost:3001/rosemary_recovery_shampoo/th4.jpg"><img src="http://localhost:3001/rosemary_recovery_shampoo/th4.jpg" /></a></li>
-                                    <li><a class="link" href="http://localhost:3001/rosemary_recovery_shampoo/th5.jpg"><img src="http://localhost:3001/rosemary_recovery_shampoo/th5.jpg" /></a></li>
+                                    <li th:each="detail : ${detailImg}" th:if="${detailImg != null}">
+                                        <a class="link" th:href="${detail.imgUrl}">
+                                            <img th:src="${detail.imgUrl}" />
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <div class="main-img" id="main-imgs">
-                                <img id="main-img-target" src="http://localhost:3001/rosemary_recovery_shampoo/th1.jpg" />
+                                <img id="main-img-target" th:if="${detailImg != null}" th:src="${detailImg[0].imgUrl}"/>
+                                <img id="main-img-target" th:if="${detailImg == null}" th:src="${listImg[0].imgUrl}"/>
                             </div>
                         </div>
                         <div class="item-content">
@@ -95,9 +96,11 @@
                         </div>
                 
                         <div id="iteminfo" class="tab-page active">
-                            <img src="http://localhost:3001/rosemary_recovery_shampoo/common.jpg"/>
-                            <img src="http://localhost:3001/rosemary_recovery_shampoo/info1.jpg"/>
-                            <img src="http://localhost:3001/rosemary_recovery_shampoo/info2.jpg"/>
+                            <ul>
+                                <li th:each="info : ${infoImg}">
+                                    <img th:src="${info.imgUrl}" />
+                                </li>
+                            </ul>
                         </div>
                         
                         <div id="itemreview" class="tab-page">
