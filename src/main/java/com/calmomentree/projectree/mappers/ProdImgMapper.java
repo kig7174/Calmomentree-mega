@@ -16,28 +16,45 @@ import com.calmomentree.projectree.models.ProdImg;
 
 @Mapper
 public interface ProdImgMapper {
-    @Insert("...")
-    @Options(useGeneratedKeys = true, keyProperty = "...", keyColumn = "...")
+    @Insert("INSERT INTO prod_imgs " +
+            "(img_type, img_url, prod_id) " +
+            "VALUE " +
+            "(#{imgType}, #{imgUrl}, #{prodId})")
+    @Options(useGeneratedKeys = true, keyProperty = "prodImgId", keyColumn = "prod_img_id")
     public int insert(ProdImg input);
 
-    @Update("...")
+    @Update("UPDATE prod_imgs SET " +
+            "img_type=#{imgType}, " +
+            "img_url=#{imgUrl}, " +
+            "prod_id=#{prodId}, " +
+            "WHERE prod_img_id=#{prodImgId}")
     public int update(ProdImg input);
 
-    @Delete("...")
+    @Delete("DELETE FROM prod_imgs WHERE prod_img_id=#{prodImgId}")
     public int delete(ProdImg input);
 
-    @Select("...")
-    @Results(id="resultMap", value={
-        @Result(property="...", column="..."),
-        @Result(property="...", column="..."),
-        @Result(property="...", column="...")
+    @Select("SELECT " +
+            "prod_img_id, img_type, img_url, prod_id " +
+            "FROM prod_imgs " +
+            "WHERE prod_img_id=#{prodImgId}")
+    @Results(id="prodImgMap", value={
+        @Result(property="prodImgId", column="prod_img_id"),
+        @Result(property="imgType", column="img_type"),
+        @Result(property="imgUrl", column="img_url"),
+        @Result(property="prodId", column="prod_id")
     })
     public ProdImg selectItem(ProdImg input);
 
-    @Select("...")
-    @ResultMap("resultMap")
+    @Select("SELECT " +
+            "prod_img_id, img_type, img_url, prod_id " +
+            "FROM prod_imgs " +
+            "WHERE prod_id=#{prodId} AND img_type=#{imgType}")
+    @ResultMap("prodImgMap")
     public List<ProdImg> selectList(ProdImg input);
 
-    @Select("...")
+    @Select("SELECT " +
+            "COUNT(*) " +
+            "FROM prod_imgs " +
+            "WHERE prod_id=#{prodId}}")
     public int selectCount(ProdImg input);
 }

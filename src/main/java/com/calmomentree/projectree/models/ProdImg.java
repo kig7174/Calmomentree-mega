@@ -6,10 +6,10 @@ import lombok.Setter;
 
 @Data
 public class ProdImg {
-    private int prod_img_id;    // 상품 이미지 번호
-    private String img_type;    // 상품 이미지 유형 (목록, 상세, 정보)
-    private String img_url;     // 이미지 경로
-    private int prod_id;        // 상품 번호 
+    private int prodImgId;    // 상품 이미지 번호
+    private String imgType;    // 상품 이미지 유형 (목록, 상세, 정보)
+    private String imgUrl;     // 이미지 경로
+    private int prodId;        // 상품 번호 
 
     @Getter
     @Setter
