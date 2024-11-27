@@ -1,14 +1,18 @@
 package com.calmomentree.projectree.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import com.calmomentree.projectree.helpers.FileHelper;
 import com.calmomentree.projectree.helpers.Pagination;
 import com.calmomentree.projectree.helpers.WebHelper;
+import com.calmomentree.projectree.models.ProdImg;
 import com.calmomentree.projectree.models.Product;
+import com.calmomentree.projectree.services.ProdImgService;
 import com.calmomentree.projectree.services.ProductService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +27,13 @@ public class ProductController {
     private WebHelper webHelper;
 
     @Autowired
+    private FileHelper fileHelper;
+
+    @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProdImgService prodImgService;
 
     @GetMapping("/product/search")
     public String searchList(Model model,
@@ -67,16 +77,31 @@ public class ProductController {
         return "product/search";
     }
 
+    
+    @SuppressWarnings("null")
     @GetMapping("/product/detail/{prodId}")
     public String prodDetail(
         Model model,
         @PathVariable("prodId") int prodId
     ) {
 
+        // 상품 객체 
         Product input = new Product();
         input.setProdId(prodId);
 
         Product output = null;
+
+        // 상품 이미지 객체
+        ProdImg inputDetail = new ProdImg();
+        inputDetail.setImgType("detail");
+        inputDetail.setProdId(prodId);
+
+        ProdImg inputInfo = new ProdImg();
+        inputInfo.setImgType("info");
+        inputInfo.setProdId(prodId);
+
+        List<ProdImg> detailList = null;
+        List<ProdImg> infoList = null;
 
         try {
             output = productService.getItem(input);
@@ -84,7 +109,36 @@ public class ProductController {
             webHelper.serverError(e);
         }
 
+        try {
+            detailList = prodImgService.getList(inputDetail);
+            infoList = prodImgService.getList(inputInfo);
+        } catch (Exception e) {
+            webHelper.serverError(e);
+        }
+
+        List<ProdImg> detail = new ArrayList<>();
+        List<ProdImg> info = new ArrayList<>();
+
+        // 이미지 변환
+        for (int i=0; i<detailList.size(); i++) {
+            ProdImg detailImg = detailList.get(i);
+
+            detailImg.setImgUrl(fileHelper.getUrl(detailImg.getImgUrl()));
+
+            detail.add(detailImg);
+        }
+
+        for (int i=0; i<infoList.size(); i++) {
+            ProdImg infoImg = infoList.get(i);
+
+            infoImg.setImgUrl(fileHelper.getUrl(infoImg.getImgUrl()));
+
+            info.add(infoImg);
+        }
+
         model.addAttribute("product", output);
+        model.addAttribute("detailImg", detail);
+        model.addAttribute("infoImg", info);
         
         return "product/detail";
     }
