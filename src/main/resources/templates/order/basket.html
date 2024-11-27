@@ -14,7 +14,7 @@
       
       <div class="title">Cart</div>
       <div class="cartBox">
-        <div class="prodBox">
+        <form class="prodBox">
           <div class="prodBox-title" >장바구니 상품<button type="button" id="agree-content-btn"></button></div>
           
           <div class="prodBox-info active">
@@ -22,54 +22,28 @@
               <p>일반상품(<span class="count"></span>)</p>
             </div>
             <ul>
-              <li class="listTable">
+              <li class="listTable" th:each="order : ${orderBasket}">
                 <input type="checkbox" class="prodCheck" />
                 <div class="thumbBox">
                   <a href=""><img src="http://placehold.co/81x83" alt="" /></a>
                 </div>
                 <div class="prodInfo">
-                  <span class="info"><a href="">떼르말 세라마이드 스칼프&헤어 팩</a></span>
-                  <span class="info">500ML</span>
-                  <span class="info">42,000</span>
+                  <span class="info"><a href="" th:text="${order.prodNameKor}"></a></span>
+                  <span class="info" th:text="|${order.capacity} ML|"></span>
+                  <span class="info orderPrice" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span>
                   <span class="red">-0</span>
                   <p class="small">배송:[<span>무료</span>]/<span>기본배송</span></p>
                   <p>[옵션:<span>선택안함</span>/<span>선택안함</span>]</p>
                   <div class="qtyBox">
-                    <a href="" class="minus"><i class="fa-solid fa-minus"></i></a>
-                    <input type="text" name="amounts" class="qty" value="1" readonly />
-                    <a href="" class="plus"><i class="fa-solid fa-plus"></i></a>
+                    <input type="hidden" class="basketId" th:value="${order.basketId}" />
+                    <a th:href="@{/api/basket/edit/{basketId}(basketId=${order.basketId})}" class="minus qtyEdit"><i class="fa-solid fa-minus"></i></a>
+                    <input type="text" name="quantity"  class="qty" th:value="${order.quantity}" readonly />
+                    <a th:href="@{/api/basket/edit/{basketId}(basketId=${order.basketId})}" class="plus qtyEdit"><i class="fa-solid fa-plus"></i></a>
                     <button class="btnChange btn1">변경</button>
                   </div>
                 </div>
                 <div class="prodInfo2">
-                  <div class="priceBox"><span class="price">84000</span>원<button class="cancel"></button></div>
-                  <div class="btnBox">
-                    <button class="btnGood btn1">관심상품</button>
-                    <button class="btnBuy btn2">주문하기</button>
-                  </div>
-                </div>
-              </li>
-              <li class="listTable">
-                <input type="checkbox" class="prodCheck" />
-                <div class="thumbBox">
-                  <a href=""><img src="http://placehold.co/81x83" alt="" /></a>
-                </div>
-                <div class="prodInfo">
-                  <span class="info"><a href="">떼르말 세라마이드 스칼프&헤어 팩</a></span>
-                  <span class="info">500ML</span>
-                  <span class="info">42,000</span>
-                  <span class="red">-0</span>
-                  <p class="small">배송:[<span>무료</span>]/<span>기본배송</span></p>
-                  <p>[옵션:<span>선택안함</span>/<span>선택안함</span>]</p>
-                  <div class="qtyBox">
-                    <a href="" class="minus" name="amounts"><i class="fa-solid fa-minus"></i></a>
-                    <input type="text" name="amounts" class="qty" value="1" readonly />
-                    <a href="" class="plus"><i class="fa-solid fa-plus"></i></a>
-                    <button class="btnChange btn1">변경</button>
-                  </div>
-                </div>
-                <div class="prodInfo2">
-                  <div class="priceBox"><span class="price">84000</span>원<button class="cancel"></button></div>
+                  <div class="priceBox"><span class="price" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span><button class="cancel"></button></div>
                   <div class="btnBox">
                     <button class="btnGood btn1">관심상품</button>
                     <button class="btnBuy btn2">주문하기</button>
@@ -87,6 +61,7 @@
               <input type="button" class="btn1" id="checkDelete" value="선택삭제" />
             </div>
           </div>
+        </form>
         </div>
         <div class="orderInfo">
           <div class="orderInfo-box">
@@ -112,5 +87,26 @@
 
     <th:block th:replace="~{/fragments/script}"></th:block>
     <script th:src="@{/assets/js/basket.js}"></script>
+    <script>
+        document.querySelectorAll(".qty").forEach((v,i) => {
+          v.addEventListener("change" ,async (e) => {
+            e.preventDefault();
+
+            const current = e.currentTarget;
+            const parent = current.closest(".qtyBox");
+            // 상품 수량
+            const quantity = parent.querySelector(".qty").value;
+            
+            // 장바구니 번호
+            const basketId = parent.querySelector(".basketId").value;
+            
+            const data = await axiosHelper.put(`/api/basket/edit/{basketId}`,{
+              quantity : quantity,
+              basketId : basketId,
+            });
+           });
+        });
+      
+    </script>
   </body>
 </html>
