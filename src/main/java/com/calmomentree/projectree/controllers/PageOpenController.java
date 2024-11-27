@@ -53,9 +53,9 @@ public class PageOpenController {
         return "member/id/find_id";
     }
 
-    @GetMapping("/member/id/find_password")
+    @GetMapping("/member/password/reset_pw")
     public String findPw() {
-        return "member/password/find_password";
+        return "member/password/reset_pw";
     }
 
     @GetMapping("/product/detail")
@@ -167,4 +167,5 @@ public class PageOpenController {
     public String amenityRead() {
         return "board/amenity/read";
     }
+    
 }
