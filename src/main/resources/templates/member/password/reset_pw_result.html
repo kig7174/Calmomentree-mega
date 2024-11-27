@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{/fragments/head :: calm-head('아이디 찾기')}"></th:block>
+    <link rel="stylesheet" th:href="@{/assets/css/member.css}" />
+</head>
+<body>
+    <header th:replace="~{/fragments/common :: calm-header}"></header>
+
+    <div class="container">
+        <div th:replace="~{/fragments/common :: calm-search}"></div>
+        <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
+        <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
+        <div class="join-body">
+            <div class="head-title">
+                <p>Reset Password<span>비밀번호가 기억나지 않으세요?</span></p>
+            </div>
+            <div class="id-result">
+                <h3><span th:text="${item.userName}"></span>님의 임시 비밀번호입니다.</h3>
+                <p>
+                    <span th:text="${password}" class="id-txt"></span>
+                    <span>입니다.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
+
+    <th:block th:replace="~{/fragments/script}"></th:block>
+    
+</body>
+</html>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="~{/fragments/head :: calm-head('비밀번호 찾기')}"></th:block>
+    <th:block th:replace="~{/fragments/head :: calm-head('비밀번호 재설정')}"></th:block>
     <link rel="stylesheet" th:href="@{/assets/css/member.css}" />
 </head>
 <body>
@@ -13,7 +13,7 @@
         <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
         <div class="join-body">
             <div class="head-title">
-                <p>Find Password<span>비밀번호가 기억나지 않으세요?</span></p>
+                <p>Reset Password<span>비밀번호가 기억나지 않으세요?</span></p>
             </div>
             <div class="join-form">    
                 <div class="find-method">
@@ -28,22 +28,24 @@
                 </div>
 
                 <div class="selected-find-method1">
-                    <form method="" action="" name="method1">
+                    <form method="post" th:action="@{/member/password/reset_pw_result}">
                         <div class="userid-box input-box">
-                            <input type="text" name="userid" placeholder="아이디"/>
+                            <input type="text" name="user_id" id="user_id" placeholder="아이디"/>
                         </div>
 
                         <div class="name-box input-box">
-                            <input type="text" name="name" placeholder="이름"/>
+                            <input type="text" name="user_name" id="user_name" placeholder="이름"/>
                         </div>
 
                         <div class="email-box input-box">
-                            <input type="email" name="email" placeholder="이메일"/>
+                            <input type="email" name="email" id="email" placeholder="이메일"/>
                         </div>
+                        <button type="submit" class="find-btn">비밀번호 찾기</button>
                     </form>
                 </div>
 
-                <div class="selected-find-method2 displaynone">
+                <!-- 이메일로만 비밀번호 재설정 구현 -->
+                <!-- <div class="selected-find-method2 displaynone">
                     <form method="" action="" name="method2">
                         <div class="userid-box input-box">
                             <input type="text" name="userid" placeholder="아이디"/>
@@ -73,9 +75,9 @@
                             <input type="text" name="name" placeholder="이름"/>
                         </div>
                     </form>
-                </div>
+                </div> -->
 
-                <button type="submit" class="find-btn">비밀번호 찾기</button>
+                
             </div>
         </div>
     </div>

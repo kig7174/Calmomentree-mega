@@ -16,7 +16,7 @@
                 <p>Find ID<span>아이디가 기억나지 않으세요?</span></p>
             </div>
             <div class="join-form">
-                <form method="" action="">    
+                <form id="find_id_form" method="get" th:action="@{/member/id/find_id_result}">    
                     <div class="find-method">
                         <p>인증방법 선택</p>
                         <input type="radio" name="find-method" id="find-method1" checked />
@@ -29,15 +29,16 @@
 
                     <div class="selected-find-method1">
                         <div class="name-box input-box">
-                            <input type="text" name="user_name" placeholder="이름"/>
+                            <input type="text" id="user_name" name="user_name" placeholder="이름"/>
                         </div>
 
                         <div class="email-box input-box">
-                            <input type="email" name="email" placeholder="이메일"/>
+                            <input type="email" id="email" name="email" placeholder="이메일"/>
                         </div>
                     </div>
 
-                    <div class="selected-find-method2 displaynone">
+                    <!-- 다른 인증 방법 지금은 제외 이메일로만 아이디 찾기 구현 -->
+                    <!-- <div class="selected-find-method2 displaynone">
                         <div class="name-box input-box">
                             <input type="text" name="user_name" placeholder="이름"/>
                         </div>
@@ -56,7 +57,7 @@
                             <input type="text" name="user_name" placeholder="이름"/>
                         </div>
 
-                    </div>
+                    </div> -->
 
                     <button type="submit" class="find-btn">아이디 찾기</button>
                 </form>
@@ -64,43 +65,11 @@
         </div>
     </div>
 
-    <!-- <th:block th:replace="~{_fragments/_scripts::my-scripts}"></th:block>
-    <script>
-        document.getElementById('find-id-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            /** 입력값 유효성 검사 */
-                try {
-                    regexHelper.value("#user_name", "이름을 입력하세요");
-                    regexHelper.value("#email", "이메일 주소를 입력하세요");
-                } catch (err) {
-                    await utilHelper.alertDanger(err.message);
-
-                    setTimeout(() => err.element.focus(), 1);
-                    return;
-                }
-
-                const data = await axiosHelper.post('[[@{/api/account/find_id}]]', new FormData(e.currentTarget));
-
-                if (data) {
-                    const userName = document.querySelector("#user_name").value;
-                    const userId = data.item;
-
-                    document.querySelector(".user-name").innerHTML = userName;
-                    document.querySelector(".user-id").innerHTML = userId;
-
-                    document.querySelector(".find-result").style.display = 'block';
-                }
-        });
-    </script> -->
-
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
-
-    <script th:inline="javascript">
-        const findIdLink = /*[[@{/api/member/find_id}]]*/'';
+    <script>
+        
     </script>
-    <script type="text/javascript" th:src="@{/assets/js/find_id.js}" th:inline="javascript"></script>
 </body>
 </html>
