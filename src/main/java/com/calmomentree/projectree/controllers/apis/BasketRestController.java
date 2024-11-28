@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,21 +27,33 @@ public class BasketRestController {
     @Autowired
     private BasketService basketService;
 
-    @PutMapping("/api/basket/edit/{basketId}")
+    @PutMapping("/api/basket/edit")
     public Map<String, Object> basketEdit(
-            @PathVariable("basketId") int basketId,
-            @RequestParam("quantity") int quantity ) {
+            @RequestParam("basketId") int basketId,
+            @RequestParam("quantity") int quantity,
+            @RequestParam("memberId") int memberId ) {
         
         Basket input = new Basket();
         input.setBasketId(basketId);
         input.setQuantity(quantity);
+        
 
         try {
             basketService.editItem(input);
         } catch (Exception e) {
             return restHelper.serverError(e);
         }
+        Basket output = new Basket();
+        output.setMemberId(memberId);
+
+        try {
+           output = basketService.getItem(output);
+        } catch (Exception e) {
+            return restHelper.serverError(e);
+        }
+
+        Map<String, Object> data = new LinkedHashMap<>();
         
-        return restHelper.sendJson();
+        return restHelper.sendJson(data);
     }
 }

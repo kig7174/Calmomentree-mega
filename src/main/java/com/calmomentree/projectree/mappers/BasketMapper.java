@@ -28,10 +28,16 @@ public interface BasketMapper {
     @Options(useGeneratedKeys = true, keyProperty = "basketId", keyColumn = "basket_id")
     public int insert(Basket input);
 
+    /**
+     * 장바구니 수량 수정
+     * @param input
+     * @return
+     */
     @Update("UPDATE baskets " +
             "SET " +
-                "quantity = #{quantity} " +
-                "WHERE basket_id = #{basketId}")
+                "quantity = #{quantity}, " +
+                "basket_add_date = now() " +
+                "WHERE member_id = #{memberId}")
     public int update(Basket input);
 
     /**
@@ -56,15 +62,17 @@ public interface BasketMapper {
     @Select("SELECT " +
                 "basket_id, quantity, basket_add_date, p.prod_id, member_id, " +
                 "p.prod_name_kor, p.price, p.capacity " +
-                "FROM baskets " +
+                "FROM baskets b " +
             "INNER JOIN products p ON b.prod_id = p.prod_id " +
-            "WHERE member_id = #{memberId}")
+            "WHERE basket_id = #{basketId}")
     @Results(id="resultMap", value={
         @Result(property="basketId", column="basket_id"),
         @Result(property="quantity", column="quantity"),
         @Result(property="basketAddDate", column="basket_add_date"),
         @Result(property="prodId", column="prod_id"),
-        @Result(property="memberId", column="member_id")
+        @Result(property="memberId", column="member_id"),
+        @Result(property="prodNameKor", column="prod_name_kor"),
+        @Result(property="imgUrl", column="img_url")
     })
     public Basket selectItem(Basket input);
 
@@ -75,10 +83,12 @@ public interface BasketMapper {
      */
     @Select("SELECT " +
                 "basket_id, quantity, basket_add_date, p.prod_id, member_id, " +
-                "p.prod_name_kor AS prodNameKor, p.price, p.capacity " +
+                "p.prod_name_kor , p.price, p.capacity, " +
+                "i.img_url " +
                 "FROM baskets b " +
             "INNER JOIN products p ON b.prod_id = p.prod_id " +
-            "WHERE member_id = #{memberId}")
+            "INNER JOIN prod_imgs i ON p.prod_id = i.prod_id " +
+            "WHERE member_id = #{memberId} AND img_url LIKE '%li1%' ")
     @ResultMap("resultMap")
     public List<Basket> selectList(Basket input);
 

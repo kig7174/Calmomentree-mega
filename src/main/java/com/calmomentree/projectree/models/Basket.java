@@ -17,6 +17,8 @@ public class Basket {
     private int capacity;
     private int price;
 
+    private String imgUrl;
+
     private String regDate;
     private String editDate;
 
