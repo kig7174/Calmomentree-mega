@@ -23,8 +23,8 @@
             <div class="main">
                 <div class="main-left">
                     <div class="name">
-                        <span class="txtname" text="xxx">111<span>고객님 안녕하세요</span></span>
-                        <button type="button" action="">로그아웃</button>
+                        <p class="txtname" th:text="${session.memberInfo.userName} + ' 고객님 안녕하세요'"></p>
+                        <a id="logout" th:href="@{/member/logout}">로그아웃</a>
                     </div>
                     <div class="membership">
                         <h3>등급 : <span>REST</span></h3>

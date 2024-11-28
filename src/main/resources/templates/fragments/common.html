@@ -15,7 +15,7 @@
                 <a href="#">신규회원 2,000원 적립금 | 홈 어메니티 멤버십 40%-50% 할인혜택</a>
             </div>
             <div class="bottom">
-                <a href="#">안티에이징 허브 영양‧보습 ~30%</a>
+                <a href="#">홀리데이 페스타 ~25%</a>
             </div>
         </div>
         <div class="menu">
@@ -95,14 +95,7 @@
                 <div class="other-menu">
                     <div class="login other-menu-list" th:if="${session.memberInfo == null}">
                         <a th:href="@{/member/login}">로그인</a>
-                        <a>카트
-                           <span class="cart">
-                            (
-                            <span class="cart-count cart">1</span>
-                            )
-                           </span>
-                        </a>
-                        <a>고객문의</a>
+                        <a th:href="@{/board/qna/list}">고객문의</a>
                         <a class="b2b-btn">B2B 문의</a>
                         <a>
                             <button class="search-btn" id="search-on" type="button"><img th:src="@{/files/common/search.svg}" /></button>
@@ -111,15 +104,11 @@
 
                     <div class="logout other-menu-list" th:unless="${session.memberInfo == null}">
                         <a id="logout" th:href="@{/member/logout}">로그아웃</a>
-                        <a>카트
-                           <span class="cart">
-                            (
-                            <span class="cart-count cart">1</span>
-                            )
-                           </span>
+                        <a th:href="@{/order/basket}">카트
+                           <span class="cart" th:text="${session.memberInfo.basketCount != null} ? '('+${session.memberInfo.basketCount}+')' : '('+'0'+')'"></span>
                         </a>
-                        <a>커뮤니티</a>
-                        <a>마이페이지</a>
+                        <a th:href="@{/board/qna/list}">커뮤니티</a>
+                        <a th:href="@{/myshop}">마이페이지</a>
                         <a class="b2b-btn">B2B 문의</a>
                         <a>
                             <button class="search-btn" id="search-on" type="button"><img th:src="@{/files/common/search.svg}" /></button>
