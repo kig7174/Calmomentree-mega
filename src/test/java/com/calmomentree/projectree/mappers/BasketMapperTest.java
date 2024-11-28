@@ -31,4 +31,18 @@ public class BasketMapperTest {
         }
 
     }
+
+    @Test
+    @DisplayName("장바구니 수량 변경테스트")
+    void orderBasketEditTest() {
+        Basket input = new Basket();
+        input.setBasketId(3);
+        input.setQuantity(7);
+
+        int output = basketMapper.update(input);
+
+        log.debug("장바구니 수량 변경 테스트 : " + output);
+        log.debug(input.toString());
+
+    }
 }
