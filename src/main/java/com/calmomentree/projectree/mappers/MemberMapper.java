@@ -79,12 +79,15 @@ public interface MemberMapper {
     public int delete(Member input);
 
     @Select("SELECT " +
-            "member_id, user_name, user_id, user_pw, " +
+            "member.member_id, user_name, user_id, user_pw, " +
             "tel, email, postcode, addr1, addr2, " +
             "birthday, is_email_agree, is_sms_agree, " +
             "login_date, join_date, edit_date, " +
-            "is_out, is_admin " +
-            "FROM members " +
+            "is_out, is_admin, " +
+            "COUNT(basket_id) AS bakset_count " +
+            "FROM members AS member " +
+            "INNER JOIN baskets AS basket " +
+            "ON basket.member_id = member.member_id " +
             "WHERE member_id=#{memberId}")
     @Results(id = "memberMap", value = {
         @Result(property="memberId", column="member_id"),
@@ -103,7 +106,8 @@ public interface MemberMapper {
         @Result(property="joinDate", column="join_date"),
         @Result(property="editDate", column="edit_date"),
         @Result(property="isOut", column="is_out"),
-        @Result(property="isAdmin", column="is_admin")
+        @Result(property="isAdmin", column="is_admin"),
+        @Result(property="basketCount", column="basket_count")
     })
     public Member selectItem(Member input);
 

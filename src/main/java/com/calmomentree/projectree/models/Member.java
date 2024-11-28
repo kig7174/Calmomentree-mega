@@ -26,6 +26,8 @@ public class Member implements Serializable {
     private String isOut;              // 탈퇴여부
     private String isAdmin;            // 관리자 여부
 
+    private int basketCount;            // 장바구니 개수
+
     @Getter
     @Setter
     private static int listCount = 0;

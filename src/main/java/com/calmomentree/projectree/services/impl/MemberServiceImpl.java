@@ -25,7 +25,7 @@ public class MemberServiceImpl implements MemberService {
             rows = memberMapper.insert(input);
 
             if (rows == 0) {
-                throw new Exception("저장된 데이터가 없습니다.");
+                throw new Exception("회원가입에 실패했습니다. 다시 시도해주세요.");
             }
         } catch (Exception e) {
             log.error("데이터 저장에 실패했습니다.", e);
@@ -43,7 +43,7 @@ public class MemberServiceImpl implements MemberService {
             rows = memberMapper.update(input);
 
             if (rows == 0) {
-                throw new Exception("수정된 데이터가 없습니다.");
+                throw new Exception("회원정보 수정에 실패했습니다. 다시 시도해주세요");
             }
         } catch (Exception e) {
             log.error("데이터 수정에 실패했습니다.", e);
@@ -162,7 +162,7 @@ public class MemberServiceImpl implements MemberService {
             output = memberMapper.login(input);
 
             if (output == null) {
-                throw new Exception("아이디 혹은 비밀번호를 확인해주세요.");
+                throw new Exception("아이디 혹은 비밀번호가 잘못되었거나 존재하지 않는 회원입니다.");
             }
         } catch (Exception e) {
             log.error("Member 데이터 조회에 실패했습니다.", e);
