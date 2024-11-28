@@ -1,6 +1,5 @@
 package com.calmomentree.projectree.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +68,11 @@ public class ProductController {
             webHelper.serverError(e);
         }
 
+        for (int i=0; i<products.size(); i++) {
+            Product p = products.get(i);
+            p.setListImgUrl(fileHelper.getUrl(p.getListImgUrl()));
+        }
+
         model.addAttribute("products", products);
         model.addAttribute("keyword", keyword);
         model.addAttribute("pagination", pagination);
@@ -78,7 +82,6 @@ public class ProductController {
     }
 
     
-    @SuppressWarnings("null")
     @GetMapping("/product/detail/{prodId}")
     public String prodDetail(
         Model model,
@@ -96,48 +99,47 @@ public class ProductController {
         inputDetail.setImgType("detail");
         inputDetail.setProdId(prodId);
 
+        ProdImg inputList = new ProdImg();
+        inputList.setImgType("list");
+        inputList.setProdId(prodId);
+
         ProdImg inputInfo = new ProdImg();
         inputInfo.setImgType("info");
         inputInfo.setProdId(prodId);
 
-        List<ProdImg> detailList = null;
-        List<ProdImg> infoList = null;
+        List<ProdImg> detail = null;
+        List<ProdImg> list = null;
+        List<ProdImg> info = null;
 
         try {
             output = productService.getItem(input);
+
+            detail = prodImgService.getList(inputDetail);
+            list = prodImgService.getList(inputList);
+            info = prodImgService.getList(inputInfo);
         } catch (Exception e) {
             webHelper.serverError(e);
         }
-
-        try {
-            detailList = prodImgService.getList(inputDetail);
-            infoList = prodImgService.getList(inputInfo);
-        } catch (Exception e) {
-            webHelper.serverError(e);
-        }
-
-        List<ProdImg> detail = new ArrayList<>();
-        List<ProdImg> info = new ArrayList<>();
 
         // 이미지 변환
-        for (int i=0; i<detailList.size(); i++) {
-            ProdImg detailImg = detailList.get(i);
-
-            detailImg.setImgUrl(fileHelper.getUrl(detailImg.getImgUrl()));
-
-            detail.add(detailImg);
+        for (int i=0; i<detail.size(); i++) {
+            ProdImg img = detail.get(i);
+            img.setImgUrl(fileHelper.getUrl(img.getImgUrl()));
         }
 
-        for (int i=0; i<infoList.size(); i++) {
-            ProdImg infoImg = infoList.get(i);
+        for (int i=0; i<list.size(); i++) {
+            ProdImg img = list.get(i);
+            img.setImgUrl(fileHelper.getUrl(img.getImgUrl()));
+        }
 
-            infoImg.setImgUrl(fileHelper.getUrl(infoImg.getImgUrl()));
-
-            info.add(infoImg);
+        for (int i=0; i<info.size(); i++) {
+            ProdImg img = info.get(i);
+            img.setImgUrl(fileHelper.getUrl(img.getImgUrl()));
         }
 
         model.addAttribute("product", output);
         model.addAttribute("detailImg", detail);
+        model.addAttribute("list", list);
         model.addAttribute("infoImg", info);
         
         return "product/detail";

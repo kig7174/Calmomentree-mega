@@ -22,7 +22,7 @@
                     <input class="text" type="text" name="keyword" th:value="${keyword}" />
                     <button class="img" type="submit"><img src="/src/main/resources/static/assets/img/search.svg" /></button>
                     <div class="sort-box">
-                        <select name="order_by" th:value="${orderBySelected}">
+                        <select name="order_by" th:value="${orderBySelected}" oninput="this.form.submit()">
                             <option value="">== 기준선택 ==</option>
                             <option th:selected="${orderBySelected} == 'recent'" value="recent">신상품</option>
                             <option th:selected="${orderBySelected} == 'name'" value="name">상품명</option>
@@ -40,8 +40,8 @@
             </div>
 
             <div class="category-box">
-                <span>홈 ></span>
-                <span>상품검색</span>
+                <a th:href="@{/}">홈 ></a>
+                <a th:href="@{/product/search}">상품검색</a>
             </div>
 
             <div class="search-item-box" th:unless="${products == null}">
@@ -50,7 +50,7 @@
                         <li th:each="product : ${products}">
                             <div class="list-item">
                                 <div class="list-item-img">
-                                    <img src="https://via.placeholder.com/200?text=search-item-image"/>
+                                    <img th:src="${product.listImgUrl}" />
                                 </div>
                                 <div class="list-item-content">
                                     <div class="item-content-name">
@@ -67,25 +67,24 @@
                             </div>
                         </li>                 
                     </ul>
-                    <div class="page-number">
-                        <ul class="pagination">
-                            <li th:if="${pagination.prevPage > 0}">
-                                <a >&laquo;</a>
-                            </li>
-                            <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
-                            
-                            <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
-                                <a class="active" th:text="${i}" />
-                                <a th:text="${i}"
-                                     />
-                            </li>
-                    
-                            <li th:if="${pagination.nextPage > 0}">
-                                <a>&raquo;</a>
-                            </li>
-                            <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
-                        </ul>
-                    </div>
+                </div>
+                <div class="page-number">
+                    <ul class="pagination">
+                        <li th:if="${pagination.prevPage > 0}">
+                            <a th:href="@{/product/search(keyword=${keyword}, page=${pagination.prevPage})}">&laquo;</a>
+                        </li>
+                        <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
+                        
+                        <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+                            <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}" />
+                            <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/product/search(keyword=${keyword}, page=${i})}" />
+                        </li>
+                
+                        <li th:if="${pagination.nextPage > 0}">
+                            <a th:href="@{/product/search(keyword=${keyword}, page=${pagination.nextPage})}">&raquo;</a>
+                        </li>
+                        <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="search-item-none" th:if="${products == null}">

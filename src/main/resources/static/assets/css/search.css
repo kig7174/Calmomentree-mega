@@ -39,7 +39,7 @@ body {
     width: 100%;
 
     .search-body {
-        width: auto;
+        width: 90%;
         margin: 0 auto;
         padding: 0 5%;
 
@@ -71,7 +71,7 @@ body {
                 border: none;
                 background: transparent;
                 color: var(--font-color);
-                font-size: var(--font-size-small);
+                font-size: var(--font-size-medium);
 
                 &:focus {
                     outline: none;
@@ -88,9 +88,8 @@ body {
 
             .sort-box {
                 position: absolute;
-                right: -150px;
-                top: 100px;
-
+                right: -200px;
+                top: 60px;
                 
                 select {
                     padding: 10px 7px;
@@ -181,6 +180,7 @@ body {
         }
 
         .page-number {
+            margin-top: 50px;
 
             .pagination {
                 display: flex;
@@ -194,9 +194,8 @@ body {
                 }
 
                 a {
-                    display: block;
-                    font-size: var(--font-size-content);
-                    font-weight: 700;         
+                    font-size: var(--font-size-small);
+                    font-weight: 500;         
                     margin: 10px 5px;
                     color: black;
                     text-decoration: none;
