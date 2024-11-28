@@ -101,7 +101,7 @@ if (document.querySelector("#logout")) {
         const data = await axiosHelper.get(e.currentTarget.getAttribute('href'));
 
         if (data) {
-            window.location.reload();
+            window.location = "/";
         }
     });
 }

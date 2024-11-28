@@ -109,7 +109,7 @@ button, a {
     }
 
     .bottom {
-        background-color: #134B28;
+        background-color: #72161D;
         padding: 10px;
     }
 
@@ -228,10 +228,6 @@ button, a {
 
                 a {
                     font-size: var(--font-size-small);
-
-                    .cart {
-                        display: none;
-                    }
                 }
 
                 .b2b-btn {

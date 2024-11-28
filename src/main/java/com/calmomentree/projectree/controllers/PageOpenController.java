@@ -26,11 +26,6 @@ public class PageOpenController {
         return "member/join";
     }
 
-    @GetMapping("/member/login")
-    public String login() {
-        return "member/login";
-    }
-
     @GetMapping("/member/mall_agreement")
     public String mailAgreement() {
         return "member/mall_agreement";
@@ -49,11 +44,6 @@ public class PageOpenController {
     @GetMapping("/member/id/find_id")
     public String findId() {
         return "member/id/find_id";
-    }
-
-    @GetMapping("/member/password/reset_pw")
-    public String findPw() {
-        return "member/password/reset_pw";
     }
 
     @GetMapping("/product/detail")
