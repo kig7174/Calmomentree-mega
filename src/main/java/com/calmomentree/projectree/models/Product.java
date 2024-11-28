@@ -27,6 +27,8 @@ public class Product {
     private String parentCategoryName; // 상위 카테고리
     private int parentCategoryNo;   // 상위 카테고리 번호
 
+    private String listImgUrl; // 상품 목록 이미지
+
     @Getter
     @Setter
     private static String orderBy;

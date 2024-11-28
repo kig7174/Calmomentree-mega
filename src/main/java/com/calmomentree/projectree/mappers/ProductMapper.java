@@ -97,7 +97,8 @@ public interface ProductMapper {
         @Result(property="categoryId", column="category_id"),
         @Result(property="categoryName", column="category_name"),
         @Result(property="parentCategoryName", column="parent_category_name"),
-        @Result(property="parentCategoryNo", column="parent_category_no")
+        @Result(property="parentCategoryNo", column="parent_category_no"),
+        @Result(property="listImgUrl", column="list_img_url")
     })
     public Product selectItem(Product input);
 
@@ -161,7 +162,14 @@ public interface ProductMapper {
             "SELECT category_name " +
             "FROM categorys " +
             "WHERE category_id = category.parent_category_no " +
-            ") AS parent_category_name " +
+            ") AS parent_category_name, " +
+            "( " +
+            "SELECT img_url " +
+            "FROM prod_imgs " +
+            "WHERE prod_id = prod.prod_id AND img_type = 'list' " +
+            "ORDER BY prod_img_id " +
+            "LIMIT 0, 1 " +
+            ") AS list_img_url " +
             "FROM products AS prod " +
             "INNER JOIN categorys AS category " +
             "ON prod.category_id = category.category_id " +
