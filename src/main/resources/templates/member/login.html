@@ -18,15 +18,15 @@
                 </div>
                 <div class="login-form">
                     <form id="login">
-                        <input type="text" name="user_id" id="user_id" placeholder="아이디" />
+                        <input type="text" name="user_id" id="user_id" placeholder="아이디" th:value="${rememberId}"/>
                         <input type="password" name="user_pw" id="user_pw" placeholder="비밀번호" />
                         <div class="login-option">
                             <label for="remember_id">
                             <input type="checkbox" value="Y" name="remember_id" />
                             아이디 저장</label>
                             <ul>
-                                <li><a>아이디 찾기</a></li>
-                                <li><a>비밀번호 찾기</a></li>
+                                <li><a th:href="@{/member/id/find_id}">아이디 찾기</a></li>
+                                <li><a th:href="@{/member/password/reset_pw}">비밀번호 찾기</a></li>
                             </ul>
                         </div>
                         <button type="submit">로그인</button>
@@ -57,7 +57,7 @@
                     <a class="naver">네이버 간편가입</a>
                 </div>
                 <div class="join-btn">
-                    <a>회원가입</a>
+                    <a th:href="@{/member/join}">회원가입</a>
                 </div>
                 <div class="membership-info">
                     <a>캄모멘트리 멤버쉽 혜택 자세히 보기</a>

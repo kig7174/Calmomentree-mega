@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.calmomentree.projectree.exceptions.StringFormatException;
 import com.calmomentree.projectree.helpers.RegexHelper;
 import com.calmomentree.projectree.helpers.RestHelper;
+import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.services.MemberService;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +30,10 @@ public class MemberRestController {
 
     @Autowired
     private RegexHelper regexHelper;
-    
+
+    @Autowired
+    private WebHelper webHelper;
+
     @Autowired
     private MemberService memberService;
 
@@ -59,7 +64,7 @@ public class MemberRestController {
         @RequestParam("user_id") String userId,
         @RequestParam("user_pw") String userPw,
         @RequestParam("user_name") String userName,
-        @RequestParam("pw_confimr") String pwConfirm,
+        @RequestParam("pw_confirm") String pwConfirm,
         @RequestParam("tel1") String tel1,
         @RequestParam("tel2") String tel2,
         @RequestParam("tel3") String tel3,
@@ -139,8 +144,10 @@ public class MemberRestController {
     @PostMapping("/api/member/login")
     public Map<String, Object> login(
         HttpServletRequest request,
+        HttpServletResponse response,
         @RequestParam("user_id") String userId,
-        @RequestParam("user_pw") String userPw
+        @RequestParam("user_pw") String userPw,
+        @RequestParam(value = "remember_id", defaultValue = "N") String rememberId
     ) {
         /** 유효성 검사 */
         try {
@@ -169,6 +176,14 @@ public class MemberRestController {
         /** 세션 저장 */
         HttpSession session = request.getSession();
         session.setAttribute("memberInfo", output);
+
+        if (rememberId.equals("Y")) {
+            try {
+                webHelper.writeCookie("rememberId", userId, 60 * 60 * 24 * 7, "/member/login");
+            } catch (Exception e) {
+                return restHelper.serverError("아이디 저장 실패");
+            }
+        }
 
         return restHelper.sendJson();
     }

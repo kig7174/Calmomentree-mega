@@ -3,6 +3,7 @@ package com.calmomentree.projectree.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,6 +29,13 @@ public class MemberController {
 
     @Autowired
     private MemberService memberService;
+
+    @GetMapping("/member/login")
+    public String login(Model model,
+        @CookieValue(value = "rememberId", required = false) String rememberId) {
+        model.addAttribute("rememberId", rememberId);
+        return "member/login";
+    }
 
     @GetMapping("/member/id/find_id_result")
     public String findId(
@@ -62,6 +70,11 @@ public class MemberController {
         model.addAttribute("item", output);
 
         return "member/id/find_id_result";
+    }
+
+    @GetMapping("/member/password/reset_pw")
+    public String resetPwPage() {
+        return "member/password/reset_pw";
     }
 
     @PostMapping("/member/password/reset_pw_result")
@@ -102,6 +115,6 @@ public class MemberController {
         model.addAttribute("item", input);
         model.addAttribute("password", newPw);
 
-        return "/member/password/reset_pw_result";
+        return "member/password/reset_pw_result";
     }
 }
