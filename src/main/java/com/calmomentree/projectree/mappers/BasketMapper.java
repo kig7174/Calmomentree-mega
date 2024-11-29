@@ -37,7 +37,7 @@ public interface BasketMapper {
             "SET " +
                 "quantity = #{quantity}, " +
                 "basket_add_date = now() " +
-                "WHERE member_id = #{memberId}")
+                "WHERE member_id = #{memberId} AND basket_id = #{basketId}")
     public int update(Basket input);
 
     /**
@@ -64,7 +64,7 @@ public interface BasketMapper {
                 "p.prod_name_kor, p.price, p.capacity " +
                 "FROM baskets b " +
             "INNER JOIN products p ON b.prod_id = p.prod_id " +
-            "WHERE basket_id = #{basketId}")
+            "WHERE basket_id = #{basketId} AND member_id = #{memberId}")
     @Results(id="resultMap", value={
         @Result(property="basketId", column="basket_id"),
         @Result(property="quantity", column="quantity"),
@@ -84,11 +84,14 @@ public interface BasketMapper {
     @Select("SELECT " +
                 "basket_id, quantity, basket_add_date, p.prod_id, member_id, " +
                 "p.prod_name_kor , p.price, p.capacity, " +
-                "i.img_url " +
-                "FROM baskets b " +
+            
+            "( SELECT img_url FROM prod_imgs " +
+            "WHERE prod_id = p.prod_id AND img_type = 'list' " +
+            "ORDER BY prod_img_id LIMIT 0, 1 ) AS img_url " +
+                
+            "FROM baskets b " +
             "INNER JOIN products p ON b.prod_id = p.prod_id " +
-            "INNER JOIN prod_imgs i ON p.prod_id = i.prod_id " +
-            "WHERE member_id = #{memberId} AND img_url LIKE '%li1%' ")
+            "WHERE member_id = #{memberId} " )
     @ResultMap("resultMap")
     public List<Basket> selectList(Basket input);
 
