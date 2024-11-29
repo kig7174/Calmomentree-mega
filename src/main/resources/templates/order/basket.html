@@ -13,10 +13,13 @@
       <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
 
       <div class="title">Cart</div>
-      <!-- 장바구니가 비어있을 경우 -->
+
+      <!-- 장바구니에 상품이 없을 경우 -->
       <div th:if="${orderBasket.size() == 0 }" class="basketEmpty">
         <p>장바구니가 비어 있습니다.</p>
       </div>
+
+      <!-- 장바구니에 상품이 있을 경우 -->
       <div th:unless="${orderBasket.size() == 0 }">
         <div class="cartBox">
           <div class="prodBox">
@@ -27,9 +30,9 @@
                 <p>일반상품(<span class="count"></span>)</p>
               </div>
 
-              <form action="put" id="editUp">
-                <ul>
-                  <li class="listTable" th:each="order : ${orderBasket}">
+              <ul>
+                <li class="listTable" th:each="order : ${orderBasket}">
+                  <form action="put" id="editUp">
                     <input type="checkbox" class="prodCheck" />
                     <input type="hidden" class="memberId" name="memberId" th:value="${order.memberId}" />
                     <div class="thumbBox">
@@ -43,16 +46,17 @@
                       <p class="small">배송:[<span>무료</span>]/<span>기본배송</span></p>
                       <p>[옵션:<span>선택안함</span>/<span>선택안함</span>]</p>
                       <div class="qtyBox">
-                        <input type="hidden" class="basketId" name="basketId" th:value="${(order.basketId)}" />
+                        <input type="hidden" class="basketId" name="basketId" th:value="${order.basketId}" />
                         <a href="" class="minus qtyEdit"><i class="fa-solid fa-minus"></i></a>
-                        <input type="text" name="quantity" class="qty" th:value="${order.quantity}" readonly />
+                        <input type="number" name="quantity" id="qty" class="qty" th:value="${order.quantity}" min="1" readonly />
                         <a href="" class="plus qtyEdit"><i class="fa-solid fa-plus"></i></a>
+
                         <button class="btnChange btn1" type="submit">변경</button>
                       </div>
                     </div>
                     <div class="prodInfo2">
                       <div class="priceBox">
-                        <span class="price" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span
+                        <span id="itemPrice" class="price itemPrice" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span
                         ><button class="cancel"></button>
                       </div>
                       <div class="btnBox">
@@ -60,14 +64,14 @@
                         <button class="btnBuy btn2">주문하기</button>
                       </div>
                     </div>
-                  </li>
-                </ul>
-              </form>
+                  </form>
+                </li>
+              </ul>
 
               <div class="shipmentInfo">
                 <span>[기본배송]</span>
-                <p>상품구매금액: <span class="price">OOO</span> + 배송비 <span class="price">OOO</span></p>
-                <p>합계: <span class="price">OOO</span>원</p>
+                <p>상품구매금액: <span id="totalPrice" class="price">OOO</span> + 배송비 <span class="price">O</span></p>
+                <p>합계: <span class="price" id="totalPrice">OOO</span></p>
               </div>
               <div class="prodBox-btnArea">
                 <input type="button" class="btn1 r" id="checkAll" value="전체선택" />
@@ -81,11 +85,11 @@
                 <strong>주문상품</strong>
               </div>
               <div class="priceBox">
-                <p class="box a"><span>총 상품금액</span><span>OOO</span></p>
-                <p class="box"><span>총 배송비</span><span>OOO</span></p>
+                <p class="box a"><span >총 상품금액</span><span id="totalPrice">OOO</span></p>
+                <p class="box"><span>총 배송비</span><span>O</span></p>
               </div>
               <div class="totalPrice box">
-                <p>결제예정금액<span>OOO</span></p>
+                <p>결제예정금액<span  id="totalPrice">OOO</span></p>
               </div>
             </div>
             <div class="orderInfo-btnArea">
@@ -101,46 +105,61 @@
     <th:block th:replace="~{/fragments/script}"></th:block>
     <script th:src="@{/assets/js/basket.js}"></script>
     <script>
-      document.querySelector("#editUp").addEventListener("submit", async (e) => {
-        e.preventDefault();
+      // 결제 예정금액 표시
+      const totalPrice = document.querySelectorAll("#totalPrice");
 
-        const current = e.currentTarget;
-        const parent = current.closest(".qtyBox");
-        // // 상품 수량
-        // const quantity = parent.querySelector(".qty").value;
+      let startSum = 0;
+      const itemPrice = document.querySelectorAll("#itemPrice");
+      
+      itemPrice.forEach((v,i) => {
+        const one = v.innerHTML.indexOf('원');
+        const two = v.innerHTML.substring(0,one);
+          
+        const num = two.replaceAll(',','');
+        const trim = parseInt(num.trim());
 
-        // // 장바구니 번호
-        // const basketId = parent.querySelector(".basketId").value;
-
-        // const memberId = parent.querySelector(".memberId").value;
-
-        const formData = new FormData(e.currentTarget);
-
-        const data = await axiosHelper.put(`[[@{/api/basket/edit}]]`, FormData);
+        startSum += trim;
       });
+      
+      for (let i=0 ; i< totalPrice.length;i++) {
+            totalPrice[i].innerHTML = startSum.toLocaleString() + " 원";
+          }
 
-      // document.querySelectorAll(".qty").forEach((v, i) => {
-      //   v.addEventListener("change", async (e) => {
-      //     e.preventDefault();
+      // 수량 변경시 DB연동
+      document.querySelectorAll(".qty").forEach((v, i) => {
+        v.addEventListener("change", async (e) => {
+          e.preventDefault();
 
-      //     const current = e.currentTarget;
-      //     const parent = current.closest(".listTable");
-      //     // 상품 수량
-      //     const quantity = parent.querySelector(".qty").value;
+          const form = v.form;
 
-      //     // 장바구니 번호
-      //     const basketId = parent.querySelector(".basketId").value;
+          const data = await axiosHelper.put(`[[@{/api/basket/edit}]]`, new FormData(form));
+          
+          if (data) {
+            if (form.querySelector(".basketId").value == data.orderBasket.basketId) {
+              form.querySelector(".orderPrice").innerHTML = (data.orderBasket.price * data.orderBasket.quantity).toLocaleString() + " 원";
+              form.querySelector(".itemPrice").innerHTML = (data.orderBasket.price * data.orderBasket.quantity).toLocaleString() + " 원";
+            } 
+          }
+          
+          let sum = 0;
 
-      //     const memberId = parent.querySelector(".memberId").value;
+          document.querySelectorAll(".itemPrice").forEach((v1, i1) => {
+            
+            const one = v1.innerHTML.indexOf('원');
+            const two = v1.innerHTML.substring(0,one);
+          
+            const num = two.replaceAll(',','');
+            const trim = parseInt(num.trim());
 
-      //     const data = await axiosHelper.put(`/api/basket/edit/{basketId}`, {
-      //       quantity: quantity,
-      //       basketId: basketId,
-      //       memberId: memberId,
+            sum += trim;
 
-      //     });
-      //   });
-      // });
+          });
+          
+          for (let i=0 ; i< totalPrice.length;i++) {
+            totalPrice[i].innerHTML = sum.toLocaleString() + " 원";
+          }
+        });
+      });
     </script>
   </body>
 </html>
