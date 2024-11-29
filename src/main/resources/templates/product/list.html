@@ -15,81 +15,35 @@
         <!-- body -->
         <div class="list-body">
             <div class="category-box">
-                <span>홈</span>
-                <span class="category-txt">HAIR</span>
-                <span class="category-txt">샴푸</span>
+                <a th:href="@{/}">홈</a>
+
+                <a class="category-txt" th:text="${products[0].parentCategoryName == 'ALL'} ? 'ALL' : ${products[0].parentCategoryName}"></a>
+
+                <a class="category-txt" th:text="${products[0].categoryName}" th:classappend="${products[0].parentCategoryName == 'ALL' ? 'displaynone' : null}"></a>
             </div>
 
             <div class="list-item-box">
                 <div class="list-item-exist">
                     <ul>
-                        <li>
+                        <li th:each="product : ${products}" th:if="${products != null}">
                             <div class="list-item">
-                                <div class="list-item-img">
-                                    <img src="https://placehold.co/200x200"/>
-                                </div>
+                                <a th:href="@{/product/detail/{prodId}(prodId=${product.prodId})}">
+                                    <div class="list-item-img">
+                                        <img th:src="${product.listImgUrl1}" />
+                                    </div>
+                                    <div class="hover-item-img displaynone" >
+                                        <img th:src="${product.listImgUrl2}" />
+                                    </div>
+                                </a>
                                 <div class="list-item-content">
                                     <div class="item-content-name">
-                                        <p>ROSEMARY RECOVERY</p>
-                                        <a href="#">로즈마리 리커버리 샴푸 500ML</a>
+                                        <p th:text="${product.prodNameEng}">ROSEMARY RECOVERY</p>
+                                        <a th:text="${product.prodNameKor}" 
+                                        th:href="@{/product/detail/{prodId}(prodId=${product.prodId})}">로즈마리 리커버리 샴푸 500ML</a>
                                         <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
                                     </div>
                                     <div class="item-price">
-                                        <span class="discount">30%</span><span>40,000원</span>
-                                        <span class="normal-price">일반 회원가</span><span class="price">27,000원</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="list-item">
-                                <div class="list-item-img">
-                                    <img src="https://placehold.co/200x200"/>
-                                </div>
-                                <div class="list-item-content">
-                                    <div class="item-content-name">
-                                        <p>ROSEMARY RECOVERY</p>
-                                        <a href="#">로즈마리 리커버리 샴푸 500ML</a>
-                                        <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
-                                    </div>
-                                    <div class="item-price">
-                                        <span class="discount">30%</span><span>40,000원</span>
-                                        <span class="normal-price">일반 회원가</span><span class="price">27,000원</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="list-item">
-                                <div class="list-item-img">
-                                    <img src="https://placehold.co/200x200"/>
-                                </div>
-                                <div class="list-item-content">
-                                    <div class="item-content-name">
-                                        <p>ROSEMARY RECOVERY</p>
-                                        <a href="#">로즈마리 리커버리 샴푸 500ML</a>
-                                        <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
-                                    </div>
-                                    <div class="item-price">
-                                        <span class="discount">30%</span><span class="discount-price">40,000원</span>
-                                        <span class="normal-price">일반 회원가</span><span class="price">27,000원</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="list-item">
-                                <div class="list-item-img">
-                                    <img src="https://placehold.co/200x200"/>
-                                </div>
-                                <div class="list-item-content">
-                                    <div class="item-content-name">
-                                        <p>ROSEMARY RECOVERY</p>
-                                        <a href="#">로즈마리 리커버리 샴푸 500ML</a>
-                                        <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
-                                    </div>
-                                    <div class="item-price">
-                                        <span class="discount">30%</span><span>40,000원</span>
+                                        <span class="discount">30%</span><span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}">40,000원</span>
                                         <span class="normal-price">일반 회원가</span><span class="price">27,000원</span>
                                     </div>
                                 </div>
@@ -102,6 +56,8 @@
     </div>
 
     <div th:replace="~{/fragments/common :: calm-footer}"></div>
+
+    <div th:replace="~{/fragments/script :: calm-scripts}"></div>
 
     <script th:src="@{/assets/js/list.js}"></script>
 </body>

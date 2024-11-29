@@ -11,8 +11,12 @@ import com.calmomentree.projectree.helpers.Pagination;
 import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.ProdImg;
 import com.calmomentree.projectree.models.Product;
+import com.calmomentree.projectree.models.ReviewBoard;
+import com.calmomentree.projectree.models.ReviewImg;
 import com.calmomentree.projectree.services.ProdImgService;
 import com.calmomentree.projectree.services.ProductService;
+import com.calmomentree.projectree.services.ReviewBoardService;
+import com.calmomentree.projectree.services.ReviewImgService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +38,13 @@ public class ProductController {
     @Autowired
     private ProdImgService prodImgService;
 
+    @Autowired
+    private ReviewBoardService reviewBoardService;
+
+    @Autowired
+    private ReviewImgService reviewImgService;
+
+    @SuppressWarnings("null")
     @GetMapping("/product/search")
     public String searchList(Model model,
         @RequestParam(value = "keyword", required = false) String keyword,
@@ -66,11 +77,13 @@ public class ProductController {
             products = productService.getListBySearch(input);
         } catch (Exception e) {
             webHelper.serverError(e);
+            return null;
         }
 
         for (int i=0; i<products.size(); i++) {
             Product p = products.get(i);
-            p.setListImgUrl(fileHelper.getUrl(p.getListImgUrl()));
+            p.setListImgUrl1(fileHelper.getUrl(p.getListImgUrl1()));
+            p.setListImgUrl2(fileHelper.getUrl(p.getListImgUrl2()));
         }
 
         model.addAttribute("products", products);
@@ -81,11 +94,47 @@ public class ProductController {
         return "product/search";
     }
 
+    @GetMapping("product/list/{categoryId}")
+    public String prodList(
+        Model model,
+        @PathVariable("categoryId") int categoryId
+    ) {
+        Product input = new Product();
+        input.setCategoryId(categoryId);
+
+        List<Product> products = null;
+
+        try {
+            products = productService.getListByCategory(input);
+        } catch (Exception e) {
+            webHelper.serverError(e);
+            return null;
+        }
+
+        for (int i=0; i<products.size(); i++) {
+            Product p = products.get(i);
+            p.setListImgUrl1(fileHelper.getUrl(p.getListImgUrl1()));
+            p.setListImgUrl2(fileHelper.getUrl(p.getListImgUrl2()));
+        }
+
+        if (categoryId == 1) {
+            for (int i=0; i<products.size(); i++) {
+                Product p = products.get(i);
+                p.setParentCategoryName("ALL");
+            }
+        }
+
+        model.addAttribute("products", products);
+
+        return "product/list";
+    }
     
+    @SuppressWarnings("null")
     @GetMapping("/product/detail/{prodId}")
     public String prodDetail(
         Model model,
-        @PathVariable("prodId") int prodId
+        @PathVariable("prodId") int prodId,
+        @RequestParam(value = "page", defaultValue = "1") String nowPage
     ) {
 
         // 상품 객체 
@@ -93,6 +142,7 @@ public class ProductController {
         input.setProdId(prodId);
 
         Product output = null;
+
 
         // 상품 이미지 객체
         ProdImg inputDetail = new ProdImg();
@@ -111,15 +161,45 @@ public class ProductController {
         List<ProdImg> list = null;
         List<ProdImg> info = null;
 
+
+        // 상품에 대한 리뷰 객체
+        ReviewBoard inputReview = new ReviewBoard();
+        inputReview.setProdId(prodId);
+
+        List<ReviewBoard> review = null;
+
+
         try {
             output = productService.getItem(input);
 
             detail = prodImgService.getList(inputDetail);
             list = prodImgService.getList(inputList);
             info = prodImgService.getList(inputInfo);
+
+            review = reviewBoardService.getList(inputReview);
         } catch (Exception e) {
             webHelper.serverError(e);
+            return null;
         }
+
+
+        // 상품에 대한 리뷰 이미지 객체
+        for (int i=0; i<review.size(); i++) {
+            ReviewImg r = new ReviewImg();
+            r.setBoardImgId(review.get(i).getReviewBoardId());
+
+            List<ReviewImg> reImg = null;
+
+            try {
+                reImg = reviewImgService.getList(r);
+            } catch (Exception e) {
+                webHelper.serverError(e);
+                return null;
+            }
+
+            review.get(i).setReviewimgUrl(reImg);
+        }
+        
 
         // 이미지 변환
         for (int i=0; i<detail.size(); i++) {
@@ -137,10 +217,19 @@ public class ProductController {
             img.setImgUrl(fileHelper.getUrl(img.getImgUrl()));
         }
 
+        for (int i=0; i<review.size(); i++) {
+            List<ReviewImg> img = review.get(i).getReviewimgUrl();
+
+            for (int j=0; j<img.size(); j++) {
+                img.get(j).setImgUrl(fileHelper.getUrl(img.get(j).getImgUrl()));
+            }
+        }
+
         model.addAttribute("product", output);
         model.addAttribute("detailImg", detail);
-        model.addAttribute("list", list);
+        model.addAttribute("listImg", list);
         model.addAttribute("infoImg", info);
+        model.addAttribute("reviews", review);
         
         return "product/detail";
     }

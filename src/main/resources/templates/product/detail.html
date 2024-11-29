@@ -34,8 +34,8 @@
                                 </ul>
                             </div>
                             <div class="main-img" id="main-imgs">
-                                <img id="main-img-target" th:if="${detailImg != null}" th:src="${detailImg[0].imgUrl}"/>
-                                <img id="main-img-target" th:if="${detailImg == null}" th:src="${listImg[0].imgUrl}"/>
+                                <!-- <img id="main-img-target" th:if="${detailImg != null}" th:src="${detailImg[0].imgUrl}"/> -->
+                                <!-- <img id="main-img-target" th:if="${detailImg == null}" th:src="${listImg[0].imgUrl}"/> -->
                             </div>
                         </div>
                         <div class="item-content">
@@ -106,61 +106,32 @@
                         <div id="itemreview" class="tab-page">
                             <div class="review-content">
                                 <div class="review-list">
-                                    <div class="collapse">
+                                    <div class="collapse" th:each="review : ${reviews}" th:unless="${reviews == null}">
                                         <div class="reviews collapsible-title">
-                                            <span class="review-num">5</span>
-                                            <span class="review-title">쓰기 좋아요</span>
-                                            <span class="review-name">김**</span>
-                                            <span class="review-date">2024-09-21</span>
+                                            <span class="review-num" th:text="${review.rownum}">5</span>
+                                            <span class="review-title" th:text="${review.reviewTitle}">쓰기 좋아요</span>
+                                            <span class="review-name" th:text="${review.userName}">김**</span>
+                                            <span class="review-date" th:text="${review.writeDate}">2024-09-21</span>
                                         </div>
                                         <div class="review-collapse-content">
-                                            <img src="assets/img/main_section01_img01.jpg" width="700px"/>
-                                            <p>쓰기 좋아요</p>
-                                            <p>2024-09-21</p>
+                                            <!-- <div th:each="reviewImg : ${review.reviewImgUrl}">
+                                                <img th:src="${reviewImg.imgUrl}" />
+                                            </div> -->
+                                            <p th:text="${review.reviewContent}">쓰기 좋아요</p>
+                                            <p th:text="${review.writeDate}">2024-09-21</p>
                                         </div>
                                     </div>
-                                    <div class="collapse">
+                                    
+                                    <div class="collapse" th:if="${reviews == null}">
                                         <div class="reviews collapsible-title">
-                                            <span class="review-num">4</span>
-                                            <span class="review-title">배송이 빨라요</span>
-                                            <span class="review-name">신**</span>
-                                            <span class="review-date">2024-09-21</span>
-                                        </div>
-                                        <div class="review-collapse-content">
-                                            <img src="assets/img/13ec4e546708b59db1c3a90aa24e5823.jpg" width="700px"/>
-                                            <p>배송이 빨라요</p>
-                                            <p>2024-09-21</p>
-                                        </div>
-                                    </div>
-                                    <div class="collapse">
-                                        <div class="reviews collapsible-title">
-                                            <span class="review-num">3</span>
-                                            <span class="review-title">좋아요</span>
-                                            <span class="review-name">박**</span>
-                                            <span class="review-date">2024-09-20</span>
-                                        </div>
-                                    </div>
-                                    <div class="collapse">
-                                        <div class="reviews collapsible-title">
-                                            <span class="review-num">2</span>
-                                            <span class="review-title">마음에 들어요</span>
-                                            <span class="review-name">이**</span>
-                                            <span class="review-date">2024-09-20</span>
-                                        </div>
-                                    </div>
-                                    <div class="collapse">
-                                        <div class="reviews collapsible-title">
-                                            <span class="review-num">1</span>
-                                            <span class="review-title">별로에요</span>
-                                            <span class="review-name">김**</span>
-                                            <span class="review-date">2024-09-19</span>
+                                            <span>게시물이 없습니다.</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="review-btn">
-                                <button type="button" class="all-btn">전체보기</button>
-                                <button type="button" class="review-write-btn">리뷰작성</button>
+                                <a th:href="@{/board/product/list}" class="all-btn">전체보기</a>
+                                <a th:href="@{/board/product/write}" class="review-write-btn">리뷰작성</a>
                             </div>
                             <div class="review-page">
                                 <a>1</a>
@@ -175,36 +146,24 @@
                             <ul class="buy-info-list">
                                 <li>
                                     <p class="info-title">내용물의 용량 및 중량</p>
-                                    <p class="info-content">500ML</p>
+                                    <p class="info-content" th:text="|${product.capacity}ML|"></p>
                                 </li>
                                 <li>
                                     <p class="info-title">제품 주요사양</p>
-                                    <p class="info-content">지성 두피로 인한 탈모 증상 완화에 도움을 주고, 약해진 모발을 케어하는 기능성 샴푸입니다. 두피의 유수분 밸런스를 조절해 피지 관리에 도움을 주고, 푸석한 모발을 윤기 있게 가꿔줍니다.</p>
+                                    <p class="info-content" th:text="${product.descTxt} ? ${product.descTxt} : '해당없음'">지성 두피로 인한 탈모 증상 완화에 도움을 주고, 약해진 모발을 케어하는 기능성 샴푸입니다. 두피의 유수분 밸런스를 조절해 피지 관리에 도움을 주고, 푸석한 모발을 윤기 있게 가꿔줍니다.</p>
                                 </li>
                                 <li>
                                     <p class="info-title">사용기한 또는 개봉 후 사용기간</p>
-                                    <p class="info-content">개봉 후 사용 기간: 12개월 / 개봉 전 사용 기간: 36개월</p>
+                                    <p class="info-content" th:text="${product.usePeriod} ? ${product.usePeriod} : '해당없음'"></p>
                                 </li>
                                 <li>
                                     <p class="info-title">사용방법</p>
-                                    <p class="info-content">
+                                    <p class="info-content" th:text="${product.useMethod} ? ${product.useMethod} : '해당없음'">
                                         미지근한 물로 두피와 모발을 충분히 적셔주세요. 적당량을 손에 덜어 젖은 머리에 거품을 내며 문지른 후, 미지근한 물로 깨끗이 헹궈주세요.</p>
                                 </li>
                                 <li>
                                     <p class="info-title">화장품제조업자</p>
-                                    <p class="info-content">유씨엘(주)</p>
-                                </li>
-                                <li>
-                                    <p class="info-title">제조국</p>
-                                    <p class="info-content">대한민국</p>
-                                </li>
-                                <li>
-                                    <p class="info-title">화장품책임판매업자</p>
-                                    <p class="info-content">(주)그린슈타인</p>
-                                </li>
-                                <li>
-                                    <p class="info-title">맞춤형 화장품판매업자</p>
-                                    <p class="info-content">해당사항 없음</p>
+                                    <p class="info-content" th:text="${product.manufacturer} ? ${product.manufacturer} : '해당없음'">유씨엘(주)</p>
                                 </li>
                                 <li>
                                     <p class="info-title">｢화장품법｣에 따라 기재 표시하여야 하는 모든성분</p>
