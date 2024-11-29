@@ -105,6 +105,15 @@ button {
 
         .thumbBox {
           margin-right: 15px;
+          width: 200px;
+
+          a{
+            display: block;
+
+            img {
+              width: 100%;
+            }
+          }
         }
 
         .prodInfo {
