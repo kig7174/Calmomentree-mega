@@ -12,7 +12,6 @@ import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.services.BasketService;
 
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,35 +35,22 @@ public class BasketController {
 
         Basket input = new Basket();
         input.setMemberId(memberId);
-        
+
         List<Basket> output = null;
-        List<Basket> li = new ArrayList<>();
+
         try {
             output = basketService.getList(input);
-           
-            
+
+            // 사진 경로에 files 추가하기.
+            for (Basket item : output) {
+                item.setImgUrl(fileHelper.getUrl(item.getImgUrl()));
+            }
+
         } catch (Exception e) {
             webHelper.serverError(e);
         }
-       
-         
-        for(int i=0 ;i< output.size(); i++) {
-            Basket output2 = output.get(i);
-            
-            output2.setImgUrl(fileHelper.getUrl(output2.getImgUrl()));
-
-            li.add(output2);
-        }
-        // for(int i=0 ;i< output.size(); i++) {
-        //     Basket output2 = output.get(i);
-            
-        //     output2.setImgUrl(fileHelper.getUrl(output2.getImgUrl()));
-
-        //     li.add(output2);
-        // }
 
         model.addAttribute("orderBasket", output);
-        model.addAttribute("li", li);
 
         return "order/basket";
     }
