@@ -75,7 +75,7 @@ public interface ReviewBoardMapper {
             "replace(user_name,substring(user_name,2),'****') AS user_name, " +
             "ROW_NUMBER() OVER(ORDER BY r.review_board_id) AS rownum, " +
             "pro.img_url, p.prod_name_kor, p.prod_name_eng, p.price, p.capacity, " +
-            "reimg.img_url " +
+            "reimg.img_url AS review_img_url" +
             "FROM review_boards r " +
 
             // 회원
@@ -103,7 +103,7 @@ public interface ReviewBoardMapper {
             @Result(property = "prodNameEng", column = "prod_name_eng"),
             @Result(property = "price", column = "price"),
             @Result(property = "capacity", column = "capacity"),
-            @Result(property = "imgUrl", column = "img_url")
+            @Result(property = "reviewImgUrl", column = "review_img_url")
     })
     public ReviewBoard selectItem(ReviewBoard input);
 
@@ -127,7 +127,8 @@ public interface ReviewBoardMapper {
             // "INNER JOIN prod_imgs pro ON r.prod_id = pro.prod_id " +
             "<where> " +
                 "<if test = 'reviewTitle != null'>review_title LIKE concat('%',#{reviewTitle},'%')</if> " +
-                // "<if test = 'memberId != 0'>AND m.member_id = #{memberId}</if> " +
+                "<if test = 'memberId != 0'>AND m.member_id = #{memberId}</if> " +
+                "<if test = 'prodId != 0'>AND r.prod_id = #{prodId}</if> " + 
             "</where> " +
                 "ORDER BY rownum DESC " +
 

@@ -1,5 +1,7 @@
 package com.calmomentree.projectree.models;
 
+import java.util.List;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +24,8 @@ public class ReviewBoard {
     private int rownum;             // 게시글 카운트
     
     private String userName;        // 회원이름
+
+    private List<ReviewImg> reviewimgUrl;    // 이미지 목록
 
     @Getter
     @Setter

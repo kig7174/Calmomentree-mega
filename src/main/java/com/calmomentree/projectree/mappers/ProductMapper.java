@@ -98,7 +98,8 @@ public interface ProductMapper {
         @Result(property="categoryName", column="category_name"),
         @Result(property="parentCategoryName", column="parent_category_name"),
         @Result(property="parentCategoryNo", column="parent_category_no"),
-        @Result(property="listImgUrl", column="list_img_url")
+        @Result(property="listImgUrl1", column="list_img_url1"),
+        @Result(property="listImgUrl2", column="list_img_url2")
     })
     public Product selectItem(Product input);
 
@@ -122,22 +123,41 @@ public interface ProductMapper {
                 "ON a.parent_category_no = b.category_id) " +
         
             "SELECT " +
-            "prod_id, " +
-            "prod_name_kor, prod_name_eng, " +
-            "func_txt, desc_txt, " +
-            "price, is_discount, discount, " +
-            "capacity, specification, " +
-            "use_period, use_method, manufacturer, " +
-            "release_date, edit_date, " +
-            "category_name, " +
-            "( " +
-            "SELECT category_name " +
-            "FROM categorys " +
-            "WHERE category_id = category.parent_category_no " +
-            ") AS parent_category_name " +
+                "prod.prod_id, " +
+                "prod_name_kor, prod_name_eng, " +
+                "func_txt, desc_txt, " +
+                "price, is_discount, discount, " +
+                "capacity, specification, " +
+                "use_period, use_method, manufacturer, " +
+                "release_date, edit_date, " +
+                "category_name, prod.category_id, " +
+
+                "( " +
+                    "SELECT category_name " +
+                    "FROM categorys " +
+                    "WHERE category_id = category.parent_category_no " +
+                ") AS parent_category_name, " +
+
+                "( " +
+                    "SELECT img_url " +
+                    "FROM prod_imgs " +
+                    "WHERE prod_id = prod.prod_id AND img_type = 'list' " +
+                    "ORDER BY prod_img_id " +
+                    "LIMIT 0, 1 " +
+                ") AS list_img_url1, " +
+
+                "( " +
+                    "SELECT img_url " +
+                    "FROM prod_imgs " +
+                    "WHERE prod_id = prod.prod_id AND img_type = 'list' " +
+                    "ORDER BY prod_img_id " +
+                    "LIMIT 1, 1 " +
+                ") AS list_img_url2 " +
+
             "FROM products AS prod " +
             "INNER JOIN categorys AS category " +
             "ON prod.category_id = category.category_id " +
+            
             "WHERE prod.category_id IN ( " +
             "<if test='categoryId == \"1\"'>(SELECT category_id FROM categorys)</if> " +
             "<if test='categoryId == \"2\"'>(SELECT category_id FROM categorys LIMIT 0, 10)</if> " +
@@ -150,29 +170,41 @@ public interface ProductMapper {
 
     @Select("<script>" +
             "SELECT " +
-            "prod_id, " +
-            "prod_name_kor, prod_name_eng, " +
-            "func_txt, desc_txt, " +
-            "price, is_discount, discount, " +
-            "capacity, specification, " +
-            "use_period, use_method, manufacturer, " +
-            "release_date, edit_date, " +
-            "category_name, " +
-            "( " +
-            "SELECT category_name " +
-            "FROM categorys " +
-            "WHERE category_id = category.parent_category_no " +
-            ") AS parent_category_name, " +
-            "( " +
-            "SELECT img_url " +
-            "FROM prod_imgs " +
-            "WHERE prod_id = prod.prod_id AND img_type = 'list' " +
-            "ORDER BY prod_img_id " +
-            "LIMIT 0, 1 " +
-            ") AS list_img_url " +
+                "prod_id, " +
+                "prod_name_kor, prod_name_eng, " +
+                "func_txt, desc_txt, " +
+                "price, is_discount, discount, " +
+                "capacity, specification, " +
+                "use_period, use_method, manufacturer, " +
+                "release_date, edit_date, " +
+                "category_name, " +
+
+                "( " +
+                    "SELECT category_name " +
+                    "FROM categorys " +
+                    "WHERE category_id = category.parent_category_no " +
+                ") AS parent_category_name, " +
+
+                "( " +
+                    "SELECT img_url " +
+                    "FROM prod_imgs " +
+                    "WHERE prod_id = prod.prod_id AND img_type = 'list' " +
+                    "ORDER BY prod_img_id " +
+                    "LIMIT 0, 1 " +
+                ") AS list_img_url1, " +
+
+                "( " +
+                    "SELECT img_url " +
+                    "FROM prod_imgs " +
+                    "WHERE prod_id = prod.prod_id AND img_type = 'list' " +
+                    "ORDER BY prod_img_id " +
+                    "LIMIT 1, 1 " +
+                ") AS list_img_url2 " +
+
             "FROM products AS prod " +
             "INNER JOIN categorys AS category " +
             "ON prod.category_id = category.category_id " +
+
             "WHERE prod_name_kor LIKE CONCAT('%', #{prodNameKor}, '%') " +
             "<if test='orderBy == \"recent\"'>ORDER BY release_date DESC, prod_id ASC</if> " +
             "<if test='orderBy == \"name\"'>ORDER BY prod_name_kor ASC, prod_id ASC</if> " +
