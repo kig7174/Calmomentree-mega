@@ -3,7 +3,6 @@
   <head>
     <th:block th:replace="~{fragments/head :: calm-head('장바구니')}"></th:block>
     <link rel="stylesheet" th:href="@{/assets/css/basket.css}" />
-    
   </head>
   <body>
     <header th:replace="~{/fragments/common :: calm-header}"></header>
@@ -14,111 +13,111 @@
       <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
 
       <div class="title">Cart</div>
+      <!-- 장바구니가 비어있을 경우 -->
+      <div th:if="${orderBasket.size() == 0 }" class="basketEmpty">
+        <p>장바구니가 비어 있습니다.</p>
+      </div>
+      <div th:unless="${orderBasket.size() == 0 }">
+        <div class="cartBox">
+          <div class="prodBox">
+            <div class="prodBox-title">장바구니 상품<button type="button" id="agree-content-btn"></button></div>
 
-      <div class="cartBox">
-        <div class="prodBox">
-          <div class="prodBox-title">장바구니 상품<button type="button" id="agree-content-btn"></button></div>
+            <div class="prodBox-info active">
+              <div class="normal">
+                <p>일반상품(<span class="count"></span>)</p>
+              </div>
 
-          <div class="prodBox-info active">
-            <div class="normal">
-              <p>일반상품(<span class="count"></span>)</p>
-            </div>
-            
-            <form action="put" id="editUp">
-            
-            <ul>
-              <li class="listTable" th:each="order : ${orderBasket}">
-                <input type="checkbox" class="prodCheck" />
-                <input type="hidden" class="memberId" name="memberId" th:value="${order.memberId}">
-                <div class="thumbBox">
-                  <a href=""><img th:src="${order.imgUrl}" alt="" /></a>
-                </div>
-                <div class="prodInfo">
-                  <span class="info"><a href="" th:text="${order.prodNameKor}"></a></span>
-                  <span class="info" th:text="|${order.capacity} ML|"></span>
-                  <span class="info orderPrice" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span>
-                  <span class="red">-0</span>
-                  <p class="small">배송:[<span>무료</span>]/<span>기본배송</span></p>
-                  <p>[옵션:<span>선택안함</span>/<span>선택안함</span>]</p>
-                  <div class="qtyBox">
-                    <input type="hidden" class="basketId" name="basketId" th:value="${(order.basketId)}" />
-                    <a href="" class="minus qtyEdit"><i class="fa-solid fa-minus"></i></a>
-                    <input type="text" name="quantity" class="qty" th:value="${order.quantity}" readonly />
-                    <a href="" class="plus qtyEdit"><i class="fa-solid fa-plus"></i></a>
-                    <button class="btnChange btn1" type="submit">변경</button>
-                  </div>
-                </div>
-                <div class="prodInfo2">
-                  <div class="priceBox">
-                    <span class="price" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span
-                    ><button class="cancel"></button>
-                  </div>
-                  <div class="btnBox">
-                    <button class="btnGood btn1">관심상품</button>
-                    <button class="btnBuy btn2">주문하기</button>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          
-          </form>
-          
-            <div class="shipmentInfo">
-              <span>[기본배송]</span>
-              <p>상품구매금액: <span class="price">OOO</span> + 배송비 <span class="price">OOO</span></p>
-              <p>합계: <span class="price">OOO</span>원</p>
-            </div>
-            <div class="prodBox-btnArea">
-              <input type="button" class="btn1 r" id="checkAll" value="전체선택" />
-              <input type="button" class="btn1" id="checkDelete" value="선택삭제" />
+              <form action="put" id="editUp">
+                <ul>
+                  <li class="listTable" th:each="order : ${orderBasket}">
+                    <input type="checkbox" class="prodCheck" />
+                    <input type="hidden" class="memberId" name="memberId" th:value="${order.memberId}" />
+                    <div class="thumbBox">
+                      <a href=""><img th:src="${order.imgUrl}" alt="" /></a>
+                    </div>
+                    <div class="prodInfo">
+                      <span class="info"><a href="" th:text="${order.prodNameKor}"></a></span>
+                      <span class="info" th:text="|${order.capacity} ML|"></span>
+                      <span class="info orderPrice" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span>
+                      <span class="red">-0</span>
+                      <p class="small">배송:[<span>무료</span>]/<span>기본배송</span></p>
+                      <p>[옵션:<span>선택안함</span>/<span>선택안함</span>]</p>
+                      <div class="qtyBox">
+                        <input type="hidden" class="basketId" name="basketId" th:value="${(order.basketId)}" />
+                        <a href="" class="minus qtyEdit"><i class="fa-solid fa-minus"></i></a>
+                        <input type="text" name="quantity" class="qty" th:value="${order.quantity}" readonly />
+                        <a href="" class="plus qtyEdit"><i class="fa-solid fa-plus"></i></a>
+                        <button class="btnChange btn1" type="submit">변경</button>
+                      </div>
+                    </div>
+                    <div class="prodInfo2">
+                      <div class="priceBox">
+                        <span class="price" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span
+                        ><button class="cancel"></button>
+                      </div>
+                      <div class="btnBox">
+                        <button class="btnGood btn1">관심상품</button>
+                        <button class="btnBuy btn2">주문하기</button>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </form>
+
+              <div class="shipmentInfo">
+                <span>[기본배송]</span>
+                <p>상품구매금액: <span class="price">OOO</span> + 배송비 <span class="price">OOO</span></p>
+                <p>합계: <span class="price">OOO</span>원</p>
+              </div>
+              <div class="prodBox-btnArea">
+                <input type="button" class="btn1 r" id="checkAll" value="전체선택" />
+                <input type="button" class="btn1" id="checkDelete" value="선택삭제" />
+              </div>
             </div>
           </div>
-        </div>
-        <div class="orderInfo">
-          <div class="orderInfo-box">
-            <div class="prod box">
-              <strong>주문상품</strong>
+          <div class="orderInfo">
+            <div class="orderInfo-box">
+              <div class="prod box">
+                <strong>주문상품</strong>
+              </div>
+              <div class="priceBox">
+                <p class="box a"><span>총 상품금액</span><span>OOO</span></p>
+                <p class="box"><span>총 배송비</span><span>OOO</span></p>
+              </div>
+              <div class="totalPrice box">
+                <p>결제예정금액<span>OOO</span></p>
+              </div>
             </div>
-            <div class="priceBox">
-              <p class="box a"><span>총 상품금액</span><span>OOO</span></p>
-              <p class="box"><span>총 배송비</span><span>OOO</span></p>
+            <div class="orderInfo-btnArea">
+              <button class="btn2" id="allOrder">전체상품주문</button>
+              <button class="btn1" id="selectOrder">선택상품주문</button>
             </div>
-            <div class="totalPrice box">
-              <p>결제예정금액<span>OOO</span></p>
-            </div>
-          </div>
-          <div class="orderInfo-btnArea">
-            <button class="btn2" id="allOrder">전체상품주문</button>
-            <button class="btn1" id="selectOrder">선택상품주문</button>
           </div>
         </div>
       </div>
     </div>
-
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
     <script th:src="@{/assets/js/basket.js}"></script>
     <script>
       document.querySelector("#editUp").addEventListener("submit", async (e) => {
-          e.preventDefault();
+        e.preventDefault();
 
-          const current = e.currentTarget;
-          const parent = current.closest(".qtyBox");
-          // // 상품 수량
-          // const quantity = parent.querySelector(".qty").value;
+        const current = e.currentTarget;
+        const parent = current.closest(".qtyBox");
+        // // 상품 수량
+        // const quantity = parent.querySelector(".qty").value;
 
-          // // 장바구니 번호
-          // const basketId = parent.querySelector(".basketId").value;
+        // // 장바구니 번호
+        // const basketId = parent.querySelector(".basketId").value;
 
-          // const memberId = parent.querySelector(".memberId").value;
-          
-          const formData = new FormData(e.currentTarget);
+        // const memberId = parent.querySelector(".memberId").value;
 
-          const data = await axiosHelper.put(`[[@{/api/basket/edit}]]`, FormData);
-        });
-    
+        const formData = new FormData(e.currentTarget);
 
+        const data = await axiosHelper.put(`[[@{/api/basket/edit}]]`, FormData);
+      });
 
       // document.querySelectorAll(".qty").forEach((v, i) => {
       //   v.addEventListener("change", async (e) => {
