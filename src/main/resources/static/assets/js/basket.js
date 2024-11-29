@@ -27,6 +27,10 @@ document.querySelectorAll(".plus").forEach((v, i) => {
     const qty = parent.querySelector(".qty");
 
     qty.value++;
+    
+    // 이벤트 강제 전송????
+    const eve = new Event("change");
+    qty.dispatchEvent(eve);
   });
 });
 
@@ -42,6 +46,10 @@ document.querySelectorAll(".minus").forEach((v, i) => {
 
     if (qty.value > 1) {
       qty.value--;
+
+      // 이벤트 강제 전송????
+      const eve = new Event("change");
+      qty.dispatchEvent(eve);
     }
   });
 });
