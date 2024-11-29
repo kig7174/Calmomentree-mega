@@ -49,7 +49,7 @@ if(scrollY > 0){
 
 // 카테고리 마우스 오버 이벤트
 document.querySelector(".category-inner").addEventListener("mouseover", (e) => {
-    e.preventDefault();
+
     const subCategory = document.querySelectorAll(".sub-category");
     subCategory.forEach((v, i) => {
         v.classList.add("on");
@@ -58,7 +58,7 @@ document.querySelector(".category-inner").addEventListener("mouseover", (e) => {
 });
 
 document.querySelector(".category-inner").addEventListener("mouseout", (e) => {
-    e.preventDefault();
+
     const subCategory = document.querySelectorAll(".sub-category");
     subCategory.forEach((v, i) => {
         v.classList.remove("on");

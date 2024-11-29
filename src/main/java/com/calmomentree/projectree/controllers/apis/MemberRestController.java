@@ -179,7 +179,7 @@ public class MemberRestController {
 
         if (rememberId.equals("Y")) {
             try {
-                webHelper.writeCookie("rememberId", userId, 60 * 60 * 24 * 7, "/member/login");
+                webHelper.writeCookie("rememberId", userId, 60 * 60 * 24 * 7, "localhost", "/member/login");
             } catch (Exception e) {
                 return restHelper.serverError("아이디 저장 실패");
             }

@@ -32,9 +32,6 @@ body {
 }
 
 /* 모든 버튼 및 링크 커서 */
-button, a {
-    cursor: pointer;
-}
 
 /* Test용 disaplay: none; */
 .displaynone {
@@ -181,6 +178,11 @@ button, a {
                     height: 65px;
                     line-height: 65px;
 
+                    a {
+                        cursor: pointer;
+                        display: block;
+                    }
+
                     .category-item {
                         width: 90px;
                         height: 100%;
@@ -192,7 +194,7 @@ button, a {
                         
                         .sub-category {
                             position: absolute;
-                            z-index: 9999999;
+                            z-index: 999999;
                             text-align: center;
                             top: 80px;
                             width: 100%;

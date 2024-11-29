@@ -20,7 +20,7 @@
             <div class="search-field">
                 <form class="search-text" method="get" th:action="@{/product/search}">
                     <input class="text" type="text" name="keyword" th:value="${keyword}" />
-                    <button class="img" type="submit"><img src="/src/main/resources/static/assets/img/search.svg" /></button>
+                    <button class="img" type="submit"><img th:src="@{/files/common/search.svg}" /></button>
                     <div class="sort-box">
                         <select name="order_by" th:value="${orderBySelected}" oninput="this.form.submit()">
                             <option value="">== 기준선택 ==</option>
@@ -50,7 +50,10 @@
                         <li th:each="product : ${products}">
                             <div class="list-item">
                                 <div class="list-item-img">
-                                    <img th:src="${product.listImgUrl}" />
+                                    <img th:src="${product.listImgUrl1}" />
+                                </div>
+                                <div class="hover-item-img displaynone" >
+                                    <img th:src="${product.listImgUrl2}" />
                                 </div>
                                 <div class="list-item-content">
                                     <div class="item-content-name">
