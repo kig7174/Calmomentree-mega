@@ -27,31 +27,26 @@ public class BasketRestController {
 
     @PutMapping("/api/basket/edit")
     public Map<String, Object> basketEdit(
-            @RequestParam("basketId") int basketId,
-            @RequestParam("quantity") int quantity,
-            @RequestParam("memberId") int memberId ) {
+        @RequestParam("quantity") int quantity,
+        @RequestParam("basketId") int basketId,
+        @RequestParam("memberId") int memberId ) {
         
         Basket input = new Basket();
         input.setBasketId(basketId);
         input.setQuantity(quantity);
-        
+        input.setMemberId(memberId);
+
+        Basket output = null;
 
         try {
-            basketService.editItem(input);
-        } catch (Exception e) {
-            return restHelper.serverError(e);
-        }
-        Basket output = new Basket();
-        output.setMemberId(memberId);
-
-        try {
-           output = basketService.getItem(output);
+            output = basketService.editItem(input);
         } catch (Exception e) {
             return restHelper.serverError(e);
         }
 
-        Map<String, Object> data = new LinkedHashMap<>();
-        
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+        data.put("orderBasket", output);
+                
         return restHelper.sendJson(data);
     }
 }
