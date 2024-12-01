@@ -19,6 +19,20 @@ public class BasketMapperTest {
     private BasketMapper basketMapper;
 
     @Test
+    @DisplayName("장바구니 추가")
+    void basketAdd() {
+        Basket input = new Basket();
+        input.setQuantity(5);
+        input.setProdId(3);
+        input.setMemberId(1);
+
+        int output = basketMapper.insert(input);
+
+        log.debug("장바구니 추가: " + output);
+    }
+
+
+    @Test
     @DisplayName("장바구니 조회 테스트")
     void orderBasketListTest() {
         Basket input = new Basket();
@@ -44,5 +58,40 @@ public class BasketMapperTest {
         log.debug("장바구니 수량 변경 테스트 : " + output);
         log.debug(input.toString());
 
+    }
+
+    @Test
+    @DisplayName("장바구니 카운트")
+    void basketCount() {
+        Basket input = new Basket();
+        input.setMemberId(1);
+
+        int output = basketMapper.selectCount(input);
+
+        log.debug("장바구니 카운트: " + output);
+    }
+
+    @Test
+    @DisplayName("장바구니 삭제 테스트")
+    void basketDelete() {
+        Basket input = new Basket();
+        input.setBasketId(1);
+        input.setMemberId(1);
+
+        int output = basketMapper.delete(input);
+
+        log.debug("장바구니 삭제: " + output);
+    }
+
+    @Test
+    @DisplayName("장바구니 중복확인")
+    void basketCheck() {
+        Basket input = new Basket();
+        input.setProdId(3);
+        input.setMemberId(1);
+        
+        int output = basketMapper.basketCheck(input);
+
+        log.debug("장바구니 중복확인: " + output);
     }
 }
