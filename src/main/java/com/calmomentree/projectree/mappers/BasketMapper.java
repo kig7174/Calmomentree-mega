@@ -48,7 +48,7 @@ public interface BasketMapper {
     @Delete("<script> " +
                 "DELETE FROM baskets " +
                 "<where> " +
-                    "<if test= 'prod_id != null'>board_id = #{ProdId} </if> " +
+                    "basket_id = #{basketId} " +
                     "<if test= 'memberId != 0'>AND member_id = #{memberId}</if> " +
                 "</where>" +
             "</script>")
@@ -95,7 +95,26 @@ public interface BasketMapper {
     @ResultMap("resultMap")
     public List<Basket> selectList(Basket input);
 
-    @Select("...")
+    /**
+     * 장바구니 카운트
+     * @param input
+     * @return
+     */
+    @Select("SELECT " +
+                "count(*) AS cnt " +
+            "FROM baskets " +
+            "WHERE member_id = #{memberId} ")
     public int selectCount(Basket input);
+
+    /**
+     * 장바구니 중복 확인
+     * @param input
+     * @return
+     */
+    @Select("SELECT " +
+                "count(*) AS cnt " +
+                "FROM baskets " +
+                "WHERE member_id = #{memberId} AND prod_id = #{prodId} ")
+    public int basketCheck(Basket input);
 }
 

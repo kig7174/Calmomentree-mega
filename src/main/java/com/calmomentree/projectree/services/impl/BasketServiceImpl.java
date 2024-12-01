@@ -21,6 +21,19 @@ public class BasketServiceImpl implements BasketService {
     public Basket addItem(Basket input) throws Exception {
         int rows = 0;
 
+        int check = 0;
+
+        try {
+            check = basketMapper.basketCheck(input);
+
+            if(check > 0) {
+                throw new Exception("이미 장바구니에 등록되어있습니다.");
+            }
+        } catch (Exception e) {
+            log.error("데이터 저장에 실패했습니다.", e);
+            throw e;
+        }
+        
         try {
             rows = basketMapper.insert(input);
 
