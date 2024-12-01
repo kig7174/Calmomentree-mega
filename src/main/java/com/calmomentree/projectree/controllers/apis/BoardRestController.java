@@ -5,11 +5,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.calmomentree.projectree.helpers.FileHelper;
 import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.models.Board;
+import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.models.UploadItem;
 import com.calmomentree.projectree.services.BoardService;
 
@@ -74,8 +76,8 @@ public class BoardRestController {
             @RequestParam("isPublic") String isPublic,
 
             // memberId 수정해야 됨
-            @RequestParam(value = "memberId", defaultValue = "1") int memberId) {
-
+            @SessionAttribute("memberInfo") Member memberInfo) {
+            // @RequestParam(value = "memberId", defaultValue = "1") int memberId
         // 게시글 공개시 비밀번호 NULL처리
         if (isPublic.equals("Y")) {
             boardPw = null;
@@ -99,7 +101,7 @@ public class BoardRestController {
         input.setBoardCategory(boardCategory);
         input.setBoardPw(boardPw);
         input.setIsPublic(isPublic);
-        input.setMemberId(memberId);
+        input.setMemberId(memberInfo.getMemberId());
 
         // 업로드 사진 있어?
         if(uploadItem != null) {
@@ -140,7 +142,8 @@ public class BoardRestController {
         @RequestParam("isPublic") String isPublic,
 
         // memberId 수정해야 됨
-        @RequestParam(value = "memberId", defaultValue = "1") int memberId
+        @SessionAttribute("memberInfo") Member memberInfo
+        // @RequestParam(value = "memberId", defaultValue = "1") int memberId
         ) {
         
         // 게시글 공개시 비밀번호 NULL처리
@@ -164,7 +167,7 @@ public class BoardRestController {
         board.setBoardPw(boardPw);
         board.setIsPublic(isPublic);
         board.setBoardId(boardId);
-        board.setMemberId(memberId);
+        board.setMemberId(memberInfo.getMemberId());
 
         String currentPhoto = fileHelper.getFilePath(board.getUploadImg());
         

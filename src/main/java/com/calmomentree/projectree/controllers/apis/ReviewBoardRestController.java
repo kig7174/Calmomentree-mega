@@ -1,10 +1,12 @@
 package com.calmomentree.projectree.controllers.apis;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.calmomentree.projectree.helpers.FileHelper;
 import com.calmomentree.projectree.helpers.RestHelper;
+import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.models.ReviewBoard;
 import com.calmomentree.projectree.models.ReviewImg;
 import com.calmomentree.projectree.models.UploadItem;
@@ -53,7 +55,7 @@ public class ReviewBoardRestController {
             @RequestParam(value = "photo", required = false) MultipartFile photo,
 
             @RequestParam(value = "prodId", defaultValue = "5") int prodId,
-            @RequestParam(value = "memberId", defaultValue = "1") int memberId) {
+            @SessionAttribute("memberInfo") Member memberInfo) {
 
         // 업로드 사진에 대한 처리
         UploadItem uploadItem = null;
@@ -73,7 +75,7 @@ public class ReviewBoardRestController {
         input.setRating(rating);
 
         input.setProdId(prodId);
-        input.setMemberId(memberId);
+        input.setMemberId(memberInfo.getMemberId());
 
         try {
             reviewBoardService.addItem(input);
