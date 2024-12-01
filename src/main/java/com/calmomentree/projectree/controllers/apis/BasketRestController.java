@@ -1,12 +1,16 @@
 package com.calmomentree.projectree.controllers.apis;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.models.Basket;
+import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.services.BasketService;
 
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -29,12 +33,13 @@ public class BasketRestController {
     public Map<String, Object> basketEdit(
         @RequestParam("quantity") int quantity,
         @RequestParam("basketId") int basketId,
-        @RequestParam("memberId") int memberId ) {
-        
+        @SessionAttribute("memberInfo") Member memberInfo) {
+        // @SessionAttribute("memberInfo") Member memberInfo
+        // @RequestParam("memberId") int memberId 
         Basket input = new Basket();
         input.setBasketId(basketId);
         input.setQuantity(quantity);
-        input.setMemberId(memberId);
+        input.setMemberId(memberInfo.getMemberId());
 
         Basket output = null;
 
@@ -48,5 +53,24 @@ public class BasketRestController {
         data.put("orderBasket", output);
                 
         return restHelper.sendJson(data);
+    }
+
+    @DeleteMapping("/api/basket/delete")
+    public Map<String, Object> basketDelete( // HttpServletRequest request,
+        @RequestParam("basketId") int basketId,
+        @SessionAttribute("memberInfo") Member memberInfo) {
+        // @SessionAttribute("memberInfo") Member memberInfo
+        // @RequestParam("memberId") int memberId
+        Basket input = new Basket();
+        input.setBasketId(basketId);
+        input.setMemberId(memberInfo.getMemberId());
+
+        try {
+            basketService.deleteItem(input);
+        } catch (Exception e) {
+            return restHelper.serverError(e);
+        }
+
+        return restHelper.sendJson();
     }
 }

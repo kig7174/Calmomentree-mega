@@ -27,12 +27,12 @@
 
             <div class="prodBox-info active">
               <div class="normal">
-                <p>일반상품(<span class="count"></span>)</p>
+                <p>일반상품(<span class="count" th:text="${counts}"></span>)</p>
               </div>
 
               <ul>
                 <li class="listTable" th:each="order : ${orderBasket}">
-                  <form action="put" id="editUp">
+                  <form id="editUp">
                     <input type="checkbox" class="prodCheck" />
                     <input type="hidden" class="memberId" name="memberId" th:value="${order.memberId}" />
                     <div class="thumbBox">
@@ -51,17 +51,17 @@
                         <input type="number" name="quantity" id="qty" class="qty" th:value="${order.quantity}" min="1" readonly />
                         <a href="" class="plus qtyEdit"><i class="fa-solid fa-plus"></i></a>
 
-                        <button class="btnChange btn1" type="submit">변경</button>
+                        <button class="btnChange btn1 cursor" type="button">변경</button>
                       </div>
                     </div>
                     <div class="prodInfo2">
                       <div class="priceBox">
-                        <span id="itemPrice" class="price itemPrice" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span
-                        ><button class="cancel"></button>
+                        <span id="itemPrice" class="price itemPrice" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span>
+                        <button class="cancel"></button>
                       </div>
                       <div class="btnBox">
-                        <button class="btnGood btn1">관심상품</button>
-                        <button class="btnBuy btn2">주문하기</button>
+                        <button class="btnGood btn1 cursor" type="button">관심상품</button>
+                        <a href="#" class="btnBuy btn2">주문하기</a>
                       </div>
                     </div>
                   </form>
@@ -74,8 +74,8 @@
                 <p>합계: <span class="price" id="totalPrice">OOO</span></p>
               </div>
               <div class="prodBox-btnArea">
-                <input type="button" class="btn1 r" id="checkAll" value="전체선택" />
-                <input type="button" class="btn1" id="checkDelete" value="선택삭제" />
+                <input type="button" class="btn1 r cursor" id="checkAll" value="전체선택" />
+                <input type="button" class="btn1 cursor" id="checkDelete" value="선택삭제" />
               </div>
             </div>
           </div>
@@ -93,8 +93,8 @@
               </div>
             </div>
             <div class="orderInfo-btnArea">
-              <button class="btn2" id="allOrder">전체상품주문</button>
-              <button class="btn1" id="selectOrder">선택상품주문</button>
+              <button class="btn2 cursor" id="allOrder">전체상품주문</button>
+              <button class="btn1 cursor" id="selectOrder">선택상품주문</button>
             </div>
           </div>
         </div>
@@ -104,6 +104,10 @@
 
     <th:block th:replace="~{/fragments/script}"></th:block>
     <script th:src="@{/assets/js/basket.js}"></script>
+    <script th:inline="javascript">
+      const basketDeleteLink = /*[[@{/api/basket/delete}]]*/'';
+      const basketList = /*[[@{/order/basket}]]*/'';
+    </script>
     <script>
       // 결제 예정금액 표시
       const totalPrice = document.querySelectorAll("#totalPrice");

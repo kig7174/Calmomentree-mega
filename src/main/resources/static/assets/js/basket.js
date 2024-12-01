@@ -27,7 +27,7 @@ document.querySelectorAll(".plus").forEach((v, i) => {
     const qty = parent.querySelector(".qty");
 
     qty.value++;
-    
+
     // 이벤트 강제 전송????
     const eve = new Event("change");
     qty.dispatchEvent(eve);
@@ -64,22 +64,45 @@ document.querySelector("#checkAll").addEventListener("click", (e) => {
 // 선택삭제 버튼 클릭
 /** --------- 삭제기능 구현 해야됨 ---------- */
 document.querySelector("#checkDelete").addEventListener("click", (e) => {
-  const checkedCnt = document.querySelectorAll(".prodCheck:checked").length;
-  if (checkedCnt) {
-    confirm("선택하신 상품을 삭제하시겠습니까?");
-  } else {
-    alert("선택된 상품이 없습니다.");
-  }
+  const checkedCnt = document.querySelectorAll(".prodCheck:checked");
+  
+  checkedCnt.forEach(async (v,i) => {
+
+    if(v.checked != null) {
+      const form = v.form;
+      const formData = form;
+      
+      if(confirm("선택하신 상품을 삭제하시겠습니까?")) {
+        const data = await axiosHelper.delete(basketDeleteLink, formData);
+
+        if(data) {
+          alert("삭제 되었습니다.");
+          window.location = basketList;
+        }
+      }
+    } 
+  });
+  if(checkedCnt.length == 0) {
+  
+      alert("선택된 상품이 없습니다.");
+    
+  }  
 });
 
 // 개별 상품 삭제 버튼
 document.querySelectorAll(".cancel").forEach((v, i) => {
-  v.addEventListener("click", (e) => {
+  v.addEventListener("click", async (e) => {
     e.preventDefault();
 
-    const current = e.currentTarget;
-    console.log(current);
+    const form = v.form;
+    const formData = new FormData(form);
     if (confirm("선택하신 상품을 삭제하시겠습니까?")) {
+      const data = await axiosHelper.delete(basketDeleteLink, formData);
+
+      if (data) {
+        alert("삭제 되었습니다.");
+        window.location = basketList;
+      }
     }
   });
 });
@@ -110,10 +133,3 @@ document.querySelector("#selectOrder").addEventListener("click", (e) => {
     alert("선택된 상품이 없습니다.");
   }
 });
-
-// 장바구니 수량 표시
-(async () => {
-  const cnt = document.querySelectorAll(".listTable").length;
-  const count = document.querySelector(".count");
-  count.innerHTML = cnt;
-})();
