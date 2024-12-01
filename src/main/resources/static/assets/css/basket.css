@@ -33,6 +33,9 @@ body {
 button {
   border: 1px solid #bcbcbc;
 }
+.cursor {
+  cursor: pointer;
+}
 .container {
   width: 50%;
   margin: auto;
@@ -98,6 +101,11 @@ button {
         font-size: 13px;
         border-bottom: 1px solid #bcbcbc;
 
+        form {
+          display: flex;
+          width: 100%;
+        }
+
         .prodCheck {
           align-self: start;
           margin-right: 10px;
@@ -112,6 +120,7 @@ button {
 
             img {
               width: 100%;
+              border: 1px solid #d5d5d5;
             }
           }
         }
@@ -145,6 +154,7 @@ button {
               width: 45px;
               height: 30px;
               padding: 0;
+              padding-left: 8px;
               line-height: 28px;
               margin-left: -1px;
               border: none;
@@ -182,6 +192,7 @@ button {
             font-weight: 600;
             .cancel {
               border: none;
+              cursor: pointer;
             }
             .cancel:after {
               content: "\00d7";
@@ -205,6 +216,13 @@ button {
           }
           .btn1 {
             margin-right: 6px;
+          }
+          .btnBuy {
+            display: block;
+            width: 50%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
           }
         }
       }
