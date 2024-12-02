@@ -37,6 +37,13 @@ body {
 
     .nav {
         width: 10%;
+
+        .nav-inner {
+
+            li {
+                margin: 10px 0;
+            }
+        }
     }
 
     .inner-body {
