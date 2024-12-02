@@ -73,8 +73,8 @@ public class MemberRestController {
         @RequestParam("addr1") String addr1,
         @RequestParam("addr2") String addr2,
         @RequestParam(value = "birthday", required = false) String birthday,
-        @RequestParam("is_sms_agree") String isSmsAgree,
-        @RequestParam("is_email_agree") String isEmailAgree,
+        @RequestParam(value = "is_sms_agree", defaultValue = "N") String isSmsAgree,
+        @RequestParam(value = "is_email_agree", defaultValue = "N") String isEmailAgree,
         @RequestParam("agree_service_check") String agreeServiceCheck,
         @RequestParam("agree_privacy_check") String agreePrivacyCheck
     ) {

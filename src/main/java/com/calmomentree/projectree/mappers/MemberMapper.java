@@ -84,10 +84,8 @@ public interface MemberMapper {
             "birthday, is_email_agree, is_sms_agree, " +
             "login_date, join_date, edit_date, " +
             "is_out, is_admin, " +
-            "COUNT(basket_id) AS bakset_count " +
+            "(SELECT COUNT(*) FROM baskets WHERE member_id = member.member_id) AS basket_count " +
             "FROM members AS member " +
-            "INNER JOIN baskets AS basket " +
-            "ON basket.member_id = member.member_id " +
             "WHERE member_id=#{memberId}")
     @Results(id = "memberMap", value = {
         @Result(property="memberId", column="member_id"),
@@ -135,8 +133,9 @@ public interface MemberMapper {
             "tel, email, postcode, addr1, addr2, " +
             "birthday, is_email_agree, is_sms_agree, " +
             "login_date, join_date, edit_date, " +
-            "is_out, is_admin " +
-            "FROM members " +
+            "is_out, is_admin, " +
+            "(SELECT COUNT(*) FROM baskets WHERE member_id = member.member_id) AS basket_count " +
+            "FROM members AS member " +
             "WHERE user_id = #{userId} AND user_pw = MD5(#{userPw}) AND is_out = 'N'")
     @ResultMap("memberMap")
     public Member login (Member input);
