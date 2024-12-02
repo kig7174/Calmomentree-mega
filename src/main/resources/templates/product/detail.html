@@ -34,8 +34,7 @@
                                 </ul>
                             </div>
                             <div class="main-img" id="main-imgs">
-                                <!-- <img id="main-img-target" th:if="${detailImg != null}" th:src="${detailImg[0].imgUrl}"/> -->
-                                <!-- <img id="main-img-target" th:if="${detailImg == null}" th:src="${listImg[0].imgUrl}"/> -->
+                                <img id="main-img-target" th:src="${#arrays.isEmpty(detailImg)} ? ${listImg[0].imgUrl} : ${detailImg[0].imgUrl}"/>
                             </div>
                         </div>
                         <div class="item-content">
@@ -90,7 +89,7 @@
                     <div id="tab-container">
                         <div class="tab-button-group">
                             <a class="tab-button active" href="#iteminfo">제품정보</a>
-                            <a class="tab-button" href="#itemreview">제품리뷰</a>
+                            <a class="tab-button" href="#itemreview">제품리뷰<span th:text="${product.reviewCount != 0} ? '('+${product.reviewCount}+')' : '('+'0'+')'"></span></a>
                             <a class="tab-button" href="#buyinfo">구매정보</a>
                             <a class="tab-button" href="#iteminquiry">제품문의</a>
                         </div>
@@ -114,9 +113,9 @@
                                             <span class="review-date" th:text="${review.writeDate}">2024-09-21</span>
                                         </div>
                                         <div class="review-collapse-content">
-                                            <!-- <div th:each="reviewImg : ${review.reviewImgUrl}">
+                                            <div th:each="reviewImg : ${review.reviewImgUrl}" th:unless="${review.reviewImgUrl == null}">
                                                 <img th:src="${reviewImg.imgUrl}" />
-                                            </div> -->
+                                            </div>
                                             <p th:text="${review.reviewContent}">쓰기 좋아요</p>
                                             <p th:text="${review.writeDate}">2024-09-21</p>
                                         </div>
@@ -134,11 +133,22 @@
                                 <a th:href="@{/board/product/write}" class="review-write-btn">리뷰작성</a>
                             </div>
                             <div class="review-page">
-                                <a>1</a>
-                                <a>2</a>
-                                <a>3</a>
-                                <a>4</a>
-                                <a class="active">5</a>
+                                <ul class="pagination">
+                                    <li th:if="${pagination.prevPage > 0}">
+                                        <a th:href="@{/product/detail/${product.prodId} (page=${pagination.prevPage})}">&laquo;</a>
+                                    </li>
+                                    <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
+                                    
+                                    <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+                                        <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}" />
+                                        <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/product/detail/${product.prodId} (page=${i})}" />
+                                    </li>
+                            
+                                    <li th:if="${pagination.nextPage > 0}">
+                                        <a th:href="@{/product/detail/${product.prodId} (page=${pagination.nextPage})}">&raquo;</a>
+                                    </li>
+                                    <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
+                                </ul>
                             </div>
                         </div>
                 
