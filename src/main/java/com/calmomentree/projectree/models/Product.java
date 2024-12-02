@@ -30,6 +30,8 @@ public class Product {
     private String listImgUrl1; // 상품 목록 이미지
     private String listImgUrl2;
 
+    private int reviewCount;        // 리뷰 카운트
+
     @Getter
     @Setter
     private static String orderBy;

@@ -56,7 +56,7 @@ public interface ReviewImgMapper {
     @Select("SELECT " +
                 "board_img_id, img_url, review_board_id " +
             "FROM review_imgs " +
-            "WHERE board_img_id = #{boardImgId}")
+            "WHERE review_board_id = #{reviewBoardId}")
     @ResultMap("resultMap")
     public List<ReviewImg> selectList(ReviewImg input);
 

@@ -75,7 +75,7 @@ public interface ReviewBoardMapper {
             "replace(user_name,substring(user_name,2),'****') AS user_name, " +
             "ROW_NUMBER() OVER(ORDER BY r.review_board_id) AS rownum, " +
             "pro.img_url, p.prod_name_kor, p.prod_name_eng, p.price, p.capacity, " +
-            "reimg.img_url AS review_img_url" +
+            "reimg.img_url" +
             "FROM review_boards r " +
 
             // 회원
@@ -102,8 +102,7 @@ public interface ReviewBoardMapper {
             @Result(property = "prodNameKor", column = "prod_name_kor"),
             @Result(property = "prodNameEng", column = "prod_name_eng"),
             @Result(property = "price", column = "price"),
-            @Result(property = "capacity", column = "capacity"),
-            @Result(property = "reviewImgUrl", column = "review_img_url")
+            @Result(property = "capacity", column = "capacity")
     })
     public ReviewBoard selectItem(ReviewBoard input);
 
@@ -149,6 +148,7 @@ public interface ReviewBoardMapper {
             "FROM review_boards " +
             "<where> " +
             "<if test = 'reviewTitle != null'>review_title LIKE concat('%',#{reviewTitle},'%')</if> " +
+            "<if test = 'prodId != null'>prod_id = #{prodId} </if> " +
             "</where> " +
             "</script>")
     public int selectCount(ReviewBoard input);

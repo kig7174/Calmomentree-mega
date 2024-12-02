@@ -134,7 +134,7 @@ public class ProductController {
     public String prodDetail(
         Model model,
         @PathVariable("prodId") int prodId,
-        @RequestParam(value = "page", defaultValue = "1") String nowPage
+        @RequestParam(value = "page", defaultValue = "1") int nowPage
     ) {
 
         // 상품 객체 
@@ -161,6 +161,12 @@ public class ProductController {
         List<ProdImg> list = null;
         List<ProdImg> info = null;
 
+        // 리뷰 페이지 번호 계산
+        int totalCount = 0;
+        int listCount = 5;
+        int pageCount = 5;
+
+        Pagination pagination = null;
 
         // 상품에 대한 리뷰 객체
         ReviewBoard inputReview = new ReviewBoard();
@@ -175,6 +181,12 @@ public class ProductController {
             detail = prodImgService.getList(inputDetail);
             list = prodImgService.getList(inputList);
             info = prodImgService.getList(inputInfo);
+
+            totalCount = reviewBoardService.getCount(inputReview);
+            pagination = new Pagination(nowPage, totalCount, listCount, pageCount);
+
+            ReviewBoard.setOffset(pagination.getOffset());
+            ReviewBoard.setListCount(pagination.getListCount());
 
             review = reviewBoardService.getList(inputReview);
         } catch (Exception e) {
@@ -197,7 +209,7 @@ public class ProductController {
                 return null;
             }
 
-            review.get(i).setReviewimgUrl(reImg);
+            review.get(i).setReviewImgUrl(reImg);
         }
         
 
@@ -218,7 +230,7 @@ public class ProductController {
         }
 
         for (int i=0; i<review.size(); i++) {
-            List<ReviewImg> img = review.get(i).getReviewimgUrl();
+            List<ReviewImg> img = review.get(i).getReviewImgUrl();
 
             for (int j=0; j<img.size(); j++) {
                 img.get(j).setImgUrl(fileHelper.getUrl(img.get(j).getImgUrl()));
@@ -230,6 +242,7 @@ public class ProductController {
         model.addAttribute("listImg", list);
         model.addAttribute("infoImg", info);
         model.addAttribute("reviews", review);
+        model.addAttribute("pagination", pagination);
         
         return "product/detail";
     }

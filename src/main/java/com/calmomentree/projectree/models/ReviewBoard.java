@@ -25,7 +25,7 @@ public class ReviewBoard {
     
     private String userName;        // 회원이름
 
-    private List<ReviewImg> reviewimgUrl;    // 이미지 목록
+    private List<ReviewImg> reviewImgUrl;    // 이미지 목록
 
     @Getter
     @Setter

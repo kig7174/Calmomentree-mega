@@ -69,11 +69,19 @@ public interface ProductMapper {
                 "use_period, use_method, manufacturer, " +
                 "release_date, edit_date, " +
                 "category_name, " +
+
                 "( " +
                 "SELECT category_name " +
                 "FROM categorys " +
                 "WHERE category_id = category.parent_category_no " +
-                ") AS parent_category_name " +
+                ") AS parent_category_name, " +
+
+                "( " +
+                "SELECT COUNT(*) " +
+                "FROM review_boards " +
+                "WHERE prod_id = prod.prod_id " +
+                ") AS review_count " +
+
             "FROM products AS prod " +
             "INNER JOIN categorys AS category " +
             "ON prod.category_id = category.category_id " +
@@ -99,7 +107,8 @@ public interface ProductMapper {
         @Result(property="parentCategoryName", column="parent_category_name"),
         @Result(property="parentCategoryNo", column="parent_category_no"),
         @Result(property="listImgUrl1", column="list_img_url1"),
-        @Result(property="listImgUrl2", column="list_img_url2")
+        @Result(property="listImgUrl2", column="list_img_url2"),
+        @Result(property="reviewCount", column="review_count")
     })
     public Product selectItem(Product input);
 
