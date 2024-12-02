@@ -12,6 +12,16 @@
         <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
         <div th:replace="~{/fragments/common :: calm-top-btn}"></div>     
         <!-- body -->
+        <div class="basket-popup displaynone">
+            <div class="popup-content">
+                <p>장바구니에 상품이 담겼습니다.</p>
+            </div>
+            <div class="btn-box">
+                <a class="popup-btn" href="#none">계속 쇼핑하기</a>
+                <a class="popup-btn" th:href="@{/order/basket}">장바구니 이동</a>
+            </div>
+        </div>
+
         <section class="detail-body">
             <div class="detail-body-inner">
                 <div class="detail-body-top">
@@ -37,52 +47,57 @@
                                 <img id="main-img-target" th:src="${#arrays.isEmpty(detailImg)} ? ${listImg[0].imgUrl} : ${detailImg[0].imgUrl}"/>
                             </div>
                         </div>
-                        <div class="item-content">
-                            <div class="text-content">
-                                <p class="eng" th:text="${product.prodNameEng}"></p>
-                                <p class="kor" th:text="|${product.prodNameKor} ${product.capacity} ML|"></p>
-                                <p class="text1" th:text="${product.funcTxt}"></p>
-                                <p class="text2" th:text="${product.descTxt}"></p>
-                            </div>
-                            <div class="price-content">
-                                <div>
-                                    <span class="discount"></span><span class="normal-price price" th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}"></span>
+
+                        <form id="prod-form">
+                            <div class="item-content">
+                                <div class="text-content">
+                                    <p class="eng" th:text="${product.prodNameEng}"></p>
+                                    <p class="kor" th:text="|${product.prodNameKor} ${product.capacity} ML|"></p>
+                                    <p class="text1" th:text="${product.funcTxt}"></p>
+                                    <p class="text2" th:text="${product.descTxt}"></p>
+                                    <input type="hidden" th:value="${product.prodNameKor}" name="prod_name_kor"/>
+                                    <input type="hidden" th:value="${product.prodId}" name="prodId"/>
                                 </div>
-                                <div>
-                                    <span>일반 회원가</span><span class="discount-price price"></span>
-                                </div>
-                            </div>
-                            <div class="option-select">
-                                <label for="option">옵션</label>
-                                <select>
-                                    <option>------</option>
-                                    <option>필수</option>
-                                    <option value="1">1개</option>
-                                </select>
-                            </div>
-                            <div class="option-item-price">
-                                <div class="buy-product">
-                                    <p th:text="|${product.prodNameKor} ${product.capacity} ML|"></p>
-                                </div>
-                                <div class="qty-box">
-                                    <input type="number" name="qty" value="1" id="qty" min="0" readonly />
-                                    <a class="qty-up" id="qty-up"><i class="fa-solid fa-plus"></i></a>
-                                    <a class="qty-down" id="qty-down"><i class="fa-solid fa-minus"></i></a>
-                                    <a class="buy-delete"></a>
-                                    <div class="qty-price">
-                                        <span></span>
+                                <div class="price-content">
+                                    <div>
+                                        <span class="discount"></span><span class="normal-price price" th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}"></span>
                                     </div>
-                                </div>                       
-                                <div class="total-price">
-                                    <span>TOTAL<span class="qty-txt">(QUANTITY)</span></span>
-                                    <span class="total-price-txt"><span class="total-qty"></span></span>
+                                    <div>
+                                        <span>일반 회원가</span><span class="discount-price price"></span>
+                                    </div>
+                                </div>
+                                <div class="option-select">
+                                    <label for="option">옵션</label>
+                                    <select id="product-option">
+                                        <option>------</option>
+                                        <option>필수</option>
+                                        <option value="1">1개</option>
+                                    </select>
+                                </div>
+                                <div class="option-item-price" id="qty-box">
+                                    <div class="buy-product">
+                                        <p th:text="|${product.prodNameKor} ${product.capacity} ML|"></p>
+                                    </div>
+                                    <div class="qty-box">
+                                        <input type="number" name="quantity" value="0" id="qty" min="0" readonly />
+                                        <a class="qty-up" id="qty-up"><i class="fa-solid fa-plus"></i></a>
+                                        <a class="qty-down" id="qty-down"><i class="fa-solid fa-minus"></i></a>
+                                        <a class="buy-delete" id="qty-delete"><i class="fa-solid fa-x"></i></a>
+                                        <div class="qty-price">
+                                            <span id="qty-price"></span>
+                                        </div>
+                                    </div>                       
+                                    <div class="total-price">
+                                        <span>TOTAL<span class="qty-txt">(QUANTITY)</span></span>
+                                        <span class="total-price-txt" id="total-price"><span class="total-qty" id="total-qty"></span></span>
+                                    </div>
+                                </div>
+                                <div class="buy-box">
+                                    <button class="cart-btn" type="button" id="basket-btn">장바구니</button>
+                                    <button class="buy-btn" type="button" id="buy-btn">바로구매</button>
                                 </div>
                             </div>
-                            <div class="buy-box">
-                                <button class="cart-btn" type="button">장바구니</button>
-                                <button class="buy-btn" type="button">바로구매</button>
-                            </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="detail-body-bottom">
@@ -333,5 +348,25 @@
 
     <th:block th:replace="~{/fragments/script}"></th:block>
     <script th:src="@{/assets/js/detail.js}"></script>
+
+    <script th:inline="javascript">
+        const prodPrice = "[[${product.price}]]";
+    </script>
+
+    <script>
+        document.querySelector("#basket-btn").addEventListener("click", async (e) => {
+
+            const data = await axiosHelper.get("[[@{/api/basket/add}]]", new FormData(e.currentTarget.form));
+
+            if (data) {
+                if (data.error) {
+                    alert("장바구니에 담지 못하였습니다. 다시 시도해주세요.");
+                    return;
+                }
+                
+                window.location = "[[@{/order/basket}]]";
+            }
+        });
+    </script>
 </body>
 </html>

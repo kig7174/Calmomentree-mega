@@ -2,19 +2,6 @@
  * product detail js
  */
 
-document.querySelector("#qty-up").addEventListener("click", e => {
-    e.preventDefault();
-    document.querySelector("#qty").value++;
-});
-
-document.querySelector("#qty-down").addEventListener("click", e => {
-    e.preventDefault();
-    const qty = document.querySelector("#qty");
-    if (qty.value > 0) {
-        qty.value--;
-    }
-});
-
 // image mouse over
 document.querySelectorAll('.link').forEach((v, i) => {
     v.addEventListener('click', e => {
@@ -108,4 +95,72 @@ document.querySelectorAll('.inquirys').forEach((v, i) => {
             content.style.maxHeight = content.scrollHeight + 'px';
         }
     });
+});
+
+const qty = document.querySelector("#qty");
+
+(function() {
+    document.querySelector("#qty-box").style.display = "none";
+})();
+
+document.querySelector("#qty-up").addEventListener("click", e => {
+    e.preventDefault();
+
+    qty.value++;
+
+    qty.dispatchEvent(new Event("change"));
+});
+
+document.querySelector("#qty-down").addEventListener("click", e => {
+    e.preventDefault();
+
+    if (qty.value > 0) {
+        qty.value--;
+    }
+
+    qty.dispatchEvent(new Event("change"));
+});
+
+const option = document.querySelector("#product-option");
+
+option.addEventListener("change", (e) => {
+    if (option.value == 1) {
+        document.querySelector("#qty-box").style.display = "block";
+        qty.value = option.value;
+
+        qty.dispatchEvent(new Event("change"));
+    } else {
+        document.querySelector("#qty-box").style.display = "none";
+    
+        qty.value = 0;
+    
+        qtyPrice.innerHTML = "";
+        totalPrice.innerHTML = "";
+        totalQty.innerHTML = "";
+    }
+});
+
+const qtyPrice = document.querySelector("#qty-price");
+const totalPrice = document.querySelector("#total-price");
+const totalQty = document.querySelector("#total-qty");
+
+qty.addEventListener("change", (e) => {
+    e.preventDefault();
+
+    qtyPrice.innerHTML = (qty.value * prodPrice).toLocaleString() + "원";
+    totalPrice.innerHTML = (qty.value * prodPrice).toLocaleString() + "원";
+    totalPrice.insertAdjacentHTML("beforeend", " ("+qty.value+"개)");
+});
+
+document.querySelector("#qty-delete").addEventListener("click", (e) => {
+    e.preventDefault();
+    document.querySelector("#qty-box").style.display = "none";
+
+    option[0].selected = true;
+
+    qty.value = 0;
+
+    qtyPrice.innerHTML = "";
+    totalPrice.innerHTML = "";
+    totalQty.innerHTML = "";
 });
