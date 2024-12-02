@@ -10,7 +10,9 @@ import com.calmomentree.projectree.exceptions.StringFormatException;
 import com.calmomentree.projectree.helpers.RegexHelper;
 import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.helpers.WebHelper;
+import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
+import com.calmomentree.projectree.services.BasketService;
 import com.calmomentree.projectree.services.MemberService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -36,6 +38,9 @@ public class MemberRestController {
 
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private BasketService basketService;
 
     /**
      * 아이디 중복 검사
@@ -195,8 +200,13 @@ public class MemberRestController {
         @RequestParam("user_pw") String userPw
     ) {
         memberInfo.setUserPw(userPw);
+        
+        Basket input = new Basket();
+        input.setMemberId(memberInfo.getMemberId());
 
         try {
+            basketService.deleteItem(input);
+
             memberService.out(memberInfo);
         } catch (Exception e) {
             return restHelper.serverError(e);
