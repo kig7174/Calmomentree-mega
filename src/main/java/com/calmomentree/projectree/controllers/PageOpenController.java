@@ -71,11 +71,6 @@ public class PageOpenController {
         return "myshop/order/list";
     }
 
-    @GetMapping("/order/order_form")
-    public String orderForm() {
-        return "order/order_form";
-    }
-
     @GetMapping("/order/search_board_list")
     public String searchOrder() {
         return "order/search_board_list";
