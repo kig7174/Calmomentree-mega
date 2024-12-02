@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Slf4j
 @Controller
-public class BasketController {
+public class OrderController {
 
     @Autowired
     private FileHelper fileHelper;
@@ -29,6 +29,11 @@ public class BasketController {
     @Autowired
     private WebHelper webHelper;
 
+    /**
+     * 장바구니 첫화면 불러오기
+     * @param memberInfo - 회원 번호
+     * @return
+     */
     @GetMapping("/order/basket")
     public String orderBasket(Model model,
             @SessionAttribute("memberInfo") Member memberInfo) {

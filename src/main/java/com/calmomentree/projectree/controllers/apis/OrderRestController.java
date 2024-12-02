@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
 @RestController
-public class BasketRestController {
+public class OrderRestController {
 
     @Autowired
     private RestHelper restHelper;
@@ -30,13 +30,19 @@ public class BasketRestController {
     @Autowired
     private BasketService basketService;
 
+    /**
+     * 장바구니 수량 수정
+     * @param quantity - 장바구니 수량
+     * @param basketId - 장바구니 일련번호
+     * @param memberInfo - 회원 번호
+     * @return
+     */
     @PutMapping("/api/basket/edit")
     public Map<String, Object> basketEdit(
             @RequestParam("quantity") int quantity,
             @RequestParam("basketId") int basketId,
             @SessionAttribute("memberInfo") Member memberInfo) {
-        // @SessionAttribute("memberInfo") Member memberInfo
-        // @RequestParam("memberId") int memberId
+        
         Basket input = new Basket();
         input.setBasketId(basketId);
         input.setQuantity(quantity);
@@ -56,12 +62,17 @@ public class BasketRestController {
         return restHelper.sendJson(data);
     }
 
+    /**
+     * 장바구니 삭제
+     * @param basketId  - 장바구니 번호
+     * @param memberInfo - 회원 번호
+     * @return
+     */
     @DeleteMapping("/api/basket/delete")
-    public Map<String, Object> basketDelete( // HttpServletRequest request,
+    public Map<String, Object> basketDelete(
             @RequestParam("basketId") int basketId,
             @SessionAttribute("memberInfo") Member memberInfo) {
-        // @SessionAttribute("memberInfo") Member memberInfo
-        // @RequestParam("memberId") int memberId
+        
         Basket input = new Basket();
         input.setBasketId(basketId);
         input.setMemberId(memberInfo.getMemberId());
@@ -75,6 +86,13 @@ public class BasketRestController {
         return restHelper.sendJson();
     }
 
+    /**
+     * 장바구니 추가하기 (중복 처리 수정필요)
+     * @param memberInfo - 회원 번호
+     * @param quantity   - 장바구니 수량
+     * @param prodId    - 상품 번호
+     * @return
+     */
     @GetMapping("/api/basket/add")
     public Map<String, Object> basketAdd(
             @SessionAttribute("memberInfo") Member memberInfo,
@@ -86,6 +104,7 @@ public class BasketRestController {
         input.setQuantity(quantity);
         input.setProdId(prodId);
 
+        // 중복을 어떻게 처리해야 되는거지 ???????
         Basket check = new Basket();
         check.setMemberId(memberInfo.getMemberId());
         check.setProdId(prodId);
@@ -96,9 +115,7 @@ public class BasketRestController {
         } catch (Exception e) {
             return restHelper.serverError(e);
         }
-
-        // Map<String, Object> data = new LinkedHashMap<String, Object>();
-
+        
         return restHelper.sendJson();
     }
 
