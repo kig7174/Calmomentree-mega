@@ -48,8 +48,8 @@ public interface BasketMapper {
     @Delete("<script> " +
                 "DELETE FROM baskets " +
                 "<where> " +
-                    "basket_id = #{basketId} " +
-                    "<if test= 'memberId != 0'>AND member_id = #{memberId}</if> " +
+                "member_id = #{memberId} " +
+                "<if test= 'basketId != 0'>AND basket_id = #{basketId}</if> " +
                 "</where>" +
             "</script>")
     public int delete(Basket input);
