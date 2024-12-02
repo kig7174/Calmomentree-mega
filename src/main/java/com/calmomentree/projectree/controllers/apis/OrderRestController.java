@@ -30,6 +30,27 @@ public class OrderRestController {
     @Autowired
     private BasketService basketService;
 
+    @GetMapping("/api/basket/count")
+    public Map<String, Object> basketCount(
+        @RequestParam("memberId") int memberId
+    ) {
+        Basket input = new Basket();
+        input.setMemberId(memberId);
+
+        int basketCount = 0;
+
+        try {
+            basketCount = basketService.getCount(input);
+        } catch (Exception e) {
+            return restHelper.serverError(e);
+        }
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+        data.put("basketCount", basketCount);
+
+        return restHelper.sendJson(data);
+    }
+
     /**
      * 장바구니 수량 수정
      * @param quantity - 장바구니 수량

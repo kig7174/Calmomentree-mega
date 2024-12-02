@@ -104,8 +104,21 @@
 
                     <div class="logout other-menu-list" th:unless="${session.memberInfo == null}">
                         <a id="logout" th:href="@{/member/logout}">로그아웃</a>
-                        <a th:href="@{/order/basket}">카트
-                           <span class="cart" th:text="${session.memberInfo.basketCount != null} ? '('+${session.memberInfo.basketCount}+')' : '('+'0'+')'"></span>
+                        <a th:href="@{/order/basket}">카트              
+                           <span class="cart" id="basket-count"></span>
+
+                           <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                           <script th:src="@{/assets/js/helpers/AxiosHelper.js}"></script>
+                           <script>
+                                window.onload = (async () => {
+                                    const data = await axiosHelper.get("[[@{/api/basket/count}]]", {
+                                        memberId: "[[${session.memberInfo.memberId}]]"
+                                    });
+
+                                    document.querySelector("#basket-count").innerHTML = "(" + data.basketCount + ")";
+                                })();
+                            </script>
+
                         </a>
                         <a th:href="@{/board/qna/list}">커뮤니티</a>
                         <a th:href="@{/myshop}">마이페이지</a>
