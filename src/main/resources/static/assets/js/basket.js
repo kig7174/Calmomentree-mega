@@ -65,28 +65,27 @@ document.querySelector("#checkAll").addEventListener("click", (e) => {
 /** --------- 삭제기능 구현 해야됨 ---------- */
 document.querySelector("#checkDelete").addEventListener("click", (e) => {
   const checkedCnt = document.querySelectorAll(".prodCheck:checked");
-  
-  checkedCnt.forEach(async (v,i) => {
 
-    if(v.checked != null) {
-      const form = v.form;
-      const formData = form;
-      
-      if(confirm("선택하신 상품을 삭제하시겠습니까?")) {
-        const data = await axiosHelper.delete(basketDeleteLink, formData);
+  if (checkedCnt.length == 0) {
+    alert("선택된 상품이 없습니다.");
+    return;
+  } else {
+    if (confirm("선택하신 상품을 삭제하시겠습니까?")) {
+      checkedCnt.forEach(async (v, i) => {
+        const form = v.form;
+        const formData = form;
+        let data = await axiosHelper.delete(basketDeleteLink, formData);
 
-        if(data) {
-          alert("삭제 되었습니다.");
-          window.location = basketList;
+        // console.log("1" + data);
+        if (data) {
+          // console.log("2" + data);
+          alert("삭제되었습니다.");
+          window.location.reload();
         }
-      }
-    } 
-  });
-  if(checkedCnt.length == 0) {
-  
-      alert("선택된 상품이 없습니다.");
-    
-  }  
+      });
+    }
+    // console.log("3" + data);
+  }
 });
 
 // 개별 상품 삭제 버튼

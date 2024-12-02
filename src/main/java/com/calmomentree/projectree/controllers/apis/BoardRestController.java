@@ -115,9 +115,9 @@ public class BoardRestController {
             return restHelper.serverError(e);
         }
 
-        Map<String, Object> data = new LinkedHashMap<String, Object>();
+        // Map<String, Object> data = new LinkedHashMap<String, Object>();
 
-        return restHelper.sendJson(data);
+        return restHelper.sendJson();
     }
 
     /**
@@ -206,8 +206,8 @@ public class BoardRestController {
             return restHelper.serverError(e);
         }
 
-        Map<String, Object> data = new LinkedHashMap<String, Object>();
+        // Map<String, Object> data = new LinkedHashMap<String, Object>();
 
-        return restHelper.sendJson(data);
+        return restHelper.sendJson();
     }
 }

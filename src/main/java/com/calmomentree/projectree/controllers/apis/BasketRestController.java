@@ -18,11 +18,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
 @RestController
 public class BasketRestController {
-    
+
     @Autowired
     private RestHelper restHelper;
 
@@ -31,11 +32,11 @@ public class BasketRestController {
 
     @PutMapping("/api/basket/edit")
     public Map<String, Object> basketEdit(
-        @RequestParam("quantity") int quantity,
-        @RequestParam("basketId") int basketId,
-        @SessionAttribute("memberInfo") Member memberInfo) {
+            @RequestParam("quantity") int quantity,
+            @RequestParam("basketId") int basketId,
+            @SessionAttribute("memberInfo") Member memberInfo) {
         // @SessionAttribute("memberInfo") Member memberInfo
-        // @RequestParam("memberId") int memberId 
+        // @RequestParam("memberId") int memberId
         Basket input = new Basket();
         input.setBasketId(basketId);
         input.setQuantity(quantity);
@@ -51,14 +52,14 @@ public class BasketRestController {
 
         Map<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("orderBasket", output);
-                
+
         return restHelper.sendJson(data);
     }
 
     @DeleteMapping("/api/basket/delete")
     public Map<String, Object> basketDelete( // HttpServletRequest request,
-        @RequestParam("basketId") int basketId,
-        @SessionAttribute("memberInfo") Member memberInfo) {
+            @RequestParam("basketId") int basketId,
+            @SessionAttribute("memberInfo") Member memberInfo) {
         // @SessionAttribute("memberInfo") Member memberInfo
         // @RequestParam("memberId") int memberId
         Basket input = new Basket();
@@ -73,4 +74,32 @@ public class BasketRestController {
 
         return restHelper.sendJson();
     }
+
+    @GetMapping("/api/basket/add")
+    public Map<String, Object> basketAdd(
+            @SessionAttribute("memberInfo") Member memberInfo,
+            @RequestParam("quantity") int quantity,
+            @RequestParam("prodId") int prodId) {
+
+        Basket input = new Basket();
+        input.setMemberId(memberInfo.getMemberId());
+        input.setQuantity(quantity);
+        input.setProdId(prodId);
+
+        Basket check = new Basket();
+        check.setMemberId(memberInfo.getMemberId());
+        check.setProdId(prodId);
+
+        
+        try {
+            basketService.addItem(input);
+        } catch (Exception e) {
+            return restHelper.serverError(e);
+        }
+
+        // Map<String, Object> data = new LinkedHashMap<String, Object>();
+
+        return restHelper.sendJson();
+    }
+
 }
