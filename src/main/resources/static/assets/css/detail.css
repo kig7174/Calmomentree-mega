@@ -198,6 +198,14 @@ body {
                             cursor: pointer;   
                         }
 
+                        .buy-delete {
+                            position: absolute;
+                            left: 32%;
+                            top: 25%;
+                            font-size: var(--font-size-medium);
+                            cursor: pointer;   
+                        }
+
                         .qty-price {
                             position: absolute;
                             right: 0;
