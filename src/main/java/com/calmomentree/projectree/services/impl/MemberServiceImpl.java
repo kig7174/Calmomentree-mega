@@ -216,4 +216,18 @@ public class MemberServiceImpl implements MemberService {
             throw e;
         }
     }
+
+    @Override
+    public int deleteOutMebmers() throws Exception {
+        int rows = 0;
+
+        try {
+            rows = memberMapper.deleteOutMembers();
+        } catch (Exception e) {
+            log.error("회원 삭제 실패", e);
+            throw new Exception("회원 삭제 실패");
+        }
+
+        return rows;
+    }
 }

@@ -26,4 +26,6 @@ public interface MemberService {
     public Member findId(Member params) throws Exception;
 
     public void resetPw(Member params) throws Exception;
+
+    public int deleteOutMebmers() throws Exception;
 }
