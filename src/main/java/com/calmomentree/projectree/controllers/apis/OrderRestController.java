@@ -20,7 +20,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -36,8 +35,7 @@ public class OrderRestController {
 
     @GetMapping("/api/basket/count")
     public Map<String, Object> basketCount(
-        @RequestParam("memberId") int memberId
-    ) {
+            @RequestParam("memberId") int memberId) {
         Basket input = new Basket();
         input.setMemberId(memberId);
 
@@ -57,10 +55,9 @@ public class OrderRestController {
 
     @GetMapping("/api/basket/unique_count")
     public Map<String, Object> uniqueBasket(
-        HttpServletRequest request,
-        @SessionAttribute("memberInfo") Member memberInfo,        
-        @RequestParam("prodId") int prodId
-    ) {
+            HttpServletRequest request,
+            @SessionAttribute("memberInfo") Member memberInfo,
+            @RequestParam("prodId") int prodId) {
 
         Basket input = new Basket();
         input.setMemberId(memberInfo.getMemberId());
@@ -73,19 +70,18 @@ public class OrderRestController {
         } catch (Exception e) {
             return restHelper.serverError(e);
         }
-        
+
         Map<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("uniqueBasket", uniqueBasket);
 
         return restHelper.sendJson(data);
     }
-    
+
     @PutMapping("/api/basket/unique_edit")
     public Map<String, Object> uniqueBasketEdit(
-        @RequestParam("quantity") String quantity,
-        @RequestParam("basketId") String basketIdTmp,
-        @SessionAttribute("memberInfo") Member memberInfo
-    ) {
+            @RequestParam("quantity") String quantity,
+            @RequestParam("basketId") String basketIdTmp,
+            @SessionAttribute("memberInfo") Member memberInfo) {
         int qty = Integer.parseInt(quantity);
         int basketId = Integer.parseInt(basketIdTmp);
 
@@ -103,11 +99,11 @@ public class OrderRestController {
         return restHelper.sendJson();
     }
 
-
     /**
      * 장바구니 수량 수정
-     * @param quantity - 장바구니 수량
-     * @param basketId - 장바구니 일련번호
+     * 
+     * @param quantity   - 장바구니 수량
+     * @param basketId   - 장바구니 일련번호
      * @param memberInfo - 회원 번호
      * @return
      */
@@ -116,7 +112,7 @@ public class OrderRestController {
             @RequestParam("quantity") int quantity,
             @RequestParam("basketId") int basketId,
             @SessionAttribute("memberInfo") Member memberInfo) {
-        
+
         Basket input = new Basket();
         input.setBasketId(basketId);
         input.setQuantity(quantity);
@@ -138,7 +134,8 @@ public class OrderRestController {
 
     /**
      * 장바구니 삭제
-     * @param basketId  - 장바구니 번호
+     * 
+     * @param basketId   - 장바구니 번호
      * @param memberInfo - 회원 번호
      * @return
      */
@@ -146,7 +143,7 @@ public class OrderRestController {
     public Map<String, Object> basketDelete(
             @RequestParam("basketId") int basketId,
             @SessionAttribute("memberInfo") Member memberInfo) {
-        
+
         Basket input = new Basket();
         input.setBasketId(basketId);
         input.setMemberId(memberInfo.getMemberId());
@@ -162,9 +159,10 @@ public class OrderRestController {
 
     /**
      * 장바구니 추가하기 (중복 처리 수정필요)
+     * 
      * @param memberInfo - 회원 번호
      * @param quantity   - 장바구니 수량
-     * @param prodId    - 상품 번호
+     * @param prodId     - 상품 번호
      * @return
      */
     @GetMapping("/api/basket/add")
@@ -183,42 +181,39 @@ public class OrderRestController {
         check.setMemberId(memberInfo.getMemberId());
         check.setProdId(prodId);
 
-        
         try {
             basketService.addItem(input);
         } catch (Exception e) {
             return restHelper.serverError(e);
         }
-        
+
         return restHelper.sendJson();
     }
 
-     @PostMapping("/order/order_form")
-    public Map<String, Object> orderForm(
-            @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
-            @RequestParam("prodId") String prodIdTmp,
-            @RequestParam("quantity") String quantityTmp,
-            @RequestParam("orderPrice") String orderPriceTmp,
-            @RequestParam("prodNameKor") String prodNameKor,
-            @RequestParam("imgUrl") String imgUrl) {
+    // @PostMapping("/api/order/order_form")
+    // public Map<String, Object> orderForm(
+    //         @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
+    //         @RequestParam("prodId") String prodIdTmp,
+    //         @RequestParam("quantity") String quantityTmp,
+    //         @RequestParam("orderPrice") String orderPriceTmp,
+    //         @RequestParam("prodNameKor") String prodNameKor,
+    //         @RequestParam("imgUrl") String imgUrl) {
 
+    //     int prodId = Integer.parseInt(prodIdTmp);
+    //     int quantity = Integer.parseInt(quantityTmp);
+    //     int orderPrice = Integer.parseInt(orderPriceTmp);
 
-        int prodId = Integer.parseInt(prodIdTmp);
-        int quantity = Integer.parseInt(quantityTmp);
-        int orderPrice = Integer.parseInt(orderPriceTmp);
-    
-        Order output = new Order();
-        output.setProdId(prodId);
-        output.setQuantity(quantity);
-        output.setOrderPrice(orderPrice);
-        output.setProdNameKor(prodNameKor);
-        output.setImgUrl(imgUrl);
+    //     Order output = new Order();
+    //     output.setProdId(prodId);
+    //     output.setQuantity(quantity);
+    //     output.setOrderPrice(orderPrice);
+    //     output.setProdNameKor(prodNameKor);
+    //     output.setImgUrl(imgUrl);
 
-        Map<String, Object> data = new LinkedHashMap<String, Object>();
-        data.put("output", output);
-        
-        return restHelper.sendJson(data);
-    }
+    //     Map<String, Object> data = new LinkedHashMap<String, Object>();
+    //     data.put("output", output);
 
+    //     return restHelper.sendJson(data);
+    // }
 
 }

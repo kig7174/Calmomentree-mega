@@ -1,6 +1,8 @@
 package com.calmomentree.projectree.controllers;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,10 +12,13 @@ import com.calmomentree.projectree.helpers.FileHelper;
 import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
+import com.calmomentree.projectree.models.Order;
 import com.calmomentree.projectree.services.BasketService;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Slf4j
@@ -69,5 +74,28 @@ public class OrderController {
         return "order/basket";
     }
 
+    @PostMapping("/order/order_form")
+    public String orderForm(Model model,
+            @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
+            @RequestParam("prodId") String prodIdTmp,
+            @RequestParam("quantity") String quantityTmp,
+            @RequestParam("orderPrice") String orderPriceTmp,
+            @RequestParam("prodNameKor") String prodNameKor,
+            @RequestParam("imgUrl") String imgUrl) {
 
+        int prodId = Integer.parseInt(prodIdTmp);
+        int quantity = Integer.parseInt(quantityTmp);
+        int orderPrice = Integer.parseInt(orderPriceTmp);
+
+        Order output = new Order();
+        output.setProdId(prodId);
+        output.setQuantity(quantity);
+        output.setOrderPrice(orderPrice);
+        output.setProdNameKor(prodNameKor);
+        output.setImgUrl(imgUrl);
+
+        model.addAttribute("output", output);
+
+        return "order/order_form";
+    }
 }
