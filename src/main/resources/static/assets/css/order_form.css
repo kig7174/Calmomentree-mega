@@ -290,3 +290,12 @@ input[type="radio"] {
     -webkit-transform: rotate(-225deg);
   }
 }
+
+.thumbnail-box {
+  width: 100px;
+
+  img {
+    width: 100%;
+    border: 1px solid #d5d5d1;
+  }
+}

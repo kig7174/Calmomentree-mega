@@ -32,7 +32,7 @@
 
               <ul>
                 <li class="listTable" th:each="order : ${orderBasket}">
-                  <form id="editUp">
+                  <form id="editUp" method="post" th:action="@{/order/order_form}">
                     <input type="checkbox" class="prodCheck" />
                     <input type="hidden" class="memberId" name="memberId" th:value="${order.memberId}" />
                     <div class="thumbBox">
@@ -65,7 +65,7 @@
                       </div>
                       <div class="btnBox">
                         <button class="btnGood btn1 cursor" type="button">관심상품</button>
-                        <a href="#" class="btnBuy btn2">주문하기</a>
+                        <button type="submit" class="btnBuy btn2">주문하기</button>
                       </div>
                     </div>
                   </form>
@@ -111,6 +111,7 @@
     <script th:inline="javascript">
       const basketDeleteLink = /*[[@{/api/basket/delete}]]*/'';
       const basketList = /*[[@{/order/basket}]]*/'';
+      const orderFormAdd = /*[[@{/api/order/order_form/add}]]*/'';
       const orderForm = /*[[@{/order/order_form}]]*/'';
     </script>
     <script>

@@ -202,7 +202,7 @@
               <span class="prod-name" th:text="${order.prodNameKor}">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
               <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
               <span>수량:<span class="qty" th:text="${order.quantity}">1</span>개</span>
-              <span><span class="price" th:text="${order.orderPrice}">28,000</span>원</span>
+              <span class="price" th:text="${#numbers.formatInteger(order.orderPrice, 3, 'COMMA') + '원'}">28,000</span>
             </div>
             <div class="cancel-btn-box">
               <button class="cancel-btn"><i class="fa-solid fa-xmark"></i></button>
@@ -228,7 +228,7 @@
           </div> -->
           <div class="price-box">
             <span>배송비</span>
-            <span><span class="price">3,000</span>원</span>
+            <span><span class="price">0(무료)</span>원</span>
           </div>
         </div>
       </div>
@@ -243,7 +243,7 @@
             주문상품<span><span class="bold">28,000</span>원</span>
           </div>
           <div class="pay">
-            배송비<span>+<span class="bold">3,000</span>원</span>
+            배송비<span>+<span class="bold">0</span>원</span>
           </div>
           <div class="pay discount">
             할인/부가결제<span><span class="red">-&nbsp;</span><span class="bold red">0</span>원</span>
