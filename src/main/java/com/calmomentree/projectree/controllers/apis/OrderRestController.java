@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
+import com.calmomentree.projectree.models.Order;
 import com.calmomentree.projectree.services.BasketService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,7 +20,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j
 @RestController
@@ -189,5 +192,33 @@ public class OrderRestController {
         
         return restHelper.sendJson();
     }
+
+     @PostMapping("/order/order_form")
+    public Map<String, Object> orderForm(
+            @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
+            @RequestParam("prodId") String prodIdTmp,
+            @RequestParam("quantity") String quantityTmp,
+            @RequestParam("orderPrice") String orderPriceTmp,
+            @RequestParam("prodNameKor") String prodNameKor,
+            @RequestParam("imgUrl") String imgUrl) {
+
+
+        int prodId = Integer.parseInt(prodIdTmp);
+        int quantity = Integer.parseInt(quantityTmp);
+        int orderPrice = Integer.parseInt(orderPriceTmp);
+    
+        Order output = new Order();
+        output.setProdId(prodId);
+        output.setQuantity(quantity);
+        output.setOrderPrice(orderPrice);
+        output.setProdNameKor(prodNameKor);
+        output.setImgUrl(imgUrl);
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+        data.put("output", output);
+        
+        return restHelper.sendJson(data);
+    }
+
 
 }

@@ -69,11 +69,5 @@ public class OrderController {
         return "order/basket";
     }
 
-    @GetMapping("/order/order_form")
-    public String orderForm(Model model
-            ) {
-        return null;
-    }
-    
 
 }
