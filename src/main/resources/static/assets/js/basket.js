@@ -109,12 +109,19 @@ document.querySelectorAll(".cancel").forEach((v, i) => {
 // 주문하기 버튼 클릭
 /** ---------- 해당 제품 정보 주문페이지로 넘겨줘야 됨. (일단 선택만 되도록) --------- */
 document.querySelectorAll(".btnBuy").forEach((v, i) => {
-  v.addEventListener("click", (e) => {
-    const current = e.currentTarget;
-    const parent = current.closest(".listTable");
-    console.log(parent);
+  v.addEventListener("click", async (e) => {
+    e.preventDefault();
+    
+    const parent = e.currentTarget.closest(".listTable");
     const check = parent.querySelector(".prodCheck");
     check.checked = true;
+    
+    const formData = new FormData(check.form);
+    console.log(formData);
+    const data = await axiosHelper.post(orderForm, formData);
+    if(data) {
+      window.location = orderForm;
+    }
   });
 });
 
