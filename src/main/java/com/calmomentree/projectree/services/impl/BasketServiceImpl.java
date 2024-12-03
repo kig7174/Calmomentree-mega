@@ -129,4 +129,44 @@ public class BasketServiceImpl implements BasketService {
 
         return output;
     }
+
+    @Override
+    public Basket uniqueBasketCount(Basket input) throws Exception {
+
+        try {
+            basketMapper.basketCheck(input);
+        } catch (Exception e) {
+            log.error("장바구니를 불러오는 데 실패했습니다.", e);
+            throw e;
+        }
+
+        return basketMapper.selectUniqueBasket(input);
+    }
+
+    @Override
+    public Basket editUniqueBasket(Basket input) throws Exception {
+
+        try {
+            basketMapper.updateByUnique(input);
+        } catch (Exception e) {
+            log.error("장바구니 추가에 실패했습니다.");
+            throw e;
+        }
+
+        return basketMapper.selectItem(input);
+    }
+
+    @Override
+    public int deleteByOverDays() throws Exception {
+        int output = 0;
+
+        try {
+            output = basketMapper.deleteByOverDays();
+        } catch (Exception e) {
+            log.error("장바구니 삭제 처리 실패", e);
+            throw e;
+        }
+
+        return output;
+    }
 }

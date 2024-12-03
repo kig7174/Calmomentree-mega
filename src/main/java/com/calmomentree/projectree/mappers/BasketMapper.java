@@ -40,6 +40,12 @@ public interface BasketMapper {
                 "WHERE member_id = #{memberId} AND basket_id = #{basketId}")
     public int update(Basket input);
 
+    @Update("UPDATE baskets SET " +
+            "quantity = quantity + #{quantity}, " +
+            "basket_add_date = NOW() " +
+            "WHERE member_id = #{memberId} AND basket_id = #{basketId}")
+    public int updateByUnique(Basket input);
+
     /**
      * 장바구니 삭제
      * @param input
@@ -116,5 +122,18 @@ public interface BasketMapper {
                 "FROM baskets " +
                 "WHERE member_id = #{memberId} AND prod_id = #{prodId} ")
     public int basketCheck(Basket input);
+
+    @Select("SELECT " +
+                "basket_id, quantity, basket_add_date, p.prod_id, member_id, " +
+                "p.prod_name_kor, p.price, p.capacity " +
+                "FROM baskets b " +
+            "INNER JOIN products p ON b.prod_id = p.prod_id " +
+            "WHERE member_id = #{memberId} AND b.prod_id = #{prodId}")
+    @ResultMap("resultMap")
+    public Basket selectUniqueBasket(Basket input);
+
+    @Delete("DELETE FROM baskets " +
+            "WHERE basket_add_date < DATE_ADD(NOW(), INTERVAL -7 day)")
+    public int deleteByOverDays();
 }
 

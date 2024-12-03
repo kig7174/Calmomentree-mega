@@ -16,4 +16,10 @@ public interface BasketService {
     public List<Basket> getList(Basket params) throws Exception;
 
     public int getCount(Basket params) throws Exception;
+
+    public Basket uniqueBasketCount(Basket parmas) throws Exception;
+
+    public Basket editUniqueBasket(Basket params) throws Exception;
+
+    public int deleteByOverDays() throws Exception;
 }

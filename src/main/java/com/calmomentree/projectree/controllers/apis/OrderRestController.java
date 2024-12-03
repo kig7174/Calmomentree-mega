@@ -8,6 +8,7 @@ import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.services.BasketService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -50,6 +51,55 @@ public class OrderRestController {
 
         return restHelper.sendJson(data);
     }
+
+    @GetMapping("/api/basket/unique_count")
+    public Map<String, Object> uniqueBasket(
+        HttpServletRequest request,
+        @SessionAttribute("memberInfo") Member memberInfo,        
+        @RequestParam("prodId") int prodId
+    ) {
+
+        Basket input = new Basket();
+        input.setMemberId(memberInfo.getMemberId());
+        input.setProdId(prodId);
+
+        Basket uniqueBasket = null;
+
+        try {
+            uniqueBasket = basketService.uniqueBasketCount(input);
+        } catch (Exception e) {
+            return restHelper.serverError(e);
+        }
+        
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+        data.put("uniqueBasket", uniqueBasket);
+
+        return restHelper.sendJson(data);
+    }
+    
+    @PutMapping("/api/basket/unique_edit")
+    public Map<String, Object> uniqueBasketEdit(
+        @RequestParam("quantity") String quantity,
+        @RequestParam("basketId") String basketIdTmp,
+        @SessionAttribute("memberInfo") Member memberInfo
+    ) {
+        int qty = Integer.parseInt(quantity);
+        int basketId = Integer.parseInt(basketIdTmp);
+
+        Basket input = new Basket();
+        input.setBasketId(basketId);
+        input.setQuantity(qty);
+        input.setMemberId(memberInfo.getMemberId());
+
+        try {
+            basketService.editUniqueBasket(input);
+        } catch (Exception e) {
+            return restHelper.serverError(e);
+        }
+
+        return restHelper.sendJson();
+    }
+
 
     /**
      * 장바구니 수량 수정
