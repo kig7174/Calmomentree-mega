@@ -198,7 +198,7 @@ public class ProductController {
         // 상품에 대한 리뷰 이미지 객체
         for (int i=0; i<review.size(); i++) {
             ReviewImg r = new ReviewImg();
-            r.setBoardImgId(review.get(i).getReviewBoardId());
+            r.setReviewBoardId(review.get(i).getReviewBoardId());
 
             List<ReviewImg> reImg = null;
 

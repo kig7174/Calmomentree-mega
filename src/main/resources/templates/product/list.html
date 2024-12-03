@@ -13,7 +13,8 @@
         <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
             
         <!-- body -->
-        <div class="list-body">
+        <div class="list-body" th:unless="${products != 0}"></div>
+        <div class="list-body" th:if="${products != 0}">
             <div class="category-box">
                 <a th:href="@{/}">홈</a>
 
@@ -43,8 +44,8 @@
                                         <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
                                     </div>
                                     <div class="item-price">
-                                        <span class="discount">30%</span><span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}">40,000원</span>
-                                        <span class="normal-price">일반 회원가</span><span class="price">27,000원</span>
+                                        <span class="discount" th:text="${product.isDiscount == 'Y'} ? ${product.discount} + '%' : null">30%</span><span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}">40,000원</span>
+                                        <span class="normal-price" th:if="${product.isDiscount == 'Y'}">일반 회원가</span><span class="price" th:if="${product.isDiscount == 'Y'}" th:text="${#numbers.formatInteger(product.discountPrice, 3, 'COMMA') + '원'}">27,000원</span>
                                     </div>
                                 </div>
                             </div>

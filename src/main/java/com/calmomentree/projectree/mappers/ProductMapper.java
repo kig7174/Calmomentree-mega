@@ -64,7 +64,7 @@ public interface ProductMapper {
                 "prod_id, " +
                 "prod_name_kor, prod_name_eng, " +
                 "func_txt, desc_txt, " +
-                "price, is_discount, discount, " +
+                "price, is_discount, discount, (price - price * (discount / 100)) AS discount_price, " +
                 "capacity, specification, " +
                 "use_period, use_method, manufacturer, " +
                 "release_date, edit_date, " +
@@ -95,6 +95,7 @@ public interface ProductMapper {
         @Result(property="price", column="price"),
         @Result(property="isDiscount", column="is_discount"),
         @Result(property="discount", column="discount"),
+        @Result(property="discountPrice", column="discount_price"),
         @Result(property="capacity", column="capacity"),
         @Result(property="specification", column="specification"),
         @Result(property="usePeriod", column="use_period"),
@@ -135,7 +136,7 @@ public interface ProductMapper {
                 "prod.prod_id, " +
                 "prod_name_kor, prod_name_eng, " +
                 "func_txt, desc_txt, " +
-                "price, is_discount, discount, " +
+                "price, is_discount, discount, (price - price * (discount / 100)) AS discount_price, " +
                 "capacity, specification, " +
                 "use_period, use_method, manufacturer, " +
                 "release_date, edit_date, " +
@@ -182,7 +183,7 @@ public interface ProductMapper {
                 "prod_id, " +
                 "prod_name_kor, prod_name_eng, " +
                 "func_txt, desc_txt, " +
-                "price, is_discount, discount, " +
+                "price, is_discount, discount, (price - price * (discount / 100)) AS discount_price, " +
                 "capacity, specification, " +
                 "use_period, use_method, manufacturer, " +
                 "release_date, edit_date, " +

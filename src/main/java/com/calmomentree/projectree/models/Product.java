@@ -32,6 +32,8 @@ public class Product {
 
     private int reviewCount;        // 리뷰 카운트
 
+    private int discountPrice; // 할인 가격
+
     @Getter
     @Setter
     private static String orderBy;
