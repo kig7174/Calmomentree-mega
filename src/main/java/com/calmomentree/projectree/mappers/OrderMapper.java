@@ -23,8 +23,8 @@ public interface OrderMapper {
                 "total_price, req, member_id, reg_date, edit_date " +
                 " ) VALUES ( " +
                 // 202411160001
-                "DATE_FORMAT(NOW(),'%Y%m%d') AS order_no, " +
-                "#{orderState}, DATE_FORMAT(NOW(), '%Y-%m-%d') AS order_date, #{memberName}, " +
+                "#{orderNo}, " +
+                "'배송중', DATE_FORMAT(NOW(), '%Y-%m-%d') AS order_date, #{memberName}, " +
                 "#{memberEmail}, #{memberPostcode}, #{memberAddr1}, #{memberAddr2}, #{memberTel}, " +
                 "#{receiverName}, #{receiverPostcode}, #{receiverAddr1}, #{receiverAddr2}, #{receiverTel}, " +
                 "#{totalPrice}, #{req}, #{memberId}, NOW(), NOW() ")
