@@ -7,7 +7,7 @@ import lombok.Setter;
 @Data
 public class OrderItem {
     private int orderItemId;    // 주문상품정보 번호
-    private String prodName;    // 대표 상품 이름
+    private String prodName;    // 상품 이름
     private int orderPrice;     // 주문 금액
     private int orderQuantity;  // 주문 수량
     private int prodId;         // 상품 번호

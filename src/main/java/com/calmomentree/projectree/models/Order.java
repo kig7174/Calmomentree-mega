@@ -25,6 +25,12 @@ public class Order {
     private String req;             // 배송요청사항
     private int memberId;           // 결제한 회원번호
 
+    private int prodId;             // 상품번호
+    private int quantity;           // 수량
+    private int orderPrice;         // 상품 금액
+    private String prodNameKor;     // 상품 이름
+    private String imgUrl;          // 상품 사진 URL
+
     private String regDate;         // 등록일시
     private String editDate;        // 변경일시
 
