@@ -36,9 +36,12 @@
                     <input type="checkbox" class="prodCheck" />
                     <input type="hidden" class="memberId" name="memberId" th:value="${order.memberId}" />
                     <div class="thumbBox">
+                      <input type="hidden" name="imgUrl" th:value="${order.imgUrl}" />
                       <a href=""><img th:src="${order.imgUrl}" alt="" /></a>
                     </div>
                     <div class="prodInfo">
+                      <input type="hidden" name="prodId" th:value="${order.prodId}" />
+                      <input type="hidden" name="prodNameKor" th:value="${order.prodNameKor}" />
                       <span class="info"><a href="" th:text="${order.prodNameKor}"></a></span>
                       <span class="info" th:text="|${order.capacity} ML|"></span>
                       <span class="info orderPrice" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span>
@@ -56,6 +59,7 @@
                     </div>
                     <div class="prodInfo2">
                       <div class="priceBox">
+                        <input type="hidden" name="orderPrice" th:value="${order.price * order.quantity}" />
                         <span id="itemPrice" class="price itemPrice" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span>
                         <button class="cancel"></button>
                       </div>
@@ -107,6 +111,7 @@
     <script th:inline="javascript">
       const basketDeleteLink = /*[[@{/api/basket/delete}]]*/'';
       const basketList = /*[[@{/order/basket}]]*/'';
+      const orderForm = /*[[@{/order/order_form}]]*/'';
     </script>
     <script>
       // 결제 예정금액 표시
