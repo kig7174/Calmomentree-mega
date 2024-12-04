@@ -12,6 +12,21 @@
         <div th:replace="~{/fragments/common :: calm-search}"></div>
         <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
         <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
+
+        <!-- pop up -->
+        <div class="popup">
+            <div class="popup-box">
+                <img th:src="@{/files/common/popup/popup.jpeg}" width="500px"/>
+                <label>
+                    <input type="checkbox" id="no-open" value="Y" style="color: #999"/>
+                    오늘 하루 열지 않기
+                </label>
+                <button type="button" id="close-popup">
+                    <img th:src="@{/files/common/popup/popup_close_btn.svg}" />
+                </button>
+            </div>
+        </div>
+
         <!-- body -->
         <section class="index-body">
             <!-- 첫 번째 사진 박스 -->
@@ -19,7 +34,7 @@
                 <div class="full-body-img">
                     <a href="product-detail.html?id=1">
                         <div class="img-box">
-                            <img src="http://localhost:3001/index/main_visual_img001.jpg" />
+                            <img th:src="@{/files/common/main_visual_img001.jpg}" />
                         </div>
                         <div class="content">
                             <h3>출산맘들이 인정한 탈모 완화 샴푸</h3>
@@ -29,9 +44,9 @@
                                 <br />
                                 깨끗한 8종 허브 오일 성분들이 윤기 모발로 가꿔줍니다.
                             </p>
-                            <a class="buy-btn" href="product-detail.html?id=1">
+                            <a class="buy-btn" th:href="@{/product/detail/1}">
                                 BUY
-                                <img src="http://localhost:3001/index/arrow_icon.svg" />
+                                <img th:src="@{/files/common/arrow_icon.svg}" />
                             </a>
                         </div>
                     </a>
@@ -42,12 +57,12 @@
                 <div class="half-img-box left">
                     <a href="#">
                         <div class="half-img">
-                            <img src="http://localhost:3001/index/main_section01_img01.jpg" />
+                            <img th:src="@{/files/common/main_section01.jpg}" />
                         </div>
                         <div class="half-content">
                             <h3>ESG CAMPAIGN</h3>
                             <a class="buy-btn" href="#">MORE
-                                <img src="http://localhost:3001/index/arrow_icon.svg" />
+                                <img th:src="@{/files/common/arrow_icon.svg}" />
                             </a>
                         </div>
                     </a>
@@ -55,12 +70,12 @@
                 <div class="half-img-box right">
                     <a href="#">
                         <div class="half-img">
-                            <img src="http://localhost:3001/index/main_section01_img02_240822.jpg" />
+                            <img th:src="@{/files/common/main_section02.jpg}" />
                         </div>
                         <div class="half-content">
                             <h3>HOME AMENITY MEMBERSHIP</h3>
                             <a class="buy-btn" href="#">MORE
-                                <img src="http://localhost:3001/index/arrow_icon.svg" />
+                                <img th:src="@{/files/common/arrow_icon.svg}" />
                             </a>
                         </div>
                     </a>

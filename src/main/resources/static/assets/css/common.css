@@ -45,7 +45,7 @@ body {
     height: 100vh;
     position: fixed;
     display: none;
-    z-index: 100000000;
+    z-index: 9999999999;
     overflow: hidden;
 
     .popup-box {
@@ -55,7 +55,7 @@ body {
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        z-index: 999999999;
+        z-index: 9999999999;
         display: flex;
         
         img {
@@ -68,7 +68,7 @@ body {
             left: 17px;
             top: 20px;
             font-size: 14px;
-            color: #f3f0eb;
+            color: var(--font-color-gray);
 
             input {
                 margin-right: 8px;
