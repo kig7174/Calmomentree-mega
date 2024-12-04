@@ -60,10 +60,14 @@
                                 </div>
                                 <div class="price-content">
                                     <div>
-                                        <span class="discount" th:text="${product.isDiscount == 'Y'} ? ${product.discount} + '%' : null">30%</span><span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}">40,000원</span>
+                                        <span class="discount" th:text="${product.isDiscount == 'Y'} ? ${product.discount} + '%' : null">30%</span>
+                                        <span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}"
+                                            th:style="${product.isDiscount == 'Y' ? 'text-decoration: line-through;' : ''}">40,000원</span>
                                     </div>
                                     <div>
-                                        <span class="normal-price" th:if="${product.isDiscount == 'Y'}">일반 회원가</span><span class="price" th:if="${product.isDiscount == 'Y'}" th:text="${#numbers.formatInteger(discountPrice, 3, 'COMMA') + '원'}">27,000원</span>
+                                        <span class="normal-price" th:if="${product.isDiscount == 'Y'}"></span>
+                                        <span class="price" th:if="${product.isDiscount == 'Y'}"
+                                            th:text="${#numbers.formatInteger(product.discountPrice, 3, 'COMMA') + '원'}">27,000원</span>
                                     </div>
                                 </div>
                                 <div class="option-select">
@@ -151,17 +155,17 @@
                             <div class="review-page">
                                 <ul class="pagination">
                                     <li th:if="${pagination.prevPage > 0}">
-                                        <a th:href="@{/product/detail/${product.prodId} (page=${pagination.prevPage})}">&laquo;</a>
+                                        <a th:href="@{/product/detail/{prodId} (prodId=${product.prodId}, page=${pagination.prevPage})}">&laquo;</a>
                                     </li>
                                     <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
                                     
                                     <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
                                         <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}" />
-                                        <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/product/detail/${product.prodId} (page=${i})}" />
+                                        <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/product/detail/{prodId} (prodId=${product.prodId}, page=${i})}" />
                                     </li>
                             
                                     <li th:if="${pagination.nextPage > 0}">
-                                        <a th:href="@{/product/detail/${product.prodId} (page=${pagination.nextPage})}">&raquo;</a>
+                                        <a th:href="@{/product/detail/{prodId} (prodId=${product.prodId}, page=${pagination.nextPage})}">&raquo;</a>
                                     </li>
                                     <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
                                 </ul>
@@ -358,15 +362,24 @@
         document.querySelector("#basket-btn").addEventListener("click", async (e) => {
             const form = new FormData(e.currentTarget.form);
 
-            const basketData = await axiosHelper.get("[[@{/api/basket/unique_count}]]", form);
-            console.log(basketData);
             let data = null;
 
-            if (basketData.uniqueBasket === null) {
-                data = await axiosHelper.get("[[@{/api/basket/add}]]", form);
-            } else if (basketData.uniqueBasket !== null && confirm("해당 상품이 이미 장바구니에 있습니다. 추가로 담으시겠습니까?")) {
-                form.append("basketId", basketData.uniqueBasket.basketId);
-                data = await axiosHelper.put("[[@{/api/basket/unique_edit}]]", form);
+            try {
+                const basketData = await axiosHelper.get("[[@{/api/basket/unique_count}]]", form);
+
+                if (basketData.error) {
+                    throw error;
+                }
+
+                if (basketData.uniqueBasket === null) {
+                    data = await axiosHelper.get("[[@{/api/basket/add}]]", form);
+                } else if (basketData.uniqueBasket !== null && confirm("해당 상품이 이미 장바구니에 있습니다. 추가로 담으시겠습니까?")) {
+                    form.append("basketId", basketData.uniqueBasket.basketId);
+                    data = await axiosHelper.put("[[@{/api/basket/unique_edit}]]", form);
+                }
+            } catch (error) {
+                alert("로그인 후 이용해주세요.");
+                return;
             }
 
             if (data) {

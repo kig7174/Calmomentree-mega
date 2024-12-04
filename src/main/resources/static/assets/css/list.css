@@ -65,12 +65,20 @@ body {
 
                 .list-item {
                     
-                    .list-item-img {
+                    .item-img {
                         width: auto;
                         margin: 0 auto;
 
                         img {
                             width: 100%;
+                        }
+
+                        .list-item-img {
+                            display: block;
+                        }
+    
+                        .hover-item-img {
+                            display: none;
                         }
                     }
 
@@ -108,6 +116,11 @@ body {
                             flex-direction: column;
                             text-align: right;
                             line-height: 110%;
+                            font-size: var(--font-size-medium);
+
+                            .discount {
+                                color: #fd4040;
+                            }
                         }   
                     }
                 }

@@ -49,12 +49,11 @@
                     <ul>
                         <li th:each="product : ${products}">
                             <div class="list-item">
-                                <div class="list-item-img">
-                                    <img th:src="${product.listImgUrl1}" />
-                                </div>
-                                <div class="hover-item-img displaynone" >
-                                    <img th:src="${product.listImgUrl2}" />
-                                </div>
+                                <a th:href="@{/product/detail/{prodId}(prodId=${product.prodId})}">
+                                    <div class="list-item-img">
+                                        <img th:src="${product.listImgUrl1}" />
+                                    </div>
+                                </a>
                                 <div class="list-item-content">
                                     <div class="item-content-name">
                                         <p th:text="${product.prodNameEng}">ROSEMARY RECOVERY</p>
@@ -63,8 +62,11 @@
                                         <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
                                     </div>
                                     <div class="item-price">
-                                        <span class="discount">30%</span><span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}">40,000원</span>
-                                        <span class="normal-price">일반 회원가</span><span class="price">27,000원</span>
+                                        <span class="discount" th:text="${product.isDiscount == 'Y'} ? ${product.discount} + '%' : null">30%</span>
+                                        <span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}" 
+                                            th:style="${product.isDiscount == 'Y' ? 'text-decoration: line-through;' : ''}">40,000원</span>
+                                        <span class="price" th:if="${product.isDiscount == 'Y'}"
+                                            th:text="${#numbers.formatInteger(product.discountPrice, 3, 'COMMA') + '원'}">27,000원</span>
                                     </div>
                                 </div>
                             </div>
@@ -90,8 +92,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="search-item-none" th:if="${products == null}">
-                <img src="https://via.placeholder.com/100?text=search-item-none"/>
+            <div class="search-item-none" th:if="${products == null or pagination.totalCount == 0}">
+                <h2><i class="fa-regular fa-circle-xmark"></i></h2>
                 <h3>검색결과가 없습니다.</h3>
                 <p>정확한 검색어 인지 확인하시고 다시 검색해 주세요.</p>
                 <p>

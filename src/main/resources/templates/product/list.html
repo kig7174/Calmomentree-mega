@@ -13,8 +13,8 @@
         <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
             
         <!-- body -->
-        <div class="list-body" th:unless="${products != 0}"></div>
-        <div class="list-body" th:if="${products != 0}">
+        <div class="list-body" th:unless="${products != 0 or products != null}"></div>
+        <div class="list-body" th:if="${products != 0 or products != null}">
             <div class="category-box">
                 <a th:href="@{/}">홈</a>
 
@@ -29,11 +29,13 @@
                         <li th:each="product : ${products}" th:if="${products != null}">
                             <div class="list-item">
                                 <a th:href="@{/product/detail/{prodId}(prodId=${product.prodId})}">
-                                    <div class="list-item-img">
-                                        <img th:src="${product.listImgUrl1}" />
-                                    </div>
-                                    <div class="hover-item-img displaynone" >
-                                        <img th:src="${product.listImgUrl2}" />
+                                    <div class="item-img">
+                                        <div class="list-item-img">
+                                            <img th:src="${product.listImgUrl1}" />
+                                        </div>
+                                        <div class="hover-item-img" th:if="${product.listImgUrl2 != null}">
+                                            <img th:src="${product.listImgUrl2}" />
+                                        </div>
                                     </div>
                                 </a>
                                 <div class="list-item-content">
@@ -44,8 +46,11 @@
                                         <p>지복합, 출산탈모, 로즈마리향, 모근강화</p>
                                     </div>
                                     <div class="item-price">
-                                        <span class="discount" th:text="${product.isDiscount == 'Y'} ? ${product.discount} + '%' : null">30%</span><span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}">40,000원</span>
-                                        <span class="normal-price" th:if="${product.isDiscount == 'Y'}">일반 회원가</span><span class="price" th:if="${product.isDiscount == 'Y'}" th:text="${#numbers.formatInteger(product.discountPrice, 3, 'COMMA') + '원'}">27,000원</span>
+                                        <span class="discount" th:text="${product.isDiscount == 'Y'} ? ${product.discount} + '%' : null">30%</span>
+                                        <span th:text="${#numbers.formatInteger(product.price, 3, 'COMMA') + '원'}" 
+                                            th:style="${product.isDiscount == 'Y' ? 'text-decoration: line-through;' : ''}">40,000원</span>
+                                        <span class="price" th:if="${product.isDiscount == 'Y'}"
+                                            th:text="${#numbers.formatInteger(product.discountPrice, 3, 'COMMA') + '원'}">27,000원</span>
                                     </div>
                                 </div>
                             </div>
