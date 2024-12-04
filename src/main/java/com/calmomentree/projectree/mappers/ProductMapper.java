@@ -209,7 +209,13 @@ public interface ProductMapper {
                     "WHERE prod_id = prod.prod_id AND img_type = 'list' " +
                     "ORDER BY prod_img_id " +
                     "LIMIT 1, 1 " +
-                ") AS list_img_url2 " +
+                ") AS list_img_url2, " +
+
+                "( " +
+                "SELECT COUNT(*) " +
+                "FROM review_boards " +
+                "WHERE prod_id = prod.prod_id " +
+                ") AS review_count " +
 
             "FROM products AS prod " +
             "INNER JOIN categorys AS category " +
@@ -221,7 +227,7 @@ public interface ProductMapper {
             "<if test='orderBy == \"priceasc\"'>ORDER BY price ASC, prod_id ASC</if> " +
             "<if test='orderBy == \"pricedesc\"'>ORDER BY price DESC, prod_id ASC</if> " +
             "<if test='orderBy == \"manu_name\"'>ORDER BY manufacturer ASC, prod_id ASC</if> " +
-            "<if test='orderBy == \"review\"'>ORDER BY review ASC, prod_id ASC</if> " +
+            "<if test='orderBy == \"review\"'>ORDER BY review_count ASC, prod_id ASC</if> " +
             "<if test='listCount > 0'>LIMIT #{offset}, #{listCount}</if> " +
             "</script>")
     @ResultMap("productMap")
