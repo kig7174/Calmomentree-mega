@@ -1,5 +1,6 @@
 package com.calmomentree.projectree.controllers;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.models.Order;
+import com.calmomentree.projectree.models.OrderItem;
 import com.calmomentree.projectree.services.BasketService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -77,24 +79,32 @@ public class OrderController {
     @PostMapping("/order/order_form")
     public String orderForm(Model model,
             @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
-            @RequestParam("prodId") String prodIdTmp,
-            @RequestParam("quantity") String quantityTmp,
-            @RequestParam("orderPrice") String orderPriceTmp,
-            @RequestParam("prodNameKor") String prodNameKor,
-            @RequestParam("imgUrl") String imgUrl) {
+            @RequestParam("prodId") List<String> prodIdTmp,
+            @RequestParam("quantity") List<String> quantityTmp,
+            @RequestParam("orderPrice") List<String> orderPriceTmp,
+            @RequestParam("prodNameKor") List<String> prodNameKor,
+            @RequestParam("imgUrl") List<String> imgUrl) {
 
-        int prodId = Integer.parseInt(prodIdTmp);
-        int quantity = Integer.parseInt(quantityTmp);
-        int orderPrice = Integer.parseInt(orderPriceTmp);
+        List<OrderItem> list = new ArrayList<>();
 
-        Order output = new Order();
-        output.setProdId(prodId);
-        output.setQuantity(quantity);
-        output.setOrderPrice(orderPrice);
-        output.setProdNameKor(prodNameKor);
-        output.setImgUrl(imgUrl);
+        for (int i=0; i<prodIdTmp.size(); i++) {
+            int prodId = Integer.parseInt(prodIdTmp.get(i));
+            int quantity = Integer.parseInt(quantityTmp.get(i));
+            int orderPrice = Integer.parseInt(orderPriceTmp.get(i));
+            String name = prodNameKor.get(i);
+            String url = imgUrl.get(i);
+    
+            OrderItem output = new OrderItem();
+            output.setProdId(prodId);
+            output.setOrderQuantity(quantity);
+            output.setOrderPrice(orderPrice);
+            output.setProdName(name);
+            output.setImgUrl(url);
+            
+            list.add(output);
+        }
 
-        model.addAttribute("output", output);
+        model.addAttribute("list", list);
 
         return "order/order_form";
     }

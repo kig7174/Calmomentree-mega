@@ -7,6 +7,7 @@ import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.models.Order;
+import com.calmomentree.projectree.models.OrderItem;
 import com.calmomentree.projectree.services.BasketService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +36,9 @@ public class OrderRestController {
     @Autowired
     private BasketService basketService;
 
+    /**
+     * 장바구니 갯수 표시
+     */
     @GetMapping("/api/basket/count")
     public Map<String, Object> basketCount(
             @RequestParam("memberId") int memberId) {
@@ -190,30 +196,40 @@ public class OrderRestController {
         return restHelper.sendJson();
     }
 
-    // @PostMapping("/api/order/order_form")
-    // public Map<String, Object> orderForm(
-    //         @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
-    //         @RequestParam("prodId") String prodIdTmp,
-    //         @RequestParam("quantity") String quantityTmp,
-    //         @RequestParam("orderPrice") String orderPriceTmp,
-    //         @RequestParam("prodNameKor") String prodNameKor,
-    //         @RequestParam("imgUrl") String imgUrl) {
+    @PostMapping("/api/order/order_form")
+    public Map<String, Object> orderForm(
+            @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
+            @RequestParam("prodId") List<String> prodIdTmp,
+            @RequestParam("quantity") List<String> quantityTmp,
+            @RequestParam("orderPrice") List<String> orderPriceTmp,
+            @RequestParam("prodNameKor") List<String> prodNameKor,
+            @RequestParam("imgUrl") List<String> imgUrl) {
 
-    //     int prodId = Integer.parseInt(prodIdTmp);
-    //     int quantity = Integer.parseInt(quantityTmp);
-    //     int orderPrice = Integer.parseInt(orderPriceTmp);
+        List<OrderItem> list = new ArrayList<>();
 
-    //     Order output = new Order();
-    //     output.setProdId(prodId);
-    //     output.setQuantity(quantity);
-    //     output.setOrderPrice(orderPrice);
-    //     output.setProdNameKor(prodNameKor);
-    //     output.setImgUrl(imgUrl);
+        for (int i=0; i<prodIdTmp.size(); i++) {
+            int prodId = Integer.parseInt(prodIdTmp.get(i));
+            int quantity = Integer.parseInt(quantityTmp.get(i));
+            int orderPrice = Integer.parseInt(orderPriceTmp.get(i));
+            String name = prodNameKor.get(i);
+            String url = imgUrl.get(i);
+    
+            OrderItem output = new OrderItem();
+            output.setProdId(prodId);
+            output.setOrderQuantity(quantity);
+            output.setOrderPrice(orderPrice);
+            output.setProdName(name);
+            output.setImgUrl(url);
+            
+            list.add(output);
+        }
+        
 
-    //     Map<String, Object> data = new LinkedHashMap<String, Object>();
-    //     data.put("output", output);
+        
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+        data.put("output", list);
 
-    //     return restHelper.sendJson(data);
-    // }
+        return restHelper.sendJson(data);
+    }
 
 }
