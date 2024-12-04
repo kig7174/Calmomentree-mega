@@ -13,6 +13,8 @@ public class OrderItem {
     private int prodId;         // 상품 번호
     private int orderId;        // 주문 일련번호
 
+    private String imgUrl;
+
     private String regDate;
     private String editDate;
 
