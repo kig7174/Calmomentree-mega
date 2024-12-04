@@ -55,6 +55,22 @@ body {
             }
         }
 
+        .search-item-none {
+            margin: 30px auto;
+            line-height: var(--font-size-large);
+            text-align: center;
+            font-size: var(--font-size-medium);
+            display: flex;
+            flex-direction: column;
+            justify-items: center;
+
+            h2 {
+                font-size: 100px;
+                margin: 10px;
+                font-weight: 100;
+            }
+        }
+
         .search-field {
             border-bottom: 1px solid #000;
             margin-bottom: 30px;
@@ -80,10 +96,17 @@ body {
 
             .img {
                 position: absolute;
-                width: 25px;
-                top: 50%;
+                width: 35px;
+                top: 49%;
                 right: 0;
+                border: none;
+                background-color: var(--background-color);
                 transform: translate(-20%, -50%);
+                cursor: pointer;
+
+                img {
+                    width: 70%;
+                }
             }
 
             .sort-box {
@@ -172,6 +195,11 @@ body {
                                 flex-direction: column;
                                 text-align: right;
                                 line-height: 110%;
+                                font-size: var(--font-size-medium);
+
+                                .discount {
+                                    color: #fd4040;
+                                }
                             }   
                         }
                     }
