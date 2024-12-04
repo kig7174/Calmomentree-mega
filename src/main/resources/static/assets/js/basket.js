@@ -111,11 +111,11 @@ document.querySelectorAll(".cancel").forEach((v, i) => {
 // document.querySelectorAll(".btnBuy").forEach((v, i) => {
 //   v.addEventListener("submit", async (e) => {
 //     e.preventDefault();
-    
+
 //     const parent = e.currentTarget.closest(".listTable");
 //     const check = parent.querySelector(".prodCheck");
 //     check.checked = true;
-    
+
 //     const formData = new FormData(check.form);
 //     console.log(formData);
 //     const data = await axiosHelper.post(orderFormAdd, formData);
@@ -132,10 +132,24 @@ document.querySelector("#allOrder").addEventListener("click", (e) => {
   });
 });
 
-// 선택상품주문 버튼 클릭 (선택된 상품이 있는지 여부만 확인함. 주문페이지로 연결해야됨)
-document.querySelector("#selectOrder").addEventListener("click", (e) => {
-  const checkedCnt = document.querySelectorAll(".prodCheck:checked").length;
-  if (checkedCnt == 0) {
-    alert("선택된 상품이 없습니다.");
-  }
-});
+// // 선택상품주문 버튼 클릭 (선택된 상품이 있는지 여부만 확인함. 주문페이지로 연결해야됨)
+// document.querySelector("#selectOrder").addEventListener("click", (e) => {
+//   const formdata = new FormData();
+
+//   // 체크된것 확인
+//   const checkedCnt = document.querySelectorAll(".prodCheck:checked");
+//   if (checkedCnt.length == 0) {
+//     alert("선택된 상품이 없습니다.");
+//     return;
+//   } else {
+   
+//       checkedCnt.forEach(async (v, i) => {
+//         // 체크된것 form태그
+//         const parent = v.closest(".orderForm");
+//         formdata.append = parent;
+//         console.log(formdata);
+//         await axiosHelper.post(`[[@{/order/order_form}]]`,formdata);
+//       });
+    
+//   }
+// });
