@@ -16,4 +16,6 @@ public interface OrderService {
     public List<Order> getList(Order params) throws Exception;
 
     public int getCount(Order params) throws Exception;
+
+    public int overCount(Order params) throws Exception;
 }

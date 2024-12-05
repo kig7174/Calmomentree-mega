@@ -116,4 +116,22 @@ public class OrderServiceImpl implements OrderService {
 
         return output;
     }
+
+    /**
+     * 주문서 중복 확인용
+     */
+    @Override
+    public int overCount(Order input) throws Exception {
+        int output = 0;
+
+        try {
+            output = orderMapper.overCount(input);
+
+        } catch (Exception e) {
+            log.error("중복여부 확인에 실패했습니다.", e);
+            throw e;
+        }
+
+        return output;
+    }
 }
