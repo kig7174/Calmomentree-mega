@@ -1,4 +1,6 @@
-// 장바구니 max-height 조절
+const formData = new FormData();
+
+// ==================장바구니 max-height 조절 ========================
 document.querySelector(".prodBox-title").addEventListener("click", (e) => {
   const current = e.currentTarget;
   const parent = current.closest(".prodBox");
@@ -16,8 +18,7 @@ document.querySelector(".prodBox-title").addEventListener("click", (e) => {
   }
 });
 
-// + 버튼 클릭시 수량 증가
-/** ------ 가격 조절 해야됨 ----- */
+// ============ '+' 버튼 클릭시 수량 증가 ====================
 document.querySelectorAll(".plus").forEach((v, i) => {
   v.addEventListener("click", (e) => {
     e.preventDefault();
@@ -34,8 +35,7 @@ document.querySelectorAll(".plus").forEach((v, i) => {
   });
 });
 
-//  - 버튼 클릭시 수량 감소
-/** ------ 가격 조절 해야됨 ----- */
+// =============== '-' 버튼 클릭시 수량 감소 =======================
 document.querySelectorAll(".minus").forEach((v, i) => {
   v.addEventListener("click", (e) => {
     e.preventDefault();
@@ -61,40 +61,48 @@ document.querySelector("#checkAll").addEventListener("click", (e) => {
   });
 });
 
-// 선택삭제 버튼 클릭
-/** --------- 삭제기능 구현 해야됨 ---------- */
-document.querySelector("#checkDelete").addEventListener("click", (e) => {
-  const checkedCnt = document.querySelectorAll(".prodCheck:checked");
+// =================== 선택삭제 버튼 클릭 ========================= 
+document.querySelector("#checkDelete").addEventListener("click", async (e) => {
+  const checkedChks = document.querySelectorAll(".prodCheck:checked");
 
-  if (checkedCnt.length == 0) {
+  if (checkedChks.length == 0) {
     alert("선택된 상품이 없습니다.");
     return;
   } else {
+    
     if (confirm("선택하신 상품을 삭제하시겠습니까?")) {
-      checkedCnt.forEach(async (v, i) => {
-        const form = v.form;
-        const formData = form;
-        let data = await axiosHelper.delete(basketDeleteLink, formData);
-
-        // console.log("1" + data);
-        if (data) {
-          // console.log("2" + data);
-          alert("삭제되었습니다.");
-          window.location.reload();
-        }
+      let data = null;
+      
+      checkedChks.forEach((v, i) => {
+        const parent = v.closest(".listTable");
+        // console.log("삭제할상품박스: " + parent);
+        const basketId = parent.querySelector("#basketId").value;
+        // console.log("삭제할 장바구니 번호: " + basketId);
+        
+        let basketIdNum = parseInt(basketId);
+        formData.append("basketIdTmp", basketIdNum);
+        
       });
+      data = await axiosHelper.delete(basketListDeleteLink, formData);
+    
+      if (data) {
+        alert("삭제되었습니다.");
+        window.location.reload();
+      }
     }
-    // console.log("3" + data);
   }
 });
 
-// 개별 상품 삭제 버튼
+// ================ 개별 상품 삭제 버튼 ====================
 document.querySelectorAll(".cancel").forEach((v, i) => {
   v.addEventListener("click", async (e) => {
     e.preventDefault();
 
-    const form = v.form;
-    const formData = new FormData(form);
+   const current = e.currentTarget.closest(".listTable");
+    const basketId = current.querySelector("#basketId").value;
+    
+    formData.append('basketIdTmp',basketId);
+
     if (confirm("선택하신 상품을 삭제하시겠습니까?")) {
       const data = await axiosHelper.delete(basketDeleteLink, formData);
 
@@ -106,31 +114,44 @@ document.querySelectorAll(".cancel").forEach((v, i) => {
   });
 });
 
-// 주문하기 버튼 클릭
-/** ---------- 해당 제품 정보 주문페이지로 넘겨줘야 됨. (일단 선택만 되도록) --------- */
-// document.querySelectorAll(".btnBuy").forEach((v, i) => {
-//   v.addEventListener("submit", async (e) => {
-//     e.preventDefault();
+// ================ 주문하기 버튼 클릭 ===========================
+document.querySelectorAll("#btnBuy").forEach((v, i) => {
+  v.addEventListener("click", async (e) => {
+    e.preventDefault();
 
-//     const parent = e.currentTarget.closest(".listTable");
-//     const check = parent.querySelector(".prodCheck");
-//     check.checked = true;
+    const parent = e.currentTarget.closest(".listTable");
+    const check = parent.querySelector(".prodCheck");
+    check.checked = true;
 
-//     const formData = new FormData(check.form);
-//     console.log(formData);
-//     const data = await axiosHelper.post(orderFormAdd, formData);
-//     if(data) {
-//       window.location = orderForm;
-//     }
-//   });
-// });
+    // prodId quantity orderPrice prodNameKor imgUrl
+    const prodId = parent.querySelector("#prodId").value;
+    const quantity = parent.querySelector("#qty").value;
+    const orderPrice = parent.querySelector("#orderPrice").value;
+    const prodNameKor = parent.querySelector("#prodNameKor").value;
+    const imgUrl = parent.querySelector("#imgUrl").value;
 
-// 전체상품주문 버튼 클릭 (일단은 전체 선택만 되도록 설정함. 주문페이지로 연결해야됨)
-document.querySelector("#allOrder").addEventListener("click", (e) => {
-  document.querySelectorAll(".prodCheck").forEach((v, i) => {
-    v.checked = true;
+    formData.append("prodIdTmp",prodId);  // int
+    formData.append("quantityTmp",quantity);  // int
+    formData.append("orderPriceTmp",orderPrice);   // int
+    formData.append("prodNameKor",prodNameKor);   
+    formData.append("imgUrl",imgUrl);
+
+    console.log(prodId);
+    console.log(quantity);
+    console.log(orderPrice);
+    console.log(prodNameKor);
+    console.log(imgUrl);
+    console.log(formData);
+
+    const data = await axiosHelper.post(orderFormAdd, formData);
+    console.log(data);
+    // if(data) {                         
+    //   window.location = orderList;
+    // }
   });
 });
+
+
 
 // // 선택상품주문 버튼 클릭 (선택된 상품이 있는지 여부만 확인함. 주문페이지로 연결해야됨)
 // document.querySelector("#selectOrder").addEventListener("click", (e) => {

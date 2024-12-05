@@ -191,7 +191,7 @@
         </div>
 
         <div class="info-box selected">
-          <div class="prod-box" th:each="order : ${output}">
+          <div class="prod-box" th:each="order : ${orders}">
             <div class="thumbnail-box">
               <div class="thumbnail-img">
                 <img th:src="${order.imgUrl}" alt="" />
@@ -199,6 +199,7 @@
             </div>
 
             <div class="description">
+              <input type="hidden" th:value="${order.prodId}">
               <span class="prod-name" th:text="${order.prodNameKor}">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
               <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
               <span>수량:<span class="qty" th:text="${order.quantity}">1</span>개</span>
@@ -208,24 +209,7 @@
               <button class="cancel-btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
           </div>
-          
-          <!-- <div class="prod-box">
-            <div class="thumbnail-box">
-              <div class="thumbnail-img">
-                <img src="http://placehold.co/83" alt="" />
-              </div>
-            </div>
-
-            <div class="description">
-              <span class="prod-name">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
-              <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
-              <span>수량:<span class="qty">1</span>개</span>
-              <span><span class="price">28,000</span>원</span>
-            </div>
-            <div class="cancel-btn-box">
-              <button class="cancel-btn"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-          </div> -->
+         
           <div class="price-box">
             <span>배송비</span>
             <span><span class="price">0(무료)</span>원</span>
