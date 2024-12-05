@@ -227,7 +227,7 @@ public interface ProductMapper {
             "<if test='orderBy == \"priceasc\"'>ORDER BY price ASC, prod_id ASC</if> " +
             "<if test='orderBy == \"pricedesc\"'>ORDER BY price DESC, prod_id ASC</if> " +
             "<if test='orderBy == \"manu_name\"'>ORDER BY manufacturer ASC, prod_id ASC</if> " +
-            "<if test='orderBy == \"review\"'>ORDER BY review_count ASC, prod_id ASC</if> " +
+            "<if test='orderBy == \"review\"'>ORDER BY review_count DESC, prod_id ASC</if> " +
             "<if test='listCount > 0'>LIMIT #{offset}, #{listCount}</if> " +
             "</script>")
     @ResultMap("productMap")

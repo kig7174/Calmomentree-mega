@@ -62,7 +62,7 @@ public class ProductController {
         Pagination pagination = null;
 
         Product input = new Product();
-        input.setProdNameKor(keyword);
+        input.setProdNameKor(keyword.trim());
         
         List<Product> products = null;
         
