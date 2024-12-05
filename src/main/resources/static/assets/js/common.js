@@ -94,14 +94,17 @@ window.addEventListener("click", (e) => {
 });
 
 // 로그아웃
-if (document.querySelector("#logout")) {
-    document.querySelector("#logout").addEventListener("click", async (e) => {
-        e.preventDefault();
-
-        const data = await axiosHelper.get(e.currentTarget.getAttribute('href'));
-
-        if (data) {
-            window.location = "/";
-        }
+if (document.querySelector(".logout-btn")) {
+    document.querySelectorAll(".logout-btn").forEach((v, i) => {
+        v.addEventListener("click", async (e) => {
+            e.preventDefault();
+    
+            const data = await axiosHelper.get(e.currentTarget.getAttribute('href'));
+    
+            if (data) {
+                alert("로그아웃되었습니다.");
+                window.location = "/";
+            }
+        });
     });
 }

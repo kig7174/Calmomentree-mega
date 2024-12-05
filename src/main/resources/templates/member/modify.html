@@ -5,9 +5,11 @@
     <link rel="stylesheet" th:href="@{/assets/css/modify.css}" />
 </head>
 <body>
+    <div th:replace="~{fragments/common :: calm-required-login}"></div>
+
     <header th:replace="~{/fragments/common :: calm-header}"></header>
 
-    <div class="container">
+    <div class="container" >
         <div th:replace="~{/fragments/common :: calm-search}"></div>
         <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
         <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
@@ -16,7 +18,7 @@
             <h2>회원 정보 수정</h2>
             <h3>기본정보 <span><span class="required-option">*</span> 필수입력사항</span></h3>
         </div>
-        <form id="edit-form" class="edit-form">
+        <form id="edit-form" class="edit-form" th:if="${session.memberInfo != null}">
             <table border="1">
                 <colgroup>
                     <col style="width:190px" />
@@ -161,6 +163,7 @@
         document.querySelector("#pw_confirm").addEventListener("blur", e => {
             e.preventDefault();
             const pwMsg = document.querySelector(".pw-confirm-msg");
+
             try {
                 regexHelper.compareTo("#user_pw", "#pw_confirm", "비밀번호가 일치하지 않습니다.");
             } catch (error) {
