@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="/src/main/resources/static/assets/css/common.css" />
 </head>
 <body>
+    <th:block th:fragment="calm-required-login">
+        <script th:if="${session.memberInfo == null}">       
+            alert("로그인 후 이용해주세요");
+            window.location = "[[@{/member/login}]]";
+        </script>
+    </th:block>
+
     <header th:fragment="calm-header">
         <div class="banner">
             <div class="top">
@@ -74,7 +81,7 @@
                                 </ul>
                             </li>
 
-                            <li class="category-item"><a>Membership</a></li>
+                            <li class="category-item"><a style="text-decoration: line-through;">Membership</a></li>
                             <li class="category-item"><a>About</a>
                                 <ul class="sub-category">
                                     <li><a>브랜드스토리</a></li>
@@ -103,7 +110,7 @@
                     </div>
 
                     <div class="logout other-menu-list" th:unless="${session.memberInfo == null}">
-                        <a id="logout" th:href="@{/member/logout}">로그아웃</a>
+                        <a class="logout-btn" th:href="@{/member/logout}">로그아웃</a>
                         <a th:href="@{/order/basket}">카트              
                            <span class="cart" id="basket-count"></span>
 
