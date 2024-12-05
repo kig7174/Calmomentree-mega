@@ -9,6 +9,7 @@ import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.models.Order;
 import com.calmomentree.projectree.models.OrderItem;
 import com.calmomentree.projectree.services.BasketService;
+import com.calmomentree.projectree.services.OrderService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -35,6 +37,9 @@ public class OrderRestController {
 
     @Autowired
     private BasketService basketService;
+
+    @Autowired
+    private OrderService orderService;
 
     /**
      * 장바구니 갯수 표시
@@ -115,9 +120,12 @@ public class OrderRestController {
      */
     @PutMapping("/api/basket/edit")
     public Map<String, Object> basketEdit(
-            @RequestParam("quantity") int quantity,
-            @RequestParam("basketId") int basketId,
+            @RequestParam("basketIdTmp") String basketIdTmp,
+            @RequestParam("quantityTmp") String quantityTmp,
             @SessionAttribute("memberInfo") Member memberInfo) {
+
+        int basketId = Integer.parseInt(basketIdTmp);
+        int quantity = Integer.parseInt(quantityTmp);
 
         Basket input = new Basket();
         input.setBasketId(basketId);
@@ -147,8 +155,10 @@ public class OrderRestController {
      */
     @DeleteMapping("/api/basket/delete")
     public Map<String, Object> basketDelete(
-            @RequestParam("basketId") int basketId,
+            @RequestParam("basketIdTmp") String basketIdTmp,
             @SessionAttribute("memberInfo") Member memberInfo) {
+
+        int basketId = Integer.parseInt(basketIdTmp);
 
         Basket input = new Basket();
         input.setBasketId(basketId);
@@ -158,6 +168,31 @@ public class OrderRestController {
             basketService.deleteItem(input);
         } catch (Exception e) {
             return restHelper.serverError(e);
+        }
+
+        return restHelper.sendJson();
+    }
+
+    /**
+     * 장바구니 리스트 삭제
+     */
+    @DeleteMapping("/api/basket/delete_list")
+    public Map<String, Object> basketListDelete(
+            @RequestParam("basketIdTmp") List<Integer> basketIdTmp,
+            @SessionAttribute("memberInfo") Member memberInfo) {
+
+        List<Basket> output = new ArrayList<>();
+        for (int i = 0; i < basketIdTmp.size(); i++) {
+            Basket input = new Basket();
+            input.setBasketId(basketIdTmp.get(i));
+            input.setMemberId(memberInfo.getMemberId());
+
+            output.add(input);
+            try {
+                basketService.deleteItem(input);
+            } catch (Exception e) {
+                return restHelper.serverError(e);
+            }
         }
 
         return restHelper.sendJson();
@@ -199,37 +234,87 @@ public class OrderRestController {
     @PostMapping("/api/order/order_form")
     public Map<String, Object> orderForm(
             @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
-            @RequestParam("prodId") List<String> prodIdTmp,
-            @RequestParam("quantity") List<String> quantityTmp,
-            @RequestParam("orderPrice") List<String> orderPriceTmp,
-            @RequestParam("prodNameKor") List<String> prodNameKor,
-            @RequestParam("imgUrl") List<String> imgUrl) {
+            @RequestParam("prodIdTmp") String prodIdTmp,
+            @RequestParam("quantityTmp") String quantityTmp,
+            @RequestParam("orderPriceTmp") String orderPriceTmp,
+            @RequestParam("prodNameKor") String prodNameKor,
+            @RequestParam("imgUrl") String imgUrl) {
 
-        List<OrderItem> list = new ArrayList<>();
+        int prodId = Integer.parseInt(prodIdTmp);
+        int quantity = Integer.parseInt(quantityTmp);
+        int orderPrice = Integer.parseInt(orderPriceTmp);
 
-        for (int i=0; i<prodIdTmp.size(); i++) {
-            int prodId = Integer.parseInt(prodIdTmp.get(i));
-            int quantity = Integer.parseInt(quantityTmp.get(i));
-            int orderPrice = Integer.parseInt(orderPriceTmp.get(i));
-            String name = prodNameKor.get(i);
-            String url = imgUrl.get(i);
-    
-            OrderItem output = new OrderItem();
-            output.setProdId(prodId);
-            output.setOrderQuantity(quantity);
-            output.setOrderPrice(orderPrice);
-            output.setProdName(name);
-            output.setImgUrl(url);
-            
-            list.add(output);
-        }
-        
+        // // 주문서 중복 여부 확인
+        // Order check = new Order();
+        // check.setMemberId(memberInfo.getMemberId());
 
-        
+        // int num = 0;
+        // try {
+        // num = orderService.overCount(check);
+
+        // } catch (Exception e) {
+        // return restHelper.serverError(e);
+        // }
+
+        // Order input = new Order();
+        // // input.setOrderNo();
+        // input.set
+
+        // Order output = null;
+        // // 중복된 주문서가 없다면?
+        // if(num == 0) {
+
+        // output = orderService.addItem(output);
+        // }
+
+        OrderItem output = new OrderItem();
+        output.setProdId(prodId);
+        output.setOrderQuantity(quantity);
+        output.setOrderPrice(orderPrice);
+        output.setProdName(prodNameKor);
+        output.setImgUrl(imgUrl);
+
         Map<String, Object> data = new LinkedHashMap<String, Object>();
-        data.put("output", list);
+        data.put("orders", output);
 
         return restHelper.sendJson(data);
     }
+
+
+    // @PostMapping("/api/order/order_form")
+    // public Map<String, Object> orderForm(
+    //         @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
+    //         @RequestParam("prodId") List<String> prodIdTmp,
+    //         @RequestParam("quantity") List<String> quantityTmp,
+    //         @RequestParam("orderPrice") List<String> orderPriceTmp,
+    //         @RequestParam("prodNameKor") List<String> prodNameKor,
+    //         @RequestParam("imgUrl") List<String> imgUrl) {
+
+    //     List<OrderItem> list = new ArrayList<>();
+
+    //     for (int i = 0; i < prodIdTmp.size(); i++) {
+    //         int prodId = Integer.parseInt(prodIdTmp.get(i));
+    //         int quantity = Integer.parseInt(quantityTmp.get(i));
+    //         int orderPrice = Integer.parseInt(orderPriceTmp.get(i));
+    //         String name = prodNameKor.get(i);
+    //         String url = imgUrl.get(i);
+
+    //         OrderItem output = new OrderItem();
+    //         output.setProdId(prodId);
+    //         output.setOrderQuantity(quantity);
+    //         output.setOrderPrice(orderPrice);
+    //         output.setProdName(name);
+    //         output.setImgUrl(url);
+
+    //         list.add(output);
+    //     }
+        
+
+        
+    //     Map<String, Object> data = new LinkedHashMap<String, Object>();
+    //     data.put("output", list);
+
+    //     return restHelper.sendJson(data);
+    // }
 
 }
