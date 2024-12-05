@@ -92,4 +92,13 @@ public interface OrderMapper {
 
     @Select("...")
     public int selectCount(Order input);
+
+    /**
+     * 주문서 중복 확인용 카운트
+     */
+    @Select("SELECT " +
+            "count(*) " +
+            "FROM orders " +
+            "WHERE member_id = #{memberId} ")
+    public int overCount(Order input);
 }
