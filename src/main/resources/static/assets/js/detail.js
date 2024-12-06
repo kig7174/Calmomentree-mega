@@ -33,6 +33,11 @@ document.querySelectorAll('.tab-button').forEach((v, i) => {
 
         document.querySelectorAll('.tab-page').forEach((v2, i2) => {
             v2.classList.remove('active');
+
+            const searchBg = document.querySelector(".search-background");
+            const searchHeight = document.body.offsetHeight;
+
+            searchBg.style.height = searchHeight + "px";
         });
 
         document.querySelector(href).classList.add('active');
