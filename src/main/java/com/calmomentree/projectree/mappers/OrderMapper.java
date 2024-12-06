@@ -20,15 +20,14 @@ public interface OrderMapper {
                 "order_no, order_state, order_date, member_name, " +
                 "member_email, member_postcode, member_addr1, member_addr2, member_tel, " +
                 "receiver_name, receiver_postcode, receiver_addr1, receiver_addr2, receiver_tel, " +
-                "total_price, req, member_id, reg_date, edit_date " +
+                "total_price, req, member_id " +
                 " ) VALUES ( " +
                 // 202411160001
-                "#{orderNo}, " +
-                "'배송중', DATE_FORMAT(NOW(), '%Y-%m-%d') AS order_date, #{memberName}, " +
+                "'123456789' , " +
+                " '배송중' , NOW(), #{memberName}, " +
                 "#{memberEmail}, #{memberPostcode}, #{memberAddr1}, #{memberAddr2}, #{memberTel}, " +
                 "#{receiverName}, #{receiverPostcode}, #{receiverAddr1}, #{receiverAddr2}, #{receiverTel}, " +
-                "#{totalPrice}, #{req}, #{memberId}, NOW(), NOW() ")
-                
+                "#{totalPrice}, #{req}, #{memberId} ) ")
     @Options(useGeneratedKeys = true, keyProperty = "orderId", keyColumn = "order_id")
     public int insert(Order input);
 
@@ -47,8 +46,8 @@ public interface OrderMapper {
                 "receiver_addr2 = #{receiverAddr2}, " +
                 "receiver_tel = #{receiverTel}, " +
                 "total_price = #{totalPrice}, " +
-                "req = #{req}, " +
-                "edit_date = NOW() " +
+                "req = #{req} " +
+                
                 "WHERE order_id = #{orderId} AND member_id = #{memberId} ")
     public int update(Order input);
 
@@ -59,7 +58,7 @@ public interface OrderMapper {
             "order_id, order_no, order_state, order_date, member_name, " +
             "member_email, member_postcode, member_addr1, member_addr2, member_tel, " +
             "receiver_name, receiver_postcode, receiver_addr1, receiver_addr2, receiver_tel, " +
-            "total_price, req, member_id, reg_date, edit_date " +
+            "total_price, req, member_id " +
             "FROM orders " +
             "WHERE order_id = #{orderId} AND member_id = #{memberId} ")
     @Results(id="resultMap", value={
@@ -80,9 +79,7 @@ public interface OrderMapper {
         @Result(property="receiverTel", column="receiver_tel"),
         @Result(property="totalPrice", column="total_price"),
         @Result(property="req", column="req"),
-        @Result(property="memberId", column="member_id"),
-        @Result(property="regDate", column="reg_date"),
-        @Result(property="editDate", column="edit_date")
+        @Result(property="memberId", column="member_id")
     })
     public Order selectItem(Order input);
 
