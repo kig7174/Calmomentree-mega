@@ -26,9 +26,10 @@
 
       <!-- 장바구니에 상품이 있을 경우 -->
       <div th:unless="${orderBasket.size() == 0 }">
-        <div class="cartBox">
-          <form id="editUp" method="post" th:action="@{/order/order_form/add}" class="orderForm">
-            <div class="prodBox">
+        <div class="cartBox">       
+                      
+          <form id="editUp" method="post" th:action="@{/order/order_form/add}"  class="orderForm">
+            <div class="prodBox">        
               <div class="prodBox-title">장바구니 상품<button type="button" id="agree-content-btn"></button></div>
 
               <div class="prodBox-info active">
@@ -40,20 +41,20 @@
                   <li class="listTable" th:each="order : ${orderBasket}">
                     <input type="checkbox" class="prodCheck" />
 
-                    <input type="hidden" id="basketId" name="basketIdTmp" th:value="${order.basketId}" />
-                    <input type="hidden" id="memberId" name="memberIdTmp" th:value="${order.memberId}" />
+                    <input type="hidden" id="basketId" name="basketId" th:value="${order.basketId}" />
+                    <input type="hidden" id="memberId" name="memberId" th:value="${order.memberId}" />
                     <input type="hidden" id="imgUrl" name="imgUrl" th:value="${order.imgUrl}" />
-                    <input type="hidden" id="prodId" name="prodIdTmp" th:value="${order.prodId}" />
+                    <input type="hidden" id="prodId" name="prodId" th:value="${order.prodId}" />
                     <input type="hidden" id="prodNameKor" name="prodNameKor" th:value="${order.prodNameKor}" />
-                    <input type="hidden" id="orderPrice" name="orderPriceTmp" th:value="${order.price * order.quantity}" />
+                    <input type="hidden" id="orderPrice" name="orderPrice" th:value="${order.price * order.quantity}" />
                     
                     <!-- 상품 이미지 -->
                     <div class="thumbBox">
-                      <a href=""><img th:src="${order.imgUrl}" alt="" /></a>
+                      <a th:href="@{/product/detail/{prodId}(prodId=${order.prodId})}"><img th:src="${order.imgUrl}" alt="" /></a>
                     </div>
                     <!-- 상품 정보 -->
                     <div class="prodInfo">
-                      <span class="info"><a href="" th:text="${order.prodNameKor}"></a></span>
+                      <span class="info"><a th:href="@{/product/detail/{prodId}(prodId=${order.prodId})}" th:text="${order.prodNameKor}"></a></span>
                       <span class="info" th:text="|${order.capacity} ML|"></span>
                       <span class="info orderPrice" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span>
                       <span class="red">-0</span>
@@ -62,7 +63,7 @@
                       <!-- 상품 수량 -->
                       <div class="qtyBox">
                         <a href="" class="minus qtyEdit"><i class="fa-solid fa-minus"></i></a>
-                        <input type="number" name="quantityTmp" id="qty" class="qty" th:value="${order.quantity}" min="1" readonly />
+                        <input type="number" name="quantity" id="qty" class="qty" th:value="${order.quantity}" min="1" readonly />
                         <a href="" class="plus qtyEdit"><i class="fa-solid fa-plus"></i></a>
                         <button class="btnChange btn1 cursor" type="button">변경</button>
                       </div>
@@ -78,7 +79,14 @@
                       </div>
                       <div class="btnBox">
                         <button class="btnGood btn1 cursor" type="button">관심상품</button>
-                        <button type="button" id="btnBuy" class="btnBuy btn2">주문하기</button>
+                        <a id="btnBuy" class="btnBuy btn2"
+                        th:data-prodId="${order.prodId}" th:data-quantity="${order.quantity}"
+                        th:data-orderPrice="${(order.price * order.quantity)}" th:data-prodNameKor="${order.prodNameKor}"
+                        th:data-imgUrl="${order.imgUrl}">
+                        주문하기
+                      </a>
+
+                      
                       </div>
                     </div>
                   </li>
@@ -110,7 +118,6 @@
               </div>
               <div class="orderInfo-btnArea">
                 <button type="submit" class="btn2 cursor" id="allOrder">전체상품주문</button>
-                <button type="submit" class="btn1 cursor" id="selectOrder">선택상품주문</button>
               </div>
             </div>
           </form>
@@ -126,8 +133,7 @@
       const basketListDeleteLink = /*[[@{/api/basket/delete_list}]]*/ "";
       const basketList = /*[[@{/order/basket}]]*/ "";
 
-      const orderFormAdd = /*[[@{/order/order_form/add}]]*/ "";
-      const orderList = /*[[@{/order/order_form}]]*/ "";
+      const orderAddItem = /*[[@{/order/order_form/item}]]*/ "";
     </script>
     <script>
       // ============== 결제 예정금액 표시 =========================
@@ -191,63 +197,6 @@
           }
         });
       });
-      
-      // 전체상품주문 버튼 클릭 (일단은 전체 선택만 되도록 설정함. 주문페이지로 연결해야됨)
-      document.querySelector("#allOrder").addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        document.querySelectorAll(".prodCheck").forEach((v, i) => {
-          v.checked = true;
-
-          const parent = v.closest(".listTable");
-
-          const prodId = parent.querySelector("#prodId").value;
-          const quantity = parent.querySelector("#qty").value;
-          const orderPrice = parent.querySelector("#orderPrice").value;
-          const prodNameKor = parent.querySelector("#prodNameKor").value;
-          const imgUrl = parent.querySelector("#imgUrl").value;
-
-          formData.append("prodIdTmp", prodId); // int
-          formData.append("quantityTmp", quantity); // int
-          formData.append("orderPriceTmp", orderPrice); // int
-          formData.append("prodNameKor", prodNameKor);
-          formData.append("imgUrl", imgUrl);
-
-        });
-        // await axiosHelper.post('[[@{/order/order_form/add}]]',formData);
-      });
-      // ==================== 선택 상품 주문 버튼 클릭 =========================
-
-      // ===============================================================================
-      // 선택상품주문 버튼 클릭 (선택된 상품이 있는지 여부만 확인함. 주문페이지로 연결해야됨)
-      // document.querySelector("#selectOrder").addEventListener("click",async (e) => {
-      //   e.preventDefault();
-
-      //   const formdata = new FormData();
-      //   const formList = {items: []};
-      //   let data = null;
-      //   // 체크된것 확인
-      //   const checkedCnt = document.querySelectorAll(".prodCheck:checked");
-      //   if (checkedCnt.length == 0) {
-      //     alert("선택된 상품이 없습니다.");
-      //     return;
-      //   } else {
-      //     checkedCnt.forEach((v, i) => {
-      //       // 체크된것 form태그
-      //       const form = new FormData(v.form);
-      //       const object = {};
-      //       form.forEach((value, key) => object[key] = value);
-      //       const json = JSON.stringify(object);
-
-      //       formList.items[i] = json;
-
-      //     });
-      //     console.log(formList);
-      //   }
-      //  data = await axiosHelper.post(`[[@{/api/order/order_form}]]`, formList);
-      //  console.log(data);
-      // });
-      // ===============================================================================
     </script>
   </body>
 </html>

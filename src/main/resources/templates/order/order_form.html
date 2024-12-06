@@ -191,19 +191,19 @@
         </div>
 
         <div class="info-box selected">
-          <div class="prod-box" th:each="order : ${orders}">
+          <div class="prod-box" th:each="orderItem : ${orderItems}">
             <div class="thumbnail-box">
               <div class="thumbnail-img">
-                <img th:src="${order.imgUrl}" alt="" />
+                <a th:href="@{/product/detail/{prodId}(prodId=${orderItem.prodId})}"><img th:src="${orderItem.imgUrl}" alt="" /></a>
               </div>
             </div>
 
             <div class="description">
-              <input type="hidden" th:value="${order.prodId}">
-              <span class="prod-name" th:text="${order.prodNameKor}">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
+              <input type="hidden" th:value="${orderItem.prodId}">
+              <a th:href="@{/product/detail/{prodId}(prodId=${orderItem.prodId})}"><span class="prod-name" th:text="${orderItem.prodName}">떼르말 세라마이드 헤드 스파 샴푸 500ML</span></a>
               <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
-              <span>수량:<span class="qty" th:text="${order.quantity}">1</span>개</span>
-              <span class="price" th:text="${#numbers.formatInteger(order.orderPrice, 3, 'COMMA') + '원'}">28,000</span>
+              <span>수량:<span class="qty" th:text="${orderItem.orderQuantity}">1</span>개</span>
+              <span class="price" th:text="${#numbers.formatInteger(orderItem.orderPrice, 3, 'COMMA') + '원'}">28,000</span>
             </div>
             <div class="cancel-btn-box">
               <button class="cancel-btn"><i class="fa-solid fa-xmark"></i></button>
