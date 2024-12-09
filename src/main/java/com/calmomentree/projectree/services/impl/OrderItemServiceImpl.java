@@ -19,20 +19,17 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public OrderItem addItem(OrderItem input) throws Exception {
-        int rows = 0;
+        
 
         try {
-            rows = orderItemMapper.insert(input);
+            orderItemMapper.insert(input);
 
-            if (rows == 0) {
-                throw new Exception("저장된 데이터가 없습니다.");
-            }
         } catch (Exception e) {
             log.error("데이터 저장에 실패했습니다.", e);
             throw e;
         }
 
-        return orderItemMapper.selectItem(input);
+        return null;
     }
 
     @Override

@@ -42,8 +42,8 @@ public interface OrderMapper {
                 "receiver_addr2 = #{receiverAddr2}, " +
                 "receiver_tel = #{receiverTel}, " +
                 "total_price = #{totalPrice}, " +
-                "req = #{req}, " +
-                "edit_date = NOW() " +
+                "req = #{req} " +
+                
                 "WHERE order_id = #{orderId} AND member_id = #{memberId} ")
     public int update(Order input);
 
@@ -75,9 +75,7 @@ public interface OrderMapper {
         @Result(property="receiverTel", column="receiver_tel"),
         @Result(property="totalPrice", column="total_price"),
         @Result(property="req", column="req"),
-        @Result(property="memberId", column="member_id"),
-        @Result(property="regDate", column="reg_date"),
-        @Result(property="editDate", column="edit_date")
+        @Result(property="memberId", column="member_id")
     })
     public Order selectItem(Order input);
 

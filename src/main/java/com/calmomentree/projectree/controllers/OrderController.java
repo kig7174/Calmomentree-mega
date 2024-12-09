@@ -12,12 +12,22 @@ import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.models.Order;
+<<<<<<< HEAD
 import com.calmomentree.projectree.services.BasketService;
+=======
+import com.calmomentree.projectree.models.OrderItem;
+import com.calmomentree.projectree.services.BasketService;
+import com.calmomentree.projectree.services.OrderItemService;
+>>>>>>> fb97eb08725b735ca4f9b1f7d31f8eb09d763047
 import com.calmomentree.projectree.services.OrderService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+<<<<<<< HEAD
+=======
+import org.springframework.web.bind.annotation.PostMapping;
+>>>>>>> fb97eb08725b735ca4f9b1f7d31f8eb09d763047
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -36,6 +46,12 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @Autowired
+    private OrderItemService orderItemService;
 
     /**
      * 장바구니 첫화면 불러오기
