@@ -18,17 +18,12 @@ import com.calmomentree.projectree.models.Order;
 public interface OrderMapper {
     @Insert("INSERT INTO orders ( " +
                 "order_no, order_state, order_date, member_name, " +
-                "member_email, member_postcode, member_addr1, member_addr2, member_tel, " +
-                "receiver_name, receiver_postcode, receiver_addr1, receiver_addr2, receiver_tel, " +
-                "total_price, req, member_id, reg_date, edit_date " +
-                " ) VALUES ( " +
+                "member_email, member_postcode, member_addr1, member_addr2, member_tel, member_id " +
+                ") VALUE ( " +
                 // 202411160001
                 "#{orderNo}, " +
-                "'배송중', DATE_FORMAT(NOW(), '%Y-%m-%d') AS order_date, #{memberName}, " +
-                "#{memberEmail}, #{memberPostcode}, #{memberAddr1}, #{memberAddr2}, #{memberTel}, " +
-                "#{receiverName}, #{receiverPostcode}, #{receiverAddr1}, #{receiverAddr2}, #{receiverTel}, " +
-                "#{totalPrice}, #{req}, #{memberId}, NOW(), NOW() ")
-                
+                "'주문중', NOW(), #{memberName}, " +
+                "#{memberEmail}, #{memberPostcode}, #{memberAddr1}, #{memberAddr2}, #{memberTel}, #{memberId}) ")
     @Options(useGeneratedKeys = true, keyProperty = "orderId", keyColumn = "order_id")
     public int insert(Order input);
 
@@ -59,7 +54,7 @@ public interface OrderMapper {
             "order_id, order_no, order_state, order_date, member_name, " +
             "member_email, member_postcode, member_addr1, member_addr2, member_tel, " +
             "receiver_name, receiver_postcode, receiver_addr1, receiver_addr2, receiver_tel, " +
-            "total_price, req, member_id, reg_date, edit_date " +
+            "total_price, req, member_id " +
             "FROM orders " +
             "WHERE order_id = #{orderId} AND member_id = #{memberId} ")
     @Results(id="resultMap", value={

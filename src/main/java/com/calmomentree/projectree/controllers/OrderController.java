@@ -1,7 +1,6 @@
 package com.calmomentree.projectree.controllers;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +11,13 @@ import com.calmomentree.projectree.helpers.FileHelper;
 import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
-
-import com.calmomentree.projectree.models.OrderItem;
+import com.calmomentree.projectree.models.Order;
 import com.calmomentree.projectree.services.BasketService;
+import com.calmomentree.projectree.services.OrderService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -31,10 +29,13 @@ public class OrderController {
     private FileHelper fileHelper;
 
     @Autowired
+    private WebHelper webHelper;
+
+    @Autowired
     private BasketService basketService;
 
     @Autowired
-    private WebHelper webHelper;
+    private OrderService orderService;
 
     /**
      * 장바구니 첫화면 불러오기
@@ -77,84 +78,91 @@ public class OrderController {
         return "order/basket";
     }
 
-    @PostMapping("/order/order_form/add")
-    public String orderForm(Model model,
-            @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
-            @RequestParam("prodIdTmp") String prodIdTmp,
-            @RequestParam("quantityTmp") String quantityTmp,
-            @RequestParam("orderPriceTmp") String orderPriceTmp,
-            @RequestParam("prodNameKor") String prodNameKor,
-            @RequestParam("imgUrl") String imgUrl) {
+    @SuppressWarnings("null")
+    @GetMapping("/order/order_form")
+    public String orderAdd(
+        Model model,
+        HttpServletRequest request,
+        @SessionAttribute("memberInfo") Member memberInfo,
+        @RequestParam("basket_id") List<Integer> basketIdTmp
+    ) {
+        List<Basket> baskets = new ArrayList<>();
 
-        int prodId = Integer.parseInt(prodIdTmp);
-        int quantity = Integer.parseInt(quantityTmp);
-        int orderPrice = Integer.parseInt(orderPriceTmp);
+        int totalPrice = 0;
 
-        // // 주문서 중복 여부 확인
-        // Order check = new Order();
-        // check.setMemberId(memberInfo.getMemberId());
+        for (int i=0; i<basketIdTmp.size(); i++) {
+            Basket b = new Basket();
+            b.setBasketId(basketIdTmp.get(i));
+            b.setMemberId(memberInfo.getMemberId());
 
-        // int num = 0;
-        // try {
-        // num = orderService.overCount(check);
+            Basket basket = null;
+            
+            try {
+                basket = basketService.getItem(b);
+            } catch (Exception e) {
+                webHelper.serverError(e);
+                return null;
+            }
 
-        // } catch (Exception e) {
-        // return restHelper.serverError(e);
+            basket.setImgUrl(fileHelper.getUrl(basket.getImgUrl()));
+
+            int t = basket.getQuantity() * basket.getPrice();
+            totalPrice += t;
+
+            baskets.add(basket);
+        }
+
+        Order input = new Order();
+        input.setOrderNo("1");
+        input.setMemberName(memberInfo.getUserName());
+        input.setMemberEmail(memberInfo.getEmail());
+        input.setMemberPostcode(memberInfo.getPostcode());
+        input.setMemberAddr1(memberInfo.getAddr1());
+        input.setMemberAddr2(memberInfo.getAddr2());
+        input.setMemberTel(memberInfo.getTel());
+        input.setMemberId(memberInfo.getMemberId());
+        input.setTotalPrice(totalPrice);
+
+        Order order = null;
+
+        try {
+            order = orderService.addItem(input);
+        } catch (Exception e) {
+            webHelper.serverError(e);
+            return null;
+        }
+
+        // List<OrderItem> items = new ArrayList<>();
+
+        // int totalPrice = 0;
+
+        // for (int i=0; i<baskets.size(); i++) {
+        //     OrderItem oi = new OrderItem();
+        //     Basket b = baskets.get(i);
+        //     oi.setProdName(b.getProdNameKor());
+        //     oi.setOrderQuantity(b.getQuantity());
+        //     oi.setProdId(b.getProdId());
+        //     int p = b.getPrice() * b.getQuantity();
+        //     oi.setOrderPrice(p);
+        //     oi.setOrderId(order.getOrderId());
+
+        //     OrderItem item = null;
+
+        //     try {
+        //         item = orderItemService.addItem(oi);
+        //     } catch (Exception e) {
+        //         webHelper.serverError(e);
+        //         return null;
+        //     }
+
+        //     items.add(item);
+
+        //     totalPrice += item.getOrderPrice();
         // }
-
-        // Order input = new Order();
-        // // input.setOrderNo();
-        // input.set
-
-        // Order output = null;
-        // // 중복된 주문서가 없다면?
-        // if(num == 0) {
-
-        // output = orderService.addItem(output);
-        // }
-
-        OrderItem output = new OrderItem();
-        output.setProdId(prodId);
-        output.setOrderQuantity(quantity);
-        output.setOrderPrice(orderPrice);
-        output.setProdName(prodNameKor);
-        output.setImgUrl(imgUrl);
-
-        model.addAttribute("orders", output);
+        
+        model.addAttribute("order", order);
+        model.addAttribute("items", baskets);
 
         return "order/order_form";
     }
-
-    // @PostMapping("/order/order_form")
-    // public String orderForm(Model model,
-    // @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
-    // @RequestParam("prodId") List<String> prodIdTmp,
-    // @RequestParam("quantity") List<String> quantityTmp,
-    // @RequestParam("orderPrice") List<String> orderPriceTmp,
-    // @RequestParam("prodNameKor") List<String> prodNameKor,
-    // @RequestParam("imgUrl") List<String> imgUrl) {
-
-    // List<OrderItem> list = new ArrayList<>();
-
-    // for (int i=0; i<prodIdTmp.size(); i++) {
-    // int prodId = Integer.parseInt(prodIdTmp.get(i));
-    // int quantity = Integer.parseInt(quantityTmp.get(i));
-    // int orderPrice = Integer.parseInt(orderPriceTmp.get(i));
-    // String name = prodNameKor.get(i);
-    // String url = imgUrl.get(i);
-
-    // OrderItem output = new OrderItem();
-    // output.setProdId(prodId);
-    // output.setOrderQuantity(quantity);
-    // output.setOrderPrice(orderPrice);
-    // output.setProdName(name);
-    // output.setImgUrl(url);
-
-    // list.add(output);
-    // }
-
-    // model.addAttribute("list", list);
-
-    // return "order/order_form";
-    // }
 }

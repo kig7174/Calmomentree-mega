@@ -1,253 +1,252 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
+
+<head>
     <th:block th:replace="~{fragments/head :: calm-head('장바구니')}"></th:block>
     <link rel="stylesheet" th:href="@{/assets/css/basket.css}" />
     <style>
-      form {
-        display: flex;
-      }
+        form {
+            display: flex;
+        }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <header th:replace="~{/fragments/common :: calm-header}"></header>
 
     <div class="container">
-      <div th:replace="~{/fragments/common :: calm-search}"></div>
-      <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
-      <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
+        <div th:replace="~{/fragments/common :: calm-search}"></div>
+        <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
+        <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
 
-      <div class="title">Cart</div>
+        <div class="title">Cart</div>
 
-      <!-- 장바구니에 상품이 없을 경우 -->
-      <div th:if="${orderBasket.size() == 0 }" class="basketEmpty">
-        <p>장바구니가 비어 있습니다.</p>
-      </div>
-
-      <!-- 장바구니에 상품이 있을 경우 -->
-      <div th:unless="${orderBasket.size() == 0 }">
-        <div class="cartBox">
-          <form id="editUp" method="post" th:action="@{/order/order_form/add}" class="orderForm">
-            <div class="prodBox">
-              <div class="prodBox-title">장바구니 상품<button type="button" id="agree-content-btn"></button></div>
-
-              <div class="prodBox-info active">
-                <div class="normal">
-                  <p>일반상품(<span class="count" th:text="${counts}"></span>)</p>
-                </div>
-
-                <ul>
-                  <li class="listTable" th:each="order : ${orderBasket}">
-                    <input type="checkbox" class="prodCheck" />
-
-                    <input type="hidden" id="basketId" name="basketIdTmp" th:value="${order.basketId}" />
-                    <input type="hidden" id="memberId" name="memberIdTmp" th:value="${order.memberId}" />
-                    <input type="hidden" id="imgUrl" name="imgUrl" th:value="${order.imgUrl}" />
-                    <input type="hidden" id="prodId" name="prodIdTmp" th:value="${order.prodId}" />
-                    <input type="hidden" id="prodNameKor" name="prodNameKor" th:value="${order.prodNameKor}" />
-                    <input type="hidden" id="orderPrice" name="orderPriceTmp" th:value="${order.price * order.quantity}" />
-                    
-                    <!-- 상품 이미지 -->
-                    <div class="thumbBox">
-                      <a href=""><img th:src="${order.imgUrl}" alt="" /></a>
-                    </div>
-                    <!-- 상품 정보 -->
-                    <div class="prodInfo">
-                      <span class="info"><a href="" th:text="${order.prodNameKor}"></a></span>
-                      <span class="info" th:text="|${order.capacity} ML|"></span>
-                      <span class="info orderPrice" th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span>
-                      <span class="red">-0</span>
-                      <p class="small">배송:[<span>무료</span>]/<span>기본배송</span></p>
-                      <p>[옵션:<span>선택안함</span>/<span>선택안함</span>]</p>
-                      <!-- 상품 수량 -->
-                      <div class="qtyBox">
-                        <a href="" class="minus qtyEdit"><i class="fa-solid fa-minus"></i></a>
-                        <input type="number" name="quantityTmp" id="qty" class="qty" th:value="${order.quantity}" min="1" readonly />
-                        <a href="" class="plus qtyEdit"><i class="fa-solid fa-plus"></i></a>
-                        <button class="btnChange btn1 cursor" type="button">변경</button>
-                      </div>
-                    </div>
-                    <div class="prodInfo2">
-                      <div class="priceBox">
-                        <span
-                          id="itemPrice"
-                          class="price itemPrice"
-                          th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"
-                        ></span>
-                        <button class="cancel"></button>
-                      </div>
-                      <div class="btnBox">
-                        <button class="btnGood btn1 cursor" type="button">관심상품</button>
-                        <button type="button" id="btnBuy" class="btnBuy btn2">주문하기</button>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-
-                <div class="shipmentInfo">
-                  <span>[기본배송]</span>
-                  <p>상품구매금액: <span id="totalPrice" class="price">OOO</span> + 배송비 <span class="price">O</span></p>
-                  <p>합계: <span class="price" id="totalPrice">OOO</span></p>
-                </div>
-                <div class="prodBox-btnArea">
-                  <input type="button" class="btn1 r cursor" id="checkAll" value="전체선택" />
-                  <input type="button" class="btn1 cursor" id="checkDelete" value="선택삭제" />
-                </div>
-              </div>
-            </div>
-            <div class="orderInfo">
-              <div class="orderInfo-box">
-                <div class="prod box">
-                  <strong>주문상품</strong>
-                </div>
-                <div class="priceBox">
-                  <p class="box a"><span>총 상품금액</span><span id="totalPrice">OOO</span></p>
-                  <p class="box"><span>총 배송비</span><span>O</span></p>
-                </div>
-                <div class="totalPrice box">
-                  <p>결제예정금액<span id="totalPrice">OOO</span></p>
-                </div>
-              </div>
-              <div class="orderInfo-btnArea">
-                <button type="submit" class="btn2 cursor" id="allOrder">전체상품주문</button>
-                <button type="submit" class="btn1 cursor" id="selectOrder">선택상품주문</button>
-              </div>
-            </div>
-          </form>
+        <!-- 장바구니에 상품이 없을 경우 -->
+        <div th:if="${orderBasket.size() == 0 }" class="basketEmpty">
+            <p>장바구니가 비어 있습니다.</p>
         </div>
-      </div>
+
+        <!-- 장바구니에 상품이 있을 경우 -->
+        <div th:unless="${orderBasket.size() == 0 }">
+            <div class="cartBox">
+                <form id="editUp" method="get" th:action="@{/order/order_form}" class="orderForm">
+                    <div class="prodBox">
+                        <div class="prodBox-title">장바구니 상품<button type="button" id="agree-content-btn"></button></div>
+
+                        <div class="prodBox-info active">
+                            <div class="normal">
+                                <p>일반상품(<span class="count" th:text="${counts}"></span>)</p>
+                            </div>
+
+                            <ul>
+                                <li class="listTable" th:each="order : ${orderBasket}">
+                                    <input type="checkbox" class="prodCheck" id="basket_id" name="basket_id"
+                                        th:value="${order.basketId}" />
+
+                                    <!-- 상품 이미지 -->
+                                    <div class="thumbBox">
+                                        <a href=""><img th:src="${order.imgUrl}" alt="" /></a>
+                                    </div>
+                                    <!-- 상품 정보 -->
+                                    <div class="prodInfo">
+                                        <span class="info"><a href="" th:text="${order.prodNameKor}"></a></span>
+                                        <span class="info" th:text="|${order.capacity} ML|"></span>
+                                        <span class="info orderPrice"
+                                            th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span>
+                                        <span class="red">-0</span>
+                                        <p class="small">배송:[<span>무료</span>]/<span>기본배송</span></p>
+                                        <p>[옵션:<span>선택안함</span>/<span>선택안함</span>]</p>
+                                        <!-- 상품 수량 -->
+                                        <div class="qtyBox">
+                                            <a href="" class="minus qtyEdit"><i class="fa-solid fa-minus"></i></a>
+                                            <input type="number" name="quantityTmp" id="qty" class="qty"
+                                                th:value="${order.quantity}" min="1" readonly />
+                                            <a href="" class="plus qtyEdit"><i class="fa-solid fa-plus"></i></a>
+                                            <button class="btnChange btn1 cursor" type="button">변경</button>
+                                        </div>
+                                    </div>
+                                    <div class="prodInfo2">
+                                        <div class="priceBox">
+                                            <span id="itemPrice" class="price itemPrice"
+                                                th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span>
+                                            <button class="cancel"></button>
+                                        </div>
+                                        <div class="btnBox">
+                                            <button class="btnGood btn1 cursor" type="button">관심상품</button>
+                                            <button type="button" id="btnBuy" class="btnBuy btn2">주문하기</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div class="shipmentInfo">
+                                <span>[기본배송]</span>
+                                <p>상품구매금액: <span id="totalPrice" class="price">OOO</span> + 배송비 <span
+                                        class="price">O</span></p>
+                                <p>합계: <span class="price" id="totalPrice">OOO</span></p>
+                            </div>
+                            <div class="prodBox-btnArea">
+                                <input type="button" class="btn1 r cursor" id="checkAll" value="전체선택" />
+                                <input type="button" class="btn1 cursor" id="checkDelete" value="선택삭제" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="orderInfo">
+                        <div class="orderInfo-box">
+                            <div class="prod box">
+                                <strong>주문상품</strong>
+                            </div>
+                            <div class="priceBox">
+                                <p class="box a"><span>총 상품금액</span><span id="totalPrice">OOO</span></p>
+                                <p class="box"><span>총 배송비</span><span>O</span></p>
+                            </div>
+                            <div class="totalPrice box">
+                                <p>결제예정금액<span id="totalPrice">OOO</span></p>
+                            </div>
+                        </div>
+                        <div class="orderInfo-btnArea">
+                            <button type="button" class="btn2 cursor" id="allOrder">전체상품주문</button>
+                            <button type="button" class="btn1 cursor" id="selectOrder">선택상품주문</button>
+
+                            <script>
+
+                            </script>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
     <script th:src="@{/assets/js/basket.js}"></script>
     <script th:inline="javascript">
-      const basketDeleteLink = /*[[@{/api/basket/delete}]]*/ "";
-      const basketListDeleteLink = /*[[@{/api/basket/delete_list}]]*/ "";
-      const basketList = /*[[@{/order/basket}]]*/ "";
+        const basketDeleteLink = /*[[@{/api/basket/delete}]]*/ "";
+        const basketListDeleteLink = /*[[@{/api/basket/delete_list}]]*/ "";
+        const basketList = /*[[@{/order/basket}]]*/ "";
 
-      const orderFormAdd = /*[[@{/order/order_form/add}]]*/ "";
-      const orderList = /*[[@{/order/order_form}]]*/ "";
+        const orderFormAdd = /*[[@{/order/order_form/add}]]*/ "";
+        const orderList = /*[[@{/order/order_form}]]*/ "";
     </script>
     <script>
-      // ============== 결제 예정금액 표시 =========================
-      const totalPrice = document.querySelectorAll("#totalPrice");
+        const orderForm = document.querySelector("#editUp");
+        const checkedProd = document.querySelectorAll(".prodCheck");
 
-      let startSum = 0;
-      const itemPrice = document.querySelectorAll("#itemPrice");
+        document.querySelector("#allOrder").addEventListener("click", (e) => {
+            e.preventDefault();
+            checkedProd.forEach((v, i) => {
+                v.checked = true;
+            });
+            orderForm.submit();
+        });
 
-      itemPrice.forEach((v, i) => {
-        const one = v.innerHTML.indexOf("원");
-        const two = v.innerHTML.substring(0, one);
+        document.querySelector("#selectOrder").addEventListener("click", (e) => {
+            e.preventDefault();
+            let checked = true;
 
-        const num = two.replaceAll(",", "");
-        const trim = parseInt(num.trim());
+            checkedProd.forEach((v, i) => {
+                if (v.checked === true) {
+                    checked = false;
+                };
+            });
 
-        startSum += trim;
-      });
-
-      for (let i = 0; i < totalPrice.length; i++) {
-        totalPrice[i].innerHTML = startSum.toLocaleString() + " 원";
-      }
-
-      // =================== 수량 변경시 DB연동 ==========================
-      document.querySelectorAll(".qty").forEach((v, i) => {
-        v.addEventListener("change", async (e) => {
-          e.preventDefault();
-
-          const formData = new FormData();
-          const current = e.currentTarget.closest(".listTable");
-          const basketId = current.querySelector("#basketId").value;
-          const quantity = current.querySelector("#qty").value;
-          const orderPrice = current.querySelector("#orderPrice");
-
-          formData.append("basketIdTmp", basketId);
-          formData.append("quantityTmp", quantity);
-
-          const data = await axiosHelper.put(`[[@{/api/basket/edit}]]`, formData);
-          console.log(data);
-          if (data) {
-            if (current.querySelector("#basketId").value == data.orderBasket.basketId) {
-              current.querySelector(".orderPrice").innerHTML = (data.orderBasket.price * data.orderBasket.quantity).toLocaleString() + " 원";
-              current.querySelector(".itemPrice").innerHTML = (data.orderBasket.price * data.orderBasket.quantity).toLocaleString() + " 원";
-              orderPrice.value = data.orderBasket.price * data.orderBasket.quantity;
+            if (checked === true) {
+                alert("선택된 항목이 없습니다.");
+            } else if (checked === false) {
+                orderForm.submit();
             }
-          }
+        });
 
-          let sum = 0;
+        const oneBuy = document.querySelectorAll("#btnBuy");
+        
 
-          document.querySelectorAll(".itemPrice").forEach((v1, i1) => {
-            const one = v1.innerHTML.indexOf("원");
-            const two = v1.innerHTML.substring(0, one);
+        oneBuy.forEach((v, i) => {
+            v.addEventListener("click", (e) => {
+                checkedProd.forEach((v, i) => {
+                    v.checked = false;
+                });
+
+                const listItem = v.closest(".listTable").children;
+                const listItemArr = Array.from(listItem);
+
+                let oneBuyId = null;
+
+                listItemArr.forEach((v1, i1) => {
+                    if (v1.id == "basket_id") {
+                        oneBuyId = v1;
+                    }
+                });
+
+                oneBuyId.checked = true;
+                orderForm.submit();
+            });
+        });
+
+        // ============== 결제 예정금액 표시 =========================
+        const totalPrice = document.querySelectorAll("#totalPrice");
+
+        let startSum = 0;
+        const itemPrice = document.querySelectorAll("#itemPrice");
+
+        itemPrice.forEach((v, i) => {
+            const one = v.innerHTML.indexOf("원");
+            const two = v.innerHTML.substring(0, one);
 
             const num = two.replaceAll(",", "");
             const trim = parseInt(num.trim());
 
-            sum += trim;
-          });
-
-          for (let i = 0; i < totalPrice.length; i++) {
-            totalPrice[i].innerHTML = sum.toLocaleString() + " 원";
-          }
+            startSum += trim;
         });
-      });
-      
-      // 전체상품주문 버튼 클릭 (일단은 전체 선택만 되도록 설정함. 주문페이지로 연결해야됨)
-      document.querySelector("#allOrder").addEventListener("submit", async (e) => {
-        e.preventDefault();
 
-        document.querySelectorAll(".prodCheck").forEach((v, i) => {
-          v.checked = true;
+        for (let i = 0; i < totalPrice.length; i++) {
+            totalPrice[i].innerHTML = startSum.toLocaleString() + " 원";
+        }
 
-          const parent = v.closest(".listTable");
+        // =================== 수량 변경시 DB연동 ==========================
+        document.querySelectorAll(".qty").forEach((v, i) => {
+            v.addEventListener("change", async (e) => {
+                e.preventDefault();
 
-          const prodId = parent.querySelector("#prodId").value;
-          const quantity = parent.querySelector("#qty").value;
-          const orderPrice = parent.querySelector("#orderPrice").value;
-          const prodNameKor = parent.querySelector("#prodNameKor").value;
-          const imgUrl = parent.querySelector("#imgUrl").value;
+                const formData = new FormData();
+                const current = e.currentTarget.closest(".listTable");
+                const basketId = current.querySelector("#basket_id").value;
+                const quantity = current.querySelector("#qty").value;
+                const orderPrice = current.querySelector("#orderPrice");
 
-          formData.append("prodIdTmp", prodId); // int
-          formData.append("quantityTmp", quantity); // int
-          formData.append("orderPriceTmp", orderPrice); // int
-          formData.append("prodNameKor", prodNameKor);
-          formData.append("imgUrl", imgUrl);
+                formData.append("basketIdTmp", basketId);
+                formData.append("quantityTmp", quantity);
 
+                const data = await axiosHelper.put(`[[@{/api/basket/edit}]]`, formData);
+                console.log(data);
+                if (data) {
+                    if (current.querySelector("#basketId").value == data.orderBasket.basketId) {
+                        current.querySelector(".orderPrice").innerHTML = (data.orderBasket.price * data.orderBasket.quantity).toLocaleString() + " 원";
+                        current.querySelector(".itemPrice").innerHTML = (data.orderBasket.price * data.orderBasket.quantity).toLocaleString() + " 원";
+                        orderPrice.value = data.orderBasket.price * data.orderBasket.quantity;
+                    }
+                }
+
+                let sum = 0;
+
+                document.querySelectorAll(".itemPrice").forEach((v1, i1) => {
+                    const one = v1.innerHTML.indexOf("원");
+                    const two = v1.innerHTML.substring(0, one);
+
+                    const num = two.replaceAll(",", "");
+                    const trim = parseInt(num.trim());
+
+                    sum += trim;
+                });
+
+                for (let i = 0; i < totalPrice.length; i++) {
+                    totalPrice[i].innerHTML = sum.toLocaleString() + " 원";
+                }
+            });
         });
-        // await axiosHelper.post('[[@{/order/order_form/add}]]',formData);
-      });
-      // ==================== 선택 상품 주문 버튼 클릭 =========================
 
-      // ===============================================================================
-      // 선택상품주문 버튼 클릭 (선택된 상품이 있는지 여부만 확인함. 주문페이지로 연결해야됨)
-      // document.querySelector("#selectOrder").addEventListener("click",async (e) => {
-      //   e.preventDefault();
 
-      //   const formdata = new FormData();
-      //   const formList = {items: []};
-      //   let data = null;
-      //   // 체크된것 확인
-      //   const checkedCnt = document.querySelectorAll(".prodCheck:checked");
-      //   if (checkedCnt.length == 0) {
-      //     alert("선택된 상품이 없습니다.");
-      //     return;
-      //   } else {
-      //     checkedCnt.forEach((v, i) => {
-      //       // 체크된것 form태그
-      //       const form = new FormData(v.form);
-      //       const object = {};
-      //       form.forEach((value, key) => object[key] = value);
-      //       const json = JSON.stringify(object);
-
-      //       formList.items[i] = json;
-
-      //     });
-      //     console.log(formList);
-      //   }
-      //  data = await axiosHelper.post(`[[@{/api/order/order_form}]]`, formList);
-      //  console.log(data);
-      // });
-      // ===============================================================================
     </script>
-  </body>
+</body>
+
 </html>

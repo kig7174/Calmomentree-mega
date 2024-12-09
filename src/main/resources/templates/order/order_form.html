@@ -1,273 +1,266 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
-  <head>
+
+<head>
     <th:block th:replace="~{fragments/head :: calm-head('주문결제페이지')}"></th:block>
     <link rel="stylesheet" th:href="@{/assets/css/order_form.css}" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+</head>
+
+<body>
     <header th:replace="~{/fragments/common :: calm-header}"></header>
 
     <div class="container">
-      <div th:replace="~{/fragments/common :: calm-search}"></div>
-      <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
-      <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
+        <div th:replace="~{/fragments/common :: calm-search}"></div>
+        <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
+        <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
 
-      <!---------- 주문 정보 ------------>
-      <div class="member-info collapse">
-        <div class="info-title">
-          <span class="title"
-            >주문정보
-            <button type="button" class="agree-content-btn"></button>
-            <span class="info active" th:text="|${session.memberInfo.userName} (${session.memberInfo.email})|"></span>
-          </span>
+        <!---------- 주문 정보 ------------>
+        <div class="member-info collapse">
+            <div class="info-title">
+                <span class="title">주문정보
+                    <button type="button" class="agree-content-btn"></button>
+                    <span class="info active"
+                        th:text="|${session.memberInfo.userName} (${session.memberInfo.email})|"></span>
+                </span>
+            </div>
+
+            <div class="info-box selected">
+                <div class="name-box input-box">
+                    <label for="member-name">주문자<span class="bg-required"></span></label>
+                    <div class="input-box2">
+                        <input type="text" name="member-name" id="member-name" class="input-box-l"
+                            th:value="${session.memberInfo.userName}" required />
+                    </div>
+                </div>
+
+                <div class="email-box input-box">
+                    <label for="email">이메일<span class="bg-required"></span></label>
+                    <div class="input-box2">
+                        <input type="email" name="email" id="email" th:value="${session.memberInfo.email}" />
+                    </div>
+                </div>
+
+                <div class="tel-box input-box">
+                    <label for="tel1"> 일반전화</label>
+                    <div class="input-box2">
+                        <select name="tel1" selected="02" class="input-box-s">
+                            <option value="02">02</option>
+                            <option value="031">031</option>
+                            <option value="041">041</option>
+                            <option value="051">051</option>
+                        </select>
+                        &nbsp; - &nbsp;
+                        <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+                        &nbsp; - &nbsp;
+                        <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+                    </div>
+                </div>
+
+                <div class="phone-box input-box">
+                    <label for="tel"> 휴대전화<span class="bg-required"></span></label>
+                    <div class="input-box2">
+                        <input type="text" name="tel" id="tel" th:value="${session.memberInfo.tel}" />
+                    </div>
+                </div>
+
+                <div class="addr-box input-box">
+                    <label for="postcode"> 주소<span class="bg-required"></span></label>
+                    <div class="input-box2">
+                        <input type="text" name="postcode" id="postcode" class="postcode" placeholder="우편번호"
+                            th:value="${session.memberInfo.postcode}" required readonly />
+                    </div>
+                </div>
+                <div class="input-box">
+                    <label for=""></label>
+                    <button type="button" id="post-btn">주소검색</button>
+                </div>
+                <div class="addr-box input-box">
+                    <label for=""></label>
+                    <div class="input-box2">
+                        <input type="text" name="addr1" id="addr1" class="addr1" placeholder="기본주소"
+                            th:value="${session.memberInfo.addr1}" />
+                    </div>
+                </div>
+                <div class="addr-box input-box">
+                    <label for=""></label>
+                    <div class="input-box2">
+                        <input type="text" name="addr2" id="addr2" class="addr2" placeholder="상세주소"
+                            th:value="${session.memberInfo.addr2}" />
+                    </div>
+                </div>
+            </div>
         </div>
+        <!---------- 배송지 ------------>
+        <div class="shop-info place collapse">
+            <div class="info-title">
+                <span>배송지<button type="button" class="agree-content-btn"></button></span>
+            </div>
 
-        <div class="info-box selected">
-          <div class="name-box input-box">
-            <label for="member-name">주문자<span class="bg-required"></span></label>
-            <div class="input-box2">
-              <input type="text" name="member-name" id="member-name" class="input-box-l" th:value="${session.memberInfo.userName}" required />
-            </div>
-          </div>
+            <div class="info-box selected">
+                <div class="radio-box">
+                    <label>
+                        <input type="radio" name="place" id="place1" value="E" checked />
+                        주문자 정보와 동일
+                    </label>
+                    <label>
+                        <input type="radio" name="place" id="place2" value="N" />
+                        새로운 배송지
+                    </label>
+                </div>
+                <div class="name-box input-box">
+                    <label for="shop-name">받는사람<span class="bg-required"></span></label>
+                    <div class="input-box2">
+                        <input type="text" name="shop-name" id="shop-name" th:value="${session.memberInfo.userName}"
+                            required />
+                    </div>
+                </div>
+                <div class="addr-box input-box">
+                    <label for="postcode2"> 주소<span class="bg-required"></span></label>
+                    <input type="text" name="postcode2" id="postcode2" class="postcode2" placeholder="우편번호"
+                        th:value="${session.memberInfo.postcode}" required readonly />
+                    <button type="button" id="post-btn2">주소검색</button>
+                </div>
+                <div class="addr-box input-box">
+                    <label for=""></label>
+                    <div class="input-box2">
+                        <input type="text" name="addr3" id="addr3" class="addr3" th:value="${session.memberInfo.addr1}"
+                            placeholder="기본주소" />
+                    </div>
+                </div>
+                <div class="addr-box input-box">
+                    <label for=""></label>
+                    <div class="input-box2">
+                        <input type="text" name="addr4" id="addr4" class="addr4" th:value="${session.memberInfo.addr2}"
+                            placeholder="상세주소" />
+                    </div>
+                </div>
 
-          <div class="email-box input-box">
-            <label for="email">이메일<span class="bg-required"></span></label>
-            <div class="input-box2">
-              <input type="email" name="email" id="email" th:value="${session.memberInfo.email}" />
-            </div>
-          </div>
+                <div class="tel-box input-box">
+                    <label for="tel1"> 일반전화</label>
+                    <div class="input-box2">
+                        <select name="tel1" selected="02" class="input-box-s">
+                            <option value="02">02</option>
+                            <option value="031">031</option>
+                            <option value="041">041</option>
+                            <option value="051">051</option>
+                        </select>
+                        &nbsp; - &nbsp;
+                        <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+                        &nbsp; - &nbsp;
+                        <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+                    </div>
+                </div>
+                <div class="phone-box input-box">
+                    <label for="telSub"> 휴대전화<span class="bg-required"></span></label>
+                    <div class="input-box2">
+                        <input type="text" name="telSub" id="telSub" th:value="${session.memberInfo.tel}" />
+                    </div>
+                </div>
+                <div class="message-box input-box">
+                    <select name="" id="">
+                        <option value="">--메시지 선택(선택사항)--</option>
+                        <option value="">배송 전에 미리 연락바랍니다.</option>
+                        <option value="">부재 시 경비실에 맡겨주세요.</option>
+                        <option value="">부재 시 문앞에 놓아주세요.</option>
+                        <option value="">빠른 배송 부탁드립니다.</option>
+                        <option value="">택배함에 보관해 주세요</option>
+                        <option value="">직접입력</option>
+                    </select>
+                </div>
 
-          <div class="tel-box input-box">
-            <label for="tel1"> 일반전화</label>
-            <div class="input-box2">
-              <select name="tel1" selected="02" class="input-box-s">
-                <option value="02">02</option>
-                <option value="031">031</option>
-                <option value="041">041</option>
-                <option value="051">051</option>
-              </select>
-              &nbsp; - &nbsp;
-              <input type="text" name="tel2" maxlength="4" class="input-box-s" />
-              &nbsp; - &nbsp;
-              <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+                <div class="message-check-box"><input type="checkbox" /><span>기본 배송지로 저장</span></div>
             </div>
-          </div>
-
-          <div class="phone-box input-box">
-            <label for="tel"> 휴대전화<span class="bg-required"></span></label>
-            <div class="input-box2">
-              <input type="text" name="tel" id="tel" th:value="${session.memberInfo.tel}" />
-            </div>
-          </div>
-
-          <div class="addr-box input-box">
-            <label for="postcode"> 주소<span class="bg-required"></span></label>
-            <div class="input-box2">
-              <input
-                type="text"
-                name="postcode"
-                id="postcode"
-                class="postcode"
-                placeholder="우편번호"
-                th:value="${session.memberInfo.postcode}"
-                required
-                readonly
-              />
-            </div>
-          </div>
-          <div class="input-box">
-            <label for=""></label>
-            <button type="button" id="post-btn">주소검색</button>
-          </div>
-          <div class="addr-box input-box">
-            <label for=""></label>
-            <div class="input-box2">
-              <input type="text" name="addr1" id="addr1" class="addr1" placeholder="기본주소" th:value="${session.memberInfo.addr1}" />
-            </div>
-          </div>
-          <div class="addr-box input-box">
-            <label for=""></label>
-            <div class="input-box2">
-              <input type="text" name="addr2" id="addr2" class="addr2" placeholder="상세주소" th:value="${session.memberInfo.addr2}" />
-            </div>
-          </div>
         </div>
-      </div>
-      <!---------- 배송지 ------------>
-      <div class="shop-info place collapse">
-        <div class="info-title">
-          <span>배송지<button type="button" class="agree-content-btn"></button></span>
-        </div>
-
-        <div class="info-box selected">
-          <div class="radio-box">
-            <label>
-              <input type="radio" name="place" id="place1" value="E" checked />
-              주문자 정보와 동일
-            </label>
-            <label>
-              <input type="radio" name="place" id="place2" value="N" />
-              새로운 배송지
-            </label>
-          </div>
-          <div class="name-box input-box">
-            <label for="shop-name">받는사람<span class="bg-required"></span></label>
-            <div class="input-box2">
-              <input type="text" name="shop-name" id="shop-name" th:value="${session.memberInfo.userName}" required />
-            </div>
-          </div>
-          <div class="addr-box input-box">
-            <label for="postcode2"> 주소<span class="bg-required"></span></label>
-            <input
-              type="text"
-              name="postcode2"
-              id="postcode2"
-              class="postcode2"
-              placeholder="우편번호"
-              th:value="${session.memberInfo.postcode}"
-              required
-              readonly
-            />
-            <button type="button" id="post-btn2">주소검색</button>
-          </div>
-          <div class="addr-box input-box">
-            <label for=""></label>
-            <div class="input-box2">
-              <input type="text" name="addr3" id="addr3" class="addr3" th:value="${session.memberInfo.addr1}" placeholder="기본주소" />
-            </div>
-          </div>
-          <div class="addr-box input-box">
-            <label for=""></label>
-            <div class="input-box2">
-              <input type="text" name="addr4" id="addr4" class="addr4" th:value="${session.memberInfo.addr2}" placeholder="상세주소" />
-            </div>
-          </div>
-
-          <div class="tel-box input-box">
-            <label for="tel1"> 일반전화</label>
-            <div class="input-box2">
-              <select name="tel1" selected="02" class="input-box-s">
-                <option value="02">02</option>
-                <option value="031">031</option>
-                <option value="041">041</option>
-                <option value="051">051</option>
-              </select>
-              &nbsp; - &nbsp;
-              <input type="text" name="tel2" maxlength="4" class="input-box-s" />
-              &nbsp; - &nbsp;
-              <input type="text" name="tel2" maxlength="4" class="input-box-s" />
-            </div>
-          </div>
-          <div class="phone-box input-box">
-            <label for="telSub"> 휴대전화<span class="bg-required"></span></label>
-            <div class="input-box2">
-              <input type="text" name="telSub" id="telSub" th:value="${session.memberInfo.tel}" />
-            </div>
-          </div>
-          <div class="message-box input-box">
-            <select name="" id="">
-              <option value="">--메시지 선택(선택사항)--</option>
-              <option value="">배송 전에 미리 연락바랍니다.</option>
-              <option value="">부재 시 경비실에 맡겨주세요.</option>
-              <option value="">부재 시 문앞에 놓아주세요.</option>
-              <option value="">빠른 배송 부탁드립니다.</option>
-              <option value="">택배함에 보관해 주세요</option>
-              <option value="">직접입력</option>
-            </select>
-          </div>
-
-          <div class="message-check-box"><input type="checkbox" /><span>기본 배송지로 저장</span></div>
-        </div>
-      </div>
-      <!---------- 주문 상품 ------------>
-      <div class="order-product place collapse">
-        <div class="info-title">
-          <span
-            >주문상품
-            <button type="button" class="agree-content-btn"></button>
-            <span class="info active"><span class="count"></span>개</span>
-          </span>
-        </div>
-
-        <div class="info-box selected">
-          <div class="prod-box" th:each="order : ${orders}">
-            <div class="thumbnail-box">
-              <div class="thumbnail-img">
-                <img th:src="${order.imgUrl}" alt="" />
-              </div>
+        <!---------- 주문 상품 ------------>
+        <div class="order-product place collapse">
+            <div class="info-title">
+                <span>주문상품
+                    <button type="button" class="agree-content-btn"></button>
+                    <span class="info active"><span class="count"></span>개</span>
+                </span>
             </div>
 
-            <div class="description">
-              <input type="hidden" th:value="${order.prodId}">
-              <span class="prod-name" th:text="${order.prodNameKor}">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
-              <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
-              <span>수량:<span class="qty" th:text="${order.quantity}">1</span>개</span>
-              <span class="price" th:text="${#numbers.formatInteger(order.orderPrice, 3, 'COMMA') + '원'}">28,000</span>
-            </div>
-            <div class="cancel-btn-box">
-              <button class="cancel-btn"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-          </div>
-         
-          <div class="price-box">
-            <span>배송비</span>
-            <span><span class="price">0(무료)</span>원</span>
-          </div>
-        </div>
-      </div>
-      <!---------- 결제 정보 ------------>
-      <div class="payment place collapse">
-        <div class="info-title">
-          <span>결제정보<button type="button" class="agree-content-btn"></button></span>
-        </div>
+            <div class="info-box selected">
+                <div class="prod-box" th:each="item : ${items}">
+                    <div class="thumbnail-box">
+                        <div class="thumbnail-img">
+                            <img th:src="${item.imgUrl}" />
+                        </div>
+                    </div>
 
-        <div class="info-box selected">
-          <div class="pay">
-            주문상품<span><span class="bold">28,000</span>원</span>
-          </div>
-          <div class="pay">
-            배송비<span>+<span class="bold">0</span>원</span>
-          </div>
-          <div class="pay discount">
-            할인/부가결제<span><span class="red">-&nbsp;</span><span class="bold red">0</span>원</span>
-          </div>
-          <div class="info-box2">
-            <div class="pay price">
-              최종 결제 금액<span><span class="bold">31000</span>원</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!---------- 결제 수단 ------------>
-      <div class="paymethod place collapse">
-        <div class="info-title">
-          <span>결제수단<button type="button" class="agree-content-btn"></button></span>
-        </div>
+                    <div class="description">
+                        <input type="hidden" th:value="${item.prodId}">
+                        <span class="prod-name" th:text="${item.prodNameKor}">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
+                        <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
+                        <span>수량:<span class="qty" th:text="${item.quantity}">1</span>개</span>
+                        <span class="price"
+                            th:text="${#numbers.formatInteger(item.price * item.quantity, 3, 'COMMA') + '원'}">28,000</span>
+                    </div>
+                    <div class="cancel-btn-box">
+                        <button class="cancel-btn"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
 
-        <div class="info-box selected"></div>
-      </div>
-      <!---------- 적립혜택 ------------>
-      <div class="benefit place collapse">
-        <div class="info-title">
-          <span>적립혜택<span type="button" class="agree-content-btn"></span></span>
+                <div class="price-box">
+                    <span>배송비</span>
+                    <span><span class="price">0(무료)</span>원</span>
+                </div>
+            </div>
         </div>
-        <div class="info-box selected">
-          <div class="pay">
-            상품별 적립금<span><span class="bold">0</span>원</span>
-          </div>
-          <div class="pay">
-            회원 적립금<span><span class="bold">200</span>원</span>
-          </div>
-          <div class="pay discount">
-            쿠폰적립금<span><span class="bold">0</span>원</span>
-          </div>
-          <div class="acc-money bold">
-            적립 예정금액<span><span class="bold">200</span>원</span>
-          </div>
+        <!---------- 결제 정보 ------------>
+        <div class="payment place collapse">
+            <div class="info-title">
+                <span>결제정보<button type="button" class="agree-content-btn"></button></span>
+            </div>
+
+            <div class="info-box selected">
+                <div class="pay">
+                    주문상품<span><span class="bold">28,000</span>원</span>
+                </div>
+                <div class="pay">
+                    배송비<span>+<span class="bold">0</span>원</span>
+                </div>
+                <div class="pay discount">
+                    할인/부가결제<span><span class="red">-&nbsp;</span><span class="bold red">0</span>원</span>
+                </div>
+                <div class="info-box2">
+                    <div class="pay price">
+                        최종 결제 금액<span><span class="bold" th:value="${#numbers.formatInteger(order.totalPrice, 3, 'COMMA') + '원'}">31000</span></span>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      <button class="fin place"><span class="">31000</span>원 결제하기</button>
+        <!---------- 결제 수단 ------------>
+        <div class="paymethod place collapse">
+            <div class="info-title">
+                <span>결제수단<button type="button" class="agree-content-btn"></button></span>
+            </div>
+
+            <div class="info-box selected"></div>
+        </div>
+        <!---------- 적립혜택 ------------>
+        <div class="benefit place collapse">
+            <div class="info-title">
+                <span>적립혜택<span type="button" class="agree-content-btn"></span></span>
+            </div>
+            <div class="info-box selected">
+                <div class="pay">
+                    상품별 적립금<span><span class="bold">0</span>원</span>
+                </div>
+                <div class="pay">
+                    회원 적립금<span><span class="bold">200</span>원</span>
+                </div>
+                <div class="pay discount">
+                    쿠폰적립금<span><span class="bold">0</span>원</span>
+                </div>
+                <div class="acc-money bold">
+                    적립 예정금액<span><span class="bold">200</span>원</span>
+                </div>
+            </div>
+        </div>
+        <button class="fin place"><span class="" th:text="${#numbers.formatInteger(order.totalPrice, 3, 'COMMA') + '원'}"></span>결제하기</button>
     </div>
 
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
@@ -277,38 +270,39 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script th:src="@{/assets/js/orderform.js}"></script>
     <script>
-      // 주문정보
-      const memberName = document.querySelector("#member-name").value;
-      const email = document.querySelector("#email").value;
-      const tel = document.querySelector("#tel").value;
-      const postcode = document.querySelector("#postcode").value;
-      const addr1 = document.querySelector("#addr1").value;
-      const addr2 = document.querySelector("#addr2").value;
+        // 주문정보
+        const memberName = document.querySelector("#member-name").value;
+        const email = document.querySelector("#email").value;
+        const tel = document.querySelector("#tel").value;
+        const postcode = document.querySelector("#postcode").value;
+        const addr1 = document.querySelector("#addr1").value;
+        const addr2 = document.querySelector("#addr2").value;
 
-      // 배송지 정보
-      const memberName2 = document.querySelector("#shop-name");
-      const tel2 = document.querySelector("#telSub");
-      const postcode2 = document.querySelector("#postcode2");
-      const addr3 = document.querySelector("#addr3");
-      const addr4 = document.querySelector("#addr4");
-      
-      // 주문자 정보와 동일 버튼
-      document.querySelector("#place1").addEventListener("click", (e) => {
-        memberName2.value = memberName;
-        tel2.value = tel;
-        postcode2.value = postcode;
-        addr3.value = addr1;
-        addr4.value = addr2;
-      });
+        // 배송지 정보
+        const memberName2 = document.querySelector("#shop-name");
+        const tel2 = document.querySelector("#telSub");
+        const postcode2 = document.querySelector("#postcode2");
+        const addr3 = document.querySelector("#addr3");
+        const addr4 = document.querySelector("#addr4");
 
-      // 새로운 배송지 버튼
-      document.querySelector("#place2").addEventListener("click", (e) => {
-        memberName2.value = '';
-        tel2.value = "";
-        postcode2.value = "";
-        addr3.value = "";
-        addr4.value = "";
-      });
+        // 주문자 정보와 동일 버튼
+        document.querySelector("#place1").addEventListener("click", (e) => {
+            memberName2.value = memberName;
+            tel2.value = tel;
+            postcode2.value = postcode;
+            addr3.value = addr1;
+            addr4.value = addr2;
+        });
+
+        // 새로운 배송지 버튼
+        document.querySelector("#place2").addEventListener("click", (e) => {
+            memberName2.value = '';
+            tel2.value = "";
+            postcode2.value = "";
+            addr3.value = "";
+            addr4.value = "";
+        });
     </script>
-  </body>
+</body>
+
 </html>

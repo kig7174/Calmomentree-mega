@@ -23,9 +23,9 @@ public interface OrderItemMapper {
      */
     @Insert("INSERT INTO order_items (" +
                 "prod_name, order_price, order_quantity, " +
-                "prod_id, order_id ) VALUES (" +
-                "#{prodName}, #{orderPrice}, #{orderQuantity}" +
-                "#{prodId}, #{orderId})")
+                "prod_id, order_id ) VALUE (" +
+                "#{prodName}, #{orderPrice}, #{orderQuantity}, " +
+                "#{prodId}, #{orderId})") 
     @Options(useGeneratedKeys = true, keyProperty = "orderItemId", keyColumn = "order_item_id")
     public int insert(OrderItem input);
 
@@ -41,10 +41,10 @@ public interface OrderItemMapper {
      * @return
      */
     @Select("SELECT " +
-                "order_item_id, prod_name, order_price " +
+                "order_item_id, prod_name, order_price, " +
                 "order_quantity, prod_id, order_id " +
             "FROM order_items " +
-            "WHERE order_id = #{orderId}")
+            "WHERE order_item_id = #{orderItemId}")
     @Results(id="resultMap", value={
         @Result(property="orderItemId", column="order_item_id"),
         @Result(property="prodName", column="prod_name"),
