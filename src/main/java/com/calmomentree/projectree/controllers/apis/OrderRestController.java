@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
-import com.calmomentree.projectree.models.Order;
-import com.calmomentree.projectree.models.OrderItem;
 import com.calmomentree.projectree.services.BasketService;
-import com.calmomentree.projectree.services.OrderService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -24,9 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j
 @RestController
@@ -37,9 +32,6 @@ public class OrderRestController {
 
     @Autowired
     private BasketService basketService;
-
-    @Autowired
-    private OrderService orderService;
 
     /**
      * 장바구니 갯수 표시
@@ -230,91 +222,4 @@ public class OrderRestController {
 
         return restHelper.sendJson();
     }
-
-    @PostMapping("/api/order/order_form")
-    public Map<String, Object> orderForm(
-            @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
-            @RequestParam("prodIdTmp") String prodIdTmp,
-            @RequestParam("quantityTmp") String quantityTmp,
-            @RequestParam("orderPriceTmp") String orderPriceTmp,
-            @RequestParam("prodNameKor") String prodNameKor,
-            @RequestParam("imgUrl") String imgUrl) {
-
-        int prodId = Integer.parseInt(prodIdTmp);
-        int quantity = Integer.parseInt(quantityTmp);
-        int orderPrice = Integer.parseInt(orderPriceTmp);
-
-        // // 주문서 중복 여부 확인
-        // Order check = new Order();
-        // check.setMemberId(memberInfo.getMemberId());
-
-        // int num = 0;
-        // try {
-        // num = orderService.overCount(check);
-
-        // } catch (Exception e) {
-        // return restHelper.serverError(e);
-        // }
-
-        // Order input = new Order();
-        // // input.setOrderNo();
-        // input.set
-
-        // Order output = null;
-        // // 중복된 주문서가 없다면?
-        // if(num == 0) {
-
-        // output = orderService.addItem(output);
-        // }
-
-        OrderItem output = new OrderItem();
-        output.setProdId(prodId);
-        output.setOrderQuantity(quantity);
-        output.setOrderPrice(orderPrice);
-        output.setProdName(prodNameKor);
-        output.setImgUrl(imgUrl);
-
-        Map<String, Object> data = new LinkedHashMap<String, Object>();
-        data.put("orders", output);
-
-        return restHelper.sendJson(data);
-    }
-
-
-    // @PostMapping("/api/order/order_form")
-    // public Map<String, Object> orderForm(
-    //         @SessionAttribute("memberInfo") Member memberInfo, // 현재 세션 정보 확인용
-    //         @RequestParam("prodId") List<String> prodIdTmp,
-    //         @RequestParam("quantity") List<String> quantityTmp,
-    //         @RequestParam("orderPrice") List<String> orderPriceTmp,
-    //         @RequestParam("prodNameKor") List<String> prodNameKor,
-    //         @RequestParam("imgUrl") List<String> imgUrl) {
-
-    //     List<OrderItem> list = new ArrayList<>();
-
-    //     for (int i = 0; i < prodIdTmp.size(); i++) {
-    //         int prodId = Integer.parseInt(prodIdTmp.get(i));
-    //         int quantity = Integer.parseInt(quantityTmp.get(i));
-    //         int orderPrice = Integer.parseInt(orderPriceTmp.get(i));
-    //         String name = prodNameKor.get(i);
-    //         String url = imgUrl.get(i);
-
-    //         OrderItem output = new OrderItem();
-    //         output.setProdId(prodId);
-    //         output.setOrderQuantity(quantity);
-    //         output.setOrderPrice(orderPrice);
-    //         output.setProdName(name);
-    //         output.setImgUrl(url);
-
-    //         list.add(output);
-    //     }
-        
-
-        
-    //     Map<String, Object> data = new LinkedHashMap<String, Object>();
-    //     data.put("output", list);
-
-    //     return restHelper.sendJson(data);
-    // }
-
 }
