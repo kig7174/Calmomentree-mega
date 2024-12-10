@@ -120,7 +120,6 @@ public class OrderController {
         }
 
         Order input = new Order();
-        input.setOrderNo("1");
         input.setMemberName(memberInfo.getUserName());
         input.setMemberEmail(memberInfo.getEmail());
         input.setMemberPostcode(memberInfo.getPostcode());
@@ -141,6 +140,53 @@ public class OrderController {
         
         model.addAttribute("order", order);
         model.addAttribute("items", baskets);
+
+        return "order/order_form";
+    }
+
+    @GetMapping("/order/order_form_by_detail")
+    public String orderAddByDetail(
+        Model model,
+        HttpServletRequest request,
+        @SessionAttribute("memberInfo") Member memberInfo,
+        @RequestParam("quantity") int quantity,
+        @RequestParam("prodId") int prodId
+    ) {
+        Basket basket = new Basket();
+        basket.setMemberId(memberInfo.getMemberId());
+        basket.setQuantity(quantity);
+        basket.setProdId(prodId);
+
+        Basket output = null;
+
+        try {
+            output = basketService.addItem(basket);
+        } catch (Exception e) {
+            webHelper.serverError(e);
+            return null;
+        }
+
+        Order input = new Order();
+        input.setMemberName(memberInfo.getUserName());
+        input.setMemberEmail(memberInfo.getEmail());
+        input.setMemberPostcode(memberInfo.getPostcode());
+        input.setMemberAddr1(memberInfo.getAddr1());
+        input.setMemberAddr2(memberInfo.getAddr2());
+        input.setMemberTel(memberInfo.getTel());
+        input.setMemberId(memberInfo.getMemberId());
+        input.setTotalPrice(output.getPrice());
+
+        Order order = null;
+
+        try {
+            order = orderService.addItem(input);
+        } catch (Exception e) {
+            webHelper.serverError(e);
+            return null;
+        }
+        
+        model.addAttribute("order", order);
+        model.addAttribute("items", basket);
 
         return "order/order_form";
     }
@@ -258,9 +304,7 @@ public class OrderController {
                 webHelper.serverError(e);
                 return null;
             }
-        }
-
-        
+        }        
 
         model.addAttribute("order", order);
         model.addAttribute("orderItems", items);

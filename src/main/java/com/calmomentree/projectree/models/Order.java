@@ -36,14 +36,14 @@ public class Order {
 
     @Getter
     @Setter
-    private static int count = 0;
+    private static int count;
 
     public static void orderCountReset() {
-        count = 0;
+        Order.setCount(0);
     }
 
-    public static int orderCount() {
-        return count++;
+    public static void orderCount() {
+        count++;
     }
 
     @Getter

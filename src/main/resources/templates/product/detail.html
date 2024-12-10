@@ -97,7 +97,7 @@
                                     </div>
                                 </div>
                                 <div class="buy-box">
-                                    <button class="cart-btn" type="button" id="basket-btn">장바구니</button>
+                                    <button class="cart-btn" type="button" id="basket-btn">장바구니</button>                                        
                                     <button class="buy-btn" type="button" id="buy-btn">바로구매</button>
                                 </div>
                             </div>
@@ -390,6 +390,43 @@
                 }
                 alert("상품을 장바구니에 담았습니다.");
                 window.location = "[[@{/order/basket}]]";
+            }
+        });
+
+        document.querySelector("#buy-btn").addEventListener("click", async (e) => {
+            const form = new FormData(e.currentTarget.form);
+
+            try {
+                const basketData = await axiosHelper.get("[[@{/api/basket/unique_count}]]", form);
+
+                if (basketData.error) {
+                    throw error;
+                }
+                const buyForm = e.currentTarget.form;
+
+                if (basketData.uniqueBasket === null) {
+                    
+                    buyForm.setAttribute("action", "[[@{/order/order_form_by_detail}]]");
+                    buyForm.setAttribute("method", "get");
+
+                    buyForm.submit();
+                } else if (basketData.uniqueBasket !== null && confirm("해당 상품이 이미 장바구니에 있습니다. 추가로 담으시겠습니까?")) {
+                    const input1 = document.createElement("input");
+
+                    input1.setAttribute("type", "hidden");
+                    input1.setAttribute("name", "basket_id");
+                    input1.setAttribute("value", basketData.uniqueBasket.basketId);
+
+                    buyForm.appendChild(input1);
+                    buyForm.setAttribute("action", "[[@{/order/order_form}]]");
+
+                    buyForm.submit();
+                }
+                
+            } catch (error) {
+                alert("로그인 후 이용해주세요.");
+                window.location = "[[@{/member/login}]]";
+                return;
             }
         });
     </script>
