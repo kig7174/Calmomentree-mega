@@ -60,7 +60,7 @@ public class OrderRestController {
     public Map<String, Object> uniqueBasket(
             HttpServletRequest request,
             @SessionAttribute("memberInfo") Member memberInfo,
-            @RequestParam("prodId") int prodId) {
+            @RequestParam("prodId") Integer prodId) {
 
         Basket input = new Basket();
         input.setMemberId(memberInfo.getMemberId());
@@ -208,11 +208,6 @@ public class OrderRestController {
         input.setMemberId(memberInfo.getMemberId());
         input.setQuantity(quantity);
         input.setProdId(prodId);
-
-        // 중복을 어떻게 처리해야 되는거지 ???????
-        Basket check = new Basket();
-        check.setMemberId(memberInfo.getMemberId());
-        check.setProdId(prodId);
 
         try {
             basketService.addItem(input);
