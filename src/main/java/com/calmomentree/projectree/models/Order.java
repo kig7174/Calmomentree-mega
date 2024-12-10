@@ -36,6 +36,18 @@ public class Order {
 
     @Getter
     @Setter
+    private static int count = 0;
+
+    public static void orderCountReset() {
+        count = 0;
+    }
+
+    public static int orderCount() {
+        return count++;
+    }
+
+    @Getter
+    @Setter
     private static int listCount = 0;
 
     @Getter

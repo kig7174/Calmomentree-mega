@@ -1,6 +1,7 @@
 package com.calmomentree.projectree.controllers;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,22 +13,15 @@ import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.models.Order;
-<<<<<<< HEAD
-import com.calmomentree.projectree.services.BasketService;
-=======
 import com.calmomentree.projectree.models.OrderItem;
 import com.calmomentree.projectree.services.BasketService;
 import com.calmomentree.projectree.services.OrderItemService;
->>>>>>> fb97eb08725b735ca4f9b1f7d31f8eb09d763047
 import com.calmomentree.projectree.services.OrderService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
-<<<<<<< HEAD
-=======
 import org.springframework.web.bind.annotation.PostMapping;
->>>>>>> fb97eb08725b735ca4f9b1f7d31f8eb09d763047
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -43,9 +37,6 @@ public class OrderController {
 
     @Autowired
     private BasketService basketService;
-
-    @Autowired
-    private OrderService orderService;
 
     @Autowired
     private OrderService orderService;
@@ -147,38 +138,133 @@ public class OrderController {
             webHelper.serverError(e);
             return null;
         }
-
-        // List<OrderItem> items = new ArrayList<>();
-
-        // int totalPrice = 0;
-
-        // for (int i=0; i<baskets.size(); i++) {
-        //     OrderItem oi = new OrderItem();
-        //     Basket b = baskets.get(i);
-        //     oi.setProdName(b.getProdNameKor());
-        //     oi.setOrderQuantity(b.getQuantity());
-        //     oi.setProdId(b.getProdId());
-        //     int p = b.getPrice() * b.getQuantity();
-        //     oi.setOrderPrice(p);
-        //     oi.setOrderId(order.getOrderId());
-
-        //     OrderItem item = null;
-
-        //     try {
-        //         item = orderItemService.addItem(oi);
-        //     } catch (Exception e) {
-        //         webHelper.serverError(e);
-        //         return null;
-        //     }
-
-        //     items.add(item);
-
-        //     totalPrice += item.getOrderPrice();
-        // }
         
         model.addAttribute("order", order);
         model.addAttribute("items", baskets);
 
         return "order/order_form";
     }
+
+    @PostMapping("/order/order_ok")
+    public String orderOk(
+        Model model,
+        @SessionAttribute("memberInfo") Member memberInfo,
+        @RequestParam("order_id") int orderId,
+        @RequestParam("member_name") String memberName,
+        @RequestParam("email") String memberEmail,
+        @RequestParam("tel") String memberTel,
+        @RequestParam("postcode") String memberPostcode,
+        @RequestParam("addr1") String memberAddr1,
+        @RequestParam("addr2") String memberAddr2,
+        @RequestParam("receiver_name") String receiverName,
+        @RequestParam("receiver_postcode") String receiverPostcode,
+        @RequestParam("receiver_addr1") String receiverAddr1,
+        @RequestParam("receiver_addr2") String receiverAddr2,
+        @RequestParam("receiver_tel") String receiverTel,
+        @RequestParam("req") String req,
+        @RequestParam("total_price") Integer totalPrice,
+        @RequestParam("basket_id") List<Integer> basketIdTmp
+    ) {
+
+        Order input = new Order();
+        input.setOrderId(orderId);
+        input.setMemberId(memberInfo.getMemberId());
+        input.setOrderNo("1");
+        input.setOrderState("결제완료");
+        input.setMemberName(memberName);
+        input.setMemberEmail(memberEmail);
+        input.setMemberPostcode(memberPostcode);
+        input.setMemberAddr1(memberAddr1);
+        input.setMemberAddr2(memberAddr2);
+        input.setMemberTel(memberTel);
+        input.setReceiverName(receiverName);
+        input.setReceiverPostcode(receiverPostcode);
+        input.setReceiverAddr1(receiverAddr1);
+        input.setReceiverAddr2(receiverAddr2);
+        input.setReceiverTel(receiverTel);
+        input.setReq(req);
+
+        Order.orderCount();
+        int count = Order.getCount();
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH) + 1;
+        int date = cal.get(Calendar.DATE);
+
+        input.setOrderNo(String.format("%04d%02d%02d%04d", year, month, date, count));
+
+        Order order = null;
+
+        try {
+            order = orderService.editItem(input);
+        } catch (Exception e) {
+            webHelper.serverError(e);
+            return null;
+        }
+        
+        List<Basket> baskets = new ArrayList<>();
+
+        for (int i=0; i<basketIdTmp.size(); i++) {
+            Basket b = new Basket();
+            b.setBasketId(basketIdTmp.get(i));
+            b.setMemberId(memberInfo.getMemberId());
+
+            Basket basket = null;
+            
+            try {
+                basket = basketService.getItem(b);
+            } catch (Exception e) {
+                webHelper.serverError(e);
+                return null;
+            }
+
+            baskets.add(basket);
+        }
+
+        List<OrderItem> items = new ArrayList<>();
+
+        for (int i=0; i<baskets.size(); i++) {
+            OrderItem oi = new OrderItem();
+
+            Basket b = baskets.get(i);
+            oi.setProdName(b.getProdNameKor());
+            oi.setOrderQuantity(b.getQuantity());
+            oi.setProdId(b.getProdId());
+            int p = b.getPrice() * b.getQuantity();
+            oi.setOrderPrice(p);
+            oi.setOrderId(orderId);
+
+            OrderItem item = null;
+
+            try {
+                item = orderItemService.addItem(oi);
+            } catch (Exception e) {
+                webHelper.serverError(e);
+                return null;
+            }
+
+            items.add(item);
+        }
+
+        for (int i=0; i<baskets.size(); i++) {
+            Basket b = new Basket();
+            b.setBasketId(basketIdTmp.get(i));
+            b.setMemberId(memberInfo.getMemberId());
+
+            try {
+                basketService.deleteItem(b);
+            } catch (Exception e) {
+                webHelper.serverError(e);
+                return null;
+            }
+        }
+
+        
+
+        model.addAttribute("order", order);
+        model.addAttribute("orderItems", items);
+
+        return "order/order_result";
+    }   
 }

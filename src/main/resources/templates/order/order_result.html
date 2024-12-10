@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{/fragments/head :: calm-head('주문 완료')}"></th:block>
+</head>
+<body>
+    <header th:replace="~{/fragments/common :: calm-header}"></header>
+
+    <div class="container">
+        <div th:replace="~{/fragments/common :: calm-search}"></div>
+        <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
+        <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
+
+        <div>
+            <p th:text="${order.memberName} + '님 주문이 완료되었습니다.'"></p>
+            <p th:text="${order.totalPrice} + ' 원 이 결제되었습니다.'"></p>
+            <p th:text="${orderItems[0].prodName} + ' 외 ' + ${orderItems.size() - 1} + '개 상품이 주문되었습니다.'"></p>
+        </div>
+    </div>
+
+    <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
+
+    <th:block th:replace="~{/fragments/script}"></th:block>
+</body>
+</html>

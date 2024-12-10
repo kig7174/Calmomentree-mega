@@ -18,4 +18,6 @@ public interface OrderService {
     public int getCount(Order params) throws Exception;
 
     public int overCount(Order params) throws Exception;
+
+    public int deleteByCancelOrder() throws Exception;
 }

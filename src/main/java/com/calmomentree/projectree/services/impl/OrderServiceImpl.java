@@ -134,4 +134,18 @@ public class OrderServiceImpl implements OrderService {
 
         return output;
     }
+
+    @Override
+    public int deleteByCancelOrder() throws Exception {
+        int rows = 0;
+
+        try {
+            rows = orderMapper.deleteByCancelOrder();
+        } catch (Exception e) {
+            log.error("삭제 실패", e);
+            throw e;
+        }
+
+        return rows;
+    }
 }
