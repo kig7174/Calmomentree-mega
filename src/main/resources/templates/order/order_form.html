@@ -265,7 +265,7 @@
         </div>
             <input type="hidden" name="order_id" th:value="${order.orderId}" />
             <input type="hidden" name="total_price" th:value="${order.totalPrice}" />
-            <button class="fin place" tye="submit"><span class="" th:text="${#numbers.formatInteger(order.totalPrice, 3, 'COMMA') + ' 원'}"></span> 결제하기</button>
+            <button class="fin place" type="submit"><span class="" th:text="${#numbers.formatInteger(order.totalPrice, 3, 'COMMA') + ' 원'}"></span> 결제하기</button>
         </form>
     </div>
 

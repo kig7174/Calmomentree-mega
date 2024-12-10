@@ -2,6 +2,107 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="~{/fragments/head :: calm-head('주문 완료')}"></th:block>
+    <style>
+        body {
+          font-family: "Noto Sans KR", "Pretendard", "sans-serif", "dotum";
+          margin: 0;
+          padding: 0;
+          background-color: #f7f7f7;
+        }
+        .email-container {
+          max-width: 600px;
+          margin: 0 auto;
+          background-color: #ffffff;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          overflow: hidden;
+        }
+        .email-header {
+          background-color: #72161d;
+          padding: 20px;
+          text-align: center;
+          h1 {
+              color: #ffffff;
+
+          }
+
+        }
+        .email-body {
+          padding: 20px;
+          color: #333333;
+          background-color: #faf8ef;
+        }
+        .email-body h1 {
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+        .email-body p {
+          font-size: 16px;
+          line-height: 1.5;
+          margin-bottom: 20px;
+        }
+        .order-details,
+        .order-info {
+          background-color: #e9e5dd;
+          padding: 15px;
+          border-radius: 8px;
+          margin-bottom: 20px;
+        }
+        .order-details h2 {
+          font-size: 18px;
+          margin-bottom: 10px;
+        }
+        .order-details p {
+          font-size: 16px;
+          margin: 5px 0;
+        }
+        .email-footer {
+          background-color: #333333;
+          
+          padding: 15px;
+          text-align: center;
+          font-size: 14px;
+
+          p {
+            display: block;
+            color: #ffffff;
+            padding: 8px;
+          }
+        }
+        .email-footer a {
+          color: #ffffff;
+          text-decoration: none;
+        }
+  
+        .logo-img {
+          text-align: center;
+          margin-top: 20px;
+        }
+  
+        .logo-img img {
+          width: 50%;
+        }
+  
+        .homeBtnArea {
+          display: flex;
+          justify-content: center;
+  
+          .home {
+            text-decoration: none;
+            color: #fff;
+            background-color: #333333;
+            display: inline-block;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+  
+            &:hover {
+              background-color: #000;
+            }
+          }
+        }
+      </style>
 </head>
 <body>
     <header th:replace="~{/fragments/common :: calm-header}"></header>
@@ -11,11 +112,46 @@
         <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
         <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
 
-        <div>
-            <p th:text="${order.memberName} + '님 주문이 완료되었습니다.'"></p>
-            <p th:text="${order.totalPrice} + ' 원 이 결제되었습니다.'"></p>
-            <p th:text="${orderItems[0].prodName} + ' 외 ' + ${orderItems.size() - 1} + '개 상품이 주문되었습니다.'"></p>
-        </div>
+        <div class="email-container">
+            <div class="email-header">
+              <h1>결제가 완료되었습니다</h1>
+            </div>
+            <div class="email-body">
+              <p class="logo-img">
+                <a th:href="@{/}"><img th:src="@{/files/common/header_logo.svg}" /></a>
+              </p>
+              <h1>안녕하세요, <span th:text="${order.memberName}"></span>님!</h1>
+              <p>고객님의 주문이 성공적으로 결제되었습니다. 아래 주문 내역을 확인해 주세요.</p>
+              <div class="order-info">
+                <p><strong>결제 일자 : </strong><span th:text="${order.orderDate}"></span> </p>
+                <p><strong>배송지 주소 : </strong>(<span th:text="${order.receiverPostcode}"></span>) 
+                      <span th:text="${order.receiverAddr1} + ${order.receiverAddr2}"></span></p>
+                <p><strong>전화번호 : </strong> <span th:text="${order.memberTel}"></span></p>
+                <p><strong>배송요청사항 : </strong><span th:text="${order.req } != 'null' ? ${order.req} : '없음'"></span></p>
+              </div>
+      
+              <div class="order-details" th:each="orderItem : ${orderItems}">
+                <h2>주문 상세 정보</h2>
+                <p><strong>주문 번호 : </strong><span th:text="${order.orderNo}"></span> </p>
+                <p><strong>주문 상품 : </strong><span th:text="${orderItem.prodName}"></span></p>
+                <p><strong>주문 수량 : </strong><span th:text="${orderItem.orderQuantity} + '개'"></span></p>
+                <p><strong>결제 금액 : </strong><span th:text="${#numbers.formatInteger(orderItem.orderPrice, 3, 'COMMA') + '원'}"></span></p>
+              </div>
+              <div>
+                <p><strong>총 결제 금액: </strong><span th:text="${#numbers.formatInteger(order.totalPrice, 3, 'COMMA') + '원'}"></span></p>
+              </div>
+              <p>주문 상품은 빠른 시일 내에 발송될 예정입니다. 배송 진행 상황은 별도의 이메일로 알려드리겠습니다.</p>
+              <p>추가 문의 사항이 있으시면 언제든지 저희 고객센터로 연락해 주세요.</p>
+              <p>감사합니다.</p>
+              <div class="homeBtnArea">
+                <a th:href="@{/product/list/1}" class="home">쇼핑하러가기</a>
+              </div>
+            </div>
+            <div class="email-footer">
+              <p>© Calmomentree. All rights reserved.</p>
+              <p><a th:href="@{/member/mall_agreement}">이용약관</a> | <a th:href="@{/member/privacy}">개인정보처리방침</a></p>
+            </div>
+          </div>
     </div>
 
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
