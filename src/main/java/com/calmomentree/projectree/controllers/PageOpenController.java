@@ -75,6 +75,11 @@ public class PageOpenController {
     public String searchOrder() {
         return "order/search_board_list";
     }
+
+    @GetMapping("/order/order_result")
+    public String orderResult() {
+        return "order/order_result";
+    }
     
     @GetMapping("/board/faq/list")
     public String faqList() {
