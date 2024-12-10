@@ -12,11 +12,13 @@
     <header th:replace="~{/fragments/common :: calm-header}"></header>
 
     <div class="container">
+        
         <div th:replace="~{/fragments/common :: calm-search}"></div>
         <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
         <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
 
         <!---------- 주문 정보 ------------>
+        <form th:action="@{/order/order_ok}" method="post">
         <div class="member-info collapse">
             <div class="info-title">
                 <span class="title">주문정보
@@ -30,7 +32,7 @@
                 <div class="name-box input-box">
                     <label for="member-name">주문자<span class="bg-required"></span></label>
                     <div class="input-box2">
-                        <input type="text" name="member-name" id="member-name" class="input-box-l"
+                        <input type="text" name="member_name" id="member_name" class="input-box-l"
                             th:value="${session.memberInfo.userName}" required />
                     </div>
                 </div>
@@ -112,27 +114,27 @@
                 <div class="name-box input-box">
                     <label for="shop-name">받는사람<span class="bg-required"></span></label>
                     <div class="input-box2">
-                        <input type="text" name="shop-name" id="shop-name" th:value="${session.memberInfo.userName}"
+                        <input type="text" name="receiver_name" id="receiver_name" th:value="${session.memberInfo.userName}"
                             required />
                     </div>
                 </div>
                 <div class="addr-box input-box">
                     <label for="postcode2"> 주소<span class="bg-required"></span></label>
-                    <input type="text" name="postcode2" id="postcode2" class="postcode2" placeholder="우편번호"
+                    <input type="text" name="receiver_postcode" id="receiver_postcode" class="postcode2" placeholder="우편번호"
                         th:value="${session.memberInfo.postcode}" required readonly />
                     <button type="button" id="post-btn2">주소검색</button>
                 </div>
                 <div class="addr-box input-box">
                     <label for=""></label>
                     <div class="input-box2">
-                        <input type="text" name="addr3" id="addr3" class="addr3" th:value="${session.memberInfo.addr1}"
+                        <input type="text" name="receiver_addr1" id="receiver_addr1" class="addr3" th:value="${session.memberInfo.addr1}"
                             placeholder="기본주소" />
                     </div>
                 </div>
                 <div class="addr-box input-box">
                     <label for=""></label>
                     <div class="input-box2">
-                        <input type="text" name="addr4" id="addr4" class="addr4" th:value="${session.memberInfo.addr2}"
+                        <input type="text" name="receiver_addr2" id="receiver_addr2" class="addr4" th:value="${session.memberInfo.addr2}"
                             placeholder="상세주소" />
                     </div>
                 </div>
@@ -155,17 +157,17 @@
                 <div class="phone-box input-box">
                     <label for="telSub"> 휴대전화<span class="bg-required"></span></label>
                     <div class="input-box2">
-                        <input type="text" name="telSub" id="telSub" th:value="${session.memberInfo.tel}" />
+                        <input type="text" name="receiver_tel" id="receiver_tel" th:value="${session.memberInfo.tel}" />
                     </div>
                 </div>
                 <div class="message-box input-box">
-                    <select name="" id="">
-                        <option value="">--메시지 선택(선택사항)--</option>
-                        <option value="">배송 전에 미리 연락바랍니다.</option>
-                        <option value="">부재 시 경비실에 맡겨주세요.</option>
-                        <option value="">부재 시 문앞에 놓아주세요.</option>
-                        <option value="">빠른 배송 부탁드립니다.</option>
-                        <option value="">택배함에 보관해 주세요</option>
+                    <select name="req" id="">
+                        <option value="null">--메시지 선택(선택사항)--</option>
+                        <option value="배송 전에 미리 연락바랍니다.">배송 전에 미리 연락바랍니다.</option>
+                        <option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
+                        <option value="부재 시 문앞에 놓아주세요.">부재 시 문앞에 놓아주세요.</option>
+                        <option value="빠른 배송 부탁드립니다.">빠른 배송 부탁드립니다.</option>
+                        <option value="택배함에 보관해 주세요.">택배함에 보관해 주세요.</option>
                         <option value="">직접입력</option>
                     </select>
                 </div>
@@ -191,7 +193,8 @@
                     </div>
 
                     <div class="description">
-                        <input type="hidden" th:value="${item.prodId}">
+                        <input type="hidden" name="basket_id" th:value="${item.basketId}" />
+
                         <span class="prod-name" th:text="${item.prodNameKor}">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
                         <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
                         <span>수량:<span class="qty" th:text="${item.quantity}">1</span>개</span>
@@ -260,18 +263,21 @@
                 </div>
             </div>
         </div>
-        <button class="fin place"><span class="" th:text="${#numbers.formatInteger(order.totalPrice, 3, 'COMMA') + '원'}"></span>결제하기</button>
+            <input type="hidden" name="order_id" th:value="${order.orderId}" />
+            <input type="hidden" name="total_price" th:value="${order.totalPrice}" />
+            <button class="fin place" tye="submit"><span class="" th:text="${#numbers.formatInteger(order.totalPrice, 3, 'COMMA') + ' 원'}"></span> 결제하기</button>
+        </form>
     </div>
 
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
     <!-- 우편번호 검색 -->
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    
     <script th:src="@{/assets/js/orderform.js}"></script>
     <script>
         // 주문정보
-        const memberName = document.querySelector("#member-name").value;
+        const memberName = document.querySelector("#member_name").value;
         const email = document.querySelector("#email").value;
         const tel = document.querySelector("#tel").value;
         const postcode = document.querySelector("#postcode").value;
@@ -279,11 +285,11 @@
         const addr2 = document.querySelector("#addr2").value;
 
         // 배송지 정보
-        const memberName2 = document.querySelector("#shop-name");
-        const tel2 = document.querySelector("#telSub");
-        const postcode2 = document.querySelector("#postcode2");
-        const addr3 = document.querySelector("#addr3");
-        const addr4 = document.querySelector("#addr4");
+        const memberName2 = document.querySelector("#receiver_name");
+        const tel2 = document.querySelector("#receiver_tel");
+        const postcode2 = document.querySelector("#receiver_postcode");
+        const addr3 = document.querySelector("#receiver_addr1");
+        const addr4 = document.querySelector("#receiver_addr2");
 
         // 주문자 정보와 동일 버튼
         document.querySelector("#place1").addEventListener("click", (e) => {

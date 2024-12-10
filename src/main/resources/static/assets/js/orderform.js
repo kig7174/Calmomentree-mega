@@ -16,8 +16,8 @@ document.querySelector("#post-btn2").addEventListener("click", (e) => {
 
   new daum.Postcode({
     oncomplete: function (data) {
-      document.querySelector("#postcode2").value = data.zonecode;
-      document.querySelector("#addr3").value = data.roadAddress;
+      document.querySelector("#receiver_postcode").value = data.zonecode;
+      document.querySelector("#receiver_addr1").value = data.roadAddress;
     },
   }).open();
 });

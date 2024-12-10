@@ -29,7 +29,7 @@ public class OrderItemServiceImpl implements OrderItemService {
             throw e;
         }
 
-        return null;
+        return orderItemMapper.selectItem(input);
     }
 
     @Override
