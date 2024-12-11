@@ -1,5 +1,6 @@
 package com.calmomentree.projectree.controllers;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,12 +11,15 @@ import com.calmomentree.projectree.helpers.FileHelper;
 import com.calmomentree.projectree.helpers.Pagination;
 import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Board;
+import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.services.BoardService;
 
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Slf4j
 @Controller
@@ -83,7 +87,23 @@ public class BoardController {
     @SuppressWarnings("null")
     @GetMapping("/board/qna/read/{boardId}")
     public String qnaRead(Model model,
-            @PathVariable("boardId") int boardId) {
+            HttpServletResponse response,
+            @PathVariable("boardId") int boardId,
+            @SessionAttribute("memberInfo") Member memberInfo) {
+        
+        String msg = "로그인 해주세요";
+        String url = "/member/login";
+        if (memberInfo == null) {
+            try {
+                response.setContentType("text/html; charset=utf-8");
+                PrintWriter w = response.getWriter();
+                w.write("<script>alert('" + msg + "');location.href='" + url + "';</script>");
+                w.flush();
+                w.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         // 조회 조건에 사용할 변수를 Beans에 저장
         Board input = new Board();
@@ -100,8 +120,17 @@ public class BoardController {
         // 업로드 사진의 경로를 URL로 변환.
         output.setUploadImg(fileHelper.getUrl(output.getUploadImg()));
 
+        Board member = new Board();
+
+        if (memberInfo != null) {
+            member.setMemberId(memberInfo.getMemberId());
+        } else {
+            member = null;
+        }
+
         // View에 데이터 전달
         model.addAttribute("board", output);
+        model.addAttribute("member", member);
 
         return "board/qna/read";
 

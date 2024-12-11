@@ -160,6 +160,18 @@ public class BoardRestController {
            return restHelper.serverError(e);
         }
 
+        Board img = new Board();
+        img.setBoardId(boardId);
+
+        Board output = null;
+
+        try {
+          output =  boardService.getItem(img);
+        } catch (Exception e) {
+            return restHelper.serverError(e);
+        }
+
+
         // 정보를 Service에 전달하기 위한 객체 구성
         Board board = new Board();
         board.setBoardContent(boardContent);
@@ -168,12 +180,12 @@ public class BoardRestController {
         board.setBoardId(boardId);
         board.setMemberId(memberInfo.getMemberId());
 
-        String currentPhoto = fileHelper.getFilePath(board.getUploadImg());
+        String currentPhoto = fileHelper.getFilePath(output.getUploadImg());
         
         // 기존에 등록된 사진이 있는 경우
-        if(currentPhoto != null && currentPhoto.equals("")) {
+        if(currentPhoto != null && !currentPhoto.equals("")) {
             currentPhoto = fileHelper.getFilePath(currentPhoto);
-
+            
             // 기존 사진의 삭제가 요청 되었다면?
             if(deletePhoto.equals("Y")) {
                 fileHelper.deleteUploadFile(currentPhoto);
@@ -197,15 +209,15 @@ public class BoardRestController {
             }
             
         }
-
+        Board check = null;
         // DB에 저장하기
         try {
-           boardService.editItem(board);
+         check = boardService.editItem(board);
         } catch (Exception e) {
             return restHelper.serverError(e);
         }
 
-        // Map<String, Object> data = new LinkedHashMap<String, Object>();
+        log.error("확인용 : "+check.getUploadImg());
 
         return restHelper.sendJson();
     }
