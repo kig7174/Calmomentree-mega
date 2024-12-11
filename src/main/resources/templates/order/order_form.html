@@ -220,7 +220,7 @@
 
             <div class="info-box selected">
                 <div class="pay">
-                    주문상품<span><span class="bold">28,000</span>원</span>
+                    주문상품<span class="bold" th:text="${#numbers.formatInteger(order.totalPrice, 3, 'COMMA') + ' 원'}"></span>
                 </div>
                 <div class="pay">
                     배송비<span>+<span class="bold">0</span>원</span>
@@ -230,7 +230,7 @@
                 </div>
                 <div class="info-box2">
                     <div class="pay price">
-                        최종 결제 금액<span><span class="bold" th:value="${#numbers.formatInteger(order.totalPrice, 3, 'COMMA') + '원'}">31000</span></span>
+                        최종 결제 금액<span class="bold" th:text="${#numbers.formatInteger(order.totalPrice, 3, 'COMMA') + ' 원'}"></span>
                     </div>
                 </div>
             </div>
