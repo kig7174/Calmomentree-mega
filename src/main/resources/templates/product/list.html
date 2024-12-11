@@ -13,8 +13,8 @@
         <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
             
         <!-- body -->
-        <div class="list-body" th:unless="${products != 0 or products != null}"></div>
-        <div class="list-body" th:if="${products != 0 or products != null}">
+        <div class="list-body" th:if="${products == 0 or products == null}"></div>
+        <div class="list-body" th:unless="${products == 0 or products == null}">
             <div class="category-box">
                 <a th:href="@{/}">홈</a>
 

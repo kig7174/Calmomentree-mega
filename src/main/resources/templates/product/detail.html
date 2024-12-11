@@ -360,6 +360,7 @@
 
     <script>
         document.querySelector("#basket-btn").addEventListener("click", async (e) => {
+            e.preventDefault();
             const form = new FormData(e.currentTarget.form);
 
             if (document.querySelector("#qty").value == 0) {
@@ -399,24 +400,20 @@
         });
 
         document.querySelector("#buy-btn").addEventListener("click", async (e) => {
-
+            e.preventDefault();
+            
             if (document.querySelector("#qty").value == 0) {
                 alert("상품을 선택해주세요.");
                 return;
             }
 
-            try {
-                if ("[[${session.memberInfo == null}]]" == true) {
-                    throw error;
-                }
-
-                e.currentTarget.form.submit();
-                
-            } catch (error) {
+            if ("[[${session.memberInfo == null}]]" == "true") {
                 alert("로그인 후 이용해주세요.");
                 window.location = "[[@{/member/login}]]";
                 return;
             }
+
+            e.currentTarget.form.submit();
         });
     </script>
 </body>

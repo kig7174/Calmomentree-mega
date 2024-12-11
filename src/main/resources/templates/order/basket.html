@@ -212,7 +212,7 @@
                 const current = e.currentTarget.closest(".listTable");
                 const basketId = current.querySelector("#basket_id").value;
                 const quantity = current.querySelector("#qty").value;
-                const orderPrice = current.querySelector("#orderPrice");
+                
 
                 formData.append("basketIdTmp", basketId);
                 formData.append("quantityTmp", quantity);
@@ -220,10 +220,10 @@
                 const data = await axiosHelper.put(`[[@{/api/basket/edit}]]`, formData);
                 console.log(data);
                 if (data) {
-                    if (current.querySelector("#basketId").value == data.orderBasket.basketId) {
+                    if (current.querySelector("#basket_id").value == data.orderBasket.basketId) {
                         current.querySelector(".orderPrice").innerHTML = (data.orderBasket.price * data.orderBasket.quantity).toLocaleString() + " 원";
                         current.querySelector(".itemPrice").innerHTML = (data.orderBasket.price * data.orderBasket.quantity).toLocaleString() + " 원";
-                        orderPrice.value = data.orderBasket.price * data.orderBasket.quantity;
+                        
                     }
                 }
 

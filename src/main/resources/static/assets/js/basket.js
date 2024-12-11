@@ -76,7 +76,7 @@ document.querySelector("#checkDelete").addEventListener("click", async (e) => {
       checkedChks.forEach((v, i) => {
         const parent = v.closest(".listTable");
         // console.log("삭제할상품박스: " + parent);
-        const basketId = parent.querySelector("#basketId").value;
+        const basketId = parent.querySelector("#basket_id").value;
         // console.log("삭제할 장바구니 번호: " + basketId);
         
         let basketIdNum = parseInt(basketId);
@@ -99,7 +99,7 @@ document.querySelectorAll(".cancel").forEach((v, i) => {
     e.preventDefault();
 
    const current = e.currentTarget.closest(".listTable");
-    const basketId = current.querySelector("#basketId").value;
+    const basketId = current.querySelector("#basket_id").value;
     
     formData.append('basketIdTmp',basketId);
 
