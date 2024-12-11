@@ -43,20 +43,20 @@
                     <h4>주문내역</h4>
                     <div class="order">                  
                         <div>
-                            <span>입금전</span>
-                            <span>0</span>
+                            <span>결제완료</span>
+                            <span th:text="${member.orderOkCount}">0</span>
                         </div>
                         <div>
                             <span>배송준비중</span>
-                            <span>0</span>
+                            <span th:text="${member.deliveryReadyCount}">0</span>
                         </div>
                         <div>
                             <span>배송중</span>
-                            <span>0</span>
+                            <span th:text="${member.deliveryCount}">0</span>
                         </div>
                         <div>
                             <span>베송완료</span>
-                            <span>0</span>
+                            <span th:text="${member.deliveryOkCount}">0</span>
                         </div>
                     </div>
                     <h4>교환/반품/취소 내역</h4>

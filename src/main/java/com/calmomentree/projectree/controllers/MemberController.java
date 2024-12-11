@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.calmomentree.projectree.exceptions.StringFormatException;
 import com.calmomentree.projectree.helpers.RegexHelper;
@@ -116,5 +117,27 @@ public class MemberController {
         model.addAttribute("password", newPw);
 
         return "member/password/reset_pw_result";
+    }
+
+    @GetMapping("/myshop")
+    public String myshop(
+        Model model,
+        @SessionAttribute("memberInfo") Member memberInfo
+    ) {
+        Member input = new Member();
+        input.setMemberId(memberInfo.getMemberId());
+
+        Member output = null;
+
+        try {
+            output = memberService.getItem(input);
+        } catch (Exception e) {
+            webHelper.serverError(e);
+            return null;
+        }
+
+        model.addAttribute("member", output);
+
+        return "myshop/index";
     }
 }

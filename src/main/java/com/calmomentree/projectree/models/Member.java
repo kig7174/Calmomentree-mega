@@ -27,6 +27,10 @@ public class Member implements Serializable {
     private String isAdmin;            // 관리자 여부
 
     private int basketCount;            // 장바구니 개수
+    private int orderOkCount;           // 결제 완료 주문 개수
+    private int deliveryReadyCount;     // 배송 준비중 개수
+    private int deliveryCount;          // 배송중 개수
+    private int deliveryOkCount;        // 배송완료 개수
 
     @Getter
     @Setter

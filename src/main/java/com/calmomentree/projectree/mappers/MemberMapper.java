@@ -84,7 +84,11 @@ public interface MemberMapper {
             "birthday, is_email_agree, is_sms_agree, " +
             "login_date, join_date, edit_date, " +
             "is_out, is_admin, " +
-            "(SELECT COUNT(*) FROM baskets WHERE member_id = member.member_id) AS basket_count " +
+            "(SELECT COUNT(*) FROM baskets WHERE member_id = member.member_id) AS basket_count, " +
+            "(SELECT COUNT(*) FROM orders WHERE member_id = member.member_id AND order_state = '결제완료') AS order_ok_count, " + 
+            "(SELECT COUNT(*) FROM orders WHERE member_id = member.member_id AND order_state = '배송준비중') AS delivery_ready_count, " + 
+            "(SELECT COUNT(*) FROM orders WHERE member_id = member.member_id AND order_state = '배송중') AS delivery_count, " + 
+            "(SELECT COUNT(*) FROM orders WHERE member_id = member.member_id AND order_state = '배송완료') AS delivery_ok_count " + 
             "FROM members AS member " +
             "WHERE member_id=#{memberId}")
     @Results(id = "memberMap", value = {
@@ -105,7 +109,11 @@ public interface MemberMapper {
         @Result(property="editDate", column="edit_date"),
         @Result(property="isOut", column="is_out"),
         @Result(property="isAdmin", column="is_admin"),
-        @Result(property="basketCount", column="basket_count")
+        @Result(property="basketCount", column="basket_count"),
+        @Result(property="orderOkCount", column="order_ok_count"),
+        @Result(property="deliveryReadyCount", column="delivery_ready_count"),
+        @Result(property="deliveryCount", column="delivery_count"),
+        @Result(property="deliveryOkCount", column="delivery_ok_count")
     })
     public Member selectItem(Member input);
 
