@@ -48,7 +48,7 @@
                             </div>
                         </div>
 
-                        <form id="prod-form">
+                        <form id="prod-form" method="get" th:action="@{/order/order_form_by_detail}">
                             <div class="item-content">
                                 <div class="text-content">
                                     <p class="eng" th:text="${product.prodNameEng}"></p>
@@ -362,6 +362,11 @@
         document.querySelector("#basket-btn").addEventListener("click", async (e) => {
             const form = new FormData(e.currentTarget.form);
 
+            if (document.querySelector("#qty").value == 0) {
+                alert("상품을 선택해주세요.");
+                return;
+            }
+
             let data = null;
 
             try {
@@ -394,34 +399,18 @@
         });
 
         document.querySelector("#buy-btn").addEventListener("click", async (e) => {
-            const form = new FormData(e.currentTarget.form);
+
+            if (document.querySelector("#qty").value == 0) {
+                alert("상품을 선택해주세요.");
+                return;
+            }
 
             try {
-                const basketData = await axiosHelper.get("[[@{/api/basket/unique_count}]]", form);
-
-                if (basketData.error) {
+                if ("[[${session.memberInfo == null}]]" == true) {
                     throw error;
                 }
-                const buyForm = e.currentTarget.form;
 
-                if (basketData.uniqueBasket === null) {
-                    
-                    buyForm.setAttribute("action", "[[@{/order/order_form_by_detail}]]");
-                    buyForm.setAttribute("method", "get");
-
-                    buyForm.submit();
-                } else if (basketData.uniqueBasket !== null && confirm("해당 상품이 이미 장바구니에 있습니다. 추가로 담으시겠습니까?")) {
-                    const input1 = document.createElement("input");
-
-                    input1.setAttribute("type", "hidden");
-                    input1.setAttribute("name", "basket_id");
-                    input1.setAttribute("value", basketData.uniqueBasket.basketId);
-
-                    buyForm.appendChild(input1);
-                    buyForm.setAttribute("action", "[[@{/order/order_form}]]");
-
-                    buyForm.submit();
-                }
+                e.currentTarget.form.submit();
                 
             } catch (error) {
                 alert("로그인 후 이용해주세요.");
