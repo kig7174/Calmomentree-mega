@@ -149,11 +149,6 @@ public class PageOpenController {
     public String amenityRead() {
         return "board/amenity/read";
     }
-
-    @GetMapping("/404")
-    public String errorPage() {
-        return "404";
-    }
     
     
 }
