@@ -45,11 +45,11 @@
 
                                     <!-- 상품 이미지 -->
                                     <div class="thumbBox">
-                                        <a href=""><img th:src="${order.imgUrl}" alt="" /></a>
+                                        <a th:href="@{/product/detail/{prodId}(prodId=${order.prodId})}"><img th:src="${order.imgUrl}" alt="" /></a>
                                     </div>
                                     <!-- 상품 정보 -->
                                     <div class="prodInfo">
-                                        <span class="info"><a href="" th:text="${order.prodNameKor}"></a></span>
+                                        <span class="info"><a th:href="@{/product/detail/{prodId}(prodId=${order.prodId})}" th:text="${order.prodNameKor}"></a></span>
                                         <span class="info" th:text="|${order.capacity} ML|"></span>
                                         <span class="info orderPrice"
                                             th:text="${#numbers.formatInteger((order.price * order.quantity) , 3, 'COMMA') + '원'}"></span>

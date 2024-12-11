@@ -166,6 +166,8 @@ public class OrderController {
             return null;
         }
 
+        output.setImgUrl(fileHelper.getUrl(output.getImgUrl()));
+
         Order input = new Order();
         input.setMemberName(memberInfo.getUserName());
         input.setMemberEmail(memberInfo.getEmail());
@@ -186,7 +188,7 @@ public class OrderController {
         }
         
         model.addAttribute("order", order);
-        model.addAttribute("items", basket);
+        model.addAttribute("items", output);
 
         return "order/order_form";
     }

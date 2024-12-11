@@ -39,7 +39,7 @@ public class Order {
     private static int count;
 
     public static void orderCountReset() {
-        Order.setCount(0);
+        count = 0;
     }
 
     public static void orderCount() {

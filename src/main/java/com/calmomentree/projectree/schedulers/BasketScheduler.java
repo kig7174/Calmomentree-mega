@@ -27,7 +27,8 @@ public class BasketScheduler {
             log.error(e.getMessage(), e);
             return;
         }
-
+        log.info("=============================================");
         log.info("삭제된 장바구니 수 : " + deleteBaskets + "개");
+        log.info("=============================================");
     }
 }

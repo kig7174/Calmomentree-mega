@@ -28,11 +28,14 @@ public class OrderScheduler {
             return;
         }
 
+        log.info("=============================================");
         log.info("삭제 처리된 주문 수 : " + deleteOrders + "개");
+        log.info("=============================================");
     }
 
     @Scheduled(cron = "0 0 0 * * *")
     public void orderCountReset() {
         Order.orderCountReset();
+        log.info("============================== 주문 번호 카운트 초기화 ==============================");
     }
 }
