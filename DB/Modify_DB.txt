@@ -7,3 +7,12 @@ ALTER TABLE categorys MODIFY `parent_category_no` INT DEFAULT 0 NULL COMMENT '�
 
 // 회원정보 생년월일 데이터 타입 변경
 ALTER TABLE `members` CHANGE `birthday` `birthday` DATE NULL;
+
+// 주문정보 수정
+ALTER TABLE `orders` CHANGE `receiver_name` `receiver_name` VARCHAR(10) NULL;
+ALTER TABLE `orders` CHANGE `receiver_postcode` `receiver_postcode` CHAR(5) NULL;
+ALTER TABLE `orders` CHANGE `receiver_addr1` `receiver_addr1` VARCHAR(255) NULL;
+ALTER TABLE `orders` CHANGE `receiver_addr2` `receiver_addr2` VARCHAR(255) NULL;
+ALTER TABLE `orders` CHANGE `receiver_tel` `receiver_tel` VARCHAR(13) NULL;
+ALTER TABLE `orders` CHANGE `order_no` `order_no` VARCHAR(20) NULL;
+ALTER TABLE `orders` CHANGE `total_price` `total_price` INT NULL;
