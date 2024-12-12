@@ -48,6 +48,14 @@ public class Order {
 
     @Getter
     @Setter
+    private static String startDate;
+
+    @Getter
+    @Setter
+    private static String endDate;
+
+    @Getter
+    @Setter
     private static int listCount = 0;
 
     @Getter

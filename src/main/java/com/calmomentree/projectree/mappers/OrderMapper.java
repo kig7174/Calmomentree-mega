@@ -94,7 +94,20 @@ public interface OrderMapper {
     })
     public Order selectItem(Order input);
 
-    @Select("...")
+    @Select("<script>" +
+            "SELECT " +
+                "order_id, order_no, order_state, order_date, member_name, " +
+                "member_email, member_postcode, member_addr1, member_addr2, member_tel, " +
+                "receiver_name, receiver_postcode, receiver_addr1, receiver_addr2, receiver_tel, " +
+                "total_price, req, member_id " +
+                "FROM orders " +
+            "WHERE member_id = #{memberId} " +
+            "<where> " +
+            "<if test='orderState != null and ordreState != \"\"'>order_state=#{orderState}</if> " +
+            "<if test='startDate != null and startDate != \"\" and endDate != null and endDate != \"\"'>#{startDate} < order_date < #{endDate}</if> " +
+            "<if test='listCount > 0'>LIMIT #{offset}, #{listCount}</if> " +
+            "</where> " +
+            "</script>")
     @ResultMap("resultMap")
     public List<Order> selectList(Order input);
 
