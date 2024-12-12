@@ -54,7 +54,7 @@ public class ReviewBoardRestController {
             @RequestParam("rating") int rating,
             @RequestParam(value = "photo", required = false) MultipartFile photo,
 
-            @RequestParam(value = "prodId", defaultValue = "5") int prodId,
+            @RequestParam("prodId") int prodId,
             @SessionAttribute("memberInfo") Member memberInfo) {
 
         // 업로드 사진에 대한 처리

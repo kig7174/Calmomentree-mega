@@ -402,3 +402,7 @@ body {
     background-color: var(--font-color-whitegray);
   }
 }
+.reviewImg {
+  width: 83px;
+  height: 83px;
+}

@@ -27,6 +27,8 @@ public class ErrorController {
                 return "error/404";
             case 500 :
                 return "error/404";
+            case 400 :
+                return "error/404";
             default :
                 return "error/404";
         }

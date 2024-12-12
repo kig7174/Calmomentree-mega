@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
+import com.calmomentree.projectree.helpers.FileHelper;
 import com.calmomentree.projectree.helpers.Pagination;
 import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Board;
@@ -26,6 +26,9 @@ public class ReviewBoardController {
 
     @Autowired
     private WebHelper webHelper;
+
+    @Autowired
+    private FileHelper fileHelper;
 
 
     /**
@@ -66,6 +69,11 @@ public class ReviewBoardController {
             Board.setListCount(pagination.getListCount());
 
             output = reviewBoardService.getList(input);
+
+            for(ReviewBoard item : output) {
+                item.setImgUrl(fileHelper.getUrl(item.getImgUrl()));
+            }
+
         } catch (Exception e) {
             webHelper.serverError(e);
 

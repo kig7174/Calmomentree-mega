@@ -104,7 +104,7 @@ public interface OrderMapper {
             "WHERE member_id = #{memberId} " +
             "<where> " +
             "<if test='orderState != null and ordreState != \"\"'>order_state=#{orderState}</if> " +
-            "<if test='startDate != null and startDate != \"\" and endDate != null and endDate != \"\"'>#{startDate} < order_date < #{endDate}</if> " +
+            //"<if test='startDate != null and startDate != \"\" and endDate != null and endDate != \"\"'>#{startDate} < order_date < #{endDate}</if> " +
             "<if test='listCount > 0'>LIMIT #{offset}, #{listCount}</if> " +
             "</where> " +
             "</script>")

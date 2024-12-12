@@ -61,7 +61,7 @@ public interface OrderItemMapper {
      * @return
      */
     @Select("SELECT " +
-                "order_item_id, prod_name, order_price " +
+                "order_item_id, prod_name, order_price, " +
                 "order_quantity, prod_id, order_id " +
             "FROM order_items " +
             "WHERE order_id = #{orderId}")

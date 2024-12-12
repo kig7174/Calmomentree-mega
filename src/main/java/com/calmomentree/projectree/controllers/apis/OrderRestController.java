@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
+import com.calmomentree.projectree.models.Product;
 import com.calmomentree.projectree.services.BasketService;
+import com.calmomentree.projectree.services.ProductService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +34,9 @@ public class OrderRestController {
 
     @Autowired
     private BasketService basketService;
+
+    @Autowired
+    private ProductService productService;
 
     /**
      * 장바구니 갯수 표시
@@ -217,4 +222,27 @@ public class OrderRestController {
 
         return restHelper.sendJson();
     }
-}
+
+    @GetMapping("/api/order/search")
+    public Map<String, Object> orderSearch(
+            @RequestParam("prodId") String prodIdTmp) {
+        
+        int prodId = Integer.parseInt(prodIdTmp);
+
+        Product input = new Product();
+        input.setProdId(prodId);
+        
+        Product output = null;
+
+        try {
+            output = productService.getItem(output);
+        } catch (Exception e) {
+            return restHelper.serverError(e);
+        }
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+        data.put("output",output);
+        
+        return restHelper.sendJson(data);
+    }
+}    

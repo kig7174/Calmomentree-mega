@@ -116,14 +116,15 @@ public interface ReviewBoardMapper {
             "SELECT " +
                 "r.review_board_id, review_title, review_content, " +
                 "rating, DATE_FORMAT(r.write_date,'%Y-%m-%d') AS write_date, " +
-                "DATE_FORMAT(r.edit_date,'%Y-%m-%d') AS edit_date, p.prod_id, m.member_id, " +
+                "DATE_FORMAT(r.edit_date,'%Y-%m-%d') AS edit_date, r.prod_id, m.member_id, " +
                 "replace(user_name,substring(user_name,2),'****') AS user_name, " +
-                "ROW_NUMBER() OVER(ORDER BY r.review_board_id) AS rownum " +
-                // "pro.img_url " +
-            "FROM review_boards r " +
+                "ROW_NUMBER() OVER(ORDER BY r.review_board_id) AS rownum , " +
+                "( SELECT img_url FROM prod_imgs " +
+                "WHERE prod_id = r.prod_id AND img_type = 'list' " +
+                "ORDER BY prod_img_id LIMIT 0,1 ) AS img_url " +
+                "FROM review_boards r " +
             "INNER JOIN members m ON r.member_id = m.member_id " +
-            "INNER JOIN products p ON r.prod_id = p.prod_id " +
-            // "INNER JOIN prod_imgs pro ON r.prod_id = pro.prod_id " +
+           
             "<where> " +
                 "<if test = 'reviewTitle != null'>review_title LIKE concat('%',#{reviewTitle},'%')</if> " +
                 "<if test = 'memberId != 0'>AND m.member_id = #{memberId}</if> " +

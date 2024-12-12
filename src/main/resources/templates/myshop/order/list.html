@@ -19,11 +19,11 @@
       <div class="side-bar">
         <div class="board-box">
           <ul class="board-inner">
-            <li><a href="">마이페이지</a></li>
-            <li><a href="">주문/배송조회</a></li>
-            <li><a href="">쿠폰/적립금</a></li>
-            <li><a href="">게시글관리</a></li>
-            <li><a href="">회원정보수정</a></li>
+            <li><a th:href="@{/myshop}">마이페이지</a></li>
+            <li><a th:href="@{/myshop/order/list}">주문/배송조회</a></li>
+            <li><a href="" style="text-decoration: line-through;">쿠폰/적립금</a></li>
+            <li><a th:href=@{/myshop/board_list}>게시글관리</a></li>
+            <li><a th:href="@{/member/modify}">회원정보수정</a></li>
           </ul>
         </div>
       </div>

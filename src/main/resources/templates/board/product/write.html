@@ -15,9 +15,11 @@
       <form id="reviewAdd" enctype="multipart/form-data">
         <div class="titleBox">
           <span class="title">Review</span>
+          
           <div class="selectProd">
             <img src="http://placehold.co/65" alt="" />
-            <span class="select"><a href="">주문상품선택</a></span>
+            <!-- <span th:text="${output.prodNameKor}"></span> -->
+            <span class="select"><a th:href="@{/order/search_board_list}">주문상품선택</a></span>
           </div>
         </div>
         <div class="reviewContent">
@@ -173,7 +175,17 @@
         }
       });
       }
+     const { prodId } = JSON.parse(localStorage.getItem("user-info"));
+     localStorage.removeItem(prodId);
+     console.log(prodId);
+      
+     let data = null;
      
+     if(prodId != null) {
+      (async () => {
+      data = await axiosHelper.get(`[[@{/api/order/search}]]`,prodId);
+      })();
+     }
     </script>
   </body>
 </html>

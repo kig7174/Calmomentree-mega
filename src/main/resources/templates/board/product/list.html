@@ -4,6 +4,9 @@
     <th:block th:replace="~{/fragments/head :: calm-head('제품리뷰 목록')}"></th:block>
     <link rel="stylesheet" th:href="@{/assets/css/product.css}" />
   </head>
+  <style>
+    
+  </style>
   <body>
     <header id="header">
       <header th:replace="~{/fragments/common :: calm-header}"></header>
@@ -42,7 +45,7 @@
             <tbody>
               <tr th:each="review : ${review}">
                 <td class="chk-no" th:text="${review.rownum}"></td>
-                <td class="thumb"><a href=""><img src="http://placehold.co/46" alt=""></a></td>
+                <td class="thumb"><a th:href="@{/product/detail/{prodId}(prodId=${review.prodId})}"><img th:src="${review.imgUrl}" alt="" class="reviewImg"></a></td>
                 <td class="subject"><a href="" th:text="${review.reviewTitle}"></a></td>
                 <td class="writer" th:text="${review.userName}"></td>
                 <td class="date" th:text="${review.writeDate}"></td>

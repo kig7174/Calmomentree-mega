@@ -56,19 +56,9 @@ public class PageOpenController {
         return "product/list";
     }
 
-    @GetMapping("/myshop/board_list")
-    public String boardList() {
-        return "myshop/board_list";
-    }
-
     @GetMapping("/myshop/order/list")
     public String orderList() {
         return "myshop/order/list";
-    }
-
-    @GetMapping("/order/search_board_list")
-    public String searchOrder() {
-        return "order/search_board_list";
     }
 
     @GetMapping("/order/order_result")
