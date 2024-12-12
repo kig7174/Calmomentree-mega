@@ -18,9 +18,11 @@ import com.calmomentree.projectree.services.ProductService;
 import com.calmomentree.projectree.services.ReviewBoardService;
 import com.calmomentree.projectree.services.ReviewImgService;
 
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 
 @Controller
@@ -43,6 +45,11 @@ public class ProductController {
 
     @Autowired
     private ReviewImgService reviewImgService;
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public String handle(Exception ex) {
+        return "error/404";
+    }
 
     @SuppressWarnings("null")
     @GetMapping("/product/search")
