@@ -178,6 +178,7 @@ body {
 
                             .item-content-name {
                                 line-height: 150%;
+                                width: 80%;
                                 
                                 p {
                                     &:first-child {

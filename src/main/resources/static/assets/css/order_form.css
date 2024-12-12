@@ -126,7 +126,12 @@ input[type="radio"] {
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   
-  
+  .req-box {
+
+    input {
+        width: 100%;
+    }
+  }
 
   .input-box {
     display: flex;

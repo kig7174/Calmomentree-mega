@@ -16,7 +16,7 @@
                 <p>Find ID<span>아이디가 기억나지 않으세요?</span></p>
             </div>
             <div class="join-form">
-                <form id="find_id_form" method="get" th:action="@{/member/id/find_id_result}">    
+                <form id="find_id_form" method="post" th:action="@{/member/id/find_id_result}">    
                     <div class="find-method">
                         <p>인증방법 선택</p>
                         <input type="radio" name="find-method" id="find-method1" checked />

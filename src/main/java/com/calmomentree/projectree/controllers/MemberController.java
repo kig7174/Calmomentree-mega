@@ -38,7 +38,7 @@ public class MemberController {
         return "member/login";
     }
 
-    @GetMapping("/member/id/find_id_result")
+    @PostMapping("/member/id/find_id_result")
     public String findId(
         Model model,
         @RequestParam("user_name") String userName,
@@ -122,7 +122,7 @@ public class MemberController {
     @GetMapping("/myshop")
     public String myshop(
         Model model,
-        @SessionAttribute("memberInfo") Member memberInfo
+        @SessionAttribute(value="memberInfo", required=false) Member memberInfo
     ) {
         Member input = new Member();
         input.setMemberId(memberInfo.getMemberId());
