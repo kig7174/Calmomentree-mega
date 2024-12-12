@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import com.calmomentree.projectree.exceptions.StringFormatException;
 import com.calmomentree.projectree.helpers.FileHelper;
+import com.calmomentree.projectree.helpers.RegexHelper;
 import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
@@ -34,6 +36,9 @@ public class OrderController {
 
     @Autowired
     private WebHelper webHelper;
+
+    @Autowired
+    private RegexHelper regexHelper;
 
     @Autowired
     private BasketService basketService;
@@ -213,11 +218,39 @@ public class OrderController {
         @RequestParam("total_price") Integer totalPrice,
         @RequestParam("basket_id") List<Integer> basketIdTmp
     ) {
+        try {
+            regexHelper.isValue(memberName, "이름을 입력해주세요.");
+            regexHelper.isKor(memberName, "이름은 한글로만 입력해주세요.");
+
+            regexHelper.isValue(memberTel, "전화번호를 입력해주세요.");
+            regexHelper.isPhone(memberTel, "전화번호 형식이 잘못되었습니다.");
+
+            regexHelper.isValue(memberEmail, "이메일을 입력해주세요.");
+            regexHelper.isEmail(memberEmail, "이메일 형식이 잘못되었습니다.");
+
+            regexHelper.isValue(memberPostcode, "우편번호를 검색해주세요.");
+            regexHelper.isNum(memberPostcode, "우편번호는 숫자로만 입력해주세요.");
+            regexHelper.isValue(memberAddr1, "주소를 검색해주세요.");
+            regexHelper.isValue(memberAddr2, "상세주소를 입력해주세요.");
+
+            regexHelper.isValue(receiverName, "받는 분의 이름을 입력해주세요.");
+            regexHelper.isKor(receiverName, "이름은 한글로만 입력해주세요.");
+
+            regexHelper.isValue(receiverTel, "받는 분의 전화번호를 입력해주세요.");
+            regexHelper.isPhone(receiverTel, "전화번호 형식이 잘못되었습니다.");
+
+            regexHelper.isValue(receiverPostcode, "받는 분의 우편번호를 검색해주세요.");
+            regexHelper.isNum(receiverPostcode, "우편번호는 숫자로만 입력해주세요.");
+            regexHelper.isValue(receiverAddr1, "받는 분의 주소를 검색해주세요.");
+            regexHelper.isValue(receiverAddr2, "받는 분의 상세주소를 입력해주세요.");
+        } catch (StringFormatException e) {
+            webHelper.badRequest(e.getMessage());
+            return null;
+        }
 
         Order input = new Order();
         input.setOrderId(orderId);
         input.setMemberId(memberInfo.getMemberId());
-        input.setOrderNo("1");
         input.setOrderState("결제완료");
         input.setMemberName(memberName);
         input.setMemberEmail(memberEmail);

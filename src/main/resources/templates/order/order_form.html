@@ -18,7 +18,7 @@
         <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
 
         <!---------- 주문 정보 ------------>
-        <form th:action="@{/order/order_ok}" method="post">
+        <form th:action="@{/order/order_ok}" method="post" id="order_form">
         <div class="member-info collapse">
             <div class="info-title">
                 <span class="title">주문정보
@@ -33,7 +33,7 @@
                     <label for="member-name">주문자<span class="bg-required"></span></label>
                     <div class="input-box2">
                         <input type="text" name="member_name" id="member_name" class="input-box-l"
-                            th:value="${session.memberInfo.userName}" required />
+                            th:value="${session.memberInfo.userName}" />
                     </div>
                 </div>
 
@@ -54,9 +54,9 @@
                             <option value="051">051</option>
                         </select>
                         &nbsp; - &nbsp;
-                        <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+                        <input type="text" name="tel2" class="input-box-s" />
                         &nbsp; - &nbsp;
-                        <input type="text" name="tel2" maxlength="4" class="input-box-s" />
+                        <input type="text" name="tel2" class="input-box-s" />
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@
                     <label for="postcode"> 주소<span class="bg-required"></span></label>
                     <div class="input-box2">
                         <input type="text" name="postcode" id="postcode" class="postcode" placeholder="우편번호"
-                            th:value="${session.memberInfo.postcode}" required readonly />
+                            th:value="${session.memberInfo.postcode}" readonly />
                     </div>
                 </div>
                 <div class="input-box">
@@ -114,14 +114,14 @@
                 <div class="name-box input-box">
                     <label for="shop-name">받는사람<span class="bg-required"></span></label>
                     <div class="input-box2">
-                        <input type="text" name="receiver_name" id="receiver_name" th:value="${session.memberInfo.userName}"
-                            required />
+                        <input type="text" name="receiver_name" id="receiver_name"
+                            th:value="${session.memberInfo.userName}" />
                     </div>
                 </div>
                 <div class="addr-box input-box">
                     <label for="postcode2"> 주소<span class="bg-required"></span></label>
                     <input type="text" name="receiver_postcode" id="receiver_postcode" class="postcode2" placeholder="우편번호"
-                        th:value="${session.memberInfo.postcode}" required readonly />
+                        th:value="${session.memberInfo.postcode}" readonly />
                     <button type="button" id="post-btn2">주소검색</button>
                 </div>
                 <div class="addr-box input-box">
@@ -161,7 +161,7 @@
                     </div>
                 </div>
                 <div class="message-box input-box">
-                    <select name="req" id="">
+                    <select name="req" id="req_select">
                         <option value="null">--메시지 선택(선택사항)--</option>
                         <option value="배송 전에 미리 연락바랍니다.">배송 전에 미리 연락바랍니다.</option>
                         <option value="부재 시 경비실에 맡겨주세요.">부재 시 경비실에 맡겨주세요.</option>
@@ -170,6 +170,9 @@
                         <option value="택배함에 보관해 주세요.">택배함에 보관해 주세요.</option>
                         <option value="">직접입력</option>
                     </select>
+                </div>
+                <div class="req-box input-box">
+                    <input type="text" name="req" id="req" style="display: none;"/>
                 </div>
 
                 <div class="message-check-box"><input type="checkbox" /><span>기본 배송지로 저장</span></div>
@@ -307,6 +310,73 @@
             postcode2.value = "";
             addr3.value = "";
             addr4.value = "";
+        });
+
+        const req = document.querySelector("#req_select");
+        const reqInput = document.querySelector("#req");
+
+        req.addEventListener("input", (e) => {
+            if (e.currentTarget.value === "") {
+                reqInput.style.display = "block";
+
+                reqInput.setAttribute("name", "req");
+                req.removeAttribute("name");
+            } else {
+                reqInput.style.display = "none";
+                reqInput.value = "";
+
+                req.setAttribute("name", "req");
+                reqInput.removeAttribute("name");
+            }
+        });
+
+        document.querySelector("#order_form").addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            try {
+                regexHelper.value("#member_name", "이름을 입력해주세요.");
+                regexHelper.kor("#member_name", "이름은 한글로만 입력해주세요.");
+                regexHelper.minLength("#member_name", "이름은 2자 이상으로 입력해주세요.");
+                regexHelper.maxLength("#member_name", "이름은 10자 이하로 입력해주세요.");
+
+                regexHelper.value("#tel", "전화번호를 입력해주세요.");
+                regexHelper.num("#tel", "전화번호는 숫자로만 입력 가능합니다.");
+                regexHelper.phone("#tel", "전화번호 형식이 잘못되었습니다.");
+
+                regexHelper.value("#postcode", "우편번호를 검색해주세요.");
+                regexHelper.minLength("#postcode", 5, "우편번호는 5자로 입력해주세요.");
+                regexHelper.maxLength("#postcode", 5, "우편번호는 5자로 입력해주세요.");
+                regexHelper.num("#postcode", "우편번호는 숫자로만 입력해주세요.");
+                
+                regexHelper.value("#addr1", "주소를 검색해주세요.");
+                regexHelper.value("#addr2", "상세 주소를 입력해주세요.");
+
+                regexHelper.value("#email", "이메일을 입력해주세요.");
+                regexHelper.email("#email", "이메일 형식이 잘못되었습니다.");
+
+
+                regexHelper.value("#receiver_name", "받는 분의 이름을 입력해주세요.");
+                regexHelper.kor("#receiver_name", "이름은 한글로만 입력해주세요.");
+                regexHelper.minLength("#receiver_name", "이름은 2자 이상으로 입력해주세요.");
+                regexHelper.maxLength("#receiver_name", "이름은 10자 이하로 입력해주세요.");
+
+                regexHelper.value("#receiver_postcode", "받는 분의 주소를 검색해주세요.");
+                regexHelper.minLength("#receiver_postcode", 5, "우편번호는 5자로 입력해주세요.");
+                regexHelper.maxLength("#receiver_postcode", 5, "우편번호는 5자로 입력해주세요.");
+                regexHelper.num("#receiver_postcode", "우편번호는 숫자로만 입력해주세요.")
+
+                regexHelper.value("#receiver_addr1", "받는 분의 주소를 검색해주세요.");
+                regexHelper.value("#receiver_addr2", "받는 분의 상세 주소를 입력해주세요.");
+
+                regexHelper.value("#receiver_tel", "받는 분의 전화번호를 입력해주세요.");
+                regexHelper.num("#receiver_tel", "전화번호는 숫자로만 입력 가능합니다.");
+                regexHelper.phone("#receiver_tel", "전화번호 형식이 잘못되었습니다.");
+            } catch (error) {
+                alert(error.message);
+                return;
+            }
+
+            e.currentTarget.submit();
         });
     </script>
 </body>
