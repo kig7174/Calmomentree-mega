@@ -50,7 +50,7 @@
         </div>
         <!-- 본인이 작성한 글이면 생김 th:if="${}" -->
         <form method="post" id="cancel">
-          <div class="passwordArea" th:if="${board.memberId == member.memberId}">
+          <div class="passwordArea" th:if="${session.memberInfo != null and board.memberId == session.memberInfo.memberId}">
             <input type="password" placeholder="비밀번호" class="password" />
             <p>수정 및 삭제하려면 비밀번호를 입력하세요.</p>
           </div>
@@ -59,7 +59,7 @@
             <a class="button" th:href="@{/board/qna/list}">목록</a>
 
             <!-- 본인이 작성한 글이면 생김 th:if="${}" -->
-            <div class="inner-button-area" th:if="${board.memberId == member.memberId}">
+            <div class="inner-button-area" th:if="${session.memberInfo != null and board.memberId == session.memberInfo.memberId}">
               <a th:href="@{/board/qna/modify/{boardId}(boardId=${board.boardId})}" class="edit">수정</a>
               <button type="sumbit" class="cancel">삭제</button>
             </div>
