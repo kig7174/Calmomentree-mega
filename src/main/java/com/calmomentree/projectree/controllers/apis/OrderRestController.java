@@ -3,6 +3,7 @@ package com.calmomentree.projectree.controllers.apis;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.calmomentree.projectree.helpers.FileHelper;
 import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
@@ -31,6 +32,9 @@ public class OrderRestController {
 
     @Autowired
     private RestHelper restHelper;
+
+    @Autowired
+    private FileHelper fileHelper;
 
     @Autowired
     private BasketService basketService;
@@ -235,10 +239,12 @@ public class OrderRestController {
         Product output = null;
 
         try {
-            output = productService.getItem(output);
+            output = productService.getItem(input);
         } catch (Exception e) {
             return restHelper.serverError(e);
         }
+
+        output.setListImgUrl1(fileHelper.getUrl(output.getListImgUrl1()));
 
         Map<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("output",output);

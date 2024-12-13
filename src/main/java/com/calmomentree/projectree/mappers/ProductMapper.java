@@ -80,7 +80,15 @@ public interface ProductMapper {
                 "SELECT COUNT(*) " +
                 "FROM review_boards " +
                 "WHERE prod_id = prod.prod_id " +
-                ") AS review_count " +
+                ") AS review_count, " +
+
+                "( " +
+                    "SELECT img_url " +
+                    "FROM prod_imgs " +
+                    "WHERE prod_id = prod.prod_id AND img_type = 'list' " +
+                    "ORDER BY prod_img_id " +
+                    "LIMIT 0, 1 " +
+                ") AS list_img_url1 " +
 
             "FROM products AS prod " +
             "INNER JOIN categorys AS category " +

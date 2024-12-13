@@ -15,7 +15,8 @@ import com.calmomentree.projectree.services.ReviewImgService;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,22 +53,29 @@ public class ReviewBoardRestController {
             @RequestParam("reviewTitle") String reviewTitle,
             @RequestParam("reviewContent") String reviewContent,
             @RequestParam("rating") int rating,
-            @RequestParam(value = "photo", required = false) MultipartFile photo,
-
+            @RequestParam(value = "photo", required = false) List<MultipartFile> photo,
             @RequestParam("prodId") int prodId,
             @SessionAttribute("memberInfo") Member memberInfo) {
-
+       
         // 업로드 사진에 대한 처리
-        UploadItem uploadItem = null;
+        List<UploadItem> uploadItemList = new ArrayList<>();
 
-        try {
-            uploadItem = fileHelper.saveMultipartFile(photo);
-        } catch (NullPointerException e) {
-            // 업로드 된 항목이 없는 경우는 에러가 아니므로 계속 진행
-        } catch (Exception e) {
-            // 업로드 된 항목이 있으나, 이를 처리하다가 에러가 발생한 경우
-            return restHelper.serverError(e);
+        log.info("포토 : " + photo);
+        for(int i=0;i<photo.size();i++) {
+            UploadItem uploadItem = new UploadItem();
+
+            try {
+                uploadItem = fileHelper.saveMultipartFile(photo.get(i));
+            } catch (NullPointerException e) {
+                // 업로드 된 항목이 없는 경우는 에러가 아니므로 계속 진행
+            } catch (Exception e) {
+                // 업로드 된 항목이 있으나, 이를 처리하다가 에러가 발생한 경우
+                return restHelper.serverError(e);
+            }
+
+            uploadItemList.add(uploadItem);
         }
+       
 
         ReviewBoard input = new ReviewBoard();
         input.setReviewTitle(reviewTitle);
@@ -84,26 +92,22 @@ public class ReviewBoardRestController {
         }
         
         // 업로드 사진 있어?
-        if (uploadItem != null) {
+        if (uploadItemList != null) {
             
-            ReviewImg input2 = new ReviewImg();
-            input2.setImgUrl(uploadItem.getFilePath());
-            input2.setReviewBoardId(input.getReviewBoardId());
-            
-            try {
-                reviewImgService.addItem(input2);
-            } catch (Exception e) {
-                return restHelper.serverError(e);
+            for (int i=0; i<uploadItemList.size(); i++) {
+                ReviewImg input2 = new ReviewImg();
+                input2.setImgUrl(uploadItemList.get(i).getFilePath());
+                input2.setReviewBoardId(input.getReviewBoardId());
+                
+                try {
+                    reviewImgService.addItem(input2);
+                } catch (Exception e) {
+                    return restHelper.serverError(e);
+                }
+                log.error("업로드사진: " + input2);
             }
-
         }
 
-        // DB에 저장
-        
-
-        Map<String, Object> data = new LinkedHashMap<String, Object>();
-
-        return restHelper.sendJson(data);
+        return restHelper.sendJson();
     }
-
 }

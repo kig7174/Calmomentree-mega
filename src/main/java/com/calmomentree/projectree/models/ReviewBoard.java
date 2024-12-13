@@ -26,6 +26,7 @@ public class ReviewBoard {
     private String userName;        // 회원이름
 
     private String imgUrl;
+    private String prodNameKor;
 
     private List<ReviewImg> reviewImgUrl;    // 이미지 목록
 

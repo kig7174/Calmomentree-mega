@@ -244,6 +244,6 @@ public class BoardController {
         // }
 
         return "order/search_board_list";
-    }
+    }  
     
 }
