@@ -238,12 +238,14 @@ body {
                     font-size: var(--font-size-medium);
                     border: 1px solid var(--btn-color-black);
                     padding: 10px;
+                    text-decoration: line-through;
                 }
 
                 .search-btn {
                     background-color: var(--background-color);
                     border: 0;
                     width: 21px;
+                    cursor: pointer;
 
                     img {
                         width: 100%;
@@ -297,6 +299,8 @@ body {
                 position: absolute;
                 right: 7.5%;
                 top: 40px;
+                background-color: #fff;
+                border: 0;
             }
         }
     }
