@@ -244,7 +244,11 @@ body {
   width: 100%;
   padding: 20px 0;
   .img {
+    width: 80%;
     padding: 10px 0;
+    img {
+      width: 100%;
+    }
   }
   .article {
     text-align: left;
@@ -306,6 +310,11 @@ body {
       display: flex;
       align-items: center;
       padding: 10px 0;
+
+      #prodImg {
+        width: 65px;
+        object-fit: cover;
+      }
       .select {
         border: 1px solid #bcbcbc;
         padding: 10px;
@@ -405,4 +414,8 @@ body {
 .reviewImg {
   width: 83px;
   height: 83px;
+}
+#prodImg {
+  width: 65px;
+  object-fit: cover;
 }
