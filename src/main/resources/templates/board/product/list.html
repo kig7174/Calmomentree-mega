@@ -46,7 +46,7 @@
               <tr th:each="review : ${review}">
                 <td class="chk-no" th:text="${review.rownum}"></td>
                 <td class="thumb"><a th:href="@{/product/detail/{prodId}(prodId=${review.prodId})}"><img th:src="${review.imgUrl}" alt="" class="reviewImg"></a></td>
-                <td class="subject"><a href="" th:text="${review.reviewTitle}"></a></td>
+                <td class="subject"><a th:href="@{/board/product/read/{reviewBoardId}/{prodId}(reviewBoardId=${review.reviewBoardId},prodId=${review.prodId})}"><span th:text="${review.reviewTitle}"></span></a></td>
                 <td class="writer" th:text="${review.userName}"></td>
                 <td class="date" th:text="${review.writeDate}"></td>
                 <!-- <td class="star"><img src="http://placehold.co/74x17" alt=""></td> -->
@@ -62,11 +62,21 @@
         <!-- 페이지 번호 -->
         <div class="paging-box">
           <ul class="pagination">
-            <li><a class="left">&laquo;</a></li>
-            <li><a class="active">1</a></li>
-            <li><a>2</a></li>
-            <li><a class="right">&raquo;</a></li>
-          </ul>
+            <li th:if="${pagination.prevPage > 0}">
+                <a th:href="@{/board/product/list(keyword=${keyword}, page=${pagination.prevPage})}">&laquo;</a>
+            </li>
+            <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
+            
+            <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+                <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}"></a>
+                <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/board/product/list(keyword=${keyword}, page=${i})}" />
+            </li>
+    
+            <li th:if="${pagination.nextPage > 0}">
+                <a th:href="@{/board/product/list(keyword=${keyword}, page=${pagination.nextPage})}">&raquo;</a>
+            </li>
+            <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
+        </ul>
         </div>
 
         <div class="search-container">

@@ -15,10 +15,11 @@
       <form id="reviewAdd" enctype="multipart/form-data">
         <div class="titleBox">
           <span class="title">Review</span>
-          
+
           <div class="selectProd">
-            <img src="http://placehold.co/65" alt="" />
-            <!-- <span th:text="${output.prodNameKor}"></span> -->
+            <input type="hidden" id="prodId" name="prodId" />
+            <img id="prodImg" src="http://placehold.co/65" alt="" />
+            <span id="prodDes"></span>
             <span class="select"><a th:href="@{/order/search_board_list}">주문상품선택</a></span>
           </div>
         </div>
@@ -134,58 +135,70 @@
           popup.focus();
         }
       });
-      if(document.querySelector("#reviewAdd") != null) {
+      if (document.querySelector("#reviewAdd") != null) {
         document.querySelector("#reviewAdd").addEventListener("submit", async (e) => {
-        e.preventDefault();
+          e.preventDefault();
 
-        // 제목 입력여부
-        const title = document.querySelector("#title");
-        if(title.value == null || title.value == "") {
-          alert("제목 항목은 필수 입력값입니다.");
-          setTimeout(() => title.focus(), 300);
-          return false;
-        }
+          // 제목 입력여부
+          const title = document.querySelector("#title");
+          if (title.value == null || title.value == "") {
+            alert("제목 항목은 필수 입력값입니다.");
+            setTimeout(() => title.focus(), 300);
+            return false;
+          }
 
-        /** ck-editor의 값 추출 후 textBox에 복사 */
-        const content = document.querySelector(".ck-content");
-        const con = content.getElementsByTagName("p");
-        const text = con[0].innerText;
-        const box = document.querySelector("#textBox");
-        box.innerHTML = text;
+          /** ck-editor의 값 추출 후 textBox에 복사 */
+          const content = document.querySelector(".ck-content");
+          const con = content.getElementsByTagName("p");
+          const text = con[0].innerText;
+          const box = document.querySelector("#textBox");
+          box.innerHTML = text;
 
-        /** textarea 입력 여부 판단 */
-        try {
-          regexHelper.value("#textBox", "내용(을/를) 입력하세요");
-        } catch (e) {
-          alert(e.message);
-          return;
-        }
-        
-        const current = e.currentTarget;
-        const formData = new FormData(current);
-        const data = await axiosHelper.postMultipart("[[@{/api/board/product/add}]]", formData);
-
-        if (data) {
-          if (data.error) {
-            alert("error : " + data.message);
+          /** textarea 입력 여부 판단 */
+          try {
+            regexHelper.value("#textBox", "내용(을/를) 입력하세요");
+          } catch (e) {
+            alert(e.message);
             return;
           }
-          alert("게시글이 등록되었습니다.");
-          window.location = "[[@{/board/product/list}]]";
+
+          const current = e.currentTarget;
+          const formData = new FormData(current);
+          const data = await axiosHelper.postMultipart("[[@{/api/board/product/add}]]", formData);
+
+          if (data) {
+            if (data.error) {
+              alert("error : " + data.message);
+              return;
+            }
+            alert("게시글이 등록되었습니다.");
+            window.location = "[[@{/board/product/list}]]";
+          }
+        });
+      }
+
+      (function () {
+        localStorage.removeItem("user-info");
+      })();
+
+      window.addEventListener("storage", (e) => {
+        const prodId = JSON.parse(localStorage.getItem("user-info"));
+
+        console.log(prodId);
+
+        if (prodId != null) {
+          (async () => {
+            const data = await axiosHelper.get(`[[@{/api/order/search}]]`, prodId);
+            if (data) {
+              document.querySelector("#prodDes").innerHTML = data.output.prodNameKor;
+              document.querySelector("#prodImg").src = data.output.listImgUrl1;
+              document.querySelector("#prodId").value = data.output.prodId;
+              console.log("실행");
+            }
+            localStorage.removeItem("user-info");
+          })();
         }
       });
-      }
-     const { prodId } = JSON.parse(localStorage.getItem("user-info"));
-     localStorage.removeItem(prodId);
-     console.log(prodId);
-      
-     let data = null;
-     
-     if(prodId != null) {
-      (async () => {
-      data = await axiosHelper.get(`[[@{/api/order/search}]]`,prodId);
-      })();
-     }
     </script>
   </body>
 </html>
