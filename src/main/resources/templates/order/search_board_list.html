@@ -66,14 +66,14 @@
           
           const current = e.currentTarget;
           const parent = current.closest("#prod-box");
-          const target = parent.querySelector("#prod_id").value;
+          const target = parent.querySelector("#prod_id");
           console.log("(1): " + target);
-          const userInfo = {
-            prodId: target,
-          }
+          let userInfo = { prodId: target.value};
 
-          localStorage.setItem("user-info", JSON.stringify(userInfo));
-          console.log("(2): " +JSON.stringify(userInfo));
+          localStorage.setItem("user-info",JSON.stringify(userInfo) );
+          console.log("(2): " +userInfo);
+
+          window.open('','_self').close(); 
         });
       });
     </script>
