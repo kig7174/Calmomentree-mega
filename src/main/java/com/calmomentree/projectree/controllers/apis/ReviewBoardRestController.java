@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -108,6 +110,33 @@ public class ReviewBoardRestController {
             }
         }
 
+        return restHelper.sendJson();
+    }
+
+    @DeleteMapping("/api/review/delete/{reviewBoardId}")
+    private Map<String, Object> reviewDelete(
+        @PathVariable("reviewBoardId") int reviewBoardId,
+        @SessionAttribute("memberInfo") Member memberInfo) {
+
+        ReviewBoard input = new ReviewBoard();
+        input.setReviewBoardId(reviewBoardId);
+        input.setMemberId(memberInfo.getMemberId());
+
+        ReviewImg img = new ReviewImg();
+        img.setReviewBoardId(reviewBoardId);
+
+        try {
+            reviewImgService.deleteItem(img);
+        } catch (Exception e) {
+            return restHelper.serverError(e);
+        }
+
+        try {
+            reviewBoardService.deleteItem(input);
+        } catch (Exception e) {
+            return restHelper.serverError(e);
+        }
+        
         return restHelper.sendJson();
     }
 }

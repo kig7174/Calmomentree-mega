@@ -14,9 +14,11 @@ import com.calmomentree.projectree.models.Board;
 import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.models.Order;
 import com.calmomentree.projectree.models.OrderItem;
+import com.calmomentree.projectree.models.Product;
 import com.calmomentree.projectree.services.BoardService;
 import com.calmomentree.projectree.services.OrderItemService;
 import com.calmomentree.projectree.services.OrderService;
+import com.calmomentree.projectree.services.ProductService;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +48,9 @@ public class BoardController {
 
     @Autowired
     private OrderItemService orderItemService;
+
+    @Autowired
+    private ProductService productService;
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public String handle(Exception ex) {
@@ -205,7 +210,6 @@ public class BoardController {
         Order input = new Order();
         input.setMemberId(memberInfo.getMemberId());
 
-        log.error("memberId: " +  memberInfo.getMemberId());
         List<Order> orderId = null;
 
         try {
@@ -214,11 +218,6 @@ public class BoardController {
             webHelper.serverError(e);
         }
         log.error("회원결제페이지 일련번호: " + orderId);
-
-        
-        // OrderItem orderIdNum = null;
-        // orderIdNum.setOrderId(orderId.getOrderId());
-        
 
         List<OrderItem> order = new ArrayList<>();
 
@@ -237,11 +236,6 @@ public class BoardController {
         }
         
         model.addAttribute("items", order);
-        // try {
-        //    order = orderItemService.getList(orderIdNum);
-        // } catch (Exception e) {
-        //     webHelper.serverError(e);
-        // }
 
         return "order/search_board_list";
     }  

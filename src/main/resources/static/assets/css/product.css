@@ -160,11 +160,10 @@ body {
     height: 35px;
     border: none;
     background-color: #1c1c1c;
-
-    a {
-      color: var(--font-color-title);
-      font-size: 14px;
-    }
+    color: var(--font-color-title);
+    font-size: 14px;
+    text-align: center;
+    line-height: 35px;
   }
 }
 

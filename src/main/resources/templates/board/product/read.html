@@ -50,7 +50,10 @@
         <!-- 하단 버튼 구역 -->
         <div class="btn-area-read">
           <button class="btn1 btn"><a th:href="@{/board/product/list}">목록</a></button>
-          <button class="btn2 btn"><a href="">삭제</a></button>
+          <form action="post" id="delete">
+            <button class="btn2 btn" type="">삭제</button>
+          </form>
+          
         </div>
         <!-- 관리자로 로그인하면 댓글 작성 구역 활성화 (작업예정) -->
         <div class="only-manager">
@@ -76,6 +79,11 @@
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
+    <script th:inline="javascript">
+      const reviewBoardDelete = /*[[@{/api/review/delete/{reviewBoardId}(reviewBoardId=${reviewInfo.reviewBoardId})}]]*/"";
+      const reviewBoardList = /*[[@{/board/product/list}]]*/"";
+    </script>
+    <script type="text/javascript" th:src="@{/assets/js/reviewBoard.js}"></script>
     <script>
       // 평점 -> 별로 바꾸기 ( '★' ) 
       const value = document.querySelectorAll(".star");
@@ -95,7 +103,6 @@
             return v.innerHTML = "★";
         }
       });
-    
     </script>
   </body>
 </html>

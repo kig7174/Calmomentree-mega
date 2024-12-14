@@ -63,6 +63,7 @@ public interface OrderItemMapper {
     @Select("SELECT " +
                 "order_item_id, prod_name, order_price, " +
                 "order_quantity, prod_id, order_id " +
+                "img_url " +
             "FROM order_items " +
             "WHERE order_id = #{orderId}")
     @ResultMap("resultMap")

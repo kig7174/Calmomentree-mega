@@ -29,7 +29,9 @@ public interface ReviewImgMapper {
     @Update("...")
     public int update(ReviewImg input);
 
-    @Delete("...")
+    @Delete("DELETE FROM " +
+                "review_imgs " +
+            "WHERE review_board_id = #{reviewBoardId} ")
     public int delete(ReviewImg input);
 
     /**

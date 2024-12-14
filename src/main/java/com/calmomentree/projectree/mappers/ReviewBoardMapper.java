@@ -53,13 +53,10 @@ public interface ReviewBoardMapper {
          * @param input
          * @return
          */
-        @Delete("<script> " +
-                        "DELETE FROM boards " +
-                        "<where> " +
-                        "<if test= 'reviewBoardId != null'>review_board_id = #{reviewBoardId} </if> " +
-                        "<if test= 'memberId != 0'>AND member_id = #{memberId}</if> " +
-                        "</where>" +
-                        "</script>")
+        @Delete("DELETE FROM review_boards " +
+                        "WHERE " +
+                        "review_board_id = #{reviewBoardId} AND " +
+                        "member_id = #{memberId} ")
         public int delete(ReviewBoard input);
 
         /**
