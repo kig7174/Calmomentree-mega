@@ -16,3 +16,6 @@ ALTER TABLE `orders` CHANGE `receiver_addr2` `receiver_addr2` VARCHAR(255) NULL;
 ALTER TABLE `orders` CHANGE `receiver_tel` `receiver_tel` VARCHAR(13) NULL;
 ALTER TABLE `orders` CHANGE `order_no` `order_no` VARCHAR(20) NULL;
 ALTER TABLE `orders` CHANGE `total_price` `total_price` INT NULL;
+
+// 리뷰 이미지 수정
+ALTER TABLE `review_imgs` CHANGE `img_url` `img_url` VARCHAR(255) NULL;
