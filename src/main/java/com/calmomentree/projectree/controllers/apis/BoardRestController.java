@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.calmomentree.projectree.helpers.FileHelper;
@@ -17,6 +18,7 @@ import com.calmomentree.projectree.services.BoardService;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,6 +36,11 @@ public class BoardRestController {
 
     @Autowired
     private BoardService boardService;
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public String handle(Exception ex) {
+        return "error/404";
+    }
 
     /**
      * 게시글 삭제 처리

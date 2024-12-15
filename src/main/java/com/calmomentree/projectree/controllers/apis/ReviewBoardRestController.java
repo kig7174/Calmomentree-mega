@@ -2,6 +2,7 @@ package com.calmomentree.projectree.controllers.apis;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.calmomentree.projectree.helpers.FileHelper;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +42,11 @@ public class ReviewBoardRestController {
 
     @Autowired
     private ReviewImgService reviewImgService;
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public String handle(Exception ex) {
+        return "error/404";
+    }
 
     /**
      * 리뷰 게시글 업로드

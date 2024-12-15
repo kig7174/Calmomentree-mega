@@ -1,21 +1,30 @@
 package com.calmomentree.projectree.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import com.calmomentree.projectree.helpers.FileHelper;
 import com.calmomentree.projectree.helpers.Pagination;
 import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Board;
+import com.calmomentree.projectree.models.Member;
+import com.calmomentree.projectree.models.Order;
+import com.calmomentree.projectree.models.OrderItem;
 import com.calmomentree.projectree.models.Product;
 import com.calmomentree.projectree.models.ReviewBoard;
 import com.calmomentree.projectree.models.ReviewImg;
+import com.calmomentree.projectree.services.OrderItemService;
+import com.calmomentree.projectree.services.OrderService;
 import com.calmomentree.projectree.services.ProductService;
 import com.calmomentree.projectree.services.ReviewBoardService;
 import com.calmomentree.projectree.services.ReviewImgService;
@@ -40,6 +49,18 @@ public class ReviewBoardController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private OrderItemService orderItemService;
+
+    @Autowired
+    private OrderService orderService;
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public String handle(Exception ex) {
+        return "error/404";
+    }
+
     /**
      * 리뷰 게시판 목록 조회하기
      * 
@@ -96,6 +117,7 @@ public class ReviewBoardController {
         return "board/product/list";
      }
      
+    @SuppressWarnings("null")
     @GetMapping("/board/product/read/{reviewBoardId}/{prodId}")
     public String reviewRead(Model model,
             @PathVariable("reviewBoardId") int reviewBoardId,
@@ -159,4 +181,43 @@ public class ReviewBoardController {
         return "board/product/read";
     }
  
+    @SuppressWarnings("null")
+    @GetMapping("/order/search_board_list")
+    public String reviewSelectOrder(Model model,
+        @SessionAttribute("memberInfo") Member memberInfo) {
+
+        // 회원 결제 페이지 일련 번호
+        Order input = new Order();
+        input.setMemberId(memberInfo.getMemberId());
+
+        List<Order> orderId = null;
+
+        try {
+            orderId = orderService.getList(input);
+        } catch (Exception e) {
+            webHelper.serverError(e);
+        }
+        log.error("회원결제페이지 일련번호: " + orderId);
+
+        List<OrderItem> order = new ArrayList<>();
+
+        for(Order item : orderId) {
+            OrderItem inputTmp = new OrderItem();
+            inputTmp.setOrderId(item.getOrderId());
+
+            List<OrderItem> output = null;
+            try {
+              output = orderItemService.getList(inputTmp);
+            } catch (Exception e) {
+                webHelper.serverError(e);
+            }
+
+            order.addAll(output);
+        }
+        
+        model.addAttribute("items", order);
+
+        return "order/search_board_list";
+    }  
+   
 }

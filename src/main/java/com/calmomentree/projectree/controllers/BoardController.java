@@ -1,6 +1,5 @@
 package com.calmomentree.projectree.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,13 +11,7 @@ import com.calmomentree.projectree.helpers.Pagination;
 import com.calmomentree.projectree.helpers.WebHelper;
 import com.calmomentree.projectree.models.Board;
 import com.calmomentree.projectree.models.Member;
-import com.calmomentree.projectree.models.Order;
-import com.calmomentree.projectree.models.OrderItem;
-import com.calmomentree.projectree.models.Product;
 import com.calmomentree.projectree.services.BoardService;
-import com.calmomentree.projectree.services.OrderItemService;
-import com.calmomentree.projectree.services.OrderService;
-import com.calmomentree.projectree.services.ProductService;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -42,15 +35,6 @@ public class BoardController {
 
     @Autowired
     private FileHelper fileHelper;
-
-    @Autowired
-    private OrderService orderService;
-
-    @Autowired
-    private OrderItemService orderItemService;
-
-    @Autowired
-    private ProductService productService;
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public String handle(Exception ex) {
@@ -200,44 +184,5 @@ public class BoardController {
         model.addAttribute("pagination", pagination);
 
         return "/myshop/board_list";
-    }
-
-    @GetMapping("/order/search_board_list")
-    public String reviewSelectOrder(Model model,
-        @SessionAttribute("memberInfo") Member memberInfo) {
-
-        // 회원 결제 페이지 일련 번호
-        Order input = new Order();
-        input.setMemberId(memberInfo.getMemberId());
-
-        List<Order> orderId = null;
-
-        try {
-            orderId = orderService.getList(input);
-        } catch (Exception e) {
-            webHelper.serverError(e);
-        }
-        log.error("회원결제페이지 일련번호: " + orderId);
-
-        List<OrderItem> order = new ArrayList<>();
-
-        for(Order item : orderId) {
-            OrderItem inputTmp = new OrderItem();
-            inputTmp.setOrderId(item.getOrderId());
-
-            List<OrderItem> output = null;
-            try {
-              output = orderItemService.getList(inputTmp);
-            } catch (Exception e) {
-                webHelper.serverError(e);
-            }
-
-            order.addAll(output);
-        }
-        
-        model.addAttribute("items", order);
-
-        return "order/search_board_list";
-    }  
-    
+    } 
 }
