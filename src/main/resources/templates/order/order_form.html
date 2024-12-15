@@ -189,6 +189,7 @@
 
             <div class="info-box selected">
                 <div class="prod-box" th:each="item : ${items}">
+                    <input type="hidden" name="basket_id" id="basket_id" th:value="${item.basketId}" />
                     <div class="thumbnail-box">
                         <div class="thumbnail-img">
                             <img th:src="${item.imgUrl}" />
@@ -196,17 +197,15 @@
                     </div>
 
                     <div class="description">
-                        <input type="hidden" name="basket_id" th:value="${item.basketId}" />
-
                         <span class="prod-name" th:text="${item.prodNameKor}">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
                         <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
                         <span>수량:<span class="qty" th:text="${item.quantity}">1</span>개</span>
                         <span class="price"
                             th:text="${#numbers.formatInteger(item.price * item.quantity, 3, 'COMMA') + '원'}">28,000</span>
                     </div>
-                    <div class="cancel-btn-box">
-                        <button class="cancel-btn"><i class="fa-solid fa-xmark"></i></button>
-                    </div>
+                    <!-- <div class="cancel-btn-box">
+                        <a class="cancel-btn" th:href="@{/api/order/delete/{basketId}(basketId=${item.basketId})}"><i class="fa-solid fa-xmark"></i></a>
+                    </div> -->
                 </div>
 
                 <div class="price-box">

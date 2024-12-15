@@ -5,20 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calmomentree</title>
     <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        color: #313131;
+      }
       .header {
         border-bottom: 1px solid #e5e5e5;
+        height: 30px;
+        margin: 10px 0;
       }
-      body {
-        padding: 0 10px;
-      }
-      .description {
-        display: flex;
-      }
-      select {
+      .content {
         background-color: #faf8ef;
-        padding: 10px;
-        margin: 20px 0;
-        border: 1px solid #e5e5e5;
+
+        .prod-box {
+          border-bottom: 1px solid #e5e5e5;
+
+          .description {
+            display: flex;
+
+            .prodDesc {
+              display: flex;
+              flex-direction: column;
+            }
+            .imgBox {
+              width: 65px;
+
+              img {
+                width: 100%;
+                object-fit: cover;
+              }
+            }
+          }
+        }
+
+        #send {
+          display: flex;
+          align-items: center;
+          text-decoration: none;
+          padding: 0 10px;
+          border: 1px solid #313131;
+          margin: 15px 10px;
+        }
       }
     </style>
   </head>
@@ -26,8 +55,8 @@
     <div class="header">
       <p>주문정보 선택</p>
     </div>
-    <div class="content">
-      <form action="">
+    <div class="content" id="content">
+      
         <div class="selectBox">
           <!-- <select name="limit" id="">
             <option value="5" selected>5개씩 보기</option>
@@ -40,20 +69,25 @@
             <!-- 결제한 상품 -->
             <div class="prod-box" id="prod-box" th:each="item : ${items}">
               <div class="description">
-                <input type="hidden" id="prod_id" th:value="${item.prodId}" />
-                <span class="prod-name" th:text="${item.prodName}">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
-                <span>수량:<span class="qty" th:text="${item.orderQuantity}">1</span>개</span>
-                <span class="price" th:text="${#numbers.formatInteger(item.orderPrice, 3, 'COMMA') + '원'}">28,000</span>
+                <div class="imgBox">
+                  <img th:src="${item.imgUrl}" alt="" />
+                </div>
+                <div class="prodDesc">
+                  <input type="hidden" id="prod_id" th:value="${item.prodId}" />
+                  <span class="prod-name" th:text="${item.prodName}">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
+                  <span>수량:<span class="qty" th:text="${item.orderQuantity}">1</span>개</span>
+                  <span class="price" th:text="${#numbers.formatInteger(item.orderPrice, 3, 'COMMA') + '원'}">28,000</span>
+                </div>
                 <a id="send" href="localhost/board/product/write">선택</a>
               </div>
             </div>
           </form>
         </div>
         <div class="limitContent"></div>
-      </form>
+      
     </div>
     <script>
-      const aTag = document.querySelectorAll("#send");
+    const aTag = document.querySelectorAll("#send");
       aTag.forEach((v, i) => {
         v.addEventListener("click", (e) => {
           e.preventDefault();

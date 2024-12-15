@@ -8,7 +8,7 @@
   <body>
     <header th:replace="~{/fragments/common :: calm-header}"></header>
 
-    <div id="container">
+    <div class="container">
       <div th:replace="~{/fragments/common :: calm-top-btn}"></div>
       <div th:replace="~{/fragments/common :: calm-search}"></div>
       <div th:replace="~{/fragments/common :: calm-search-bg}"></div>
@@ -19,17 +19,17 @@
       <div class="table-container">
         <div class="title-wr">Review</div>
         <div class="board-list">
-          <!-- 첫번째: 상품 정보 -->
+          <!-- 상품 정보 -->
           <div class="board-prod box">
             <div class="thumb-box">
-              <a th:href="@{/product/detail/{prodId}(prodId=${prodInfo.prodId})}"><img id="prodImg" th:src="${prodInfo.listImgUrl1}" alt="" /></a>
+              <a th:href="@{/product/detail/{prodId}(prodId=${reviewInfo.prodId})}"><img id="prodImg" th:src="${reviewInfo.imgUrl}" alt="" /></a>
             </div>
             <div class="prod-info">
-              <p class="prod-name"><a th:href="@{/product/detail/{prodId}(prodId=${prodInfo.prodId})}" th:text="${prodInfo.prodNameKor}">떼르말 세라마이드 헤드 스파 샴푸 500ML</a></p>
-              <p class="price"><span th:text="${#numbers.formatInteger(prodInfo.price, 3, 'COMMA') + '원'}">28,000</span></p>
+              <p class="prod-name"><a th:href="@{/product/detail/{prodId}(prodId=${reviewInfo.prodId})}" th:text="${reviewInfo.prodNameKor}">떼르말 세라마이드 헤드 스파 샴푸 500ML</a></p>
+              <p class="price"><span th:text="${#numbers.formatInteger(reviewInfo.price, 3, 'COMMA') + '원'}">28,000</span></p>
             </div>
           </div>
-          <!-- 두번째: 작성자 정보 -->
+          <!-- 작성자 정보 -->
           <div class="board-head box">
             <span th:text="${reviewInfo.reviewTitle}">온가족이 사용가능한 헤드스파 샴푸</span>
             <div class="board-writer">
@@ -39,7 +39,6 @@
             </div>
           </div>
           <!-- 본문 내용 -->
-          <!-- <div class="attach">---다운로드링크 작업예정---</div> -->
           <div class="detail">
             <div class="img" th:each="reviewImgs :${reviewImgs}">
               <img th:src="${reviewImgs.imgUrl}" alt="" />
@@ -49,9 +48,9 @@
         </div>
         <!-- 하단 버튼 구역 -->
         <div class="btn-area-read">
-          <button class="btn1 btn"><a th:href="@{/board/product/list}">목록</a></button>
+          <a class="btn1 btn" th:href="@{/board/product/list}">목록</a>
           <form action="post" id="delete">
-            <button class="btn2 btn" type="">삭제</button>
+            <button class="btn2 btn" id="btn2" type="">삭제</button>
           </form>
           
         </div>
@@ -63,16 +62,17 @@
           </div>
         </div>
         <!-- 이전/다음 버튼 -->
-        <div class="page-mov-box">
+        <!-- <div class="page-mov-box">            
           <div class="page-mov-prev page-box">
-            이전<i class="fa-solid fa-chevron-up"></i>
-            <span class="prev-subject"><a href="">너무 좋아요</a></span>
+            <a th:href="">이전<i class="fa-solid fa-chevron-up"></i></a>
+            <span class="prev-subject"><a href=""
+                                  th:text="">너무 좋아요</a></span>
           </div>
           <div class="page-mov-next page-box">
             다음<i class="fa-solid fa-chevron-down"></i>
             <span class="next-subject"><a href="">향도 좋고 민감성 두피가 사용하기 참 좋네요</a></span>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="board-box right"></div>
     </div>

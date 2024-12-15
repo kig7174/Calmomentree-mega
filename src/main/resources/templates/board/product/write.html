@@ -87,26 +87,11 @@
                   <input name="photo" class="line file-btn" type="file" accept="image/*" />
                 </td>
               </tr>
-              <tr>
-                <th>비밀번호</th>
-                <td>
-                  <input type="password" size="5" />
-                </td>
-              </tr>
-              <tr>
-                <th>비밀글설정</th>
-                <td class="star">
-                  <input type="radio" id="public" class="" name="secure" checked />
-                  <label for="public">공개글</label>
-                  <input type="radio" id="private" class="" name="secure" />
-                  <label for="private">비밀글</label>
-                </td>
-              </tr>
             </tbody>
           </table>
         </div>
         <div class="btnArea">
-          <button class="cancelBtn btn">취소</button>
+          <a class="cancelBtn btn" th:href="@{/board/product/list}">취소</a>
           <button class="uploadBtn btn">등록</button>
         </div>
       </form>
@@ -123,9 +108,9 @@
         e.preventDefault();
 
         const popup = window.open(
-          "[[@{/order/search_board_list}]]",
+          "[[@{/review/search_board_list}]]",
           "",
-          "width=500, height=500, scrollbars=no, toolbar=no, menubar=no, status=no, location=no"
+          "width=600, height=700, scrollbars=no, toolbar=no, menubar=no, status=no, location=no"
         );
 
         // 팝업창이 차단된 경우
@@ -138,6 +123,14 @@
       if (document.querySelector("#reviewAdd") != null) {
         document.querySelector("#reviewAdd").addEventListener("submit", async (e) => {
           e.preventDefault();
+
+          // 리뷰 상품 선택
+          const prodDes = document.querySelector("#prodDes");
+          if(prodDes.innerText == null || prodDes.innerText == "") {
+            alert("상품을 선택해 주세요.");
+            setTimeout(() =>  window.scrollTo({ top: 0, behavior: 'smooth'}) , 300);
+            return false;
+          }
 
           // 제목 입력여부
           const title = document.querySelector("#title");
