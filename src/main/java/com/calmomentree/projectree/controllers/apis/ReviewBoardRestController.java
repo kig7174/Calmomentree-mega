@@ -104,16 +104,18 @@ public class ReviewBoardRestController {
         if (uploadItemList != null) {
             
             for (int i=0; i<uploadItemList.size(); i++) {
-                ReviewImg input2 = new ReviewImg();
-                input2.setImgUrl(uploadItemList.get(i).getFilePath());
-                input2.setReviewBoardId(input.getReviewBoardId());
-                
-                try {
-                    reviewImgService.addItem(input2);
-                } catch (Exception e) {
-                    return restHelper.serverError(e);
-                }
-                log.error("업로드사진: " + input2);
+                if (uploadItemList.get(i).getFilePath() != null) {
+                    ReviewImg input2 = new ReviewImg();
+                    input2.setImgUrl(uploadItemList.get(i).getFilePath());
+                    input2.setReviewBoardId(input.getReviewBoardId());
+                    
+                    try {
+                        reviewImgService.addItem(input2);
+                    } catch (Exception e) {
+                        return restHelper.serverError(e);
+                    }
+                    log.error("업로드사진: " + input2);
+                }            
             }
         }
 

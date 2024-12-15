@@ -1,3 +1,5 @@
+const formData = new FormData();
+
 // 주문정보에 있는 주소검색
 document.querySelector("#post-btn").addEventListener("click", (e) => {
   e.preventDefault();
@@ -54,3 +56,21 @@ document.querySelectorAll(".info-title").forEach((v, i) => {
     }
   });
 });
+// ================ 개별 상품 삭제 버튼 ====================
+// document.querySelectorAll(".cancel-btn").forEach((v, i) => {
+//   v.addEventListener("click", async (e) => {
+//     e.preventDefault();
+
+//     const current = e.currentTarget;
+//     console.log(current);
+//     console.log(current.href.value);
+//     if (confirm("선택하신 상품을 삭제하시겠습니까?")) {
+//       const data = await axiosHelper.delete(current.href, formData);
+
+//       if (data) {
+//         alert("삭제 되었습니다.");
+//         window.location = orderList;
+//       }
+//     }
+//   });
+// });

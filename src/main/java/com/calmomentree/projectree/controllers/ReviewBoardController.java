@@ -16,11 +16,9 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import com.calmomentree.projectree.helpers.FileHelper;
 import com.calmomentree.projectree.helpers.Pagination;
 import com.calmomentree.projectree.helpers.WebHelper;
-import com.calmomentree.projectree.models.Board;
 import com.calmomentree.projectree.models.Member;
 import com.calmomentree.projectree.models.Order;
 import com.calmomentree.projectree.models.OrderItem;
-import com.calmomentree.projectree.models.Product;
 import com.calmomentree.projectree.models.ReviewBoard;
 import com.calmomentree.projectree.models.ReviewImg;
 import com.calmomentree.projectree.services.OrderItemService;
@@ -46,9 +44,6 @@ public class ReviewBoardController {
 
     @Autowired
     private FileHelper fileHelper;
-
-    @Autowired
-    private ProductService productService;
 
     @Autowired
     private OrderItemService orderItemService;
@@ -95,8 +90,8 @@ public class ReviewBoardController {
             pagination = new Pagination(nowPage, totalCount, listCount, pageCount);
 
             // SQL의 Limit절에서 사용될 값을 Beans의 static 변수에 저장
-            Board.setOffset(pagination.getOffset());
-            Board.setListCount(pagination.getListCount());
+            ReviewBoard.setOffset(pagination.getOffset());
+            ReviewBoard.setListCount(pagination.getListCount());
 
             output = reviewBoardService.getList(input);
 
@@ -118,10 +113,10 @@ public class ReviewBoardController {
      }
      
     @SuppressWarnings("null")
-    @GetMapping("/board/product/read/{reviewBoardId}/{prodId}")
+    @GetMapping("/board/product/read/{reviewBoardId}")
     public String reviewRead(Model model,
-            @PathVariable("reviewBoardId") int reviewBoardId,
-            @PathVariable("prodId") int prodId) {
+            @PathVariable("reviewBoardId") int reviewBoardId){
+            // @PathVariable("prodId") int prodId) {
         
         // 리뷰 
         ReviewBoard input = new ReviewBoard();
@@ -140,17 +135,8 @@ public class ReviewBoardController {
             return null;
         }
 
-        // 상품
-        Product product = new Product();
-        product.setProdId(prodId);
-
-        Product prodOutput = null;
-
-        try {
-            prodOutput = productService.getItem(product);
-        } catch (Exception e) {
-            webHelper.serverError(e);
-        }
+        // 상품정보 이미지
+        output.setImgUrl(fileHelper.getUrl(output.getImgUrl()));
 
         // 리뷰 이미지
         List<ReviewImg> reviewImgOutput = null;
@@ -159,30 +145,21 @@ public class ReviewBoardController {
             reviewImgOutput = reviewImgService.getList(reviewImg);
         } catch (Exception e) {
             webHelper.serverError(e);
-        }
-        // log.info("=================================================");
-        // log.info("리뷰이미지 : " + reviewImgOutput);
-        // log.info("=================================================");
-       
+        }       
         
         for(int i=0;i<reviewImgOutput.size();i++) {
             ReviewImg r = reviewImgOutput.get(i);
             r.setImgUrl(fileHelper.getUrl(reviewImgOutput.get(i).getImgUrl()));
-            
-            // log.info("=================================================");
-            // log.info("리뷰이미지(2) : " + reviewImgOutput);
-            // log.info("=================================================");
         }
            
         model.addAttribute("reviewInfo", output);
-        model.addAttribute("prodInfo", prodOutput);
         model.addAttribute("reviewImgs", reviewImgOutput);
 
         return "board/product/read";
     }
  
     @SuppressWarnings("null")
-    @GetMapping("/order/search_board_list")
+    @GetMapping("/review/search_board_list")
     public String reviewSelectOrder(Model model,
         @SessionAttribute("memberInfo") Member memberInfo) {
 
@@ -210,6 +187,9 @@ public class ReviewBoardController {
               output = orderItemService.getList(inputTmp);
             } catch (Exception e) {
                 webHelper.serverError(e);
+            }
+            for(int i=0;i<output.size();i++) {
+                output.get(i).setImgUrl(fileHelper.getUrl(output.get(i).getImgUrl()));
             }
 
             order.addAll(output);

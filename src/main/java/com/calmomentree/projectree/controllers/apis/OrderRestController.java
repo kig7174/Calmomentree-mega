@@ -25,6 +25,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Slf4j
 @RestController
@@ -251,4 +252,23 @@ public class OrderRestController {
         
         return restHelper.sendJson(data);
     }
+    // @DeleteMapping("/api/order/delete/{basketId}")
+    // public Map<String, Object> orderProdDelete(
+    //         @PathVariable("basketId") String basketIdTmp,
+    //         @SessionAttribute("memberInfo") Member memberInfo) {
+
+    //     int basketId = Integer.parseInt(basketIdTmp);
+                
+    //     Basket input = new Basket();
+    //     input.setBasketId(basketId);
+    //     input.setMemberId(memberInfo.getMemberId());
+
+    //     try {
+    //         basketService.deleteItem(input);
+    //     } catch (Exception e) {
+    //         return restHelper.serverError(e);
+    //     }
+
+    //     return restHelper.sendJson();
+    // }
 }    

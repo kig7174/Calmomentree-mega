@@ -93,36 +93,40 @@ public class OrderController {
     @SuppressWarnings("null")
     @GetMapping("/order/order_form")
     public String orderAdd(
-        Model model,
-        HttpServletRequest request,
-        @SessionAttribute("memberInfo") Member memberInfo,
-        @RequestParam("basket_id") List<Integer> basketIdTmp
-    ) {
+            Model model,
+            HttpServletRequest request,
+            @SessionAttribute("memberInfo") Member memberInfo,
+            @RequestParam("basket_id") List<Integer> basketIdTmp) {
         List<Basket> baskets = new ArrayList<>();
 
         int totalPrice = 0;
-
-        for (int i=0; i<basketIdTmp.size(); i++) {
-            Basket b = new Basket();
-            b.setBasketId(basketIdTmp.get(i));
-            b.setMemberId(memberInfo.getMemberId());
-
-            Basket basket = null;
-            
-            try {
-                basket = basketService.getItem(b);
-            } catch (Exception e) {
-                webHelper.serverError(e);
-                return null;
+       
+            for (int i = 0; i < basketIdTmp.size(); i++) {
+                if (basketIdTmp.get(i) != null) {
+    
+                    Basket b = new Basket();
+                    b.setBasketId(basketIdTmp.get(i));
+                    b.setMemberId(memberInfo.getMemberId());
+    
+                    Basket basket = null;
+    
+                    try {
+                        basket = basketService.getItem(b);
+                    } catch (Exception e) {
+                        webHelper.serverError(e);
+                        return null;
+                    }
+    
+                    basket.setImgUrl(fileHelper.getUrl(basket.getImgUrl()));
+    
+                    int t = basket.getQuantity() * basket.getPrice();
+                    totalPrice += t;
+    
+                    baskets.add(basket);
+                }
             }
-
-            basket.setImgUrl(fileHelper.getUrl(basket.getImgUrl()));
-
-            int t = basket.getQuantity() * basket.getPrice();
-            totalPrice += t;
-
-            baskets.add(basket);
-        }
+        
+       
 
         Order input = new Order();
         input.setMemberName(memberInfo.getUserName());
@@ -142,7 +146,7 @@ public class OrderController {
             webHelper.serverError(e);
             return null;
         }
-        
+
         model.addAttribute("order", order);
         model.addAttribute("items", baskets);
 
@@ -151,12 +155,11 @@ public class OrderController {
 
     @GetMapping("/order/order_form_by_detail")
     public String orderAddByDetail(
-        Model model,
-        HttpServletRequest request,
-        @SessionAttribute("memberInfo") Member memberInfo,
-        @RequestParam("quantity") int quantity,
-        @RequestParam("prodId") int prodId
-    ) {
+            Model model,
+            HttpServletRequest request,
+            @SessionAttribute("memberInfo") Member memberInfo,
+            @RequestParam("quantity") int quantity,
+            @RequestParam("prodId") int prodId) {
         Basket basket = new Basket();
         basket.setMemberId(memberInfo.getMemberId());
         basket.setQuantity(quantity);
@@ -191,7 +194,7 @@ public class OrderController {
             webHelper.serverError(e);
             return null;
         }
-        
+
         model.addAttribute("order", order);
         model.addAttribute("items", output);
 
@@ -200,24 +203,23 @@ public class OrderController {
 
     @PostMapping("/order/order_ok")
     public String orderOk(
-        Model model,
-        @SessionAttribute("memberInfo") Member memberInfo,
-        @RequestParam("order_id") int orderId,
-        @RequestParam("member_name") String memberName,
-        @RequestParam("email") String memberEmail,
-        @RequestParam("tel") String memberTel,
-        @RequestParam("postcode") String memberPostcode,
-        @RequestParam("addr1") String memberAddr1,
-        @RequestParam("addr2") String memberAddr2,
-        @RequestParam("receiver_name") String receiverName,
-        @RequestParam("receiver_postcode") String receiverPostcode,
-        @RequestParam("receiver_addr1") String receiverAddr1,
-        @RequestParam("receiver_addr2") String receiverAddr2,
-        @RequestParam("receiver_tel") String receiverTel,
-        @RequestParam("req") String req,
-        @RequestParam("total_price") Integer totalPrice,
-        @RequestParam("basket_id") List<Integer> basketIdTmp
-    ) {
+            Model model,
+            @SessionAttribute("memberInfo") Member memberInfo,
+            @RequestParam("order_id") int orderId,
+            @RequestParam("member_name") String memberName,
+            @RequestParam("email") String memberEmail,
+            @RequestParam("tel") String memberTel,
+            @RequestParam("postcode") String memberPostcode,
+            @RequestParam("addr1") String memberAddr1,
+            @RequestParam("addr2") String memberAddr2,
+            @RequestParam("receiver_name") String receiverName,
+            @RequestParam("receiver_postcode") String receiverPostcode,
+            @RequestParam("receiver_addr1") String receiverAddr1,
+            @RequestParam("receiver_addr2") String receiverAddr2,
+            @RequestParam("receiver_tel") String receiverTel,
+            @RequestParam("req") String req,
+            @RequestParam("total_price") Integer totalPrice,
+            @RequestParam("basket_id") List<Integer> basketIdTmp) {
         try {
             regexHelper.isValue(memberName, "이름을 입력해주세요.");
             regexHelper.isKor(memberName, "이름은 한글로만 입력해주세요.");
@@ -283,16 +285,16 @@ public class OrderController {
             webHelper.serverError(e);
             return null;
         }
-        
+
         List<Basket> baskets = new ArrayList<>();
 
-        for (int i=0; i<basketIdTmp.size(); i++) {
+        for (int i = 0; i < basketIdTmp.size(); i++) {
             Basket b = new Basket();
             b.setBasketId(basketIdTmp.get(i));
             b.setMemberId(memberInfo.getMemberId());
 
             Basket basket = null;
-            
+
             try {
                 basket = basketService.getItem(b);
             } catch (Exception e) {
@@ -305,7 +307,7 @@ public class OrderController {
 
         List<OrderItem> items = new ArrayList<>();
 
-        for (int i=0; i<baskets.size(); i++) {
+        for (int i = 0; i < baskets.size(); i++) {
             OrderItem oi = new OrderItem();
 
             Basket b = baskets.get(i);
@@ -328,7 +330,7 @@ public class OrderController {
             items.add(item);
         }
 
-        for (int i=0; i<baskets.size(); i++) {
+        for (int i = 0; i < baskets.size(); i++) {
             Basket b = new Basket();
             b.setBasketId(basketIdTmp.get(i));
             b.setMemberId(memberInfo.getMemberId());
@@ -339,11 +341,11 @@ public class OrderController {
                 webHelper.serverError(e);
                 return null;
             }
-        }        
+        }
 
         model.addAttribute("order", order);
         model.addAttribute("orderItems", items);
 
         return "order/order_result";
-    }   
+    }
 }
