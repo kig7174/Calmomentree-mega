@@ -134,6 +134,7 @@ public interface BoardMapper {
                         "FROM boards " +
                         "<where> " +
                         "<if test = 'boardTitle != null'>board_title LIKE concat('%',#{boardTitle},'%')</if> " +
+                        "<if test = 'memberId != 0'>AND member_id = #{memberId}</if> " +
                         "</where> " +
                 "</script>")
         public int selectCount(Board input);

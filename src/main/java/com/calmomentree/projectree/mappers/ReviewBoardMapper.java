@@ -71,12 +71,12 @@ public interface ReviewBoardMapper {
                         "DATE_FORMAT(r.edit_date,'%Y-%m-%d') AS edit_date, p.prod_id, m.member_id, " +
                         "replace(user_name,substring(user_name,2),'****') AS user_name, " +
                         "ROW_NUMBER() OVER(ORDER BY r.review_board_id) AS rownum, " +
-                        " p.prod_name_kor, p.prod_name_eng, p.price, p.capacity, " +
+                        " p.prod_name_kor, p.price, " +
                          
                         "( SELECT img_url FROM prod_imgs " +
                         "WHERE prod_id = r.prod_id AND img_type = 'list' " +
                         "ORDER BY prod_img_id LIMIT 0,1 ) AS img_url " +
-                        "FROM review_boards r " +
+                "FROM review_boards r " +
 
                         // 회원
                         "INNER JOIN members m ON r.member_id = m.member_id " +
@@ -98,7 +98,8 @@ public interface ReviewBoardMapper {
                         @Result(property = "userName", column = "user_name"),
                         @Result(property = "rownum", column = "rownum"),
                         @Result(property = "imgUrl", column = "img_url"),
-                        @Result(property = "prodNameKor", column = "prod_name_kor")
+                        @Result(property = "prodNameKor", column = "prod_name_kor"),
+                        @Result(property = "price", column = "price")
         })
         public ReviewBoard selectItem(ReviewBoard input);
 
@@ -109,27 +110,29 @@ public interface ReviewBoardMapper {
          * @return
          */
         @Select("<script> " +
-                        "SELECT " +
+                "SELECT " +
                         "r.review_board_id, review_title, review_content, " +
                         "rating, DATE_FORMAT(r.write_date,'%Y-%m-%d') AS write_date, " +
                         "DATE_FORMAT(r.edit_date,'%Y-%m-%d') AS edit_date, r.prod_id, m.member_id, " +
                         "replace(user_name,substring(user_name,2),'****') AS user_name, " +
                         "ROW_NUMBER() OVER(ORDER BY r.review_board_id) AS rownum , " +
+                        
                         "( SELECT img_url FROM prod_imgs " +
                         "WHERE prod_id = r.prod_id AND img_type = 'list' " +
                         "ORDER BY prod_img_id LIMIT 0,1 ) AS img_url " +
-                        "FROM review_boards r " +
-                        "INNER JOIN members m ON r.member_id = m.member_id " +
+                
+                "FROM review_boards r " +
+                "INNER JOIN members m ON r.member_id = m.member_id " +
 
-                        "<where> " +
+                "<where> " +
                         "<if test = 'reviewTitle != null'>review_title LIKE concat('%',#{reviewTitle},'%')</if> " +
                         "<if test = 'memberId != 0'>AND m.member_id = #{memberId}</if> " +
-                        "<if test = 'prodId != 0'>AND r.prod_id = #{prodId}</if> " +
-                        "</where> " +
+                        // "<if test = 'prodId != 0'>OR r.prod_id = #{prodId}</if> " +
+                "</where> " +
                         "ORDER BY rownum DESC " +
 
                         "<if test='listCount > 0'>LIMIT #{offset}, #{listCount}</if> " +
-                        "</script> ")
+                "</script> ")
         @ResultMap("resultMap")
         public List<ReviewBoard> selectList(ReviewBoard input);
 
@@ -145,7 +148,7 @@ public interface ReviewBoardMapper {
                         "FROM review_boards " +
                         "<where> " +
                         "<if test = 'reviewTitle != null'>review_title LIKE concat('%',#{reviewTitle},'%')</if> " +
-                        "<if test = 'prodId != null'>prod_id = #{prodId} </if> " +
+                        // "<if test = 'prodId != null'>OR prod_id = #{prodId} </if> " +
                         "</where> " +
                         "</script>")
         public int selectCount(ReviewBoard input);

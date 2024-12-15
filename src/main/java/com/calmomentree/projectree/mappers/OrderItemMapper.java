@@ -51,7 +51,8 @@ public interface OrderItemMapper {
         @Result(property="orderPrice", column="order_price"),
         @Result(property="orderQuantity", column="order_quantity"),
         @Result(property="prodId", column="prod_id"),
-        @Result(property="orderId", column="order_id")
+        @Result(property="orderId", column="order_id"),
+        @Result(property="imgUrl", column="img_url")
     })
     public OrderItem selectItem(OrderItem input);
 
@@ -62,9 +63,11 @@ public interface OrderItemMapper {
      */
     @Select("SELECT " +
                 "order_item_id, prod_name, order_price, " +
-                "order_quantity, prod_id, order_id " +
-                "img_url " +
-            "FROM order_items " +
+                "order_quantity, prod_id, order_id, " +
+                "( SELECT img_url FROM prod_imgs " +
+                    "WHERE prod_id = o.prod_id AND img_type = 'list' " +
+                    "ORDER BY prod_img_id LIMIT 0,1 ) AS img_url " +
+            "FROM order_items o " +
             "WHERE order_id = #{orderId}")
     @ResultMap("resultMap")
     public List<OrderItem> selectList(OrderItem input);
