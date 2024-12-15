@@ -162,6 +162,11 @@ table {
 
   li {
     padding: 0 7px;
+    a {
+      &.active {
+        text-decoration: underline;
+      }
+    }
   }
 
   .pagination {
@@ -178,15 +183,6 @@ table {
       color: var(--font-color);
       text-decoration: none;
       font-size: var(--font-size-item);
-
-      &.active {
-        /* background-color: #168; */
-        color: white;
-      }
-
-      /* &[href]:hover {
-              background-color: #f0f6f9;
-            } */
     }
   }
 }
@@ -224,6 +220,10 @@ table {
       text-align: center;
       margin-top: 2px;
       border: none;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }

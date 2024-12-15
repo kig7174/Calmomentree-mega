@@ -126,8 +126,19 @@ body {
 }
 
 .paging-box {
-  margin-top: 50px;
+  margin-top: 100px;
   text-align: center;
+  justify-content: center;
+  display: flex;
+
+  li {
+    padding: 0 7px;
+    a {
+      &.active {
+        text-decoration: underline;
+      }
+    }
+  }
 
   .pagination {
     list-style: none;
@@ -138,14 +149,11 @@ body {
 
     a {
       display: block;
+      font-size: 14px;
       padding: 0 7px;
       color: var(--font-color);
       text-decoration: none;
-      font-size: var(--font-size-large);
-
-      &.active {
-        color: white;
-      }
+      font-size: var(--font-size-item);
     }
   }
 }
@@ -194,7 +202,7 @@ body {
       }
     }
 
-    a {
+    button {
       display: block;
       color: #fff;
       background-color: #000;
@@ -204,6 +212,10 @@ body {
       line-height: 38px;
       text-align: center;
       margin-top: 2px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 }
@@ -258,17 +270,20 @@ body {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  .btn {
+  button,
+  a {
     background-color: var(--background-color);
     border: 1px solid #bcbcbc;
     text-align: center;
-  }
-  .btn1 {
     min-width: 96px;
+    padding: 12px 20px;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
   a {
     display: inline-block;
-    padding: 12px 20px;
   }
 }
 
