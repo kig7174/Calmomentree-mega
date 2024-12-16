@@ -172,7 +172,7 @@
                     </select>
                 </div>
                 <div class="req-box input-box">
-                    <input type="text" name="req" id="req" style="display: none;"/>
+                    <input type="text" id="req" style="display: none;"/>
                 </div>
 
                 <div class="message-check-box"><input type="checkbox" /><span>기본 배송지로 저장</span></div>
@@ -192,20 +192,17 @@
                     <input type="hidden" name="basket_id" id="basket_id" th:value="${item.basketId}" />
                     <div class="thumbnail-box">
                         <div class="thumbnail-img">
-                            <img th:src="${item.imgUrl}" />
+                            <a th:href="@{/product/detail/{prodId}(prodId=${item.prodId})}"><img th:src="${item.imgUrl}" /></a>
                         </div>
                     </div>
 
                     <div class="description">
-                        <span class="prod-name" th:text="${item.prodNameKor}">떼르말 세라마이드 헤드 스파 샴푸 500ML</span>
+                        <a th:href="@{/product/detail/{prodId}(prodId=${item.prodId})}"><span class="prod-name" th:text="${item.prodNameKor}">떼르말 세라마이드 헤드 스파 샴푸 500ML</span></a>
                         <span>[옵션: <span class="op1">선택안함</span>/<span class="op2">선택안함</span>]</span>
                         <span>수량:<span class="qty" th:text="${item.quantity}">1</span>개</span>
                         <span class="price"
                             th:text="${#numbers.formatInteger(item.price * item.quantity, 3, 'COMMA') + '원'}">28,000</span>
                     </div>
-                    <!-- <div class="cancel-btn-box">
-                        <a class="cancel-btn" th:href="@{/api/order/delete/{basketId}(basketId=${item.basketId})}"><i class="fa-solid fa-xmark"></i></a>
-                    </div> -->
                 </div>
 
                 <div class="price-box">

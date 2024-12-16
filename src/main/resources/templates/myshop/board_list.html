@@ -21,8 +21,8 @@
           <ul class="board-inner">
             <li><a th:href="@{/myshop}">마이페이지</a></li>
             <li><a th:href="@{/myshop/order/list}">주문/배송조회</a></li>
-            <li><a href="" style="text-decoration: line-through;">쿠폰/적립금</a></li>
-            <li><a th:href=@{/myshop/board_list}>게시글관리</a></li>
+            <li><a style="text-decoration: line-through">쿠폰/적립금</a></li>
+            <li><a th:href="@{/myshop/board_list}">게시글관리</a></li>
             <li><a th:href="@{/member/modify}">회원정보수정</a></li>
           </ul>
         </div>
@@ -32,10 +32,12 @@
         <div class="myshop-area">
           <div class="myshop-title board-select">
             <p class="title">Board</p>
-            <select name="board-sort" id="board-sort">
-              <option value="D">작성 일자별</option>
-              <option value="C">분류별</option>
-            </select>
+            <form method="get" id="myForm" th:action="@{/myshop/board_list}">
+              <select name="boardSort" id="board-sort" onchange="this.form.submit()" >
+                <option th:selected="${boardSort} == 'date'" value="date">작성 일자별</option>
+                <option th:selected="${boardSort} == 'cate'" value="cate">분류별</option>
+              </select>
+            </form>
           </div>
 
           <div class="order-history-box">
@@ -70,25 +72,25 @@
           <!-- 페이지 번호 -->
           <div class="paging-box">
             <!-- 페이지 번호 -->
-        <ul class="pagination">
-          <!-- 이전 페이지 그룹 이동 버튼 -->
-          <li th:if="${pagination.prevPage > 0}">
-            <a th:href="@{/myshop/board_list(page=${pagination.prevPage})}">&laquo;</a>
-          </li>
-          <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
+            <ul class="pagination">
+              <!-- 이전 페이지 그룹 이동 버튼 -->
+              <li th:if="${pagination.prevPage > 0}">
+                <a th:href="@{/myshop/board_list(page=${pagination.prevPage})}">&laquo;</a>
+              </li>
+              <li th:unless="${pagination.prevPage > 0}"><a>&laquo;</a></li>
 
-          <!-- 페이지 번호 링크 -->
-          <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
-            <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}"></a>
-            <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/myshop/board_list(page=${i})}"></a>
-          </li>
+              <!-- 페이지 번호 링크 -->
+              <li th:each="i : ${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+                <a th:if="${i == pagination.nowPage}" class="active" th:text="${i}"></a>
+                <a th:unless="${i == pagination.nowPage}" th:text="${i}" th:href="@{/myshop/board_list(page=${i})}"></a>
+              </li>
 
-          <!-- 다음 페이지 그룹 이동 버튼 -->
-          <li th:if="${pagination.nextPage > 0}">
-            <a th:href="@{/myshop/board_list(page=${pagination.nextPage})}">&raquo;</a>
-          </li>
-          <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
-        </ul>
+              <!-- 다음 페이지 그룹 이동 버튼 -->
+              <li th:if="${pagination.nextPage > 0}">
+                <a th:href="@{/myshop/board_list(page=${pagination.nextPage})}">&raquo;</a>
+              </li>
+              <li th:unless="${pagination.nextPage > 0}"><a>&raquo;</a></li>
+            </ul>
           </div>
         </div>
       </div>

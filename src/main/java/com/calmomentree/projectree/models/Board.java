@@ -23,6 +23,10 @@ public class Board {
     private String userName;        // 회원 이름
 
     private String rownum;          // 순번
+
+    @Getter
+    @Setter
+    private static String boardSort;  // 분류
     
     @Getter
     @Setter

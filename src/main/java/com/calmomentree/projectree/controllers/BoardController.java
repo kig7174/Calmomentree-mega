@@ -151,7 +151,8 @@ public class BoardController {
     @GetMapping("/myshop/board_list")
     public String myshopBoard(Model model,
             @SessionAttribute("memberInfo") Member memberInfo,
-            @RequestParam(value = "page", defaultValue = "1") int nowPage) {
+            @RequestParam(value = "page", defaultValue = "1") int nowPage,
+            @RequestParam(value = "boardSort", defaultValue = "date") String boardSort) {
 
         int totalCount = 0; // 전체 게시글 수
         int listCount = 10; // 한 페이지당 표시할 목록 수
@@ -174,6 +175,8 @@ public class BoardController {
             // SQL의 Limit절에서 사용될 값을 Beans의 static 변수에 저장
             Board.setOffset(pagination.getOffset());
             Board.setListCount(pagination.getListCount());
+            Board.setBoardSort(boardSort);
+
 
             output = boardService.getList(input);
         } catch (Exception e) {
@@ -181,6 +184,7 @@ public class BoardController {
         }
 
         model.addAttribute("boards", output);
+        model.addAttribute("boardSort", boardSort);
         model.addAttribute("pagination", pagination);
 
         return "/myshop/board_list";

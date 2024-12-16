@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.calmomentree.projectree.helpers.FileHelper;
-import com.calmomentree.projectree.helpers.Pagination;
 import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;

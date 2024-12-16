@@ -23,7 +23,6 @@ import com.calmomentree.projectree.models.ReviewBoard;
 import com.calmomentree.projectree.models.ReviewImg;
 import com.calmomentree.projectree.services.OrderItemService;
 import com.calmomentree.projectree.services.OrderService;
-import com.calmomentree.projectree.services.ProductService;
 import com.calmomentree.projectree.services.ReviewBoardService;
 import com.calmomentree.projectree.services.ReviewImgService;
 

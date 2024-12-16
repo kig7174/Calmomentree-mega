@@ -105,7 +105,10 @@ public interface BoardMapper {
                         "board_id, board_category, board_title, board_content, " +
                         "DATE_FORMAT(b.write_date,'%Y-%m-%d') AS write_date, DATE_FORMAT(b.edit_date,'%Y-%m-%d') AS edit_date, is_public, board_pw," +
                         "upload_img, m.member_id, replace(user_name,substring(user_name,2),'****') AS user_name, " +
-                        "ROW_NUMBER() OVER(ORDER BY board_id) AS rownum " +
+                        "ROW_NUMBER() OVER( " +
+                        "<if test = 'boardSort == \"date\"'>ORDER BY write_date ASC , board_id DESC</if> " +
+                        "<if test = 'boardSort == \"cate\"'>ORDER BY board_category ASC</if> " +
+                        ") AS rownum " +
                 "FROM boards b " +
                 "INNER JOIN members m ON b.member_id = m.member_id " +
                 "<where> " +
@@ -114,7 +117,9 @@ public interface BoardMapper {
 
                         "<if test = 'boardCategory != null'>AND board_category = #{boardCategory}</if> " +
                         "<if test = 'memberId != 0'>AND m.member_id = #{memberId}</if> " +
+                        
                 "</where> " +
+                        
                         "ORDER BY rownum DESC " +
 
                         "<if test='listCount > 0'>LIMIT #{offset}, #{listCount}</if> " +
