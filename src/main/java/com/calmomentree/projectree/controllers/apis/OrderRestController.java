@@ -7,8 +7,10 @@ import com.calmomentree.projectree.helpers.FileHelper;
 import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
+import com.calmomentree.projectree.models.Order;
 import com.calmomentree.projectree.models.Product;
 import com.calmomentree.projectree.services.BasketService;
+import com.calmomentree.projectree.services.OrderService;
 import com.calmomentree.projectree.services.ProductService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -42,6 +44,9 @@ public class OrderRestController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private OrderService orderService;
 
     /**
      * 장바구니 갯수 표시
@@ -252,23 +257,33 @@ public class OrderRestController {
         
         return restHelper.sendJson(data);
     }
-    // @DeleteMapping("/api/order/delete/{basketId}")
-    // public Map<String, Object> orderProdDelete(
-    //         @PathVariable("basketId") String basketIdTmp,
-    //         @SessionAttribute("memberInfo") Member memberInfo) {
+    
+    @GetMapping("/api/myshop/order/list")
+    public Map<String, Object> myshopOrder(
+        @SessionAttribute("memberInfo") Member memberInfo,
+        @RequestParam("order_state") String orderState,
+        @RequestParam("start_date") String startDate,
+        @RequestParam("end_date") String endDate,
+        @RequestParam(value = "page", defaultValue = "1") int nowPage
+    ) {
+        Order input = new Order();
+        input.setMemberId(memberInfo.getMemberId());
 
-    //     int basketId = Integer.parseInt(basketIdTmp);
-                
-    //     Basket input = new Basket();
-    //     input.setBasketId(basketId);
-    //     input.setMemberId(memberInfo.getMemberId());
+        List<Order> order = null;
 
-    //     try {
-    //         basketService.deleteItem(input);
-    //     } catch (Exception e) {
-    //         return restHelper.serverError(e);
-    //     }
+        try {
+            order = orderService.getList(input);
+        } catch (Exception e) {
+            return restHelper.serverError(e);
+        }
 
-    //     return restHelper.sendJson();
-    // }
+        for (Order o : order) {
+            o.setImgUrl(fileHelper.getUrl(o.getImgUrl()));
+        }
+
+        Map<String, Object> data = new LinkedHashMap<String, Object>();
+        data.put("orders", order);
+
+        return restHelper.sendJson(data);
+    }
 }    

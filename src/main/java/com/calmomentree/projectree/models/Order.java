@@ -30,6 +30,9 @@ public class Order {
     private int orderPrice;         // 상품 금액
     private String prodNameKor;     // 상품 이름
     private String imgUrl;          // 상품 사진 URL
+    private int totalQuantity;
+    private String orderItem;
+    private String rownum;
 
     private String regDate;         // 등록일시
     private String editDate;        // 변경일시
