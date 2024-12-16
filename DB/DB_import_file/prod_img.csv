@@ -11,7 +11,7 @@ prod_img_id,img_type,img_url,prod_id
 10,info,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/info/info1.jpg,4
 11,info,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/info/info2.jpg,4
 12,list,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/list/li1.jpg,4
-13,list,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/list/li2jpg,4
+13,list,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/list/li2.jpg,4
 14,detail,/product_img/떼르말_세라마이드_페이스바디워시/detail/th1.jpg,11
 15,detail,/product_img/떼르말_세라마이드_페이스바디워시/detail/th2.jpg,11
 16,detail,/product_img/떼르말_세라마이드_페이스바디워시/detail/th3.jpg,11
@@ -21,11 +21,11 @@ prod_img_id,img_type,img_url,prod_id
 20,info,/product_img/떼르말_세라마이드_페이스바디워시/info/info2.jpg,11
 21,list,/product_img/떼르말_세라마이드_페이스바디워시/list/li1.jpg,11
 22,list,/product_img/떼르말_세라마이드_페이스바디워시/list/li2.jpg,11
-23,detail,/product_img/떼르말_세라마이드_핸드_워시/detail.th1.jpg,15
-24,detail,/product_img/떼르말_세라마이드_핸드_워시/detail.th2.jpg,15
-25,detail,/product_img/떼르말_세라마이드_핸드_워시/detail.th3.jpg,15
-26,detail,/product_img/떼르말_세라마이드_핸드_워시/detail.th4.jpg,15
-27,detail,/product_img/떼르말_세라마이드_핸드_워시/detail.th5.jpg,15
+23,detail,/product_img/떼르말_세라마이드_핸드_워시/detail/th1.jpg,15
+24,detail,/product_img/떼르말_세라마이드_핸드_워시/detail/th2.jpg,15
+25,detail,/product_img/떼르말_세라마이드_핸드_워시/detail/th3.jpg,15
+26,detail,/product_img/떼르말_세라마이드_핸드_워시/detail/th4.jpg,15
+27,detail,/product_img/떼르말_세라마이드_핸드_워시/detail/th5.jpg,15
 28,info,/product_img/떼르말_세라마이드_핸드_워시/info/info1.jpg,15
 29,info,/product_img/떼르말_세라마이드_핸드_워시/info/info2.jpg,15
 30,list,/product_img/떼르말_세라마이드_핸드_워시/list/li1.jpg,15
@@ -44,8 +44,8 @@ prod_img_id,img_type,img_url,prod_id
 43,detail,/product_img/떼르말_세라마이드_헤어_젤/detail/th3.jpg,7
 44,detail,/product_img/떼르말_세라마이드_헤어_젤/detail/th4.jpg,7
 45,detail,/product_img/떼르말_세라마이드_헤어_젤/detail/th5.jpg,7
-46,info,"/product_img/떼르말_세라마이드_헤어_젤/info/info1,jpg",7
-47,info,"/product_img/떼르말_세라마이드_헤어_젤/info/info2,jpg",7
+46,info,/product_img/떼르말_세라마이드_헤어_젤/info/info1.jpg,7
+47,info,/product_img/떼르말_세라마이드_헤어_젤/info/info2.jpg,7
 48,list,/product_img/떼르말_세라마이드_헤어_젤/list/li1.jpg,7
 49,list,/product_img/떼르말_세라마이드_헤어_젤/list/li2.jpg,7
 50,detail,/product_img/뗴르말_세라마이드_바디_크림/detail/th1.jpg,12
@@ -218,3 +218,8 @@ prod_img_id,img_type,img_url,prod_id
 217,info,/product_img/프렌치_레몬_비타민_에너지_토너/info/info2.jpg,20
 218,list,/product_img/프렌치_레몬_비타민_에너지_토너/list/li1.jpg,20
 219,list,/product_img/프렌치_레몬_비타민_에너지_토너/list/li2.jpg,20
+220,detail,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/detail/th1.jpg,4
+221,detail,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/detail/th2.jpg,4
+222,detail,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/detail/th3.jpg,4
+223,detail,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/detail/th4.jpg,4
+224,detail,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/detail/th5.jpg,4
