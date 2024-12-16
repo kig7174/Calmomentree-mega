@@ -32,6 +32,7 @@ public class Order {
     private String imgUrl;          // 상품 사진 URL
     private int totalQuantity;
     private String orderItem;
+    private int orderItemCount;
     private String rownum;
 
     private String regDate;         // 등록일시

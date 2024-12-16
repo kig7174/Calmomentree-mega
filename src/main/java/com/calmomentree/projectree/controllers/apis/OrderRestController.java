@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.calmomentree.projectree.helpers.FileHelper;
+import com.calmomentree.projectree.helpers.Pagination;
 import com.calmomentree.projectree.helpers.RestHelper;
 import com.calmomentree.projectree.models.Basket;
 import com.calmomentree.projectree.models.Member;
@@ -27,7 +28,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Slf4j
 @RestController
@@ -258,16 +258,20 @@ public class OrderRestController {
         return restHelper.sendJson(data);
     }
     
+    @SuppressWarnings("static-access")
     @GetMapping("/api/myshop/order/list")
     public Map<String, Object> myshopOrder(
         @SessionAttribute("memberInfo") Member memberInfo,
-        @RequestParam("order_state") String orderState,
-        @RequestParam("start_date") String startDate,
-        @RequestParam("end_date") String endDate,
-        @RequestParam(value = "page", defaultValue = "1") int nowPage
+        @RequestParam(value = "order_state", required = false) String orderState,
+        @RequestParam(value = "start_date", required = false) String startDate,
+        @RequestParam(value = "end_date", required = false) String endDate
     ) {
+
         Order input = new Order();
         input.setMemberId(memberInfo.getMemberId());
+        input.setOrderState(orderState);
+        input.setStartDate(startDate);
+        input.setEndDate(endDate);
 
         List<Order> order = null;
 
@@ -283,6 +287,9 @@ public class OrderRestController {
 
         Map<String, Object> data = new LinkedHashMap<String, Object>();
         data.put("orders", order);
+        data.put("orderState", orderState);
+        data.put("startDate", startDate);
+        data.put("endDate", endDate);
 
         return restHelper.sendJson(data);
     }

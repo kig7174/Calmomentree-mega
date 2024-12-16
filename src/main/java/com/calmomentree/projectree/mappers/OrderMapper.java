@@ -94,7 +94,8 @@ public interface OrderMapper {
         @Result(property="orderItem", column="order_item"),
         @Result(property="totalQuantity", column="total_quantity"),
         @Result(property="rownum", column="rownum"),
-        @Result(property="imgUrl", column="img_url")
+        @Result(property="imgUrl", column="img_url"),
+        @Result(property="orderItemCount", column="order_item_count")
     })
     public Order selectItem(Order input);
 
@@ -116,6 +117,10 @@ public interface OrderMapper {
 
                 "ROW_NUMBER() OVER(ORDER BY order_id) AS rownum, " +
 
+                "( " +
+                "SELECT COUNT(*) FROM order_items WHERE order_id = ord.order_id " +
+                ") AS order_item_count, " +
+
                 "( " + 
                 "SELECT img_url FROM prod_imgs " +
                 "WHERE img_type = 'list' AND prod_id = " +
@@ -129,18 +134,27 @@ public interface OrderMapper {
                 ") AS img_url " +
 
                 "FROM orders AS ord " +
-            "WHERE member_id = #{memberId} AND order_state != '주문중' " +
+            
             "<where> " +
-            "<if test='orderState != null and ordreState != \"\"'>order_state=#{orderState}</if> " +
-            "<if test='startDate != null and startDate != \"\" and endDate != null and endDate != \"\"'>#{startDate} &lt; order_date AND order_date &lt; #{endDate}</if> " +
-            "<if test='listCount > 0'>LIMIT #{offset}, #{listCount}</if> " +
+                "member_id = #{memberId} AND order_state != '주문중' " +
+            "<if test='orderState != null and orderState != \"\"'>AND order_state=#{orderState}</if> " +
+            "<if test='startDate != null and startDate != \"\" and endDate != null and endDate != \"\"'>AND #{startDate} &lt; order_date AND order_date &lt; #{endDate}</if> " +
             "</where> " +
-            "ORDER BY order_id ASC " +
+
+            "ORDER BY rownum DESC " +
             "</script>")
     @ResultMap("resultMap")
     public List<Order> selectList(Order input);
 
-    @Select("...")
+    @Select("<script> " +
+            "SELECT COUNT(*) FROM orders " +  
+
+            "<where> " +
+            "member_id = #{memberId} AND order_state != '주문중' " +
+            "<if test='orderState != null and orderState != \"\"'>AND order_state=#{orderState}</if> " +
+            "<if test='startDate != null and startDate != \"\" and endDate != null and endDate != \"\"'>AND #{startDate} &lt; order_date AND order_date &lt; #{endDate}</if> " +
+            "</where> " +
+            "</script>")
     public int selectCount(Order input);
 
     /**
