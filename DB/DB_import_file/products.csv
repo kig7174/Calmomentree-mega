@@ -1,31 +1,264 @@
-prod_id,prod_name_kor,prod_name_eng,func_txt,desc_txt,price,is_discount,discount,capacity,specification,use_period,use_method,manufacturer,release_date,edit_date,category_id
-1,"로즈마리 리커버리 샴푸 ","rosemary recovery","지복합,출산탈모,로즈마리향,모근강화,",...,42000,N,0,500,"주요 사항 텍스트",12개월,"사용 방법",유씨엘㈜,"2024-10-01 00:00:00","2024-10-01 00:00:00",8
-2,"아르간 리페어 샴푸 ","argan repair","극손상,모발영양,허브향,윤기보습,",...,43000,N,0,400,"주요 사항 텍스트",13개월,"사용 방법",코스맥스㈜,"2024-10-02 00:00:00","2024-10-01 00:00:00",8
-3,"떼르말 세라마이드 헤드 스파 샴푸 ","thermal ceramide","민감성,청소년비듬,시트러스향,헤드스파,",...,40000,N,0,300,"주요 사항 텍스트",14개월,"사용 방법",유씨엘㈜,"2024-10-03 00:00:00","2024-10-01 00:00:00",8
-4,"떼르말 세라마이드 스칼프 & 헤어 팩 ","thermal ceramide","민감성,청소년비듬,시트러스향,헤드스파,",...,42000,N,0,500,"주요 사항 텍스트",15개월,"사용 방법",코스맥스㈜,"2024-10-04 00:00:00","2024-10-01 00:00:00",9
-5,"아르간 트리트먼트 헤어 팩 ","argan treatment","극손상,모발영양,허브향,윤기보습,",...,45000,N,0,400,"주요 사항 텍스트",16개월,"사용 방법",유씨엘㈜,"2024-10-05 00:00:00","2024-10-01 00:00:00",9
-6,"로즈마리 리커버리 헤어 트리트먼트 ","rosemary recovery","지복합,출산탈모,로즈마리향,모근강화,",...,45000,N,0,300,"주요 사항 텍스트",17개월,"사용 방법",코스맥스㈜,"2024-10-06 00:00:00","2024-10-01 00:00:00",9
-7,"떼르말 세라마이드 헤어 젤 ","thermal ceramide","민감성,볼륨탄력,시트러스향,스타일링,",...,26000,N,0,500,"주요 사항 텍스트",18개월,"사용 방법",유씨엘㈜,"2024-10-07 00:00:00","2024-10-01 00:00:00",10
-8,"아르간 리페어 헤어 에센스 ","argan repair","극손상,모발영양,레몬향,윤기보습,",...,25000,N,0,400,"주요 사항 텍스트",19개월,"사용 방법",코스맥스㈜,"2024-10-08 00:00:00","2024-10-01 00:00:00",10
-9,"레몬 비타민 페이스 & 바디 워시 ","lemon vitamin","여드름,피지각질,레몬향,유수분밸런싱,",...,38000,N,0,300,"주요 사항 텍스트",20개월,"사용 방법",유씨엘㈜,"2024-10-09 00:00:00","2024-10-01 00:00:00",11
-10,"레몬 버베나 히알루론 페이스&바디 워시 +(랜덤)인견 때타올","lemon verbena hyaluron","극건성,속당김,레몬향,이중속보습,",...,38000,N,0,500,"주요 사항 텍스트",21개월,"사용 방법",코스맥스㈜,"2024-10-10 00:00:00","2024-10-01 00:00:00",11
-11,"떼르말 세라마이드 페이스/바디워시 ","thermal ceramide face/body wash","민감성,저자극,시트러스향,딥클렌징,",...,38000,N,0,400,"주요 사항 텍스트",22개월,"사용 방법",유씨엘㈜,"2024-10-11 00:00:00","2024-10-01 00:00:00",11
-12,"뗴르말 세라마이드 바디 크림 ","thermal ceramide","민감성,저자극,시트러스향,속보습,",...,48000,N,0,300,"주요 사항 텍스트",23개월,"사용 방법",코스맥스㈜,"2024-10-12 00:00:00","2024-10-01 00:00:00",12
-13,"레몬 비타민 바디 겔 크림 ","lemon vitamin","여드름,미백각질,레몬향,피부톤,",...,50000,N,0,500,"주요 사항 텍스트",24개월,"사용 방법",유씨엘㈜,"2024-10-13 00:00:00","2024-10-01 00:00:00",12
-14,"레몬 버베나 링클 케어 바디 크림 ","lemon verbena wrinkle care","극건성,속당김,레몬향,이중속보습,",...,50000,N,0,400,"주요 사항 텍스트",25개월,"사용 방법",코스맥스㈜,"2024-10-14 00:00:00","2024-10-01 00:00:00",12
-15,"떼르말 세라마이드 핸드 워시 ","thermal ceramide","민감성,저자극,시트러스향,속보습,",...,32000,N,0,300,"주요 사항 텍스트",26개월,"사용 방법",유씨엘㈜,"2024-10-15 00:00:00","2024-10-01 00:00:00",13
-16,"스위스 허벌 애플 히알루론 핸드 워시 ","apple hyaluronic hand wash","극건성,속당김,허벌애플향,이중속보습,",...,30000,N,0,500,"주요 사항 텍스트",27개월,"사용 방법",코스맥스㈜,"2024-10-16 00:00:00","2024-10-01 00:00:00",13
-17,"뗴르말 세라마이드 베이비 크림 ","thermal ceramide","민감성,저자극,무향,속보습,",...,48000,N,0,400,"주요 사항 텍스트",28개월,"사용 방법",유씨엘㈜,"2024-10-17 00:00:00","2024-10-01 00:00:00",16
-18,"떼르말 세라마이드 베이비 올인원 샴푸&바스 ","thermal ceramide baby bath","민감성,저자극,무향,속보습,",...,38000,N,0,300,"주요 사항 텍스트",29개월,"사용 방법",코스맥스㈜,"2024-10-18 00:00:00","2024-10-01 00:00:00",16
-19,"레몬그라스 링클 케어 에센스 ","lemongrass wrinkle care","극건성,주름미백,레몬향,생기보습,",...,50000,N,0,500,"주요 사항 텍스트",30개월,"사용 방법",유씨엘㈜,"2024-10-19 00:00:00","2024-10-01 00:00:00",14
-20,"프렌치 레몬 비타민 에너지 토너 ","french lemon vitamin energy toner","여드름,미백탄력,레몬향,유수분밸런싱,",...,40000,N,0,400,"주요 사항 텍스트",31개월,"사용 방법",코스맥스㈜,"2024-10-20 00:00:00","2024-10-01 00:00:00",14
-21,"뗴르말 세라마이드 토너 ","thermal ceramide toner","민감성,저자극,무향,속보습,",...,42000,N,0,300,"주요 사항 텍스트",32개월,"사용 방법",유씨엘㈜,"2024-10-21 00:00:00","2024-10-01 00:00:00",14
-22,"뗴르말 세라마이드 크림 ","thermal ceramide","민감성,저자극,무향,속보습,",...,45000,N,0,500,"주요 사항 텍스트",33개월,"사용 방법",코스맥스㈜,"2024-10-22 00:00:00","2024-10-01 00:00:00",15
-23,"레몬 비타민 에너지 크림 ","lemon vitamin energy","여드름,미백탄력,레몬향,유수분밸런싱,",...,45000,N,0,400,"주요 사항 텍스트",34개월,"사용 방법",유씨엘㈜,"2024-10-23 00:00:00","2024-10-01 00:00:00",15
-24,"레몬그라스 링클 케어 크림 ","lemongrass wrinkle care","극건성,주름미백,레몬향,생기보습,",...,52000,N,0,300,"주요 사항 텍스트",35개월,"사용 방법",코스맥스㈜,"2024-10-24 00:00:00","2024-10-01 00:00:00",15
-25,"프레쉬 브라이트리 치약","fresh brightree toothpaste","충치잇몸,구취충치,레몬향,올인원케어,",...,15000,N,0,500,"주요 사항 텍스트",36개월,"사용 방법",유씨엘㈜,"2024-10-25 00:00:00","2024-10-01 00:00:00",17
-26,"허브 샴푸 기프트 세트","HERB SHAMPOO GIFT SET","로즈마리 샴푸 + 로즈마리 샴푸",,84000,N,0,500/500,"주요 사항 텍스트",12개월,"사용 방법",유씨엘㈜,"2024-12-16 00:00:00","2024-12-16 00:00:00",19
-27,"허브 바디 기프트 세트","HERB BODY GIFT SET","레몬 버베나 바디워시 + 바디크림",,66000,N,0,500/450,"주요 사항 텍스트",12개월,"사용 방법",코스맥스㈜,"2024-12-16 00:00:00","2024-12-16 00:00:00",20
-28,"허브 워시 기프트 세트","HERB SHAMPOO & WASH GIFT SET","로즈마리 샴푸 + 레몬 버베나 워시",,80000,N,0,500/500,"주요 사항 텍스트",12개월,"사용 방법",유씨엘㈜/코스맥스㈜,"2024-12-16 00:00:00","2024-12-16 00:00:00",21
-29,"허브 스킨 기프트 세트","HERB SKIN GIFT SET","레몬그라스 에센스 + 크림",,102000,N,0,300/300,"주요 사항 텍스트",12개월,"사용 방법",코스맥스㈜,"2024-12-16 00:00:00","2024-12-16 00:00:00",22
-30,"떼르말 베이비 기프트 세트","THERMAL BABY GIFT SET","떼르말 베이비 바스 + 크림",,86000,N,0,450/300,"주요 사항 텍스트",12개월,"사용 방법",코스맥스㈜,"2024-12-16 00:00:00","2024-12-16 00:00:00",23
+prod_img_id,img_type,img_url,prod_id
+1,detail,/product_img/떼르말_세라마이드_베이비_올인원_샴푸&바스/detail/th1.jpg,18
+2,detail,/product_img/떼르말_세라마이드_베이비_올인원_샴푸&바스/detail/th2.jpg,18
+3,detail,/product_img/떼르말_세라마이드_베이비_올인원_샴푸&바스/detail/th3.jpg,18
+4,detail,/product_img/떼르말_세라마이드_베이비_올인원_샴푸&바스/detail/th4.jpg,18
+5,detail,/product_img/떼르말_세라마이드_베이비_올인원_샴푸&바스/detail/th5.jpg,18
+6,info,/product_img/떼르말_세라마이드_베이비_올인원_샴푸&바스/info/info1.jpg,18
+7,info,/product_img/떼르말_세라마이드_베이비_올인원_샴푸&바스/info/info2.jpg,18
+8,list,/product_img/떼르말_세라마이드_베이비_올인원_샴푸&바스/list/li1.jpg,18
+9,list,/product_img/떼르말_세라마이드_베이비_올인원_샴푸&바스/list/li2.jpg,18
+10,info,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/info/info1.jpg,4
+11,info,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/info/info2.jpg,4
+12,list,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/list/li1.jpg,4
+13,list,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/list/li2.jpg,4
+14,detail,/product_img/떼르말_세라마이드_페이스바디워시/detail/th1.jpg,11
+15,detail,/product_img/떼르말_세라마이드_페이스바디워시/detail/th2.jpg,11
+16,detail,/product_img/떼르말_세라마이드_페이스바디워시/detail/th3.jpg,11
+17,detail,/product_img/떼르말_세라마이드_페이스바디워시/detail/th4.jpg,11
+18,detail,/product_img/떼르말_세라마이드_페이스바디워시/detail/th5.jpg,11
+19,info,/product_img/떼르말_세라마이드_페이스바디워시/info/info1.jpg,11
+20,info,/product_img/떼르말_세라마이드_페이스바디워시/info/info2.jpg,11
+21,list,/product_img/떼르말_세라마이드_페이스바디워시/list/li1.jpg,11
+22,list,/product_img/떼르말_세라마이드_페이스바디워시/list/li2.jpg,11
+23,detail,/product_img/떼르말_세라마이드_핸드_워시/detail/th1.jpg,15
+24,detail,/product_img/떼르말_세라마이드_핸드_워시/detail/th2.jpg,15
+25,detail,/product_img/떼르말_세라마이드_핸드_워시/detail/th3.jpg,15
+26,detail,/product_img/떼르말_세라마이드_핸드_워시/detail/th4.jpg,15
+27,detail,/product_img/떼르말_세라마이드_핸드_워시/detail/th5.jpg,15
+28,info,/product_img/떼르말_세라마이드_핸드_워시/info/info1.jpg,15
+29,info,/product_img/떼르말_세라마이드_핸드_워시/info/info2.jpg,15
+30,list,/product_img/떼르말_세라마이드_핸드_워시/list/li1.jpg,15
+31,list,/product_img/떼르말_세라마이드_핸드_워시/list/li2.jpg,15
+32,detail,/product_img/떼르말_세라마이드_헤드_스파_샴푸/detail/th1.jpg,3
+33,detail,/product_img/떼르말_세라마이드_헤드_스파_샴푸/detail/th2.jpg,3
+34,detail,/product_img/떼르말_세라마이드_헤드_스파_샴푸/detail/th3.jpg,3
+35,detail,/product_img/떼르말_세라마이드_헤드_스파_샴푸/detail/th4.jpg,3
+36,detail,/product_img/떼르말_세라마이드_헤드_스파_샴푸/detail/th5.jpg,3
+37,info,/product_img/떼르말_세라마이드_헤드_스파_샴푸/info/info1.jpg,3
+38,info,/product_img/떼르말_세라마이드_헤드_스파_샴푸/info/info2.jpg,3
+39,list,/product_img/떼르말_세라마이드_헤드_스파_샴푸/list/li1.jpg,3
+40,list,/product_img/떼르말_세라마이드_헤드_스파_샴푸/list/li2.jpg,3
+41,detail,/product_img/떼르말_세라마이드_헤어_젤/detail/th1.jpg,7
+42,detail,/product_img/떼르말_세라마이드_헤어_젤/detail/th2.jpg,7
+43,detail,/product_img/떼르말_세라마이드_헤어_젤/detail/th3.jpg,7
+44,detail,/product_img/떼르말_세라마이드_헤어_젤/detail/th4.jpg,7
+45,detail,/product_img/떼르말_세라마이드_헤어_젤/detail/th5.jpg,7
+46,info,/product_img/떼르말_세라마이드_헤어_젤/info/info1.jpg,7
+47,info,/product_img/떼르말_세라마이드_헤어_젤/info/info2.jpg,7
+48,list,/product_img/떼르말_세라마이드_헤어_젤/list/li1.jpg,7
+49,list,/product_img/떼르말_세라마이드_헤어_젤/list/li2.jpg,7
+50,detail,/product_img/뗴르말_세라마이드_바디_크림/detail/th1.jpg,12
+51,detail,/product_img/뗴르말_세라마이드_바디_크림/detail/th2.jpg,12
+52,detail,/product_img/뗴르말_세라마이드_바디_크림/detail/th3.jpg,12
+53,detail,/product_img/뗴르말_세라마이드_바디_크림/detail/th4.jpg,12
+54,detail,/product_img/뗴르말_세라마이드_바디_크림/detail/th5.jpg,12
+55,info,/product_img/뗴르말_세라마이드_바디_크림/info/info1.jpg,12
+56,info,/product_img/뗴르말_세라마이드_바디_크림/info/info2.jpg,12
+57,list,/product_img/뗴르말_세라마이드_바디_크림/list/li1.jpg,12
+58,list,/product_img/뗴르말_세라마이드_바디_크림/list/li2.jpg,12
+59,detail,/product_img/뗴르말_세라마이드_베이비_크림/detail/th1.jpg,17
+60,detail,/product_img/뗴르말_세라마이드_베이비_크림/detail/th2.jpg,17
+61,detail,/product_img/뗴르말_세라마이드_베이비_크림/detail/th3.jpg,17
+62,detail,/product_img/뗴르말_세라마이드_베이비_크림/detail/th4.jpg,17
+63,detail,/product_img/뗴르말_세라마이드_베이비_크림/detail/th5.jpg,17
+64,info,/product_img/뗴르말_세라마이드_베이비_크림/info/info1.jpg,17
+65,info,/product_img/뗴르말_세라마이드_베이비_크림/info/info2.jpg,17
+66,list,/product_img/뗴르말_세라마이드_베이비_크림/list/li1.jpg,17
+67,list,/product_img/뗴르말_세라마이드_베이비_크림/list/li2.jpg,17
+68,detail,/product_img/뗴르말_세라마이드_크림/detail/th1.jpg,22
+69,detail,/product_img/뗴르말_세라마이드_크림/detail/th2.jpg,22
+70,detail,/product_img/뗴르말_세라마이드_크림/detail/th3.jpg,22
+71,detail,/product_img/뗴르말_세라마이드_크림/detail/th4.jpg,22
+72,detail,/product_img/뗴르말_세라마이드_크림/detail/th5.jpg,22
+73,info,/product_img/뗴르말_세라마이드_크림/info/info1.jpg,22
+74,info,/product_img/뗴르말_세라마이드_크림/info/info2.jpg,22
+75,list,/product_img/뗴르말_세라마이드_크림/list/li1.jpg,22
+76,list,/product_img/뗴르말_세라마이드_크림/list/li2.jpg,22
+77,detail,/product_img/뗴르말_세라마이드_토너/detail/th1.jpg,21
+78,detail,/product_img/뗴르말_세라마이드_토너/detail/th2.jpg,21
+79,detail,/product_img/뗴르말_세라마이드_토너/detail/th3.jpg,21
+80,detail,/product_img/뗴르말_세라마이드_토너/detail/th4.jpg,21
+81,detail,/product_img/뗴르말_세라마이드_토너/detail/th5.jpg,21
+82,info,/product_img/뗴르말_세라마이드_토너/info/info1.jpg,21
+83,info,/product_img/뗴르말_세라마이드_토너/info/info2.jpg,21
+84,list,/product_img/뗴르말_세라마이드_토너/list/li1.jpg,21
+85,list,/product_img/뗴르말_세라마이드_토너/list/li2.jpg,21
+86,detail,/product_img/레몬_버베나_링클_케어_바디_크림/detail/th1.jpg,14
+87,detail,/product_img/레몬_버베나_링클_케어_바디_크림/detail/th2.jpg,14
+88,detail,/product_img/레몬_버베나_링클_케어_바디_크림/detail/th3.jpg,14
+89,detail,/product_img/레몬_버베나_링클_케어_바디_크림/detail/th4.jpg,14
+90,detail,/product_img/레몬_버베나_링클_케어_바디_크림/detail/th5.jpg,14
+91,info,/product_img/레몬_버베나_링클_케어_바디_크림/info/info1.jpg,14
+92,info,/product_img/레몬_버베나_링클_케어_바디_크림/info/info2.jpg,14
+93,list,/product_img/레몬_버베나_링클_케어_바디_크림/list/li1.jpg,14
+94,list,/product_img/레몬_버베나_링클_케어_바디_크림/list/li2.jpg,14
+95,detail,/product_img/레몬_버베나_히알루론_페이스&바디_워시/detail/th1.jpg,10
+96,detail,/product_img/레몬_버베나_히알루론_페이스&바디_워시/detail/th2.jpg,10
+97,detail,/product_img/레몬_버베나_히알루론_페이스&바디_워시/detail/th3.jpg,10
+98,detail,/product_img/레몬_버베나_히알루론_페이스&바디_워시/detail/th4.jpg,10
+99,detail,/product_img/레몬_버베나_히알루론_페이스&바디_워시/detail/th5.jpg,10
+100,info,/product_img/레몬_버베나_히알루론_페이스&바디_워시/info/info1.jpg,10
+101,info,/product_img/레몬_버베나_히알루론_페이스&바디_워시/info/info2.jpg,10
+102,list,/product_img/레몬_버베나_히알루론_페이스&바디_워시/list/li1.jpg,10
+103,list,/product_img/레몬_버베나_히알루론_페이스&바디_워시/list/li2.jpg,10
+104,detail,/product_img/레몬_비타민_바디_겔_크림/detail/th1.jpg,13
+105,detail,/product_img/레몬_비타민_바디_겔_크림/detail/th2.jpg,13
+106,detail,/product_img/레몬_비타민_바디_겔_크림/detail/th3.jpg,13
+107,detail,/product_img/레몬_비타민_바디_겔_크림/detail/th4.jpg,13
+108,detail,/product_img/레몬_비타민_바디_겔_크림/detail/th5.jpg,13
+109,info,/product_img/레몬_비타민_바디_겔_크림/info/info1.jpg,13
+110,info,/product_img/레몬_비타민_바디_겔_크림/info/info2.jpg,13
+111,list,/product_img/레몬_비타민_바디_겔_크림/list/li1.jpg,13
+112,list,/product_img/레몬_비타민_바디_겔_크림/list/li2.jpg,13
+113,detail,/product_img/레몬_비타민_에너지_크림/detail/th1.jpg,23
+114,detail,/product_img/레몬_비타민_에너지_크림/detail/th2.jpg,23
+115,detail,/product_img/레몬_비타민_에너지_크림/detail/th3.jpg,23
+116,detail,/product_img/레몬_비타민_에너지_크림/detail/th4.jpg,23
+117,detail,/product_img/레몬_비타민_에너지_크림/detail/th5.jpg,23
+118,info,/product_img/레몬_비타민_에너지_크림/info/info1.jpg,23
+119,info,/product_img/레몬_비타민_에너지_크림/info/info2.jpg,23
+120,list,/product_img/레몬_비타민_에너지_크림/list/li1.jpg,23
+121,list,/product_img/레몬_비타민_에너지_크림/list/li2.jpg,23
+122,detail,/product_img/레몬_비타민_페이스_&_바디_워시/detail/th1.jpg,9
+123,detail,/product_img/레몬_비타민_페이스_&_바디_워시/detail/th2.jpg,9
+124,detail,/product_img/레몬_비타민_페이스_&_바디_워시/detail/th3.jpg,9
+125,detail,/product_img/레몬_비타민_페이스_&_바디_워시/detail/th4.jpg,9
+126,detail,/product_img/레몬_비타민_페이스_&_바디_워시/detail/th5.jpg,9
+127,info,/product_img/레몬_비타민_페이스_&_바디_워시/info/info1.jpg,9
+128,info,/product_img/레몬_비타민_페이스_&_바디_워시/info/info2.jpg,9
+129,list,/product_img/레몬_비타민_페이스_&_바디_워시/list/li1.jpg,9
+130,list,/product_img/레몬_비타민_페이스_&_바디_워시/list/li2.jpg,9
+131,detail,/product_img/레몬그라스_링클_케어_에센스/detail/th1.jpg,19
+132,detail,/product_img/레몬그라스_링클_케어_에센스/detail/th2.jpg,19
+133,detail,/product_img/레몬그라스_링클_케어_에센스/detail/th3.jpg,19
+134,detail,/product_img/레몬그라스_링클_케어_에센스/detail/th4.jpg,19
+135,detail,/product_img/레몬그라스_링클_케어_에센스/detail/th5.jpg,19
+136,info,/product_img/레몬그라스_링클_케어_에센스/info/info1.jpg,19
+137,info,/product_img/레몬그라스_링클_케어_에센스/info/info2.jpg,19
+138,list,/product_img/레몬그라스_링클_케어_에센스/list/li1.jpg,19
+139,list,/product_img/레몬그라스_링클_케어_에센스/list/li2.jpg,19
+140,detail,/product_img/레몬그라스_링클_케어_크림/detail/th1.jpg,24
+141,detail,/product_img/레몬그라스_링클_케어_크림/detail/th2.jpg,24
+142,detail,/product_img/레몬그라스_링클_케어_크림/detail/th3.jpg,24
+143,detail,/product_img/레몬그라스_링클_케어_크림/detail/th4.jpg,24
+144,detail,/product_img/레몬그라스_링클_케어_크림/detail/th5.jpg,24
+145,info,/product_img/레몬그라스_링클_케어_크림/info/info1.jpg,24
+146,info,/product_img/레몬그라스_링클_케어_크림/info/info2.jpg,24
+147,list,/product_img/레몬그라스_링클_케어_크림/list/li1.jpg,24
+148,list,/product_img/레몬그라스_링클_케어_크림/list/li2.jpg,24
+149,detail,/product_img/로즈마리_리커버리_샴푸/detail/th1.jpg,1
+150,detail,/product_img/로즈마리_리커버리_샴푸/detail/th2.jpg,1
+151,detail,/product_img/로즈마리_리커버리_샴푸/detail/th3.jpg,1
+152,detail,/product_img/로즈마리_리커버리_샴푸/detail/th4.jpg,1
+153,detail,/product_img/로즈마리_리커버리_샴푸/detail/th5.jpg,1
+154,info,/product_img/로즈마리_리커버리_샴푸/info/info1.jpg,1
+155,info,/product_img/로즈마리_리커버리_샴푸/info/info2.jpg,1
+156,list,/product_img/로즈마리_리커버리_샴푸/list/li1.jpg,1
+157,list,/product_img/로즈마리_리커버리_샴푸/list/li2.jpg,1
+158,detail,/product_img/로즈마리_리커버리_헤어_트리트먼트/detail/th1.jpg,6
+159,detail,/product_img/로즈마리_리커버리_헤어_트리트먼트/detail/th2.jpg,6
+160,detail,/product_img/로즈마리_리커버리_헤어_트리트먼트/detail/th3.jpg,6
+161,detail,/product_img/로즈마리_리커버리_헤어_트리트먼트/detail/th4.jpg,6
+162,detail,/product_img/로즈마리_리커버리_헤어_트리트먼트/detail/th5.jpg,6
+163,info,/product_img/로즈마리_리커버리_헤어_트리트먼트/info/info1.jpg,6
+164,info,/product_img/로즈마리_리커버리_헤어_트리트먼트/info/info2.jpg,6
+165,list,/product_img/로즈마리_리커버리_헤어_트리트먼트/list/li1.jpg,6
+166,list,/product_img/로즈마리_리커버리_헤어_트리트먼트/list/li2.jpg,6
+167,detail,/product_img/스위스_허벌_애플_히알루론_핸드_워시/detail/th1.jpg,16
+168,detail,/product_img/스위스_허벌_애플_히알루론_핸드_워시/detail/th2.jpg,16
+169,detail,/product_img/스위스_허벌_애플_히알루론_핸드_워시/detail/th3.jpg,16
+170,detail,/product_img/스위스_허벌_애플_히알루론_핸드_워시/detail/th4.jpg,16
+171,detail,/product_img/스위스_허벌_애플_히알루론_핸드_워시/detail/th5.jpg,16
+172,info,/product_img/스위스_허벌_애플_히알루론_핸드_워시/info/info1.jpg,16
+173,info,/product_img/스위스_허벌_애플_히알루론_핸드_워시/info/info2.jpg,16
+174,list,/product_img/스위스_허벌_애플_히알루론_핸드_워시/list/li1.jpg,16
+175,list,/product_img/스위스_허벌_애플_히알루론_핸드_워시/list/li2.jpg,16
+176,detail,/product_img/아르간_리페어_샴푸/detail/th1.jpg,2
+177,detail,/product_img/아르간_리페어_샴푸/detail/th2.jpg,2
+178,detail,/product_img/아르간_리페어_샴푸/detail/th3.jpg,2
+179,detail,/product_img/아르간_리페어_샴푸/detail/th4.jpg,2
+180,detail,/product_img/아르간_리페어_샴푸/detail/th5.jpg,2
+181,info,/product_img/아르간_리페어_샴푸/info/info1.jpg,2
+182,info,/product_img/아르간_리페어_샴푸/info/info2.jpg,2
+183,list,/product_img/아르간_리페어_샴푸/list/li1.jpg,2
+184,list,/product_img/아르간_리페어_샴푸/list/li2.jpg,2
+185,detail,/product_img/아르간_리페어_헤어_에센스/detail/th1.jpg,8
+186,detail,/product_img/아르간_리페어_헤어_에센스/detail/th2.jpg,8
+187,detail,/product_img/아르간_리페어_헤어_에센스/detail/th3.jpg,8
+188,detail,/product_img/아르간_리페어_헤어_에센스/detail/th4.jpg,8
+189,detail,/product_img/아르간_리페어_헤어_에센스/detail/th5.jpg,8
+190,info,/product_img/아르간_리페어_헤어_에센스/info/info1.jpg,8
+191,info,/product_img/아르간_리페어_헤어_에센스/info/info2.jpg,8
+192,list,/product_img/아르간_리페어_헤어_에센스/list/li1.jpg,8
+193,list,/product_img/아르간_리페어_헤어_에센스/list/li2.jpg,8
+194,detail,/product_img/아르간_트리트먼트_헤어_팩/detail/th1.jpg,5
+195,detail,/product_img/아르간_트리트먼트_헤어_팩/detail/th2.jpg,5
+196,detail,/product_img/아르간_트리트먼트_헤어_팩/detail/th3.jpg,5
+197,detail,/product_img/아르간_트리트먼트_헤어_팩/detail/th4.jpg,5
+198,detail,/product_img/아르간_트리트먼트_헤어_팩/detail/th5.jpg,5
+199,info,/product_img/아르간_트리트먼트_헤어_팩/info/info1.jpg,5
+200,info,/product_img/아르간_트리트먼트_헤어_팩/info/info2.jpg,5
+201,list,/product_img/아르간_트리트먼트_헤어_팩/list/li1.jpg,5
+202,list,/product_img/아르간_트리트먼트_헤어_팩/list/li2.jpg,5
+203,detail,/product_img/프레쉬_브라이트리_치약/detail/th1.jpg,25
+204,detail,/product_img/프레쉬_브라이트리_치약/detail/th2.jpg,25
+205,detail,/product_img/프레쉬_브라이트리_치약/detail/th3.jpg,25
+206,detail,/product_img/프레쉬_브라이트리_치약/detail/th4.jpg,25
+207,info,/product_img/프레쉬_브라이트리_치약/info/info1.jpg,25
+208,info,/product_img/프레쉬_브라이트리_치약/info/info2.jpg,25
+209,list,/product_img/프레쉬_브라이트리_치약/list/li1.jpg,25
+210,list,/product_img/프레쉬_브라이트리_치약/list/li2.jpg,25
+211,detail,/product_img/프렌치_레몬_비타민_에너지_토너/detail/th1.jpg,20
+212,detail,/product_img/프렌치_레몬_비타민_에너지_토너/detail/th2.jpg,20
+213,detail,/product_img/프렌치_레몬_비타민_에너지_토너/detail/th3.jpg,20
+214,detail,/product_img/프렌치_레몬_비타민_에너지_토너/detail/th4.jpg,20
+215,detail,/product_img/프렌치_레몬_비타민_에너지_토너/detail/th5.jpg,20
+216,info,/product_img/프렌치_레몬_비타민_에너지_토너/info/info1.jpg,20
+217,info,/product_img/프렌치_레몬_비타민_에너지_토너/info/info2.jpg,20
+218,list,/product_img/프렌치_레몬_비타민_에너지_토너/list/li1.jpg,20
+219,list,/product_img/프렌치_레몬_비타민_에너지_토너/list/li2.jpg,20
+220,detail,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/detail/th1.jpg,4
+221,detail,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/detail/th2.jpg,4
+222,detail,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/detail/th3.jpg,4
+223,detail,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/detail/th4.jpg,4
+224,detail,/product_img/떼르말_세라마이드_스칼프_&_헤어_팩/detail/th5.jpg,4
+225,detail,/product_img/허브_샴푸_기프트_세트/detail/th1.jpg,26
+226,detail,/product_img/허브_샴푸_기프트_세트/detail/th2.jpg,26
+227,detail,/product_img/허브_샴푸_기프트_세트/detail/th3.jpg,26
+228,detail,/product_img/허브_샴푸_기프트_세트/detail/th4.jpg,26
+229,info,/product_img/허브_샴푸_기프트_세트/info/info1.jpg,26
+230,info,/product_img/허브_샴푸_기프트_세트/info/info2.jpg,26
+231,list,/product_img/허브_샴푸_기프트_세트/list/li1.jpg,26
+232,detail,/product_img/허브_바디_기프트_세트/detail/th1.jpg,27
+233,detail,/product_img/허브_바디_기프트_세트/detail/th2.jpg,27
+234,detail,/product_img/허브_바디_기프트_세트/detail/th3.jpg,27
+235,detail,/product_img/허브_바디_기프트_세트/detail/th4.jpg,27
+236,info,/product_img/허브_바디_기프트_세트/info/info1.jpg,27
+237,info,/product_img/허브_바디_기프트_세트/info/info2.jpg,27
+238,info,/product_img/허브_바디_기프트_세트/info/info3.jpg,27
+239,list,/product_img/허브_바디_기프트_세트/list/li1.jpg,27
+240,detail,/product_img/허브_워시_기프트_세트/detail/th1.jpg,28
+241,detail,/product_img/허브_워시_기프트_세트/detail/th2.jpg,28
+242,detail,/product_img/허브_워시_기프트_세트/detail/th3.jpg,28
+243,detail,/product_img/허브_워시_기프트_세트/detail/th4.jpg,28
+244,info,/product_img/허브_워시_기프트_세트/info/info1.jpg,28
+245,info,/product_img/허브_워시_기프트_세트/info/info2.jpg,28
+246,info,/product_img/허브_워시_기프트_세트/info/info3.jpg,28
+247,list,/product_img/허브_워시_기프트_세트/list/li1.jpg,28
+248,detail,/product_img/허브_스킨_기프트_세트/detail/th1.jpg,29
+249,detail,/product_img/허브_스킨_기프트_세트/detail/th2.jpg,29
+250,detail,/product_img/허브_스킨_기프트_세트/detail/th3.jpg,29
+251,detail,/product_img/허브_스킨_기프트_세트/detail/th4.jpg,29
+252,info,/product_img/허브_스킨_기프트_세트/info/info1.jpg,29
+253,info,/product_img/허브_스킨_기프트_세트/info/info2.jpg,29
+254,info,/product_img/허브_스킨_기프트_세트/info/info3.jpg,29
+255,list,/product_img/허브_스킨_기프트_세트/list/li1.jpg,29
+256,detail,/product_img/떼르말_베이비_기프트_세트/detail/th1.jpg,30
+257,detail,/product_img/떼르말_베이비_기프트_세트/detail/th2.jpg,30
+258,detail,/product_img/떼르말_베이비_기프트_세트/detail/th3.jpg,30
+259,detail,/product_img/떼르말_베이비_기프트_세트/detail/th4.jpg,30
+260,info,/product_img/떼르말_베이비_기프트_세트/info/info1.jpg,30
+261,info,/product_img/떼르말_베이비_기프트_세트/info/info2.jpg,30
+262,info,/product_img/떼르말_베이비_기프트_세트/info/info3.jpg,30
+263,list,/product_img/떼르말_베이비_기프트_세트/list/li1.jpg,30
