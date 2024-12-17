@@ -269,8 +269,8 @@ public class OrderRestController {
         Order input = new Order();
         input.setMemberId(memberInfo.getMemberId());
         input.setOrderState(orderState);
-        input.setStartDate(startDate);
-        input.setEndDate(endDate);
+        input.setStartDate(startDate + " 00:00:00");
+        input.setEndDate(endDate + " 23:59:59");
 
         List<Order> order = null;
 

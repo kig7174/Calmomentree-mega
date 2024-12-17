@@ -51,15 +51,15 @@
                             <option value="배송완료">배송완료</option>
                         </select>
                         <div class="period">
-                            <a href="" days="00">오늘</a>
-                            <a href="" days="30">1개월</a>
-                            <a href="" days="90">3개월</a>
-                            <a href="" days="180">6개월</a>
+                            <a onclick="setDate(0)">오늘</a>
+                            <a onclick="setDate(30)">1개월</a>
+                            <a onclick="setDate(90)">3개월</a>
+                            <a onclick="setDate(180)">6개월</a>
                         </div>
                         <div class="date">
                             <input type="date" id="start-date" name="start_date" class="start-date" />
                             -
-                            <input type="date" id="end-date" name="end_date" class="end-date" />
+                            <input type="date" id="end-date" name="end_date" class="end-date" value="N"/>
                         </div>
                         <button type="button" class="btn-submit">찾기</button>
                     </form>
@@ -78,6 +78,39 @@
 
     <th:block th:replace="~{/fragments/script}"></th:block>
     <script>
+        const now_utc = Date.now();
+        const timeOff = new Date().getTimezoneOffset()*60000;
+        const today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+
+        document.querySelector("#end-date").setAttribute("max", today);
+
+        const setDate = (days) => {
+
+            const start = document.querySelector("#start-date");
+            const end = document.querySelector("#end-date");
+
+            if (days == 0) {
+                end.value = today;
+                start.value = today;
+                return;
+            }
+
+            const tod = new Date();
+
+            end.value = today;
+
+            const a = tod.getDate() - days;
+            tod.setDate(a);
+
+            const year = tod.getFullYear();
+            const month = tod.getMonth();
+            const date = tod.getDate();
+
+            const startDate = `${year}-${month >= 10 ? month : '0' + month}-${date >= 10 ? date : '0' + date}`;
+
+            start.value = startDate;
+        }
+
         function deleteOrders() {
             const rem = document.querySelectorAll(".order");
             rem.forEach((v, i) => v.remove());
