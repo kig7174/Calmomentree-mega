@@ -62,7 +62,7 @@ public interface ProductMapper {
 
     @Select("SELECT " +
                 "prod_id, " +
-                "prod_name_kor, prod_name_eng, " +
+                "prod_name_kor, UPPER(prod_name_eng) AS prod_name_eng, " +
                 "func_txt, desc_txt, " +
                 "price, is_discount, discount, (price - price * (discount / 100)) AS discount_price, " +
                 "capacity, specification, " +
@@ -142,7 +142,7 @@ public interface ProductMapper {
         
             "SELECT " +
                 "prod.prod_id, " +
-                "prod_name_kor, prod_name_eng, " +
+                "prod_name_kor, UPPER(prod_name_eng) AS prod_name_eng, " +
                 "func_txt, desc_txt, " +
                 "price, is_discount, discount, (price - price * (discount / 100)) AS discount_price, " +
                 "capacity, specification, " +
@@ -189,7 +189,7 @@ public interface ProductMapper {
     @Select("<script>" +
             "SELECT " +
                 "prod_id, " +
-                "prod_name_kor, prod_name_eng, " +
+                "prod_name_kor, UPPER(prod_name_eng) AS prod_name_eng, " +
                 "func_txt, desc_txt, " +
                 "price, is_discount, discount, (price - price * (discount / 100)) AS discount_price, " +
                 "capacity, specification, " +

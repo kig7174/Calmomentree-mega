@@ -127,7 +127,7 @@ public interface ReviewBoardMapper {
                 "<where> " +
                         "<if test = 'reviewTitle != null'>review_title LIKE concat('%',#{reviewTitle},'%')</if> " +
                         "<if test = 'memberId != 0'>AND m.member_id = #{memberId}</if> " +
-                        // "<if test = 'prodId != 0'>OR r.prod_id = #{prodId}</if> " +
+                        "<if test = 'prodId != 0'>OR r.prod_id = #{prodId}</if> " +
                 "</where> " +
                         "ORDER BY rownum DESC " +
 
