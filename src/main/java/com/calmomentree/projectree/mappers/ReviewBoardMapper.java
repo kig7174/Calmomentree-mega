@@ -148,7 +148,7 @@ public interface ReviewBoardMapper {
                         "FROM review_boards " +
                         "<where> " +
                         "<if test = 'reviewTitle != null'>review_title LIKE concat('%',#{reviewTitle},'%')</if> " +
-                        // "<if test = 'prodId != null'>OR prod_id = #{prodId} </if> " +
+                        "<if test = 'prodId != null'>OR prod_id = #{prodId} </if> " +
                         "</where> " +
                         "</script>")
         public int selectCount(ReviewBoard input);
