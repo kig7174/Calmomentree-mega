@@ -1,0 +1,157 @@
+@startuml
+skinparam dpi 200
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+class ProductController {
+    + ProductController()
+    + productList(Model, String, int): String
+    + productRead(Model, int): String
+    + productAdd(Model, Product): String
+    + productEdit(Model, int): String
+    + productDelete(Model, int): String
+}
+
+class ProductService {
+    + addItem(Product): void
+    + editItem(Product): void
+    + deleteItem(int): void
+    + getItem(int): Product
+    + getListByCategory(String): List<Product>
+    + getCount(): int
+    + getListBySearch(String): List<Product>
+}
+
+class ProductServiceImpl {
+    + addItem(Product): void
+    + editItem(Product): void
+    + deleteItem(int): void
+    + getItem(int): Product
+    + getListByCategory(String): List<Product>
+    + getCount(): int
+    + getListBySearch(String): List<Product>
+}
+
+class ProdImgService {
+    + addItem(ProdImg): void
+    + editItem(ProdImg): void
+    + deleteItem(int): void
+    + getItem(int): ProdImg
+    + getList(): List<ProdImg>
+    + getCount(): int
+}
+
+class ProdImgServiceImpl {
+    + addItem(ProdImg): void
+    + editItem(ProdImg): void
+    + deleteItem(int): void
+    + getItem(int): ProdImg
+    + getList(): List<ProdImg>
+    + getCount(): int
+}
+
+class ReviewBoardService {
+    + addItem(ReviewBoard): void
+    + editItem(ReviewBoard): void
+    + deleteItem(int): void
+    + getItem(int): ReviewBoard
+    + getList(): List<ReviewBoard>
+    + getCount(): int
+}
+
+class ReviewBoardServiceImpl {
+    + addItem(ReviewBoard): void
+    + editItem(ReviewBoard): void
+    + deleteItem(int): void
+    + getItem(int): ReviewBoard
+    + getList(): List<ReviewBoard>
+    + getCount(): int
+}
+
+class ReviewImgService {
+    + addItem(ReviewImg): void
+    + editItem(ReviewImg): void
+    + deleteItem(int): void
+    + getItem(int): ReviewImg
+    + getList(): List<ReviewImg>
+    + getCount(): int
+}
+
+class ReviewImgServiceImpl {
+    + addItem(ReviewImg): void
+    + editItem(ReviewImg): void
+    + deleteItem(int): void
+    + getItem(int): ReviewImg
+    + getList(): List<ReviewImg>
+    + getCount(): int
+}
+
+class OrderItemService {
+    + addItem(OrderItem): void
+    + editItem(OrderItem): void
+    + deleteItem(int): void
+    + getItem(int): OrderItem
+    + getList(): List<OrderItem>
+    + getCount(): int
+}
+
+class OrderItemServiceImpl {
+    + addItem(OrderItem): void
+    + editItem(OrderItem): void
+    + deleteItem(int): void
+    + getItem(int): OrderItem
+    + getList(): List<OrderItem>
+    + getCount(): int
+}
+
+class FileHelper {
+    + saveFile(MultipartFile, String): String
+    + deleteFile(String): boolean
+    + getFile(String): File
+}
+
+class RegexHelper {
+    + isValue(String): boolean
+    + isEmail(String): boolean
+    + isPhone(String): boolean
+    + isNum(String): boolean
+}
+
+class WebHelper {
+    + getRequest(): HttpServletRequest
+    + getResponse(): HttpServletResponse
+    + getSession(): HttpSession
+    + getParameter(String): String
+    + getParameter(String, String): String
+    + getParameterValues(String): String[]
+    + getCookie(String): Cookie
+    + setCookie(String, String, int): void
+    + removeCookie(String): void
+}
+
+ProductController --> ProductService
+ProductController --> ProdImgService
+ProductController --> ReviewBoardService
+ProductController --> ReviewImgService
+ProductController --> OrderItemService
+ProductController --> FileHelper
+ProductController --> RegexHelper
+ProductController --> WebHelper
+
+ProductServiceImpl --> ProductService
+ProdImgServiceImpl --> ProdImgService
+ReviewBoardServiceImpl --> ReviewBoardService
+ReviewImgServiceImpl --> ReviewImgService
+OrderItemServiceImpl --> OrderItemService
+
+' 배치 수정
+ProductController -[hidden]-> ProductService
+ProductService -[hidden]-> ProductServiceImpl
+ProdImgService -[hidden]-> ProdImgServiceImpl
+ReviewBoardService -[hidden]-> ReviewBoardServiceImpl
+ReviewImgService -[hidden]-> ReviewImgServiceImpl
+OrderItemService -[hidden]-> OrderItemServiceImpl
+FileHelper -[hidden]-> RegexHelper
+WebHelper -[hidden]-> ProductController
+
+@enduml

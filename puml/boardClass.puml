@@ -1,0 +1,84 @@
+@startuml
+skinparam dpi 200
+skinparam classAttributeIconSize 0
+
+class BoardController {
+    + BoardController()
+    + qnaList(Model model, String category, int page): String
+    + qnaRead(Model model, HttpServletResponse response, int id): String
+    + boardEdit(Model model, int id): String
+    + myshopBoard(Model model, Member member, int page, String category): String
+}
+
+class BoardRestController {
+    + BoardRestController()
+    + deleteQna(int id): Map<String, Object>
+    + boardAdd(String title, String content, String category, MultipartFile file, String writer, String password, Member member): Map<String, Object>
+    + boardEditOk(int id, String title, String content, String category, MultipartFile file, String writer, String password, Member member): Map<String, Object>
+}
+
+class BoardService {
+    + BoardService()
+    + findBoardById(int id): Board
+    + saveBoard(Board board): void
+    + deleteBoard(Board board): void
+}
+
+class BoardServiceImpl {
+    + BoardServiceImpl()
+    + findBoardById(int id): Board
+    + saveBoard(Board board): void
+    + deleteBoard(Board board): void
+}
+
+class RestHelper {
+    + RestHelper()
+    + sendJson(int status, String message, Map<String, Object> data, Exception error): Map<String, Object>
+    + sendJson(Map<String, Object> data): Map<String, Object>
+    + sendJson(): Map<String, Object>
+    + sendError(int status, String message): Map<String, Object>
+    + badRequest(String message): Map<String, Object>
+    + badRequest(Exception error): Map<String, Object>
+    + serverError(String message): Map<String, Object>
+}
+
+class FileHelper {
+    + FileHelper()
+    + saveFile(MultipartFile file, String path): String
+    + deleteFile(String path): boolean
+    + getFile(String path): File
+}
+
+class RegexHelper {
+    + RegexHelper()
+    + isValue(String str): boolean
+    + isEmail(String str): boolean
+    + isPhone(String str): boolean
+    + isNum(String str): boolean
+}
+
+class WebHelper {
+    + WebHelper()
+    + getRequest(): HttpServletRequest
+    + getResponse(): HttpServletResponse
+    + getSession(): HttpSession
+    + getParameter(String name): String
+    + getParameter(String name, String defaultValue): String
+    + getParameterValues(String name): String[]
+    + getCookie(String name): Cookie
+    + setCookie(String name, String value, int maxAge): void
+    + removeCookie(String name): void
+}
+
+BoardController --> BoardService
+BoardController --> FileHelper
+BoardController --> RegexHelper
+BoardController --> WebHelper
+
+BoardRestController --> RestHelper
+BoardRestController --> FileHelper
+BoardRestController --> BoardService
+
+BoardServiceImpl --> BoardService
+
+@enduml

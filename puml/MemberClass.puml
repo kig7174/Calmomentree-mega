@@ -1,0 +1,150 @@
+@startuml
+skinparam dpi 200
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+
+class MemberController {
+    + MemberController()
+    + login(Model, String): String
+    + findId(Model, String, String): String
+    + resetPwPage(): String
+    + resetPw(Model, String, String, String): String
+    + myshop(Model, Member, int, String): String
+}
+
+class MemberRestController {
+    + MemberRestController()
+    + idUniqueCheck(String): Map<String, Object>
+    + join(String, String, String, String, String, String, String, String, String, String, String, String, String, String): Map<String, Object>
+    + login(HttpServletRequest, HttpServletResponse, String, String, String): Map<String, Object>
+    + memberOut(HttpServletRequest, Member, String): Map<String, Object>
+    + modify(HttpServletRequest, Member, String, String, String, String, String, String, String, String): Map<String, Object>
+    + logout(HttpServletRequest): Map<String, Object>
+}
+
+class MemberService {
+    + addItem(Member): Member
+    + editItem(Member): Member
+    + deleteItem(Member): int
+    + getItem(Member): Member
+    + getList(Member): List<Member>
+    + getCount(Member): int
+    + out(Member): int
+    + isUniqueUserId(String): void
+    + login(Member): Member
+    + findId(Member): Member
+    + resetPw(Member): void
+    + deleteOutMembers(): int
+}
+
+class MemberServiceImpl {
+    + addItem(Member): Member
+    + editItem(Member): Member
+    + deleteItem(Member): int
+    + getItem(Member): Member
+    + getList(Member): List<Member>
+    + getCount(Member): int
+    + out(Member): int
+    + isUniqueUserId(String): void
+    + login(Member): Member
+    + findId(Member): Member
+    + resetPw(Member): void
+    + deleteOutMembers(): int
+}
+
+class BasketService {
+    + addItem(Basket): Basket
+    + editItem(Basket): Basket
+    + deleteItem(Basket): int
+    + getItem(Basket): Basket
+    + getList(Basket): List<Basket>
+    + getCount(Basket): int
+    + uniqueBasketCount(Basket): Basket
+    + editUniqueBasket(Basket): Basket
+    + deleteByOverDays(): int
+}
+
+class BasketServiceImpl {
+    + addItem(Basket): Basket
+    + editItem(Basket): Basket
+    + deleteItem(Basket): int
+    + getItem(Basket): Basket
+    + getList(Basket): List<Basket>
+    + getCount(Basket): int
+    + uniqueBasketCount(Basket): Basket
+    + editUniqueBasket(Basket): Basket
+    + deleteByOverDays(): int
+}
+
+class RestHelper {
+    + RestHelper()
+    + sendJson(int, String, Map<String, Object>, Exception): Map<String, Object>
+    + sendJson(Map<String, Object>): Map<String, Object>
+    + sendJson(): Map<String, Object>
+    + sendError(int, String): Map<String, Object>
+    + badRequest(String): Map<String, Object>
+    + badRequest(Exception): Map<String, Object>
+    + serverError(String): Map<String, Object>
+}
+
+class FileHelper {
+    + FileHelper()
+    + saveFile(MultipartFile, String): String
+    + deleteFile(String): boolean
+    + getFile(String): File
+}
+
+class RegexHelper {
+    + RegexHelper()
+    + isValue(String): boolean
+    + isEmail(String): boolean
+    + isPhone(String): boolean
+    + isNum(String): boolean
+}
+
+class WebHelper {
+    + WebHelper()
+    + getRequest(): HttpServletRequest
+    + getResponse(): HttpServletResponse
+    + getSession(): HttpSession
+    + getParameter(String): String
+    + getParameter(String, String): String
+    + getParameterValues(String): String[]
+    + getCookie(String): Cookie
+    + setCookie(String, String, int): void
+    + removeCookie(String): void
+}
+
+class UtilHelper {
+    + UtilHelper()
+    + getCurrentDate(): Date
+    + getCurrentTime(): Time
+    + getCurrentDateTime(): Timestamp
+    + formatDate(Date, String): String
+    + formatTime(Time, String): String
+    + formatDateTime(Timestamp, String): String
+}
+
+MemberController --> MemberService
+MemberController --> FileHelper
+MemberController --> RegexHelper
+MemberController --> WebHelper
+MemberController --> UtilHelper
+
+MemberRestController --> RestHelper
+MemberRestController --> FileHelper
+MemberRestController --> MemberService
+MemberRestController --> BasketService
+
+MemberServiceImpl --> MemberService
+BasketServiceImpl --> BasketService
+
+' 배치 수정
+MemberController -[hidden]-> MemberRestController
+MemberService -[hidden]-> MemberServiceImpl
+BasketService -[hidden]-> BasketServiceImpl
+RestHelper -[hidden]-> FileHelper
+RegexHelper -[hidden]-> WebHelper
+UtilHelper -[hidden]-> MemberController
+
+@enduml
