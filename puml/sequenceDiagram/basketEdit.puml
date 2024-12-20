@@ -1,0 +1,39 @@
+@startuml
+skinparam dpi 200
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+skinparam sequenceParticipantBorderThickness 2
+skinparam sequenceArrowThickness 2
+
+actor User
+participant "OrderRestController\n@Controller" as Controller
+participant "BasketService\n@Service" as BasketService
+participant "BasketMapper\n@Mapper" as BasketMapper
+participant "Database" as DB
+
+User -> Controller : basketEdit(@RequestParam("basketIdTmp") String basketIdTmp,\n@RequestParam("quantityTmp") String quantityTmp,\n@SessionAttribute("memberInfo") Member memberInfo)
+activate Controller
+
+Controller -> BasketService : editItem(Basket input)
+activate BasketService
+
+BasketService -> BasketMapper : updateItem(Basket input)
+activate BasketMapper
+
+BasketMapper -> DB : UPDATE
+activate DB
+DB --> BasketMapper : int (number of rows affected)
+deactivate DB
+
+BasketMapper --> BasketService : int
+deactivate BasketMapper
+
+BasketService --> Controller : Basket
+deactivate BasketService
+
+Controller -> Controller : Map<String, Object> data = new LinkedHashMap<>()\ndata.put("orderBasket", output)
+
+Controller -> User : Map<String, Object>
+deactivate Controller
+
+@enduml

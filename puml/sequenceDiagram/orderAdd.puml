@@ -1,0 +1,67 @@
+@startuml
+skinparam dpi 200
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+skinparam sequenceParticipantBorderThickness 2
+skinparam sequenceArrowThickness 2
+
+actor User
+participant "OrderController\n@Controller" as Controller
+participant "BasketService\n@Service" as BasketService
+participant "OrderService\n@Service" as OrderService
+participant "FileHelper\n@Component" as FileHelper
+participant "WebHelper\n@Component" as WebHelper
+participant "BasketMapper\n@Mapper" as BasketMapper
+participant "OrderMapper\n@Mapper" as OrderMapper
+participant "Database" as DB
+
+User -> Controller : orderAdd(Model model,\nHttpServletRequest request,\nMember memberInfo,\nList<Integer> basketIdTmp)
+activate Controller
+
+loop basketIdTmp list
+    Controller -> BasketService : getItem(Basket basket)
+    activate BasketService
+    
+    BasketService -> BasketMapper : selectItem(Basket input)
+    activate BasketMapper
+    
+    BasketMapper -> DB : SELECT 
+    activate DB
+    DB --> BasketMapper : Basket
+    deactivate DB
+    
+    BasketMapper --> BasketService : Basket
+    deactivate BasketMapper
+    
+    BasketService --> Controller : Basket
+    deactivate BasketService
+    
+    Controller -> FileHelper : getUrl(String imgUrl)
+    activate FileHelper
+    FileHelper --> Controller : String
+    deactivate FileHelper
+end
+
+Controller -> OrderService : addItem(Order input)
+activate OrderService
+
+OrderService -> OrderMapper : insert(Order input)
+activate OrderMapper
+
+OrderMapper -> DB : INSERT INTO 
+activate DB
+DB --> OrderMapper : int (Generated orderId)
+deactivate DB
+
+OrderMapper --> OrderService : Order
+deactivate OrderMapper
+
+OrderService --> Controller : Order
+deactivate OrderService
+
+Controller -> Controller : model.addAttribute("order", order) ,("items", baskets)
+
+Controller --> User : String "order/order_form"
+deactivate Controller
+
+@enduml

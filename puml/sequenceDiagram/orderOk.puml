@@ -1,0 +1,112 @@
+@startuml
+skinparam dpi 200
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+skinparam sequenceParticipantBorderThickness 2
+skinparam sequenceArrowThickness 2
+
+actor User
+participant "OrderController\n@Controller" as Controller
+participant "OrderService\n@Service" as OrderService
+participant "BasketService\n@Service" as BasketService
+participant "OrderItemService\n@Service" as OrderItemService
+participant "RegexHelper\n@Component" as RegexHelper
+participant "WebHelper\n@Component" as WebHelper
+participant "OrderMapper\n@Mapper" as OrderMapper
+participant "BasketMapper\n@Mapper" as BasketMapper
+participant "OrderItemMapper\n@Mapper" as OrderItemMapper
+participant "Database" as DB
+
+User -> Controller : orderOk(Model model,...other params)
+activate Controller
+
+Controller -> RegexHelper : isValue(String value, String message)
+activate RegexHelper
+RegexHelper --> Controller : void
+deactivate RegexHelper
+
+Controller -> RegexHelper : ...(other validations)
+activate RegexHelper
+RegexHelper --> Controller : void
+deactivate RegexHelper
+
+Controller -> OrderService : editItem(Order input)
+activate OrderService
+
+OrderService -> OrderMapper : update(Order input)
+activate OrderMapper
+
+OrderMapper -> DB : UPDATE orders SET ... WHERE order_id = #{orderId}
+activate DB
+DB --> OrderMapper : int (number of rows affected)
+deactivate DB
+
+OrderMapper --> OrderService : int
+deactivate OrderMapper
+
+OrderService --> Controller : Order
+deactivate OrderService
+
+loop basketIdTmp list
+    Controller -> BasketService : getItem(Basket basket)
+    activate BasketService
+    
+    BasketService -> BasketMapper : selectItem(Basket input)
+    activate BasketMapper
+    
+    BasketMapper -> DB : SELECT * FROM basket WHERE basket_id = #{basketId}
+    activate DB
+    DB --> BasketMapper : Basket
+    deactivate DB
+    
+    BasketMapper --> BasketService : Basket
+    deactivate BasketMapper
+    
+    BasketService --> Controller : Basket
+    deactivate BasketService
+end
+
+loop baskets list
+    Controller -> OrderItemService : addItem(OrderItem oi)
+    activate OrderItemService
+    
+    OrderItemService -> OrderItemMapper : insert(OrderItem input)
+    activate OrderItemMapper
+    
+    OrderItemMapper -> DB : INSERT INTO order_items ...
+    activate DB
+    DB --> OrderItemMapper : int (Generated orderItemId)
+    deactivate DB
+    
+    OrderItemMapper --> OrderItemService : OrderItem
+    deactivate OrderItemMapper
+    
+    OrderItemService --> Controller : OrderItem
+    deactivate OrderItemService
+end
+
+loop baskets list
+    Controller -> BasketService : deleteItem(Basket b)
+    activate BasketService
+    
+    BasketService -> BasketMapper : delete(Basket input)
+    activate BasketMapper
+    
+    BasketMapper -> DB : DELETE FROM basket WHERE basket_id = #{basketId}
+    activate DB
+    DB --> BasketMapper : int (number of rows affected)
+    deactivate DB
+    
+    BasketMapper --> BasketService : int
+    deactivate BasketMapper
+    
+    BasketService --> Controller : int
+    deactivate BasketService
+end
+
+Controller -> Controller : model.addAttribute("order", order)\nmodel.addAttribute("orderItems", items)
+
+Controller --> User : String "order/order_result"
+deactivate Controller
+
+@enduml

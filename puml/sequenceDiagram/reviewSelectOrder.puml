@@ -1,0 +1,67 @@
+@startuml
+skinparam dpi 200
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+skinparam sequenceParticipantBorderThickness 2
+skinparam sequenceArrowThickness 2
+
+actor User
+participant "ReviewBoardController\n@Controller" as Controller
+participant "OrderService\n@Service" as Service
+participant "OrderItemService\n@Service" as ItemService
+participant "OrderMapper\n@Mapper" as Mapper
+participant "OrderItemMapper\n@Mapper" as ItemMapper
+participant "FileHelper\n@Component" as FileHelper
+participant "Database" as DB
+
+User -> Controller : reviewSelectOrder(Model model, Member memberInfo)
+activate Controller
+
+Controller -> Service : getList(Order input)
+activate Service
+
+Service -> Mapper : selectList(Order input)
+activate Mapper
+
+Mapper -> DB : SELECT
+activate DB
+DB --> Mapper : List<Order>
+deactivate DB
+
+Mapper --> Service : List<Order>
+deactivate Mapper
+
+Service --> Controller : List<Order>
+deactivate Service
+
+loop for each Order
+    Controller -> ItemService : getList(OrderItem input)
+    activate ItemService
+    
+    ItemService -> ItemMapper : selectList(OrderItem input)
+    activate ItemMapper
+    
+    ItemMapper -> DB : SELECT
+    activate DB
+    DB --> ItemMapper : List<OrderItem>
+    deactivate DB
+    
+    ItemMapper --> ItemService : List<OrderItem>
+    deactivate ItemMapper
+    
+    ItemService --> Controller : List<OrderItem>
+    deactivate ItemService
+
+    loop for each OrderItem
+        Controller -> FileHelper : getUrl(String imgUrl)
+        activate FileHelper
+        FileHelper --> Controller : String
+        deactivate FileHelper
+    end
+end
+
+Controller -> Controller : model.addAttribute("items", order)
+Controller --> User : String "order/search_board_list"
+deactivate Controller
+
+@enduml

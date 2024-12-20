@@ -1,0 +1,64 @@
+@startuml
+skinparam dpi 200
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+skinparam sequenceParticipantBorderThickness 2
+skinparam sequenceArrowThickness 2
+
+actor User
+participant "ReviewBoardRestController\n@RestController" as Controller
+participant "ReviewBoardService\n@Service" as Service
+participant "ReviewImgService\n@Service" as ImgService
+participant "ReviewBoardMapper\n@Mapper" as Mapper
+participant "ReviewImgMapper\n@Mapper" as ImgMapper
+participant "FileHelper\n@Component" as FileHelper
+participant "Database" as DB
+
+User -> Controller : reviewAdd(ReviewBoard input,\nList<MultipartFile> reviewImg)
+activate Controller
+
+Controller -> Service : addItem(ReviewBoard input)
+activate Service
+
+Service -> Mapper : insert(ReviewBoard input)
+activate Mapper
+
+Mapper -> DB : INSERT
+activate DB
+DB --> Mapper : int (Generated reviewBoardId)
+deactivate DB
+
+Mapper --> Service : ReviewBoard
+deactivate Mapper
+
+Service --> Controller : ReviewBoard
+deactivate Service
+
+loop for each reviewImg in reviewImgs
+    Controller -> FileHelper : saveMultipartFile(reviewImg)
+    activate FileHelper
+    FileHelper --> Controller : String (saved file path)
+    deactivate FileHelper
+
+    Controller -> ImgService : addItem(ReviewImg input)
+    activate ImgService
+    
+    ImgService -> ImgMapper : insert(ReviewImg input)
+    activate ImgMapper
+    
+    ImgMapper -> DB : INSERT
+    activate DB
+    DB --> ImgMapper : ReviewImg
+    deactivate DB
+    
+    ImgMapper --> ImgService : ReviewImg
+    deactivate ImgMapper
+    
+    ImgService --> Controller : ReviewImg
+    deactivate ImgService
+end
+
+Controller --> User : Map<String, Object>
+deactivate Controller
+
+@enduml

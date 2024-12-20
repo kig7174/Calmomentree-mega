@@ -1,0 +1,133 @@
+@startuml
+skinparam dpi 200
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+skinparam sequenceParticipantBorderThickness 2
+skinparam sequenceArrowThickness 2
+
+actor User
+participant "ProductController\n@Controller" as Controller
+participant "ProductService\n@Service" as Service
+participant "ProductImgService\n@Service" as ImgService
+participant "ReviewBoardService\n@Service" as ReviewService
+participant "ReviewImgService\n@Service" as ReviewImgService
+participant "ProductMapper\n@Mapper" as Mapper
+participant "ProductImgMapper\n@Mapper" as ImgMapper
+participant "ReviewBoardMapper\n@Mapper" as ReviewMapper
+participant "ReviewImgMapper\n@Mapper" as ReviewImgMapper
+participant "FileHelper\n@Component" as FileHelper
+participant "WebHelper\n@Component" as WebHelper
+participant "Database" as DB
+
+User -> Controller : prodDetail(Model model,\nint prodId, int nowPage)
+activate Controller
+
+Controller -> Service : getItem(Product input)
+activate Service
+
+Service -> Mapper : selectItem(Product input)
+activate Mapper
+
+Mapper -> DB : SELECT
+activate DB
+DB --> Mapper : Product
+deactivate DB
+
+Mapper --> Service : Product
+deactivate Mapper
+
+Service --> Controller : Product
+deactivate Service
+
+Controller -> ImgService : getList(ProductImg input)
+activate ImgService
+
+ImgService -> ImgMapper : selectList(ProductImg input)
+activate ImgMapper
+
+ImgMapper -> DB : SELECT
+activate DB
+DB --> ImgMapper : List<ProductImg>
+deactivate DB
+
+ImgMapper --> ImgService : List<ProductImg>
+deactivate ImgMapper
+
+ImgService --> Controller : List<ProductImg>
+deactivate ImgService
+
+Controller -> ReviewService : getCount(ReviewBoard input)
+activate ReviewService
+
+ReviewService -> ReviewMapper : selectCount(ReviewBoard input)
+activate ReviewMapper
+
+ReviewMapper -> DB : SELECT COUNT(*)\nFROM review_boards\nWHERE prod_id = #{prodId}
+activate DB
+DB --> ReviewMapper : int
+deactivate DB
+
+ReviewMapper --> ReviewService : int
+deactivate ReviewMapper
+
+ReviewService --> Controller : int
+deactivate ReviewService
+
+Controller -> Controller : new Pagination(nowPage,\ntotalCount, listCount, pageCount)
+
+Controller -> ReviewBoard : setOffset(pagination.getOffset())
+activate ReviewBoard
+ReviewBoard --> Controller : void
+deactivate ReviewBoard
+
+Controller -> ReviewBoard : setListCount(pagination.getListCount())
+activate ReviewBoard
+ReviewBoard --> Controller : void
+deactivate ReviewBoard
+
+Controller -> ReviewService : getList(ReviewBoard input)
+activate ReviewService
+
+ReviewService -> ReviewMapper : selectList(ReviewBoard input)
+activate ReviewMapper
+
+ReviewMapper -> DB : SELECT
+activate DB
+DB --> ReviewMapper : List<ReviewBoard>
+deactivate DB
+
+ReviewMapper --> ReviewService : List<ReviewBoard>
+deactivate ReviewMapper
+
+ReviewService --> Controller : List<ReviewBoard>
+deactivate ReviewService
+
+loop for each review in reviewList
+    Controller -> ReviewImgService : getList(ReviewImg input)
+    activate ReviewImgService
+    ReviewImgService -> ReviewImgMapper : selectList(ReviewImg input)
+    activate ReviewImgMapper
+    ReviewImgMapper -> DB : SELECT
+    activate DB
+    DB --> ReviewImgMapper : List<ReviewImg>
+    deactivate DB
+    ReviewImgMapper --> ReviewImgService : List<ReviewImg>
+    deactivate ReviewImgMapper
+    ReviewImgService --> Controller : List<ReviewImg>
+    deactivate ReviewImgService
+    Controller -> Controller : review.setReviewImgUrl(reviewImgList)
+end
+
+loop for each image in detail, list
+    Controller -> FileHelper : getUrl(String imgUrl)
+    activate FileHelper
+    FileHelper --> Controller : String
+    deactivate FileHelper
+end
+
+Controller -> Controller : model.addAttribute("product", product) ... ("review", review)
+
+Controller --> User : String "product/detail"
+deactivate Controller
+
+@enduml

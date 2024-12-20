@@ -1,0 +1,59 @@
+@startuml
+skinparam dpi 200
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+skinparam sequenceParticipantBorderThickness 2
+skinparam sequenceArrowThickness 2
+skinparam maxMessageSize 300
+skinparam participantPadding 20
+skinparam boxPadding 10
+
+actor Actor
+participant "MemberController" as Controller
+participant "MemberService" as Service
+participant "MemberMapper" as Mapper 
+participant "RegexHelper" as Helper
+participant "UtilHelper" as Util
+database Database
+
+Actor -> Controller: resetPw(userId:String, userName:String, email:String)
+activate Controller
+
+Controller -> Helper: isValue(userId:String, message:String)
+activate Helper
+Helper --> Controller: void
+deactivate Helper
+
+Controller -> Helper: ...(other validations)
+activate Helper
+Helper --> Controller: void
+deactivate Helper
+
+Controller -> Util: randomPassword(length:int)
+activate Util
+Util --> Controller: newPw:String
+deactivate Util
+
+Controller -> Service: resetPw(member:Member)
+activate Service
+
+Service -> Mapper: updatePassword(member:Member)
+activate Mapper
+
+Mapper -> Database: UPDATE
+activate Database
+Database --> Mapper: void
+deactivate Database
+
+Mapper --> Service: void
+deactivate Mapper
+
+Service --> Controller: void
+deactivate Service
+
+Controller -> Controller: model.addAttribute("item", input) ,("password", newPw)
+
+Controller --> Actor: String "member/password/reset_pw_result"
+deactivate Controller
+
+@enduml

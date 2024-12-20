@@ -1,0 +1,37 @@
+@startuml
+skinparam dpi 200
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+skinparam sequenceParticipantBorderThickness 2
+skinparam sequenceArrowThickness 2
+
+actor "Scheduler" as scheduler
+participant "OrderScheduler\n@Component" as controller
+participant "OrderService\n@Service" as service
+participant "OrderMapper\n@Mapper" as mapper
+database "Database" as db
+
+scheduler -> controller : deleteByCancelOrder()
+activate controller
+
+controller -> service : deleteByCancelOrder()
+activate service
+
+service -> mapper : deleteByCancelOrder()
+activate mapper
+
+mapper -> db : DELETE FROM orders\nWHERE order_state = '주문중' AND\norder_date < DATE_ADD(NOW(), INTERVAL -1 hour)
+activate db
+db --> mapper : int (affected rows)
+deactivate db
+
+mapper --> service : int
+deactivate mapper
+
+service --> controller : int
+deactivate service
+
+controller --> scheduler : void
+deactivate controller
+
+@enduml

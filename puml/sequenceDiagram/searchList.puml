@@ -1,0 +1,73 @@
+@startuml
+skinparam dpi 200
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+skinparam sequenceParticipantBorderThickness 2
+skinparam sequenceArrowThickness 2
+skinparam maxMessageSize 300
+skinparam participantPadding 20
+skinparam boxPadding 10
+
+actor User
+participant "ProductController\n@Controller" as Controller
+participant "ProductService\n@Service" as Service
+participant "ProductMapper\n@Mapper" as Mapper
+participant "FileHelper\n@Component" as FileHelper
+participant "WebHelper\n@Component" as WebHelper
+participant "Database" as DB
+
+User -> Controller : searchList(Model model,\nString keyword,\nInteger page)
+activate Controller
+
+Controller -> Service : getSearchList(Product input)
+activate Service
+
+Service -> Mapper : selectSearchList(Product input)
+activate Mapper
+
+Mapper -> DB : SELECT
+activate DB
+DB --> Mapper : List<Product>
+deactivate DB
+
+Mapper --> Service : List<Product>
+deactivate Mapper
+
+Service --> Controller : List<Product>
+deactivate Service
+
+loop for each product in productList
+    Controller -> FileHelper : getUrl(String filePath)
+    activate FileHelper
+    FileHelper --> Controller : String
+    deactivate FileHelper
+end
+
+Controller -> Service : getSearchCount(Product input)
+activate Service
+
+Service -> Mapper : selectSearchCount(Product input)
+activate Mapper
+
+Mapper -> DB : SELECT
+activate DB
+DB --> Mapper : int
+deactivate DB
+
+Mapper --> Service : int
+deactivate Mapper
+
+Service --> Controller : int
+deactivate Service
+
+Controller -> WebHelper : getPagination(int page, int totalCount, int listCount)
+activate WebHelper
+WebHelper --> Controller : Pagination
+deactivate WebHelper
+
+Controller -> Controller : model.addAttribute("keyword", keyword), ... , ("productList", productList)
+
+Controller --> User : String "product/search"
+deactivate Controller
+
+@enduml

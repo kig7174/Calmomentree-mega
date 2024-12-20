@@ -1,0 +1,57 @@
+@startuml
+skinparam dpi 200
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+skinparam sequenceParticipantBorderThickness 2
+skinparam sequenceArrowThickness 2
+skinparam maxMessageSize 300
+skinparam participantPadding 20
+skinparam boxPadding 10
+
+actor User
+participant "MemberRest\nController" as Controller
+participant "Member\nService" as Service
+participant "Member\nMapper" as Mapper
+participant "Regex\nHelper" as Helper
+participant "DB" as DB
+participant "Http\nSession" as Session
+
+User -> Controller : login(String userId,String userPw)
+activate Controller
+
+Controller -> Helper : isValue(String userId,String message)
+activate Helper
+Helper --> Controller : void
+deactivate Helper
+
+Controller -> Helper : ...(other validations)
+activate Helper
+Helper --> Controller : void
+deactivate Helper
+
+Controller -> Service : login(Member member)
+activate Service
+
+Service -> Mapper : selectLoginInfo\n(Member member)
+activate Mapper
+
+Mapper -> DB : SELECT
+activate DB
+DB --> Mapper : Member
+deactivate DB
+
+Mapper --> Service : Member
+deactivate Mapper
+
+Service --> Controller : Member
+deactivate Service
+
+Controller -> Session : setAttribute("memberInfo", Member)
+activate Session
+Session --> Controller : void
+deactivate Session
+
+Controller --> User : Map<String, Object>
+deactivate Controller
+
+@enduml

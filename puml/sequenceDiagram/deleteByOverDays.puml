@@ -1,0 +1,37 @@
+@startuml
+skinparam dpi 200
+skinparam sequenceMessageAlign center
+skinparam monochrome true
+skinparam sequenceParticipantBorderThickness 2
+skinparam sequenceArrowThickness 2
+
+actor "Scheduler" as scheduler
+participant "BasketScheduler\n@Component" as controller
+participant "BasketService\n@Service" as service
+participant "BasketMapper\n@Mapper" as mapper
+database "Database" as db
+
+scheduler -> controller : deleteByOverDays()
+activate controller
+
+controller -> service : deleteByOverDays()
+activate service
+
+service -> mapper : deleteByOverDays()
+activate mapper
+
+mapper -> db : DELETE FROM baskets\nWHERE basket_add_date < DATE_ADD(NOW(), INTERVAL -7 day)
+activate db
+db --> mapper : int (affected rows)
+deactivate db
+
+mapper --> service : int
+deactivate mapper
+
+service --> controller : int
+deactivate service
+
+controller --> scheduler : void
+deactivate controller
+
+@enduml
