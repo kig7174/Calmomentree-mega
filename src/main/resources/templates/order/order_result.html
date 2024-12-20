@@ -127,7 +127,7 @@
                 <p><strong>배송지 주소 : </strong>(<span th:text="${order.receiverPostcode}"></span>) 
                       <span th:text="${order.receiverAddr1} + ${order.receiverAddr2}"></span></p>
                 <p><strong>전화번호 : </strong> <span th:text="${order.memberTel}"></span></p>
-                <p><strong>배송요청사항 : </strong><span th:text="${order.req } != 'null,' ? ${order.req} : '없음'"></span></p>
+                <p><strong>배송요청사항 : </strong><span th:text="${order.req } != 'null' ? ${order.req} : '없음'"></span></p>
               </div>
       
               <div class="order-details" th:each="orderItem : ${orderItems}">

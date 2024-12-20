@@ -51,7 +51,7 @@
                   </td>
                   <td class="writer" th:text="${review.userName}"></td>
                   <td class="date" th:text="${review.writeDate}"></td>
-                  <td class="star" th:text="${review.rating}"></td>
+                  <td class="star" th:text="${review.rating == 1 ? '★' : review.rating == 2 ? '★★' : review.rating == 3 ? '★★★' : review.rating == 4 ? '★★★★' : '★★★★★'}"></td>
                 </tr>
               </tbody>
             </table>
@@ -99,25 +99,5 @@
     <footer th:replace="~{/fragments/common :: calm-footer}"></footer>
 
     <th:block th:replace="~{/fragments/script}"></th:block>
-    <script>
-      // 평점 -> 별로 바꾸기 ( '★' )
-      const value = document.querySelectorAll(".star");
-      value.forEach((v, i) => {
-        const star = v.innerHTML;
-
-        switch (star) {
-          case "5":
-            return (v.innerHTML = "★★★★★");
-          case "4":
-            return (v.innerHTML = "★★★★");
-          case "3":
-            return (v.innerHTML = "★★★");
-          case "2":
-            return (v.innerHTML = "★★");
-          case "1":
-            return (v.innerHTML = "★");
-        }
-      });
-    </script>
   </body>
 </html>
