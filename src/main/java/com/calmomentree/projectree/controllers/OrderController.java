@@ -50,19 +50,20 @@ public class OrderController {
     private OrderItemService orderItemService;
 
     /**
-     * 장바구니 첫화면 불러오기
+     * 장바구니 페이지를 반환하는 메서드
      * 
-     * @param memberInfo - 회원 번호
-     * @return
+     * @param model 뷰에 데이터를 전달하기 위한 모델 객체
+     * @param memberInfo 세션에 저장된 회원 정보
+     * @return 장바구니 페이지 뷰 이름
      */
     @GetMapping("/order/basket")
     public String orderBasket(Model model,
             @SessionAttribute("memberInfo") Member memberInfo) {
-        // @RequestParam(value = "memberId", defaultValue = "1") int memberId
+        // 장바구니 목록 조회를 위한 객체 생성 및 데이터 설정
         Basket input = new Basket();
         input.setMemberId(memberInfo.getMemberId());
 
-        // 주문상품 카운트
+        // 주문상품 카운트를 위한 객체 생성 및 데이터 설정
         Basket input2 = new Basket();
         input2.setMemberId(memberInfo.getMemberId());
 
@@ -71,8 +72,10 @@ public class OrderController {
         int count = 0;
 
         try {
+            // 장바구니 목록 조회
             output = basketService.getList(input);
-
+            
+            // 장바구니 상품 개수 조회
             count = basketService.getCount(input2);
 
             // 사진 경로에 files 추가하기.
@@ -90,6 +93,15 @@ public class OrderController {
         return "order/basket";
     }
 
+    /**
+     * 주문서 작성 페이지를 반환하는 메서드
+     * 
+     * @param model 뷰에 데이터를 전달하기 위한 모델 객체
+     * @param request HTTP 요청 객체
+     * @param memberInfo 세션에 저장된 회원 정보
+     * @param basketIdTmp 장바구니 항목 ID 목록
+     * @return 주문서 작성 페이지 뷰 이름
+     */
     @SuppressWarnings("null")
     @GetMapping("/order/order_form")
     public String orderAdd(
@@ -97,13 +109,14 @@ public class OrderController {
             HttpServletRequest request,
             @SessionAttribute("memberInfo") Member memberInfo,
             @RequestParam("basket_id") List<Integer> basketIdTmp) {
+        // 장바구니 목록을 저장할 리스트 객체 생성
         List<Basket> baskets = new ArrayList<>();
-
+        // 총 주문 금액을 저장할 변수
         int totalPrice = 0;
-       
+            // 장바구니 목록을 순회하면서 조회
             for (int i = 0; i < basketIdTmp.size(); i++) {
                 if (basketIdTmp.get(i) != null) {
-    
+                    // 장바구니 항목 조회를 위한 객체 생성 및 데이터 설정
                     Basket b = new Basket();
                     b.setBasketId(basketIdTmp.get(i));
                     b.setMemberId(memberInfo.getMemberId());
@@ -116,7 +129,7 @@ public class OrderController {
                         webHelper.serverError(e);
                         return null;
                     }
-    
+                    // 사진 경로에 files 추가하기.
                     basket.setImgUrl(fileHelper.getUrl(basket.getImgUrl()));
     
                     int t = basket.getQuantity() * basket.getPrice();
@@ -125,9 +138,7 @@ public class OrderController {
                     baskets.add(basket);
                 }
             }
-        
-       
-
+        // 주문 정보를 저장하기 위한 객체 생성 및 데이터 설정
         Order input = new Order();
         input.setMemberName(memberInfo.getUserName());
         input.setMemberEmail(memberInfo.getEmail());
@@ -153,6 +164,16 @@ public class OrderController {
         return "order/order_form";
     }
 
+    /**
+     * 상품 상세 페이지에서 주문서 작성 페이지로 이동하는 메서드
+     * 
+     * @param model 뷰에 데이터를 전달하기 위한 모델 객체
+     * @param request HTTP 요청 객체
+     * @param memberInfo 세션에 저장된 회원 정보
+     * @param quantity 주문할 상품 수량
+     * @param prodId 주문할 상품 ID
+     * @return 주문서 작성 페이지 뷰 이름
+     */
     @GetMapping("/order/order_form_by_detail")
     public String orderAddByDetail(
             Model model,
@@ -160,11 +181,13 @@ public class OrderController {
             @SessionAttribute("memberInfo") Member memberInfo,
             @RequestParam("quantity") int quantity,
             @RequestParam("prodId") int prodId) {
+
+        // 장바구니 항목 추가를 위한 객체 생성 및 데이터 설정 
         Basket basket = new Basket();
         basket.setMemberId(memberInfo.getMemberId());
         basket.setQuantity(quantity);
         basket.setProdId(prodId);
-
+        
         Basket output = null;
 
         try {
@@ -173,9 +196,10 @@ public class OrderController {
             webHelper.serverError(e);
             return null;
         }
-
+        // 사진 경로에 files 추가하기.
         output.setImgUrl(fileHelper.getUrl(output.getImgUrl()));
 
+        // 주문 정보를 저장하기 위한 객체 생성 및 데이터 설정
         Order input = new Order();
         input.setMemberName(memberInfo.getUserName());
         input.setMemberEmail(memberInfo.getEmail());
@@ -201,6 +225,28 @@ public class OrderController {
         return "order/order_form";
     }
 
+    /**
+     * 주문 완료 처리를 하는 메서드
+     * 
+     * @param model 뷰에 데이터를 전달하기 위한 모델 객체
+     * @param memberInfo 세션에 저장된 회원 정보
+     * @param orderId 주문 ID
+     * @param memberName 회원 이름
+     * @param memberEmail 회원 이메일
+     * @param memberTel 회원 전화번호
+     * @param memberPostcode 회원 우편번호
+     * @param memberAddr1 회원 주소 1
+     * @param memberAddr2 회원 주소 2
+     * @param receiverName 수령인 이름
+     * @param receiverPostcode 수령인 우편번호
+     * @param receiverAddr1 수령인 주소 1
+     * @param receiverAddr2 수령인 주소 2
+     * @param receiverTel 수령인 전화번호
+     * @param req 요청 사항
+     * @param totalPrice 총 가격
+     * @param basketIdTmp 장바구니 항목 ID 목록
+     * @return 주문 결과 페이지 뷰 이름
+     */
     @PostMapping("/order/order_ok")
     public String orderOk(
             Model model,
@@ -220,6 +266,7 @@ public class OrderController {
             @RequestParam("req") String req,
             @RequestParam("total_price") Integer totalPrice,
             @RequestParam("basket_id") List<Integer> basketIdTmp) {
+        // 유효성 검사
         try {
             regexHelper.isValue(memberName, "이름을 입력해주세요.");
             regexHelper.isKor(memberName, "이름은 한글로만 입력해주세요.");
@@ -249,7 +296,7 @@ public class OrderController {
             webHelper.badRequest(e.getMessage());
             return null;
         }
-
+        // 주문 정보를 수정하기 위한 객체 생성 및 데이터 설정
         Order input = new Order();
         input.setOrderId(orderId);
         input.setMemberId(memberInfo.getMemberId());
@@ -266,7 +313,7 @@ public class OrderController {
         input.setReceiverAddr2(receiverAddr2);
         input.setReceiverTel(receiverTel);
         input.setReq(req);
-
+        // 주문 번호 생성
         Order.orderCount();
         int count = Order.getCount();
 
@@ -278,23 +325,24 @@ public class OrderController {
         input.setOrderNo(String.format("%04d%02d%02d%04d", year, month, date, count));
 
         Order order = null;
-
+        // 주문 정보 수정
         try {
             order = orderService.editItem(input);
         } catch (Exception e) {
             webHelper.serverError(e);
             return null;
         }
-
+        // 장바구니 항목을 저장할 리스트 객체 생성
         List<Basket> baskets = new ArrayList<>();
 
         for (int i = 0; i < basketIdTmp.size(); i++) {
+            // 장바구니 항목 조회를 위한 객체 생성 및 데이터 설정
             Basket b = new Basket();
             b.setBasketId(basketIdTmp.get(i));
             b.setMemberId(memberInfo.getMemberId());
 
             Basket basket = null;
-
+            // 장바구니 항목 조회
             try {
                 basket = basketService.getItem(b);
             } catch (Exception e) {
@@ -304,7 +352,7 @@ public class OrderController {
 
             baskets.add(basket);
         }
-
+        // 주문 항목을 저장할 리스트 객체 생성
         List<OrderItem> items = new ArrayList<>();
 
         for (int i = 0; i < baskets.size(); i++) {
@@ -319,7 +367,7 @@ public class OrderController {
             oi.setOrderId(orderId);
 
             OrderItem item = null;
-
+            // 주문 항목 저장.
             try {
                 item = orderItemService.addItem(oi);
             } catch (Exception e) {
@@ -329,12 +377,12 @@ public class OrderController {
 
             items.add(item);
         }
-
+        // 장바구니 항목 삭제
         for (int i = 0; i < baskets.size(); i++) {
             Basket b = new Basket();
             b.setBasketId(basketIdTmp.get(i));
             b.setMemberId(memberInfo.getMemberId());
-
+            // 장바구니 항목 삭제
             try {
                 basketService.deleteItem(b);
             } catch (Exception e) {

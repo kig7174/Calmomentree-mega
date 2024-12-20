@@ -51,7 +51,7 @@ public class ReviewBoardRestController {
     /**
      * 리뷰 게시글 업로드
      * 
-     * @param reviewTitle
+     * @param reviewTitle 
      * @param reviewContent
      * @param rating
      * @param photo
@@ -69,10 +69,9 @@ public class ReviewBoardRestController {
         // 업로드 사진에 대한 처리
         List<UploadItem> uploadItemList = new ArrayList<>();
 
-        log.info("포토 : " + photo);
         for(int i=0;i<photo.size();i++) {
+            // 업로드된 파일을 저장하고, 저장된 파일의 정보를 반환받는다.
             UploadItem uploadItem = new UploadItem();
-
             try {
                 uploadItem = fileHelper.saveMultipartFile(photo.get(i));
             } catch (NullPointerException e) {
@@ -85,12 +84,11 @@ public class ReviewBoardRestController {
             uploadItemList.add(uploadItem);
         }
        
-
+        // 리뷰 게시글 저장을 위한 객체 생성 및 데이터 입력
         ReviewBoard input = new ReviewBoard();
         input.setReviewTitle(reviewTitle);
         input.setReviewContent(reviewContent);
         input.setRating(rating);
-
         input.setProdId(prodId);
         input.setMemberId(memberInfo.getMemberId());
 
@@ -100,11 +98,13 @@ public class ReviewBoardRestController {
             return restHelper.serverError(e);
         }
         
-        // 업로드 사진 있어?
+        // 업로드 된 파일이 있을 경우
         if (uploadItemList != null) {
             
             for (int i=0; i<uploadItemList.size(); i++) {
+                // 업로드 된 파일의 정보를 DB에 저장
                 if (uploadItemList.get(i).getFilePath() != null) {
+                    // 업로드 파일 저장을 위한 객체 생성 및 데이터 입력
                     ReviewImg input2 = new ReviewImg();
                     input2.setImgUrl(uploadItemList.get(i).getFilePath());
                     input2.setReviewBoardId(input.getReviewBoardId());
@@ -114,7 +114,6 @@ public class ReviewBoardRestController {
                     } catch (Exception e) {
                         return restHelper.serverError(e);
                     }
-                    log.error("업로드사진: " + input2);
                 }            
             }
         }
@@ -122,24 +121,34 @@ public class ReviewBoardRestController {
         return restHelper.sendJson();
     }
 
+    /**
+     * 리뷰 게시글을 삭제
+     * 
+     * @param reviewBoardId 삭제할 리뷰 게시글의 ID
+     * @param memberInfo 세션에 저장된 회원 정보
+     * @return 처리 결과를 포함한 JSON 응답
+     */
     @DeleteMapping("/api/review/delete/{reviewBoardId}")
     private Map<String, Object> reviewDelete(
         @PathVariable("reviewBoardId") int reviewBoardId,
         @SessionAttribute("memberInfo") Member memberInfo) {
-
+        
+        // 리뷰 게시글 삭제를 위한 객체 생성 및 데이터 입력
         ReviewBoard input = new ReviewBoard();
         input.setReviewBoardId(reviewBoardId);
         input.setMemberId(memberInfo.getMemberId());
-
+        
+        // 리뷰 게시글에 포함된 이미지 파일 삭제를 위한 객체 생성 및 데이터 입력
         ReviewImg img = new ReviewImg();
         img.setReviewBoardId(reviewBoardId);
-
+        
+        // 리뷰 이미지 삭제
         try {
             reviewImgService.deleteItem(img);
         } catch (Exception e) {
             return restHelper.serverError(e);
         }
-
+        // 리뷰 게시글 삭제
         try {
             reviewBoardService.deleteItem(input);
         } catch (Exception e) {
