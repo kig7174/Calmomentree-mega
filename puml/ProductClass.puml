@@ -138,11 +138,11 @@ ProductController --> FileHelper
 ProductController --> RegexHelper
 ProductController --> WebHelper
 
-ProductServiceImpl --> ProductService
-ProdImgServiceImpl --> ProdImgService
-ReviewBoardServiceImpl --> ReviewBoardService
-ReviewImgServiceImpl --> ReviewImgService
-OrderItemServiceImpl --> OrderItemService
+ProductServiceImpl ..> ProductService
+ProdImgServiceImpl ..> ProdImgService
+ReviewBoardServiceImpl ..> ReviewBoardService
+ReviewImgServiceImpl ..> ReviewImgService
+OrderItemServiceImpl ..> OrderItemService
 
 ' 배치 수정
 ProductController -[hidden]-> ProductService

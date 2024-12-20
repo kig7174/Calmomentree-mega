@@ -136,8 +136,8 @@ MemberRestController --> FileHelper
 MemberRestController --> MemberService
 MemberRestController --> BasketService
 
-MemberServiceImpl --> MemberService
-BasketServiceImpl --> BasketService
+MemberServiceImpl ..> MemberService
+BasketServiceImpl ..> BasketService
 
 ' 배치 수정
 MemberController -[hidden]-> MemberRestController

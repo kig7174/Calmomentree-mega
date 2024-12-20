@@ -141,9 +141,9 @@ OrderRestController --> OrderService
 OrderRestController --> BasketService
 OrderRestController --> ProductService
 
-OrderServiceImpl --> OrderService
-BasketServiceImpl --> BasketService
-ProductServiceImpl --> ProductService
+OrderServiceImpl ..> OrderService
+BasketServiceImpl ..> BasketService
+ProductServiceImpl ..> ProductService
 
 ' 배치 수정
 OrderController -[hidden]-> OrderRestController

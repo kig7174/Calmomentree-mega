@@ -124,9 +124,9 @@ ReviewBoardRestController --> FileHelper
 ReviewBoardRestController --> ReviewBoardService
 ReviewBoardRestController --> ReviewImgService
 
-ReviewBoardServiceImpl --> ReviewBoardService
-ReviewImgServiceImpl --> ReviewImgService
-OrderItemServiceImpl --> OrderItemService
+ReviewBoardServiceImpl ..> ReviewBoardService
+ReviewImgServiceImpl ..> ReviewImgService
+OrderItemServiceImpl ..> OrderItemService
 
 ' 배치 수정
 ReviewBoardController -[hidden]-> ReviewBoardRestController
