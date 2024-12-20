@@ -265,12 +265,16 @@ public class OrderRestController {
         @RequestParam(value = "start_date", required = false) String startDate,
         @RequestParam(value = "end_date", required = false) String endDate
     ) {
+        if (startDate != null && !startDate.equals("") && endDate != null && !endDate.equals("")) {
+            startDate += " 00:00:00";
+            endDate += " 23:59:59";
+        }
 
         Order input = new Order();
         input.setMemberId(memberInfo.getMemberId());
         input.setOrderState(orderState);
-        input.setStartDate(startDate + " 00:00:00");
-        input.setEndDate(endDate + " 23:59:59");
+        input.setStartDate(startDate);
+        input.setEndDate(endDate);
 
         List<Order> order = null;
 

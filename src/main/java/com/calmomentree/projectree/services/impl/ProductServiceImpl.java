@@ -95,6 +95,10 @@ public class ProductServiceImpl implements ProductService {
 
         try {
             output = productMapper.selectListByCategory(input);
+            
+            if (output == null) {
+                throw new Exception("조회된 데이터가 없습니다.");
+            }
         } catch (Exception e) {
             log.error("상품 목록 조회에 실패했습니다.", e);
             throw e;

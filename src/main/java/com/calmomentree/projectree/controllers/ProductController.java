@@ -50,30 +50,34 @@ public class ProductController {
     public String handle(Exception ex) {
         return "error/404";
     }
-
-    @SuppressWarnings("null")
+    
     @GetMapping("/product/search")
     public String searchList(Model model,
         @RequestParam(value = "keyword", required = false) String keyword,
         @RequestParam(value = "order_by", defaultValue = "recent") String orderBy,
         @RequestParam(value = "page", defaultValue = "1") int nowPage) {
 
+        // 검색어가 없을 시 처리 없이 페이지 이동
         if (keyword == null || keyword.equals("")) {
             return "product/search";
         }
 
+        // 페이지 구현
         int totalCount = 0;
         int listCount = 8;
         int pageCount = 3;
 
         Pagination pagination = null;
 
+        // 검색할 상품 객체
         Product input = new Product();
         input.setProdNameKor(keyword.trim());
         
         List<Product> products = null;
         
+        // DB 연동
         try {
+            // 페이지 처리
             totalCount = productService.getCount(input);
             pagination = new Pagination(nowPage, totalCount, listCount, pageCount);
 
@@ -81,18 +85,21 @@ public class ProductController {
             Product.setListCount(pagination.getListCount());
             Product.setOrderBy(orderBy);
 
+            // 목록 불러오기
             products = productService.getListBySearch(input);
         } catch (Exception e) {
             webHelper.serverError(e);
             return null;
         }
 
+        // 이미지 처리
         for (int i=0; i<products.size(); i++) {
             Product p = products.get(i);
             p.setListImgUrl1(fileHelper.getUrl(p.getListImgUrl1()));
             p.setListImgUrl2(fileHelper.getUrl(p.getListImgUrl2()));
         }
 
+        // View로 전달
         model.addAttribute("products", products);
         model.addAttribute("keyword", keyword);
         model.addAttribute("pagination", pagination);
