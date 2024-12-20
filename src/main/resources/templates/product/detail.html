@@ -130,6 +130,7 @@
                                             <span class="review-title" th:text="${review.reviewTitle}">쓰기 좋아요</span>
                                             <span class="is-img-file" th:if="${review.reviewImgUrl != null}"><i class="fa-solid fa-paperclip"></i></span>
                                             <span class="review-name" th:text="${review.userName}">김**</span>
+                                            <span class="review-rating" th:text="${review.rating == 1 ? '★' : review.rating == 2 ? '★★' : review.rating == 3 ? '★★★' : review.rating == 4 ? '★★★★' : '★★★★★'}"></span>
                                             <span class="review-date" th:text="${review.writeDate}">2024-09-21</span>
                                         </div>
                                         <div class="review-collapse-content">

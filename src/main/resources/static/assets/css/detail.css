@@ -362,6 +362,7 @@ body {
 
                         span {
                             font-size: 13px;
+                            width: 15%;
                             padding: 20px 10px;
                             text-align: left;
                             display: inline-block;
@@ -374,6 +375,15 @@ body {
 
                         .review-num {
                             margin-left: 5px;
+                            width: 10%;
+                        }
+
+                        .review-date  {
+                            width: 30%;
+                        }
+
+                        .review-rating {
+                            text-align: center;
                         }
                     }
 
