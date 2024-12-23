@@ -2,10 +2,12 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.3.5'
 	id 'io.spring.dependency-management' version '1.1.6'
+    id 'war'
 }
 
 group = 'com.calmomentree'
 version = '0.0.1-SNAPSHOT'
+apply plugin: 'war'
 
 java {
 	toolchain {
@@ -47,7 +49,19 @@ dependencies {
 
      /** Spring Session */
     implementation 'org.springframework.session:spring-session-jdbc'
+
+    // Tomcat
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
+
+bootWar {
+    archiveBaseName = 'ROOT'
+    archiveFileName = 'ROOT.war'
+    archiveVersion = '0.0.1'
+}
+
+bootWar.enabled = true
+war.enabled = false
 
 tasks.named('test') {
 	useJUnitPlatform()
