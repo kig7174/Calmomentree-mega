@@ -28,7 +28,6 @@ public interface SaleMapper {
     @Insert("INSERT INTO sales (total_sales, date) " +
             "VALUE " + 
             "(0, DATE(DATE_ADD(NOW(), INTERVAL -1 DAY)))")
-    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     public int insertDefault();
 
     @Update("...")
@@ -45,7 +44,7 @@ public interface SaleMapper {
     })
     public Sale selectItem(Sale input);
 
-    @Select("...")
+    @Select("SELECT id, date, total_sales FROM sales WHERE date <= DATE(DATE_ADD(NOW(), INTERVAL -1 DAY)) ORDER BY date DESC LIMIT 0, 28")
     @ResultMap("resultMap")
     public List<Sale> selectList(Sale input);
 
