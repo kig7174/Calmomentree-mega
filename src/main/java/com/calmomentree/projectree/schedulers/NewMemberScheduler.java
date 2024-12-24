@@ -18,8 +18,16 @@ public class NewMemberScheduler {
 
     @Scheduled(cron = "0 0 1 * * *")
     public void newMemberInsert() {
+
         try {
-            newMemberService.addItem();
+            int be = newMemberService.addItem();
+
+            if (be == 0) {
+                newMemberService.addDefault();
+                log.debug("신규회원 없음 - 기본값 0 삽입 완료");
+            } else {
+                log.debug("신규회원 데이터 집계 완료", be);
+            }
         } catch (Exception e) {
             log.error("신규회원 데이터 집계 실패", e);
             return;

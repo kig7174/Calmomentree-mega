@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.calmomentree.projectree.models.NewMember;
-
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -31,10 +29,9 @@ public class NewMemberServiceTest {
     @Test
     @DisplayName("신규 회원 조회 테스트")
     void newMemberSelect() throws Exception {
-        NewMember input = new NewMember();
-        input.setId(1);
+       
         try {
-            newMemberService.getItem(input);
+            newMemberService.getItem();
 
         } catch (Exception e) {
             log.error("Mapper 구현 에러", e);

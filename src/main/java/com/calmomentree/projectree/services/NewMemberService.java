@@ -5,9 +5,11 @@ import java.util.List;
 import com.calmomentree.projectree.models.NewMember;
 
 public interface NewMemberService {
-    public void addItem() throws Exception;
+    public int addItem() throws Exception;
 
-    public NewMember getItem(NewMember params) throws Exception;
+    public int addDefault() throws Exception;
+
+    public List<NewMember> getItem() throws Exception;
 
     public List<NewMember> getWeeklyList() throws Exception;
 

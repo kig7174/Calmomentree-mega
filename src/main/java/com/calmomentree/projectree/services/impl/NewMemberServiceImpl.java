@@ -18,24 +18,40 @@ public class NewMemberServiceImpl implements NewMemberService {
     private NewMemberMapper newMemberMapper;
 
     @Override
-    public void addItem() throws Exception {
-
+    public int addItem() throws Exception {
+        int rows = 0;
         try {
-            newMemberMapper.insert();
+        rows =  newMemberMapper.insert();
 
         } catch (Exception e) {
             log.error("데이터 저장에 실패했습니다.", e);
             throw e;
         }
+        return rows;
+    }
+
+    
+    @Override
+    public int addDefault() throws Exception {
+        int rows = 0;
+        try {
+        rows =  newMemberMapper.insertDefault();
+
+        } catch (Exception e) {
+            log.error("데이터 저장에 실패했습니다.", e);
+            throw e;
+        }
+        return rows;
     }
 
 
+
     @Override
-    public NewMember getItem(NewMember input) throws Exception {
-        NewMember output = null;
+    public List<NewMember> getItem() throws Exception {
+        List<NewMember> output = null;
 
         try {
-            output = newMemberMapper.selectItem(input);
+            output = newMemberMapper.selectItem();
 
             if (output == null) {
                 throw new Exception("조회된 데이터가 없습니다.");
@@ -61,6 +77,7 @@ public class NewMemberServiceImpl implements NewMemberService {
 
         return output;
     }
+
 
   
 }
