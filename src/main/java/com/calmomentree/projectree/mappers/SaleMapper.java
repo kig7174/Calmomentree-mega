@@ -16,19 +16,20 @@ import com.calmomentree.projectree.models.Sale;
 
 @Mapper
 public interface SaleMapper {
-    @Insert(
-            "INSERT INTO sales (total_sales, date) " +
-            "SELECT SUM(order_price) AS order_price, DATE_FORMAT(order_date, '%Y-%m-%d') AS order_date FROM orders AS ord " +
+    @Insert("INSERT INTO sales (total_sales, date) " +
+            "SELECT SUM(total_price), DATE(order_date) AS ord_date FROM orders " +
 
-            "INNER JOIN order_items AS item " +
-            "ON ord.order_id = item.order_id " +
+            "WHERE order_state != '주문중' AND DATE(order_date) = DATE(DATE_ADD(NOW(),  INTERVAL -1 DAY)) " +
 
-            "WHERE DATE_FORMAT(order_date, '%Y-%m-%d') = DATE(DATE_ADD(NOW(),  INTERVAL -1 DAY)) " +
-
-            "GROUP BY DATE_FORMAT(order_date, '%Y-%m-%d')"
-            )
+            "GROUP BY ord_date")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     public int insert();
+
+    @Insert("INSERT INTO sales (total_sales, date) " +
+            "VALUE " + 
+            "(0, DATE(DATE_ADD(NOW(), INTERVAL -1 DAY)))")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    public int insertDefault();
 
     @Update("...")
     public int update(Sale input);

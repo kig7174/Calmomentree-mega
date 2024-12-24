@@ -18,4 +18,10 @@ public class SaleMapperTest {
     public void saleInsertTest() {
         saleMapper.insert();
     }
+
+    @Test
+    @DisplayName("매출 없을 때 테스트")
+    public void saleDefaultInsert() {
+        saleMapper.insertDefault();
+    }
 }

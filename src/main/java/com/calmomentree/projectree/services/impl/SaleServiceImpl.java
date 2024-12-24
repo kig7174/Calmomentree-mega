@@ -19,9 +19,14 @@ public class SaleServiceImpl implements SaleService {
 
     @Override
     public void addItem() throws Exception {
+        int rows = 0;
 
         try {
-            saleMapper.insert();
+            rows = saleMapper.insert();
+
+            if (rows == 0) {
+                saleMapper.insertDefault();
+            }
         } catch (Exception e) {
             log.error("데이터 저장에 실패했습니다.", e);
             throw e;
