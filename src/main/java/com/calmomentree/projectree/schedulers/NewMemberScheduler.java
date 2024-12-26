@@ -33,4 +33,15 @@ public class NewMemberScheduler {
             return;
         }
     }
+
+    @Scheduled(cron = "0 0 4 * * *")
+    public void newMemberAutoDelete() {
+        try {
+            int be = newMemberService.autoDelete();
+            log.debug("신규회원 데이터 삭제 완료", be);
+        } catch (Exception e) {
+            log.error("신규회원 데이터 삭제 실패", e);
+            return;
+        }
+    }
 }

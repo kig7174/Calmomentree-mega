@@ -9,6 +9,8 @@ public interface NewMemberService {
 
     public int addDefault() throws Exception;
 
+    public int autoDelete() throws Exception;
+
     public List<NewMember> getItem() throws Exception;
 
     public List<NewMember> getWeeklyList() throws Exception;

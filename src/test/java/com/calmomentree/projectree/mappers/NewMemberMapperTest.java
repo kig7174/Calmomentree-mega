@@ -48,4 +48,12 @@ public class NewMemberMapperTest {
             log.debug("주간 신규 회원 조회: " + item.toString());
         });
     }
+
+    @Test
+    @DisplayName("신규 회원 자동 삭제 테스트")
+    void newMemberAutoDelete() {
+        int output = newMemberMapper.autoDelete();
+
+        log.debug("신규 회원 자동 삭제: " + output);
+    }
 }

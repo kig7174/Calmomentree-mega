@@ -50,4 +50,16 @@ public class NewMemberServiceTest {
             throw e;
         }
     }
+
+    @Test
+    @DisplayName("신규 회원 자동 삭제 테스트")
+    void newMemberAutoDelete() throws Exception {
+        try {
+            newMemberService.autoDelete();
+
+        } catch (Exception e) {
+            log.error("Mapper 구현 에러", e);
+            throw e;
+        }
+    }
 }

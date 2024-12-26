@@ -13,12 +13,10 @@ import com.calmomentree.projectree.services.NewMemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
 @RestController
-@CrossOrigin(origins = "http://localhost:3000") // React 개발 서버 주소
 public class NewMemberRestController {
     @Autowired
     private NewMemberService newMemberService;
@@ -28,18 +26,18 @@ public class NewMemberRestController {
     
     @GetMapping("/api/new_member")
     public Map<String, Object> newMember() {
-        List<NewMember> newMembers = null;
-        // List<NewMember> newMembersWeekly = null;
+        List<NewMember> newMembersweekly = null;
+        List<NewMember> newMembersMonthly = null;
         try {
-            newMembers = newMemberService.getItem();
-            // newMembersWeekly = newMemberService.getWeeklyList();
+            newMembersweekly = newMemberService.getItem();
+            newMembersMonthly = newMemberService.getWeeklyList();
         } catch (Exception e) {
             return restHelper.serverError(e);
         }
         
         Map<String, Object> data = new LinkedHashMap<String, Object>();
-        data.put("item", newMembers);
-        // data.put("newMembersWeekly", newMembersWeekly);
+        data.put("weekly", newMembersweekly);
+        data.put("monthly", newMembersMonthly);
 
         return restHelper.sendJson(data);
     }

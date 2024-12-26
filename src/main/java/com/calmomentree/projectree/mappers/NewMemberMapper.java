@@ -2,6 +2,7 @@ package com.calmomentree.projectree.mappers;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -27,22 +28,37 @@ public interface NewMemberMapper {
                         "(DATE(DATE_ADD(NOW(), INTERVAL -1 DAY)), 0)")
         public int insertDefault();
 
-        @Select("SELECT id, date, member_count, DATE_FORMAT(date, '%a') AS day " +
-                        "FROM new_member " +
-                        "WHERE date > date(DATE_ADD(NOW(), INTERVAL -1 MONTH)) " +
-                        "ORDER BY date ASC ")
+        @Delete("DELETE FROM new_member " +
+                "WHERE date < DATE(DATE_ADD(NOW(), INTERVAL -3 MONTH)) ")
+        public int autoDelete();
+
+        @Select("SELECT id, date, member_count, " +
+                "CASE DAYOFWEEK(date) " +
+                        "WHEN 1 THEN '일' " +
+                        "WHEN 2 THEN '월' " +
+                        "WHEN 3 THEN '화' " +
+                        "WHEN 4 THEN '수' " +
+                        "WHEN 5 THEN '목' " +
+                        "WHEN 6 THEN '금' " +
+                        "WHEN 7 THEN '토' " +
+                "END AS day " +
+                "FROM new_member " +
+                "WHERE date <= date(DATE_ADD(NOW(), INTERVAL -1 DAY)) " +
+                "ORDER BY date DESC " +
+                "LIMIT 0, 7 ")
         @Results(id = "resultMap", value = {
                         @Result(property = "id", column = "id"),
                         @Result(property = "date", column = "date"),
-                        @Result(property = "memberCount", column = "member_count")
+                        @Result(property = "memberCount", column = "member_count")                    
         })
         public List<NewMember> selectItem();
 
-        @Select("SELECT DATE_FORMAT(date, '%Y-%m-%u') AS week, SUM(member_count) AS member_count " +
+        @Select("SELECT CONCAT(DATE_FORMAT(MIN(date), '%Y-%m-%d'), ' ~ ', DATE_FORMAT(MAX(date), '%Y-%m-%d')) AS week, " +
+                        "SUM(member_count) AS member_count " +
                         "FROM new_member " +
-                        "GROUP BY week " +
-                        "ORDER BY week DESC " +
-                        "LIMIT 0, 4 ")
+                        "GROUP BY FLOOR(DATEDIFF(DATE_ADD(NOW(), INTERVAL -1 DAY), date) / 7) " +
+                        "ORDER BY MIN(date) DESC " +
+                "LIMIT 0, 4 ")
         @ResultMap("resultMap")
         public List<NewMember> selectWeekly();
 

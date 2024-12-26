@@ -44,7 +44,18 @@ public class NewMemberServiceImpl implements NewMemberService {
         return rows;
     }
 
+    @Override
+    public int autoDelete() throws Exception {
+        int rows = 0;
+        try {
+        rows =  newMemberMapper.autoDelete();
 
+        } catch (Exception e) {
+            log.error("데이터 삭제에 실패했습니다.", e);
+            throw e;
+        }
+        return rows;
+    }
 
     @Override
     public List<NewMember> getItem() throws Exception {
@@ -76,8 +87,5 @@ public class NewMemberServiceImpl implements NewMemberService {
         }
 
         return output;
-    }
-
-
-  
+    } 
 }
