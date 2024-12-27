@@ -23,4 +23,15 @@ public class SaleServiceTest {
             return;
         }
     }
+
+    @Test
+    @DisplayName("월 매출 확인 테스트")
+    public void saleListTest() {
+        try {
+            saleService.getList(null);
+        } catch (Exception e) {
+            log.error("매출 확인 실패", e);
+            return;
+        }
+    }
 }

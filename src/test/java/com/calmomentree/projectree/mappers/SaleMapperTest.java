@@ -24,4 +24,11 @@ public class SaleMapperTest {
     public void saleDefaultInsert() {
         saleMapper.insertDefault();
     }
+
+    @Test
+    @DisplayName("월 매출 조회")
+    public void saleList() {
+
+        saleMapper.selectList(null);
+    }
 }
