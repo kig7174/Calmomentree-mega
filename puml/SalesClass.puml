@@ -1,0 +1,51 @@
+@startuml
+skinparam dpi 200
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype ortho
+skinparam backgroundColor white
+skinparam classBackgroundColor #E8F8F5
+skinparam classBorderColor #85929E
+
+interface SaleService {
+    + addItem(): void
+    + editItem(params: Sale): Sale
+    + deleteItem(params: Sale): int
+    + getItem(params: Sale): Sale
+    + getList(params: Sale): List<Sale>
+    + getCount(params: Sale): int
+}
+
+class SaleServiceImpl {
+    - @Autowired SaleMapper saleMapper
+    + addItem(): void
+    + editItem(input: Sale): Sale
+    + deleteItem(input: Sale): int
+    + getItem(input: Sale): Sale
+    + getList(input: Sale): List<Sale>
+    + getCount(input: Sale): int
+}
+
+class SaleRestController {
+    - @Autowired RestHelper restHelper
+    - @Autowired SaleService saleService
+    + @GetMapping("/sales/month") salesMonth(): Map<String, Object>
+}
+
+class SaleScheduler {
+    - @Autowired SaleService saleService
+    - @Autowired Logger logger
+    + @Scheduled saleInsert(): void
+}
+
+class RestHelper {
+    + sendJson(): Map<String, Object>
+    + sendError(): Map<String, Object>
+}
+
+SaleService <|.. SaleServiceImpl
+SaleRestController --> SaleService
+SaleRestController --> RestHelper
+SaleScheduler --> SaleService
+
+@enduml

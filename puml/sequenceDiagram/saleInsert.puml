@@ -1,0 +1,45 @@
+@startuml
+skinparam dpi 200
+skinparam backgroundColor white
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+
+participant "SaleScheduler" as Scheduler
+participant "SaleService" as Service
+participant "SaleMapper" as Mapper
+database "Database" as DB
+
+activate Scheduler
+note over Scheduler: "@Scheduled(cron = "0 0 1 * * *")"
+
+Scheduler -> Service: addItem()
+activate Service
+
+Service -> Mapper: insert()
+activate Mapper
+
+Mapper -> DB: SELECT SUM(total_price)\nFROM orders\nWHERE order_state != '주문중'\nAND DATE(order_date) = yesterday
+activate DB
+DB --> Mapper: result
+deactivate DB
+
+alt rows == 0
+    Mapper -> DB: INSERT INTO sales\n(total_sales = 0, date = yesterday)
+    activate DB
+    DB --> Mapper: result
+    deactivate DB
+end
+
+Mapper --> Service: rows
+deactivate Mapper
+
+alt exception occurs
+    Service --> Scheduler: throw Exception
+    note right of Scheduler: log.error("데이터 집계 실패")
+end
+
+Service --> Scheduler: void
+deactivate Service
+
+deactivate Scheduler
+@enduml
