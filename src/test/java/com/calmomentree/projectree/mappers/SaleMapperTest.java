@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.calmomentree.projectree.models.Sale;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -16,13 +18,15 @@ public class SaleMapperTest {
     @Test
     @DisplayName("매출 집계 테스트")
     public void saleInsertTest() {
-        saleMapper.insert();
+        Sale input = new Sale();
+        saleMapper.insert(input);
     }
 
     @Test
     @DisplayName("매출 없을 때 테스트")
     public void saleDefaultInsert() {
-        saleMapper.insertDefault();
+        Sale input = new Sale();
+        saleMapper.insertDefault(input);
     }
 
     @Test
