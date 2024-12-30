@@ -5,7 +5,7 @@ import java.util.List;
 import com.calmomentree.projectree.models.Sale;
 
 public interface SaleService {
-    public void addItem() throws Exception;
+    public void addItem(Sale params) throws Exception;
 
     public Sale editItem(Sale params) throws Exception;
 

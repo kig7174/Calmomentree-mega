@@ -18,14 +18,14 @@ public class SaleServiceImpl implements SaleService {
     private SaleMapper saleMapper;
 
     @Override
-    public void addItem() throws Exception {
+    public void addItem(Sale input) throws Exception {
         int rows = 0;
 
         try {
-            rows = saleMapper.insert();
+            rows = saleMapper.insert(input);
 
             if (rows == 0) {
-                saleMapper.insertDefault();
+                saleMapper.insertDefault(input);
             }
         } catch (Exception e) {
             log.error("데이터 저장에 실패했습니다.", e);

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Sale {
-    public int id;
-    public String date;
-    public int totalSales;   
+    private int id;
+    private String date;
+    private int totalSales;   
 }

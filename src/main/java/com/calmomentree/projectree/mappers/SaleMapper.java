@@ -23,12 +23,13 @@ public interface SaleMapper {
 
             "GROUP BY ord_date")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-    public int insert();
+    public int insert(Sale input);
 
     @Insert("INSERT INTO sales (total_sales, date) " +
             "VALUE " + 
             "(0, DATE(DATE_ADD(NOW(), INTERVAL -1 DAY)))")
-    public int insertDefault();
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    public int insertDefault(Sale input);
 
     @Update("...")
     public int update(Sale input);
