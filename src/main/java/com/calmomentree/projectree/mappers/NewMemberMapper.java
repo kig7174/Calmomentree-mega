@@ -2,7 +2,6 @@ package com.calmomentree.projectree.mappers;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -21,16 +20,16 @@ public interface NewMemberMapper {
                         "WHERE DATE(join_date) = DATE(DATE_ADD(NOW(), INTERVAL -1 DAY)) " +
                         "GROUP BY join_date ")
         @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
-        public int insert();
+        public int insert(NewMember input);
 
         @Insert("INSERT INTO new_member (date, member_count) " +
                         "VALUES " +
                         "(DATE(DATE_ADD(NOW(), INTERVAL -1 DAY)), 0)")
-        public int insertDefault();
+        public int insertDefault(NewMember input);
 
-        @Delete("DELETE FROM new_member " +
-                "WHERE date < DATE(DATE_ADD(NOW(), INTERVAL -3 MONTH)) ")
-        public int autoDelete();
+        // @Delete("DELETE FROM new_member " +
+        //         "WHERE date < DATE(DATE_ADD(NOW(), INTERVAL -3 MONTH)) ")
+        // public int autoDelete();
 
         @Select("SELECT id, date, member_count, " +
                 "CASE DAYOFWEEK(date) " +
@@ -51,7 +50,7 @@ public interface NewMemberMapper {
                         @Result(property = "date", column = "date"),
                         @Result(property = "memberCount", column = "member_count")                    
         })
-        public List<NewMember> selectItem();
+        public List<NewMember> selectWeekly();
 
         @Select("SELECT CONCAT(DATE_FORMAT(MIN(date), '%Y-%m-%d'), ' ~ ', DATE_FORMAT(MAX(date), '%Y-%m-%d')) AS week, " +
                         "SUM(member_count) AS member_count " +
@@ -60,6 +59,6 @@ public interface NewMemberMapper {
                         "ORDER BY MIN(date) DESC " +
                 "LIMIT 0, 4 ")
         @ResultMap("resultMap")
-        public List<NewMember> selectWeekly();
+        public List<NewMember> selectMonthly();
 
 }

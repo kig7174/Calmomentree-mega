@@ -20,40 +20,48 @@ public class NewMemberMapperTest {
     @Test
     @DisplayName("신규회원 추가 테스트")
     void newMemberAdd() {
-       int output = newMemberMapper.insert();
+
+        NewMember input = new NewMember();
+       int output = newMemberMapper.insert(input);
         
+       if(output == 0) {
+        newMemberMapper.insertDefault(input);
+        log.debug("신규회원 없음 - 기본값 0 삽입 완료");
+       }
+
        log.debug("신규회원 추가: " + output);
     }
 
     @Test
     @DisplayName("신규회원 기본값 추가 테스트")
     void newMemberAddDefault() {
-        int output = newMemberMapper.insertDefault();
+        NewMember input = new NewMember();
+        int output = newMemberMapper.insertDefault(input);
 
         log.debug("신규회원 기본값 추가: " + output);
     }
 
     @Test
-    @DisplayName("신규 회원 조회 테스트")
-    void newMemberSelect() {
-       List<NewMember> output = newMemberMapper.selectItem();
+    @DisplayName("신규 회원 주간 조회 테스트")
+    void newMemberWeekly() {
+       List<NewMember> output = newMemberMapper.selectWeekly();
 
-        log.debug("신규 회원 조회: " + output.toString());
+        log.debug("주간 조회: " + output.toString());
     }
 
     @Test
-    @DisplayName("주간 신규 회원 조회 테스트")
-    void newMemberWeekly() {
-        newMemberMapper.selectWeekly().forEach(item -> {
-            log.debug("주간 신규 회원 조회: " + item.toString());
+    @DisplayName("신규 회원 월간 조회 테스트")
+    void newMemberMonthly() {
+        newMemberMapper.selectMonthly().forEach(item -> {
+            log.debug("월간 조회: " + item.toString());
         });
     }
 
-    @Test
-    @DisplayName("신규 회원 자동 삭제 테스트")
-    void newMemberAutoDelete() {
-        int output = newMemberMapper.autoDelete();
+    // @Test
+    // @DisplayName("신규 회원 자동 삭제 테스트")
+    // void newMemberAutoDelete() {
+    //     int output = newMemberMapper.autoDelete();
 
-        log.debug("신규 회원 자동 삭제: " + output);
-    }
+    //     log.debug("신규 회원 자동 삭제: " + output);
+    // }
 }

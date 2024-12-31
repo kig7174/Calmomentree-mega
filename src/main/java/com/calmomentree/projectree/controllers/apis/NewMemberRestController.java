@@ -33,8 +33,8 @@ public class NewMemberRestController {
         List<NewMember> newMembersweekly = null;
         List<NewMember> newMembersMonthly = null;
         try {
-            newMembersweekly = newMemberService.getItem();
-            newMembersMonthly = newMemberService.getWeeklyList();
+            newMembersweekly = newMemberService.getWeeklyList();
+            newMembersMonthly = newMemberService.getMonthlyList();
         } catch (Exception e) {
             return restHelper.serverError(e);
         }

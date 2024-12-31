@@ -1,0 +1,48 @@
+@startuml
+skinparam dpi 200
+
+actor User
+
+User -> NewMemberRestController : newMember()
+activate NewMemberRestController
+
+NewMemberRestController -> NewMemberService : getWeeklyList()
+activate NewMemberService
+
+NewMemberService -> NewMemberMapper : selectWeekly()
+activate NewMemberMapper
+
+NewMemberMapper -> Database : SELECT
+activate Database
+Database --> NewMemberMapper : List<NewMember>
+deactivate Database
+
+NewMemberMapper --> NewMemberService : List<NewMember>
+deactivate NewMemberMapper
+
+NewMemberService --> NewMemberRestController : List<NewMember>
+deactivate NewMemberService
+
+NewMemberRestController -> NewMemberService : getMonthlyList()
+activate NewMemberService
+
+NewMemberService -> NewMemberMapper : selectMonthly()
+activate NewMemberMapper
+
+NewMemberMapper -> Database : SELECT
+activate Database
+Database --> NewMemberMapper : List<NewMember>
+deactivate Database
+
+NewMemberMapper --> NewMemberService : List<NewMember>
+deactivate NewMemberMapper
+
+NewMemberService --> NewMemberRestController : List<NewMember>
+deactivate NewMemberService
+
+NewMemberRestController -> NewMemberRestController : Map<String, Object> data = new LinkedHashMap<>()\ndata.put("weekly", newMembersweekly), ("monthly", newMembersMonthly);
+
+NewMemberRestController -> User : Map<String, Object>
+deactivate NewMemberRestController
+
+@enduml

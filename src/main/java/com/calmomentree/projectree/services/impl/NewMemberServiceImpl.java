@@ -18,10 +18,10 @@ public class NewMemberServiceImpl implements NewMemberService {
     private NewMemberMapper newMemberMapper;
 
     @Override
-    public int addItem() throws Exception {
+    public int addItem(NewMember input) throws Exception {
         int rows = 0;
         try {
-        rows =  newMemberMapper.insert();
+        rows =  newMemberMapper.insert(input);
 
         } catch (Exception e) {
             log.error("데이터 저장에 실패했습니다.", e);
@@ -32,10 +32,10 @@ public class NewMemberServiceImpl implements NewMemberService {
 
     
     @Override
-    public int addDefault() throws Exception {
+    public int addDefault(NewMember input) throws Exception {
         int rows = 0;
         try {
-        rows =  newMemberMapper.insertDefault();
+        rows =  newMemberMapper.insertDefault(input);
 
         } catch (Exception e) {
             log.error("데이터 저장에 실패했습니다.", e);
@@ -44,25 +44,25 @@ public class NewMemberServiceImpl implements NewMemberService {
         return rows;
     }
 
-    @Override
-    public int autoDelete() throws Exception {
-        int rows = 0;
-        try {
-        rows =  newMemberMapper.autoDelete();
+    // @Override
+    // public int autoDelete() throws Exception {
+    //     int rows = 0;
+    //     try {
+    //     rows =  newMemberMapper.autoDelete();
 
-        } catch (Exception e) {
-            log.error("데이터 삭제에 실패했습니다.", e);
-            throw e;
-        }
-        return rows;
-    }
+    //     } catch (Exception e) {
+    //         log.error("데이터 삭제에 실패했습니다.", e);
+    //         throw e;
+    //     }
+    //     return rows;
+    // }
 
     @Override
-    public List<NewMember> getItem() throws Exception {
+    public List<NewMember> getWeeklyList() throws Exception {
         List<NewMember> output = null;
 
         try {
-            output = newMemberMapper.selectItem();
+            output = newMemberMapper.selectWeekly();
 
             if (output == null) {
                 throw new Exception("조회된 데이터가 없습니다.");
@@ -76,11 +76,11 @@ public class NewMemberServiceImpl implements NewMemberService {
     }
 
     @Override
-    public List<NewMember> getWeeklyList() throws Exception {
+    public List<NewMember> getMonthlyList() throws Exception {
         List<NewMember> output = null;
 
         try {
-            output = newMemberMapper.selectWeekly();
+            output = newMemberMapper.selectMonthly();
         } catch (Exception e) {
             log.error("신규 회원 목록 조회에 실패했습니다.", e);
             throw e;

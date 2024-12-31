@@ -1,0 +1,46 @@
+@startuml
+skinparam dpi 200
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam linetype ortho
+skinparam backgroundColor white
+skinparam classBackgroundColor #E8F8F5
+skinparam classBorderColor #85929E
+
+interface NewMemberService {
+    + int addItem() throws Exception
+    + int addDefault() throws Exception
+    + List<NewMember> getWeeklyList() throws Exception
+    + List<NewMember> getMonthlyList() throws Exception
+}
+
+class NewMemberServiceImpl {
+    - @Autowired NewMemberMapper newMemberMapper
+    + int addItem() throws Exception
+    + int addDefault() throws Exception
+    + List<NewMember> getWeeklyList() throws Exception
+    + List<NewMember> getMonthlyList() throws Exception
+}
+
+class NewMemberRestController {
+    - @Autowired NewMemberService newMemberService
+    - @Autowired RestHelper restHelper
+    + @GetMapping("/api/new_member") newMember(): Map<String, Object>
+}
+
+class NewMemberScheduler {
+    - @Autowired NewMemberService newMemberService
+    + @Scheduled newMemberInsert(): void
+}
+
+class RestHelper {
+    + sendJson(data: Map<String, Object>): Map<String, Object>
+    + serverError(e: Exception): Map<String, Object>
+}
+
+NewMemberService <|.. NewMemberServiceImpl
+NewMemberRestController --> NewMemberService
+NewMemberRestController --> RestHelper
+NewMemberScheduler --> NewMemberService
+
+@enduml

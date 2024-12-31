@@ -1,0 +1,48 @@
+@startuml
+skinparam dpi 200
+
+activate NewMemberScheduler
+note over NewMemberScheduler
+    @Scheduled(cron = "0 0 1 * * *")
+end note
+
+NewMemberScheduler -> NewMemberService : addItem(NewMember input)
+activate NewMemberService
+
+NewMemberService -> NewMemberMapper : insertNewMember(NewMember input)
+activate NewMemberMapper
+
+NewMemberMapper -> Database : INSERT 
+activate Database
+
+Database --> NewMemberMapper : int (number of rows affected)
+
+deactivate Database
+
+NewMemberMapper --> NewMemberService : int (number of rows affected)
+deactivate NewMemberMapper
+
+NewMemberService --> NewMemberScheduler : int (number of rows affected)
+deactivate NewMemberService
+
+alt 신규회원 없음
+    NewMemberScheduler -> NewMemberService : addDefault(NewMember input)
+    activate NewMemberService
+    NewMemberService -> NewMemberMapper : insertDefaultMember(NewMember input)
+    activate NewMemberMapper
+    NewMemberMapper -> Database : INSERT 
+    activate Database
+    Database --> NewMemberMapper : int (number of rows affected)
+    deactivate Database
+    NewMemberMapper --> NewMemberService : int (number of rows affected)
+    deactivate NewMemberMapper
+    NewMemberService --> NewMemberScheduler : int (number of rows affected)
+    deactivate NewMemberService
+    
+else
+    
+end
+
+deactivate NewMemberScheduler
+
+@enduml
