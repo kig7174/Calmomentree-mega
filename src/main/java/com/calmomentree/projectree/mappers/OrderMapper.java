@@ -115,8 +115,6 @@ public interface OrderMapper {
                 "SELECT SUM(order_quantity) FROM order_items where order_id = ord.order_id " +
                 ") AS total_quantity, " +
 
-                "ROW_NUMBER() OVER(ORDER BY order_id) AS rownum, " +
-
                 "( " +
                 "SELECT COUNT(*) FROM order_items WHERE order_id = ord.order_id " +
                 ") AS order_item_count, " +
@@ -141,7 +139,7 @@ public interface OrderMapper {
             "<if test='startDate != null and startDate != \"\" and endDate != null and endDate != \"\"'>AND #{startDate} &lt; order_date AND order_date &lt; #{endDate}</if> " +
             "</where> " +
 
-            "ORDER BY rownum DESC " +
+            "ORDER BY order_id DESC " +
             "</script>")
     @ResultMap("resultMap")
     public List<Order> selectList(Order input);

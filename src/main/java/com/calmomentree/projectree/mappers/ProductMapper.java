@@ -122,69 +122,60 @@ public interface ProductMapper {
     public Product selectItem(Product input);
 
     @Select("<script>" +
-            "WITH RECURSIVE category_list AS ( " +
-                "SELECT " +
-                    "category_id, " +
-                    "category_name, " +
-                    "parent_category_no " +
+        "SELECT " +
+            "prod.prod_id, " +
+            "prod_name_kor, UPPER(prod_name_eng) AS prod_name_eng, " +
+            "func_txt, desc_txt, " +
+            "price, is_discount, discount, (price - price * (discount / 100)) AS discount_price, " +
+            "capacity, specification, " +
+            "use_period, use_method, manufacturer, " +
+            "release_date, edit_date, " +
+            "category_name, prod.category_id, " +
+
+            "( " +
+                "SELECT category_name " +
                 "FROM categorys " +
-                "WHERE parent_category_no = #{categoryId} " + 
-                    
-                "UNION ALL " +
-                    
-                "SELECT " + 
-                    "a.category_id, " +
-                    "a.category_name, " + 
-                    "a.parent_category_no " +
-                "FROM categorys AS a " +
-                "INNER JOIN category_list AS b " +
-                "ON a.parent_category_no = b.category_id) " +
+                "WHERE category_id = category.parent_category_no " +
+            ") AS parent_category_name, " +
+
+            "( " +
+                "SELECT img_url " +
+                "FROM prod_imgs " +
+                "WHERE prod_id = prod.prod_id AND img_type = 'list' " +
+                "ORDER BY prod_img_id " +
+                "LIMIT 0, 1 " +
+            ") AS list_img_url1, " +
+
+            "( " +
+                "SELECT img_url " +
+                "FROM prod_imgs " +
+                "WHERE prod_id = prod.prod_id AND img_type = 'list' " +
+                "ORDER BY prod_img_id " +
+                "LIMIT 1, 1 " +
+            ") AS list_img_url2 " +
+
+        "FROM products AS prod " +
+        "INNER JOIN categorys AS category " +
+        "ON prod.category_id = category.category_id " +
         
-            "SELECT " +
-                "prod.prod_id, " +
-                "prod_name_kor, UPPER(prod_name_eng) AS prod_name_eng, " +
-                "func_txt, desc_txt, " +
-                "price, is_discount, discount, (price - price * (discount / 100)) AS discount_price, " +
-                "capacity, specification, " +
-                "use_period, use_method, manufacturer, " +
-                "release_date, edit_date, " +
-                "category_name, prod.category_id, " +
-
-                "( " +
-                    "SELECT category_name " +
-                    "FROM categorys " +
-                    "WHERE category_id = category.parent_category_no " +
-                ") AS parent_category_name, " +
-
-                "( " +
-                    "SELECT img_url " +
-                    "FROM prod_imgs " +
-                    "WHERE prod_id = prod.prod_id AND img_type = 'list' " +
-                    "ORDER BY prod_img_id " +
-                    "LIMIT 0, 1 " +
-                ") AS list_img_url1, " +
-
-                "( " +
-                    "SELECT img_url " +
-                    "FROM prod_imgs " +
-                    "WHERE prod_id = prod.prod_id AND img_type = 'list' " +
-                    "ORDER BY prod_img_id " +
-                    "LIMIT 1, 1 " +
-                ") AS list_img_url2 " +
-
-            "FROM products AS prod " +
-            "INNER JOIN categorys AS category " +
-            "ON prod.category_id = category.category_id " +
-            
-            "WHERE prod.category_id IN ( " +
-            "<if test='categoryId == \"1\"'>(SELECT category_id FROM categorys)</if> " +
-            "<if test='categoryId == \"2\"'>(SELECT category_id FROM categorys LIMIT 0, 10)</if> " +
-            "<if test='categoryId gt \"2\" and categoryId lt \"8\"'>(SELECT category_id FROM category_list AS c)</if> " +
-            "<if test='categoryId gte \"8\"'>#{categoryId}</if> " +
-            ") " +
-            "</script>")
-    @ResultMap("productMap")
-    public List<Product> selectListByCategory(Product input);
+        "WHERE prod.category_id IN ( " +
+        "<if test='categoryId == \"1\"'>(SELECT category_id FROM categorys)</if> " +
+        "<if test='categoryId == \"2\"'>(SELECT category_id FROM categorys LIMIT 0, 10)</if> " +
+        "<if test='categoryId gt \"2\" and categoryId lt \"8\"'>" +
+            "(SELECT c2.category_id " +
+            "FROM categorys c1 " +
+            "JOIN categorys c2 ON c2.parent_category_no = c1.category_id " +
+            "WHERE c1.category_id = #{categoryId} " +
+            "UNION " +
+            "SELECT category_id " +
+            "FROM categorys " +
+            "WHERE parent_category_no = #{categoryId})" +
+        "</if> " +
+        "<if test='categoryId gte \"8\"'>#{categoryId}</if> " +
+        ") " +
+        "</script>")
+@ResultMap("productMap")
+public List<Product> selectListByCategory(Product input);
 
     @Select("<script>" +
             "SELECT " +

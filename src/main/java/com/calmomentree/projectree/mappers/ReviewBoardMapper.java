@@ -66,26 +66,26 @@ public interface ReviewBoardMapper {
          * @return
          */
         @Select("SELECT " +
-                        "r.review_board_id, review_title, review_content, " +
-                        "rating, DATE_FORMAT(r.write_date,'%Y-%m-%d') AS write_date, " +
-                        "DATE_FORMAT(r.edit_date,'%Y-%m-%d') AS edit_date, p.prod_id, m.member_id, " +
-                        "replace(user_name,substring(user_name,2),'****') AS user_name, " +
-                        "ROW_NUMBER() OVER(ORDER BY r.review_board_id) AS rownum, " +
-                        " p.prod_name_kor, p.price, " +
-                         
-                        "( SELECT img_url FROM prod_imgs " +
-                        "WHERE prod_id = r.prod_id AND img_type = 'list' " +
-                        "ORDER BY prod_img_id LIMIT 0,1 ) AS img_url " +
-                "FROM review_boards r " +
+                "review_board_id, review_title, review_content, " +
+                "rating, DATE_FORMAT(r.write_date,'%Y-%m-%d') AS write_date, " +
+                "DATE_FORMAT(edit_date,'%Y-%m-%d') AS edit_date, p.prod_id, m.member_id, " +
+                "replace(user_name,substring(user_name,2),'****') AS user_name, " +
+                "@rownum := @rownum + 1 AS rownum, " +
+                "p.prod_name_kor, p.price, " +
+                
+                "( SELECT img_url FROM prod_imgs " +
+                "WHERE prod_id = r.prod_id AND img_type = 'list' " +
+                "ORDER BY prod_img_id LIMIT 0,1 ) AS img_url " +
+                "FROM review_boards r, (SELECT @rownum := 0) rn " +
 
-                        // 회원
-                        "INNER JOIN members m ON r.member_id = m.member_id " +
-                        // 상품
-                        "INNER JOIN products p ON p.prod_id = r.prod_id " +
-                        // 상품이미지
-                        // "INNER JOIN prod_imgs pro ON r.prod_id = pro.prod_id " +
-                        // 리뷰이미지
-                        "WHERE r.review_board_id = #{reviewBoardId}")
+                // 회원
+                "INNER JOIN members m ON r.member_id = m.member_id " +
+                // 상품
+                "INNER JOIN products p ON p.prod_id = r.prod_id " +
+                // 상품이미지
+                // "INNER JOIN prod_imgs pro ON r.prod_id = pro.prod_id " +
+                // 리뷰이미지
+                "WHERE review_board_id = #{reviewBoardId}")
         @Results(id = "resultMap", value = {
                         @Result(property = "reviewBoardId", column = "review_board_id"),
                         @Result(property = "reviewTitle", column = "review_title"),
@@ -111,27 +111,31 @@ public interface ReviewBoardMapper {
          */
         @Select("<script> " +
                 "SELECT " +
-                        "r.review_board_id, review_title, review_content, " +
-                        "rating, DATE_FORMAT(r.write_date,'%Y-%m-%d') AS write_date, " +
-                        "DATE_FORMAT(r.edit_date,'%Y-%m-%d') AS edit_date, r.prod_id, m.member_id, " +
+                    "review_board_id, review_title, review_content, " +
+                    "rating, DATE_FORMAT(write_date,'%Y-%m-%d') AS write_date, " +
+                    "DATE_FORMAT(edit_date,'%Y-%m-%d') AS edit_date, prod_id, member_id, " +
+                    "user_name, img_url, rownum " +
+                "FROM ( " +
+                    "SELECT " +
+                        "review_board_id, review_title, review_content, " +
+                        "rating, rb.write_date, rb.edit_date, rb.prod_id, m.member_id, " +
                         "replace(user_name,substring(user_name,2),'****') AS user_name, " +
-                        "ROW_NUMBER() OVER(ORDER BY r.review_board_id) AS rownum , " +
-                        
                         "( SELECT img_url FROM prod_imgs " +
-                        "WHERE prod_id = r.prod_id AND img_type = 'list' " +
-                        "ORDER BY prod_img_id LIMIT 0,1 ) AS img_url " +
-                
-                "FROM review_boards r " +
-                "INNER JOIN members m ON r.member_id = m.member_id " +
-
-                "<where> " +
+                        "WHERE prod_id = rb.prod_id AND img_type = 'list' " +
+                        "ORDER BY prod_img_id LIMIT 0,1 ) AS img_url, " +
+                        "@rownum := @rownum + 1 AS rownum " +
+                    "FROM review_boards rb " +
+                    "INNER JOIN members m ON rb.member_id = m.member_id, " +
+                    "(SELECT @rownum := 0) r " +
+                    "<where> " +
                         "<if test = 'reviewTitle != null'>review_title LIKE concat('%',#{reviewTitle},'%')</if> " +
                         "<if test = 'memberId != 0'>AND m.member_id = #{memberId}</if> " +
-                        "<if test = 'prodId != 0'>OR r.prod_id = #{prodId}</if> " +
-                "</where> " +
-                        "ORDER BY rownum DESC " +
-
-                        "<if test='listCount > 0'>LIMIT #{offset}, #{listCount}</if> " +
+                        "<if test = 'prodId != 0'>OR rb.prod_id = #{prodId}</if> " +
+                    "</where> " +
+                    "ORDER BY review_board_id " +
+                ") AS subquery " +
+                "ORDER BY rownum DESC " +
+                "<if test='listCount > 0'>LIMIT #{offset}, #{listCount}</if> " +
                 "</script> ")
         @ResultMap("resultMap")
         public List<ReviewBoard> selectList(ReviewBoard input);
