@@ -68,20 +68,20 @@ public interface ReviewBoardMapper {
         @Select("SELECT " +
                 "review_board_id, review_title, review_content, " +
                 "rating, DATE_FORMAT(r.write_date,'%Y-%m-%d') AS write_date, " +
-                "DATE_FORMAT(edit_date,'%Y-%m-%d') AS edit_date, p.prod_id, m.member_id, " +
-                "replace(user_name,substring(user_name,2),'****') AS user_name, " +
+                "DATE_FORMAT(r.edit_date,'%Y-%m-%d') AS edit_date, p.prod_id, m.member_id, " +
+                "replace(m.user_name,substring(m.user_name,2),'****') AS user_name, " +
                 "@rownum := @rownum + 1 AS rownum, " +
                 "p.prod_name_kor, p.price, " +
                 
                 "( SELECT img_url FROM prod_imgs " +
                 "WHERE prod_id = r.prod_id AND img_type = 'list' " +
                 "ORDER BY prod_img_id LIMIT 0,1 ) AS img_url " +
-                "FROM review_boards r, (SELECT @rownum := 0) rn " +
+                "FROM review_boards r " +
 
                 // 회원
                 "INNER JOIN members m ON r.member_id = m.member_id " +
                 // 상품
-                "INNER JOIN products p ON p.prod_id = r.prod_id " +
+                "INNER JOIN products p ON p.prod_id = r.prod_id, (SELECT @rownum := 0) rn " +
                 // 상품이미지
                 // "INNER JOIN prod_imgs pro ON r.prod_id = pro.prod_id " +
                 // 리뷰이미지
